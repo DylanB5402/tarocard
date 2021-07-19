@@ -13,7 +13,6 @@ class UserDatabase {
 
     createUserTable() {
         this.db.prepare("CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, profile_picture BLoB, banner BLOB);").run();
-        // console.log(info);
     }
 
     /**
