@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.innerBody {
+    background-color: rgba(238, 238, 238, 0.712);
+    height: 100%;
+    margin: auto;
+    width: 97%;
+    text-align: center;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+}
+
+.titleCard {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    z-index: -1;
+}
+
+.titleCard h1 {
+    font-weight: lighter;
+    font-size: 58px;
+    color: rgb(152, 121, 197);
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 200px;
+    bottom: 55px;
+}
+
+#back {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 23px;
+    left: 60px;
+
+  }
+
+.innerBody input {
+    height: fit-content;
+    font-weight: lighter;
+    color: rgb(233, 233, 233);
+    width: 85%;
+    font-size: 50px;
+    border-style: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 100px;
+    margin: 30px;
+    margin-top: 40px;
+    border-radius: 30px;
+    background-image: url(./search.png);
+    background-repeat: no-repeat;
+    background-size: 85px, 85px;
+}
+
+.friendElement {
+    width: 100%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+}
+
+.friendElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.friendElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: lighter;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.friendElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 262px;
+    bottom: 110px;
+}
