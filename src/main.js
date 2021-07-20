@@ -18,16 +18,12 @@ app.post("/signup", (req, res) => {
   var email = req.body["email"];
   var password = req.body["password"];
   var repeatPassword = req.body["repeatPassword"];
-  console.log("received", email, password, repeatPassword);
+  // console.log("received", email, password, repeatPassword);
   if (password != repeatPassword) {
     res.redirect("/signup.html");
   } else {
-    var success = user_db.insertNewUser(email, password);
-    if (success) {
-      res.send("success!");
-    } else {
-      res.send("failure");
-    }
+    var result = user_db.insertNewUser(email, password);
+    res.send(result);
   }
 })
 
