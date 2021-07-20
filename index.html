@@ -12,12 +12,13 @@
                 <img src="./assets/TaroCardTransparent 2.png">
             </div>
             <div class="userInfo">
-                <form action="./homepage/home.html">
+                <form action="/login" method="post"">
                 <input type="text" class="userInput" id="userEmail" placeholder="Email">
                 <input type="password" class="userInput" id="userPassword" placeholder="Password">
                 <input id='login-button' type="submit" value="Login"> 
                 </form>
-                <p id="noAcc"> <a href="/taro-cards/sign-up.html"> Don't have an account? <strong> Sign Up.</strong> </a> </p>
+                <!-- After form submits, server checks and will redirect them toward the homepage! -->
+                <p id="noAcc"> <a href="sign-up.html"> Don't have an account? <strong> Sign Up.</strong> </a> </p>
                 <div class="container">
                     <hr style="width: 50%; height: 0.1px;">
                     <p style="color:white" id="or"> or </p>
@@ -28,6 +29,6 @@
 
 
 
-            <script src="app.js"></script>
+            <script  type="text/javascript" src="app.js"></script>
     </body>
 </html>
