@@ -12,3 +12,4 @@ Dependencies:
 - better-sqlite3
 - pug]
 - bcrypt
+- mocha
