@@ -35,3 +35,11 @@ li:last-child{
 .active {
     background-color: #D4D4D4;
 }
+
+
+/* Styling for the card creation button/pop up */ 
+#add-card-btn{
+    position: absolute;
+    left: 80vw;
+    top: 80vh;
+}

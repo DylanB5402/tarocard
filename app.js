@@ -11,3 +11,17 @@ function signUp(){
         document.getElementById('login-button').innerHTML = " Log in";
     }
 }
+
+
+// Fake login for now??
+
+function validate(){
+    console.log("Button was pressed!");
+    if(document.getElementById('userEmail').value === "user1" && document.getElementById("userPassword").value === "password1"){
+        console.log("User has logged in!")
+    } else {
+        console.log("Bred how did you mess that up");
+    }
+
+    console.log(location.href)
+}
