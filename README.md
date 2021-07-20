@@ -13,3 +13,4 @@ Dependencies:
 - pug
 - bcrypt
 - mocha
+- chai

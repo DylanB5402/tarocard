@@ -13,6 +13,7 @@ describe('Array', function() {
 
 describe('test', ()=> {
     it('should pass', () => {
-        assert.strictEqual(5 + 5, 10);
+      assert.strictEqual(5 + 5, 10);
+        
     })
 })

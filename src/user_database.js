@@ -1,5 +1,6 @@
 const Database = require("better-sqlite3");
 const bcrypt = require("bcrypt");
+const { threadId } = require("worker_threads");
 
 class UserDatabase {
 
@@ -13,7 +14,13 @@ class UserDatabase {
     }
 
     createUserTable() {
-        this.db.prepare("CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, profile_picture BLOB, banner BLOB);").run();
+        this.db.prepare("CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);").run();
+    }
+
+    getSchema() {
+        // var schema = this.db.prepare(".schema").get();
+        var schema = this.db.prepare("SELECT sql FROM sqlite_master WHERE name='users'").get();
+        return schema;
     }
 
     /**
@@ -30,7 +37,7 @@ class UserDatabase {
         } else {
             const saltRounds = 10;
             bcrypt.hash(password, saltRounds, (err, hash) => {
-                var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', 0, 0);`).run();
+                var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, profile_picture, banner) VALUES ('${email}', '${hash}', '', '${username}', '${username}', 0, 0);`).run();
                 if (info["changes"] > 0) {
                     return InsertNewUserResult.SUCCESS;
                 } else {
