@@ -11,4 +11,5 @@ Dependencies:
 - express
 - better-sqlite3
 - pug
-- bcrypto
+- bcrypt
+- mocha
