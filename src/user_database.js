@@ -36,14 +36,13 @@ class UserDatabase {
             return InsertNewUserResult.INVALID_EMAIL;
         } else {
             const saltRounds = 10;
-            bcrypt.hash(password, saltRounds, (err, hash) => {
-                var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, profile_picture, banner) VALUES ('${email}', '${hash}', '', '${username}', '${username}', 0, 0);`).run();
-                if (info["changes"] > 0) {
-                    return InsertNewUserResult.SUCCESS;
-                } else {
-                    return InsertNewUserResult.ERROR;
-                }
-            })
+            var hash = bcrypt.hashSync(password, saltRounds);
+            var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '', '${username}', '${username}', 0, 0);`).run();
+            if (info["changes"] > 0) {
+                return InsertNewUserResult.SUCCESS;
+            } else {
+                return InsertNewUserResult.ERROR;
+            }
         }
     }
 
