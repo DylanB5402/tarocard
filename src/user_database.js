@@ -1,4 +1,5 @@
 const Database = require("better-sqlite3");
+const bcrypt = require("bcrypt");
 
 class UserDatabase {
 
@@ -27,12 +28,15 @@ class UserDatabase {
         if (this.isEmailInDatabase(email)) {
             return InsertNewUserResult.INVALID_EMAIL;
         } else {
-            var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, profile_picture, banner) VALUES ('${email}', '${password}', '${username}', '${username}', 0, 0);`).run();
-            if (info["changes"] > 0) {
-                return InsertNewUserResult.SUCCESS;
-            } else {
-                return InsertNewUserResult.ERROR;
-            }
+            const saltRounds = 10;
+            bcrypt.hash(password, saltRounds, (err, hash) => {
+                var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', 0, 0);`).run();
+                if (info["changes"] > 0) {
+                    return InsertNewUserResult.SUCCESS;
+                } else {
+                    return InsertNewUserResult.ERROR;
+                }
+            })
         }
     }
 
