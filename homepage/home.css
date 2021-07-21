@@ -41,10 +41,15 @@ li:last-child{
 /* Styling for the card creation button/pop up */ 
 #add-card-btn{
     position: fixed;
-    left: 80vw;
-    top: 85vh;
-    width: auto;
-    height: auto;
+    left: 84vw;
+    top: 80vh;
+    width: 8vh;
+    height: 8vh;
+    font-size: 5vh;
+    border-radius: 100%;
+    border: none;
+    background-color: #9879C5;
+    color: white;
 }
 
 .form-container{
@@ -61,7 +66,7 @@ li:last-child{
 .small-input{
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
-    color:rgba(205, 93, 233, 0.5);
+    color: black;
     padding: 15px;
     width: 80vw;
     height: 4vw;
@@ -75,6 +80,11 @@ li:last-child{
 
 }
 
+
+.userInput{
+    text-align: center;
+}
+
 .small-input::placeholder{
     color: rgba(205, 93, 233, 0.5);
 }
@@ -82,7 +92,7 @@ li:last-child{
 .large-input{
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
-    color:rgba(205, 93, 233, 0.5);
+    color:black;
     padding: 15px;
     width: 80vw;
     height: 30vh;
@@ -92,7 +102,7 @@ li:last-child{
     font-family: 'Roboto', sans-serif;
     font-size: 2vh;
     top: 10vh;
-    margin: 2.5vh ;
+    margin: 2.5vh;
 }
 
 .large-input::placeholder{
@@ -154,4 +164,19 @@ li:last-child{
   @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+  }
+
+  .dezoom {
+      -webkit-animation: animatezoomout 0.6s;
+      animation: animatezoomout 0.6s;
+  }
+
+  @-webkit-keyframes animatezoomout {
+    from {-webkit-transform: scale(1)} 
+    to {-webkit-transform: scale(0)}
+  }
+    
+  @keyframes animatezoomout {
+    from {transform: scale(1)} 
+    to {transform: scale(0)}
   }
