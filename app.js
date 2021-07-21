@@ -11,3 +11,5 @@ function signUp(){
         document.getElementById('login-button').innerHTML = " Log in";
     }
 }
+
+
