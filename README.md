@@ -9,8 +9,10 @@ https://drive.google.com/file/d/1Xi5BZgOF8UiaBWbpYE_Zq-3Mc4ydA9xk/view?usp=shari
 Dependencies:
 
 - express
+- express-session
 - better-sqlite3
 - pug
 - bcrypt
 - mocha
 - chai
+- connect-session-knex

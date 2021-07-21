@@ -35,8 +35,7 @@ class UserDatabase {
         if (this.isEmailInDatabase(email)) {
             return InsertNewUserResult.INVALID_EMAIL;
         } else {
-            const saltRounds = 10;
-            var hash = bcrypt.hashSync(password, saltRounds);
+            var hash = this.encryptPassword(password, 10);
             var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '', '${username}', '${username}', 0, 0);`).run();
             if (info["changes"] > 0) {
                 return InsertNewUserResult.SUCCESS;
@@ -45,7 +44,6 @@ class UserDatabase {
             }
         }
     }
-
 
     /**
      * Check if an email address is stored in the database
@@ -61,12 +59,19 @@ class UserDatabase {
         console.log(this.db.prepare("SELECT * FROM users;").all());
     }
 
-    encryptPassword(password) {
-
+    encryptPassword(password, saltRounds) {
+        return bcrypt.hashSync(password, saltRounds);
     }
 
     checkPassword() {
 
+    }
+
+    /**
+     * Delete all entries in table, should only be used for testing/debugging 
+     */
+    deleteAllTableEntries() {
+        this.db.prepare(`DELETE FROM users;`).run();
     }
     
 
