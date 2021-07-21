@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="./home.css">
     </head>
     <body>
+
+        <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
         <nav>
             <ul>
                 <li class="active"> <img src="../assets/Home-Icon.png" alt="Home"> </li>
@@ -13,16 +15,20 @@
                 <li> <img src="../assets/Profile-Icon.png" alt="Profile"> </li>
             </uL>
         </nav>
-        <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button">
-        <div class="card-create-form" id="card-create-form">
-            <form action="/action_page.php" class="form-container">
-                <input type="text" placeholder="Name of Establishment">
-                <input type="text" placeholder="Name of Order">
-                <input type="text" placeholder="Description or extra instructions for order">
+
+        <!-- Card Creation Form (Pop up? )-->
+        <!-- The Button that starts it all :00 -->
+        <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button" onclick="document.getElementById('id01').style.display='block'">
+
+            <form action="/action_page.php" class="form-container animate" id="id01">
+                <div class="card-bar">
+                    <button type=button style="float:left" class="del-button" onclick="document.getElementById('id01').style.display='none'" >X</button>
+                    <input  type=button class="post-button" value="Post">
+                </div>
+                <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
+                <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
+                <textarea class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
             </form>
-
-        </div>
-
 
     </body>
 </html>
