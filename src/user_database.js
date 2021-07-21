@@ -31,12 +31,12 @@ class UserDatabase {
      */
     insertNewUser(email, password) {
         // default username is first 5 characters of email
-        var username = email.substring(0, 6); 
+        var username = email.substring(0, 5); 
         if (this.isEmailInDatabase(email)) {
             return InsertNewUserResult.INVALID_EMAIL;
         } else {
-            var hash = this.encryptPassword(password, 10);
-            var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '', '${username}', '${username}', 0, 0);`).run();
+            var hash = this.encryptPassword(password);
+            var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run();
             if (info["changes"] > 0) {
                 return InsertNewUserResult.SUCCESS;
             } else {
@@ -59,12 +59,46 @@ class UserDatabase {
         console.log(this.db.prepare("SELECT * FROM users;").all());
     }
 
-    encryptPassword(password, saltRounds) {
+    encryptPassword(password) {
+        var saltRounds = 5;
         return bcrypt.hashSync(password, saltRounds);
     }
 
-    checkPassword() {
+    selectHashedPassword(email) {
+        return this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()['password'];
+    }
 
+    /**
+     * 
+     * @param {*} password unencrypted password
+     * @param {*} hashFromDatabase encrypted password from the database
+     * @returns {Boolean}, true if successful, false otherwise
+     */
+    checkPassword(email, password) {
+        var hashFromDatabase = this.selectHashedPassword(email);
+        return bcrypt.compareSync(password, hashFromDatabase);
+    }
+
+    /**
+     * 
+     * @param {*} https_request 
+     * @param {*} email 
+     * @param {*} password 
+     * @returns {Boolean} true if login successful, false otherwise
+     */
+    logInUser(https_request, email, password) {
+        if (this.checkPassword(email, password)) {
+            https_request.session['logged-in'] = true;
+            https_request.session['email'] = email;
+            return true;
+        } else {
+            https_request.session['logged-in'] = false;
+            return false;
+        }
+    }
+
+    selectUserSessionData(email) {
+        return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get();
     }
 
     /**

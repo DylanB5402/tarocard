@@ -5,8 +5,8 @@ const KnexSessionStore = require('connect-session-knex')(session);
 
 const user_database = require('./user_database');
 
-const db = new Database('databases/users3.db', {verbose: console.log});
-// const db = new Database('users.db');
+// const db = new Database('databases/users4.db', {verbose: console.log});
+const db = new Database('users4.db');
 const user_db = new user_database.UserDatabase(db);
 
 const store = new KnexSessionStore();
@@ -31,14 +31,27 @@ app.post("/signup", (req, res) => {
   var email = req.body["email"];
   var password = req.body["password"];
   var repeatPassword = req.body["repeatPassword"];
-  // console.log("received", email, password, repeatPassword);
   if (password != repeatPassword) {
     res.redirect("/signup.html");
   } else {
     var result = user_db.insertNewUser(email, password);
-    res.send(result);
+    if (result == user_database.InsertNewUserResult.SUCCESS) {
+      user_db.logInUser(req, email, password);
+      res.redirect('/home');
+    }
   }
 })
+
+app.get("/home", (req, res) => {
+  // if (req.session.loggedin)
+  // req.session["logged-in"] = true;
+  if (req.session["logged-in"] != true) {
+    res.send("please log in");
+  } else {
+    res.send("Welcome " + req.session["email"]);
+  }
+  // res.send(req.session);
+}) 
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
