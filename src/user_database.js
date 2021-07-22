@@ -1,121 +1,118 @@
-const Database = require("better-sqlite3");
-const bcrypt = require("bcrypt");
-const { threadId } = require("worker_threads");
+const Database = require('better-sqlite3')
+const bcrypt = require('bcrypt')
 
 class UserDatabase {
-
-    constructor(database) {
-        /**
+  constructor (database) {
+    /**
          * @type {!Database}
          */
-        this.db = database;
-        this.createUserTable();
-        this.printAll();
-    }
+    this.db = database
+    this.createUserTable()
+    this.printAll()
+  }
 
-    createUserTable() {
-        this.db.prepare("CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);").run();
-    }
+  createUserTable () {
+    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);').run()
+  }
 
-    getSchema() {
-        var schema = this.db.prepare("SELECT sql FROM sqlite_master WHERE name='users'").get();
-        return schema;
-    }
+  getSchema () {
+    const schema = this.db.prepare("SELECT sql FROM sqlite_master WHERE name='users'").get()
+    return schema
+  }
 
-    /**
-     * 
-     * @param {String} email 
-     * @param {String} password 
+  /**
+     *
+     * @param {String} email
+     * @param {String} password
      * @returns {InsertNewUserResult} true if successful, false otherwise
      */
-    insertNewUser(email, password) {
-        // default username is first 5 characters of email
-        var username = email.substring(0, 5); 
-        if (this.isEmailInDatabase(email)) {
-            return InsertNewUserResult.INVALID_EMAIL;
-        } else {
-            var hash = this.encryptPassword(password);
-            var info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run();
-            if (info["changes"] > 0) {
-                return InsertNewUserResult.SUCCESS;
-            } else {
-                return InsertNewUserResult.ERROR;
-            }
-        }
+  insertNewUser (email, password) {
+    // default username is first 5 characters of email
+    const username = email.substring(0, 5)
+    if (this.isEmailInDatabase(email)) {
+      return InsertNewUserResult.INVALID_EMAIL
+    } else {
+      const hash = this.encryptPassword(password)
+      const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
+      if (info.changes > 0) {
+        return InsertNewUserResult.SUCCESS
+      } else {
+        return InsertNewUserResult.ERROR
+      }
     }
+  }
 
-    /**
+  /**
      * Check if an email address is stored in the database
-     * @param {String} email 
-     * @returns {boolean} true if in the database, false if not 
+     * @param {String} email
+     * @returns {boolean} true if in the database, false if not
      */
-    isEmailInDatabase(email) {
-        var rows = this.db.prepare(`SELECT * FROM users WHERE email = '${email}'`).all();
-        return (rows.length > 0);
-    }
+  isEmailInDatabase (email) {
+    const rows = this.db.prepare(`SELECT * FROM users WHERE email = '${email}'`).all()
+    return (rows.length > 0)
+  }
 
-    printAll() {
-        console.log(this.db.prepare("SELECT * FROM users;").all());
-    }
+  printAll () {
+    console.log(this.db.prepare('SELECT * FROM users;').all())
+  }
 
-    encryptPassword(password) {
-        var saltRounds = 5;
-        return bcrypt.hashSync(password, saltRounds);
-    }
+  encryptPassword (password) {
+    const saltRounds = 5
+    return bcrypt.hashSync(password, saltRounds)
+  }
 
-    selectHashedPassword(email) {
-        return this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()['password'];
-    }
+  selectHashedPassword (email) {
+    return this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get().password
+  }
 
-    /**
-     * 
+  /**
+     *
      * @param {*} password unencrypted password
      * @param {*} hashFromDatabase encrypted password from the database
      * @returns {Boolean}, true if successful, false otherwise
      */
-    checkPassword(email, password) {
-        var hashFromDatabase = this.selectHashedPassword(email);
-        return bcrypt.compareSync(password, hashFromDatabase);
-    }
+  checkPassword (email, password) {
+    const hashFromDatabase = this.selectHashedPassword(email)
+    return bcrypt.compareSync(password, hashFromDatabase)
+  }
 
-    /**
-     * 
-     * @param {*} https_request 
-     * @param {*} email 
-     * @param {*} password 
+  /**
+     *
+     * @param {*} httpsRequest
+     * @param {*} email
+     * @param {*} password
      * @returns {Boolean} true if login successful, false otherwise
      */
-    logInUser(https_request, email, password) {
-        if (this.checkPassword(email, password)) {
-            https_request.session['logged-in'] = true;
-            https_request.session['email'] = email;
-            return true;
-        } else {
-            https_request.session['logged-in'] = false;
-            return false;
-        }
+  logInUser (httpsRequest, email, password) {
+    if (this.checkPassword(email, password)) {
+      httpsRequest.session['logged-in'] = true
+      httpsRequest.session.email = email
+      return true
+    } else {
+      httpsRequest.session['logged-in'] = false
+      return false
     }
+  }
 
-    selectUserSessionData(email) {
-        return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get();
-    }
+  selectUserSessionData (email) {
+    return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get()
+  }
 
-    /**
-     * Delete all entries in table, should only be used for testing/debugging 
+  /**
+     * Delete all entries in table, should only be used for testing/debugging
      */
-    deleteAllTableEntries() {
-        this.db.prepare(`DELETE FROM users;`).run();
-    }
-    
+  deleteAllTableEntries () {
+    this.db.prepare('DELETE FROM users;').run()
+  }
 }
 
 /**
  * @enum {String}
  */
 const InsertNewUserResult = {
-    SUCCESS: "success",
-    INVALID_EMAIL: "invalid email",
-    ERROR: "error"
+  SUCCESS: 'success',
+  INVALID_EMAIL: 'invalid email',
+  ERROR: 'error'
 }
 
-module.exports = {UserDatabase, InsertNewUserResult};
+module.exports = { UserDatabase, InsertNewUserResult }
