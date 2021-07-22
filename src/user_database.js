@@ -60,7 +60,7 @@ class UserDatabase {
      * @param {Integer} uid the user id to search for
      * @returns {boolean} true if in the database, false if not
      */
-   isExist (uid) {
+  isExist (uid) {
     const stmt = this.db.prepare(`SELECT * FROM users WHERE uid = '${uid}'`)
     const query = stmt.all()
     return query.length > 0

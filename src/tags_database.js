@@ -13,9 +13,9 @@ class TagsDatabase {
   }
 
   createTable () {
-    let stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS tags ' +
+    const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS tags ' +
             '(tag_id INTEGER PRIMARY KEY AUTOINCREMENT, tag_name TEXT, tag_desc TEXT)')
-    let query = stmt.run()
+    const query = stmt.run()
   }
 
   /**
@@ -30,9 +30,9 @@ class TagsDatabase {
     const query = stmt.run()
 
     if (query.changes === 1) {
-      return query.lastInsertRowid;
+      return query.lastInsertRowid
     } else {
-      return null;
+      return null
     }
   }
 
@@ -65,8 +65,8 @@ class TagsDatabase {
     return query.toString()
   }
 
-  purgeDb() {
-    const stmt = this.db.prepare(`DELETE FROM tags`)
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM tags')
     const query = stmt.run()
   }
 }

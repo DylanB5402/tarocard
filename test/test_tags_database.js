@@ -14,22 +14,21 @@ describe('Testing Tags Database', function () {
   })
 
   it('Test: Is Tag Exist', function () {
-    let name = 'taga'
-    let desc = 'this tag is cool'
-    let id = tagsDb.addTag(name, desc)
+    const name = 'taga'
+    const desc = 'this tag is cool'
+    const id = tagsDb.addTag(name, desc)
     assert.equal(tagsDb.isExist(id), true)
   })
 
   it('Test: Get Tag', function () {
-    let name = 'salty'
-    let desc = 'why would you ever want a salty drink?????!!'
-    let id = tagsDb.addTag(name, desc)
-    let testTag = {
+    const name = 'salty'
+    const desc = 'why would you ever want a salty drink?????!!'
+    const id = tagsDb.addTag(name, desc)
+    const testTag = {
       tag_id: id,
       tag_name: name,
       tag_desc: desc
-    } 
+    }
     assert.deepEqual(tagsDb.getTag(id), testTag)
   })
-
 })

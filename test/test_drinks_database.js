@@ -15,21 +15,21 @@ describe('Testing Drinks Database', function () {
   })
 
   it('Test: Is Drink Exist', function () {
-    let name = 'drinka'
-    let desc = 'this drink is cool'
-    let id = drinksDb.addDrink(name, desc)
+    const name = 'drinka'
+    const desc = 'this drink is cool'
+    const id = drinksDb.addDrink(name, desc)
     assert.equal(drinksDb.isExist(id), true)
   })
 
   it('Test: Get Drink', function () {
-    let name = 'sprite'
-    let desc = 'this drink sucks'
-    let id = drinksDb.addDrink(name, desc)
-    let testDrink = {
+    const name = 'sprite'
+    const desc = 'this drink sucks'
+    const id = drinksDb.addDrink(name, desc)
+    const testDrink = {
       drink_id: id,
       drink_name: name,
       drink_desc: desc
-    } 
+    }
     assert.deepEqual(drinksDb.getDrink(id), testDrink)
   })
 })

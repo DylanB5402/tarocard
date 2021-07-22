@@ -15,9 +15,9 @@ class DrinksTagsDatabase {
   }
 
   createTable () {
-    let stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks_tags ' +
+    const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks_tags ' +
             '(drink_id INTEGER, tag_id INTEGER)')
-    let query = stmt.run()
+    const query = stmt.run()
   }
 
   /**
@@ -124,8 +124,8 @@ class DrinksTagsDatabase {
     return query.toString()
   }
 
-  purgeDb() {
-    const stmt = this.db.prepare(`DELETE FROM drinks_tags`)
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM drinks_tags')
     const query = stmt.run()
   }
 }

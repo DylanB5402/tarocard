@@ -13,9 +13,9 @@ class DrinksDatabase {
   }
 
   createTable () {
-    let stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks ' +
+    const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks ' +
             '(drink_id INTEGER PRIMARY KEY AUTOINCREMENT, drink_name TEXT, drink_desc TEXT)')
-    let query = stmt.run()
+    const query = stmt.run()
   }
 
   /**
@@ -30,9 +30,9 @@ class DrinksDatabase {
     const query = stmt.run()
 
     if (query.changes === 1) {
-      return query.lastInsertRowid;
+      return query.lastInsertRowid
     } else {
-      return null;
+      return null
     }
   }
 
@@ -65,8 +65,8 @@ class DrinksDatabase {
     return query.toString()
   }
 
-  purgeDb() {
-    const stmt = this.db.prepare(`DELETE FROM drinks`)
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM drinks')
     const query = stmt.run()
   }
 }
