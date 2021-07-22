@@ -7,7 +7,8 @@ Credits: Dylan Barva for skeleton code
 */
 
 const bSQLite3 = require('better-sqlite3');
-var template_engine = require('./template_engine');
+const template_engine = require('./template_engine');
+const drinksDatabase = require('./drinks_database')
 
 class FavDrinksDatabase {
     constructor (name) {
@@ -19,20 +20,21 @@ class FavDrinksDatabase {
 
     /**
      * Creates a new drink database if DNE. Otherwise, does not create table.
+     * Table has 4 columns: User Id, Drink ID, Favorite (bool), and date
      * @param none
      * @return none
      */
     createFavDrinkDatabase() {
-        this.db.prepare("CREATE TABLE IF NOT EXISTS drinks (uid INTEGER , drink_id INTEGER, fav BOOL, date DATETIME);").run();
+        this.db.prepare("CREATE TABLE IF NOT EXISTS fav_drinks (uid INTEGER , drink_id INTEGER, fav BOOL, date DATETIME);").run();
     }
 
     /**
-     * get all drinks in database 
+     * get all favorited drinks
      * @param {Response} http_response 
      */
     getAllDrinks(http_response) {
         var response_string = "";
-        this.db.prepare("SELECT * FROM drinks;", (err, rows) => {
+        this.db.prepare("SELECT * FROM fav_drinks;", (err, rows) => {
             rows.forEach((row) => {
                 response_string += "<p>" + JSON.stringify(row, null, 2) + "</p>";
             })
@@ -46,7 +48,7 @@ class FavDrinksDatabase {
      * @param {Response} http_response 
      */
     getDrink(id, http_response) {
-        this.db.prepare(`SELECT * FROM drinks WHERE id = ${id};`, (err, row) => {
+        this.db.prepare(`SELECT * FROM fav_drinks WHERE id = ${id};`, (err, row) => {
             var response_string = JSON.stringify(row, null, 2);
             // console.log(response_string);
             if (response_string != undefined) {
@@ -63,7 +65,7 @@ class FavDrinksDatabase {
      * @param {Response} http_response 
      */
     viewDrink(id, http_response) {
-        this.db.prepare(`SELECT * FROM drinks WHERE id = ${id};`, (err, row) => {
+        this.db.prepare(`SELECT * FROM fav_drinks WHERE id = ${id};`, (err, row) => {
             if (row != undefined) {
                 var name = row['name'];
                 var desc = row['desc'];
