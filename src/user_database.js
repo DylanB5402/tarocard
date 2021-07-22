@@ -18,7 +18,6 @@ class UserDatabase {
     }
 
     getSchema() {
-        // var schema = this.db.prepare(".schema").get();
         var schema = this.db.prepare("SELECT sql FROM sqlite_master WHERE name='users'").get();
         return schema;
     }
@@ -108,7 +107,6 @@ class UserDatabase {
         this.db.prepare(`DELETE FROM users;`).run();
     }
     
-
 }
 
 /**

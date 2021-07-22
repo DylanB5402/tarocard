@@ -6,7 +6,7 @@ const KnexSessionStore = require('connect-session-knex')(session);
 const user_database = require('./user_database');
 
 // const db = new Database('databases/users4.db', {verbose: console.log});
-const db = new Database('users4.db');
+const db = new Database('databases/users4.db');
 const user_db = new user_database.UserDatabase(db);
 
 const store = new KnexSessionStore();
@@ -43,14 +43,11 @@ app.post("/signup", (req, res) => {
 })
 
 app.get("/home", (req, res) => {
-  // if (req.session.loggedin)
-  // req.session["logged-in"] = true;
   if (req.session["logged-in"] != true) {
     res.send("please log in");
   } else {
     res.send("Welcome " + req.session["email"]);
   }
-  // res.send(req.session);
 }) 
 
 app.listen(port, () => {

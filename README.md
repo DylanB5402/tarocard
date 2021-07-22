@@ -15,4 +15,4 @@ Dependencies:
 - bcrypt
 - mocha
 - chai
-- connect-session-knex
+- connect-session-knex32
