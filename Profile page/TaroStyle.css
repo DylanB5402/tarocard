@@ -1,7 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Roboto";
 }
+
+html {
+    background-color: #EFEFEF;
+}
+
 body {
     background: #ffffff;
     width: 120%
@@ -38,10 +44,10 @@ body {
     width: 300px;
     height: 50px;
     font-size: 40px;
-    color:rgb(152, 121, 197);
-    border: 3px solid rgb(152, 121, 197);
+    color:#9879C5;
+    border: 3px solid #9879C5;
     border-radius: 40px;
-    font-weight: lighter;
+    font-weight: normal;
     position: absolute;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -55,8 +61,8 @@ body {
     height: 500px;
     position: relative;
     bottom: 30px;
-    border-top-right-radius: 30px;
-    border-top-left-radius: 30px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     z-index: 1;
     border-style: hidden;
     background-color: white;
@@ -76,47 +82,45 @@ body {
     position: absolute;
     top: 140px;
     left: 100px;
-    font-weight: normal;
+    font-weight: medium;
 }
 
 #username {
     width: 300px;
     height: 30px;
-    font-size: 25px;
+    font-size: 27px;
     position: absolute;
     top: 225px;
     left: 100px;
     font-weight: lighter;
-    color: lightgrey;
+    color: #C1C1C1;
 }
 
 #profileDescription {
     height: 200px;
     min-width: none;
     max-width: 1000px;
-    font-size: 30px;
+    font-size: 36px;
     position: absolute;
     left: 100px;
     margin-bottom: 20px;
 }
 
-
-
 #profileCards {
-    background-color: lightgrey;
+    background-color: #EFEFEF;
 }
 
 #userFriends {
     position: relative;
     left: 100px;
-    top: 100px;
+    top: 125px;
     width: 500px;
 }
 
 #userCards {
     position: relative;
     left: 600px;
-    top: 21px;
+    top: 41px;
     width: 500px;
 }
 
@@ -128,7 +132,7 @@ body {
 .userStats span {
     font-weight: lighter;
     font-size: 50px;
-    color: rgb(193, 193, 193);
+    color: #C1C1C1;
 }
 
 .cardDesign {
