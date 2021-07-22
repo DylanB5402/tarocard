@@ -7,15 +7,13 @@ Credits: Dylan Barva for skeleton code
 */
 
 const bSQLite3 = require('better-sqlite3');
-const template_engine = require('./template_engine');
 const drinksDatabase = require('./drinks_database')
+const userDatabase = require('./user_database');
 
 class FavDrinksDatabase {
-    constructor (name) {
-        this.name = name;
-        this.db = new bSQLite3.Database(name);
-        this.createDrinkDatabase();
-        this.temp_engine = new template_engine.TemplateEngine();
+    constructor (database) {
+        this.db = database;
+        this.createFavDrinkTable();
     }
 
     /**
@@ -24,7 +22,7 @@ class FavDrinksDatabase {
      * @param none
      * @return none
      */
-    createFavDrinkDatabase() {
+    createFavDrinkTable() {
         this.db.prepare("CREATE TABLE IF NOT EXISTS fav_drinks (uid INTEGER , drink_id INTEGER, fav BOOL, date DATETIME);").run();
     }
 
