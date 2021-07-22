@@ -16,9 +16,10 @@ class TaroCardApp {
     if (database === undefined) {
       database = 'databases/taroCard.db'
     }
-    const db = new Database(database)
-    console.log(database)
-    this.userDB = new userDatabase.UserDatabase(db)
+    this.db = new Database(database)
+    // console.log(database)
+    this.server = undefined
+    this.userDB = new userDatabase.UserDatabase(this.db)
     const store = new KnexSessionStore()
     this.app = express()
     this.app.use(express.json()) // for parsing this.application/json
@@ -49,9 +50,11 @@ class TaroCardApp {
       }
     })
 
-    // this.app.post("/login")
+    this.app.post('/login', (req, res) => {
+      // const email = req.body
+    })
 
-    // placeholder function
+    // placeholder/debug routes begin here
     this.app.get('/debug/home', (req, res) => {
       if (req.session['logged-in'] !== true) {
         res.send('please log in')
@@ -60,16 +63,20 @@ class TaroCardApp {
       }
     })
 
+    this.app.get('/debug/connect', (req, res) => {
+      res.send('connected')
+    })
+
     // 404, page can't be found
     this.app.use(function (req, res) {
-      res.status(404).send('404 page not found')
+      res.status(404).send('404 page not found taco')
     })
   }
 
   run () {
     const port = 3000
-    this.app.listen(port, () => {
-      console.log(`Example this.app listening at http://localhost:${port}`)
+    this.server = this.app.listen(port, () => {
+      console.log(`Example app listening at http://localhost:${port}`)
     })
   }
 }

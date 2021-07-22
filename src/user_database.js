@@ -8,7 +8,7 @@ class UserDatabase {
          */
     this.db = database
     this.createUserTable()
-    this.printAll()
+    // this.printAll()
   }
 
   createUserTable () {

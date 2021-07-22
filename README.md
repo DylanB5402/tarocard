@@ -15,4 +15,5 @@ Dependencies:
 - bcrypt
 - mocha
 - chai
+- chai-http
 - connect-session-knex
