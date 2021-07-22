@@ -7,28 +7,23 @@
     <body>
 
         <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
-        <nav>
-            <ul>
-                <li class="active"> <img src="../assets/Home-Icon.png" alt="Home"> </li>
-                <li> <img src="../assets/Search-Icon.png" alt="Search"> </li>
-                <li> <img src="../assets/Notifs-Icon.png" alt="Notification"> </li>
-                <li> <img src="../assets/Profile-Icon.png" alt="Profile"> </li>
-            </uL>
-        </nav>
-
         <!-- Card Creation Form (Pop up? )-->
         <!-- The Button that starts it all :00 -->
-        <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button" onclick="document.getElementById('id01').style.display='block'">
+        <!-- <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button" onclick="document.getElementById('id01').style.display='block'"> -->
 
-            <form action="/action_page.php" class="form-container animate" id="id01">
+        <button id="add-card-btn" alt="add card button" onclick="openCardCreate()" > + </button> 
+
+            <form action="/cards" class="form-container" id="id01" method="POST">
                 <div class="card-bar">
-                    <button type=button style="float:left" class="del-button" onclick="document.getElementById('id01').style.display='none'" >X</button>
-                    <input  type=button class="post-button" value="Post">
+                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >X</button>
+                    <button class="post-button" value="submit"> Post </button>
                 </div>
-                <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
-                <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
-                <textarea class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
+                <div class="userInput">
+                    <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
+                    <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
+                    <textarea class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
+                </div>
             </form>
-
     </body>
+    <script type="text/javascript" src="homepage.js"></script>
 </html>
