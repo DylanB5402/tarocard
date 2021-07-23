@@ -135,6 +135,71 @@ body {
     color: #C1C1C1;
 }
 
-.cardDesign {
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+    background-color: #ffffff;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 50px 100px;
+    text-decoration: none;
+    font-size: 50px;
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    background-color: #D4D4D4;
+    /*border: solid #9879C5;*/
+    color: #9879C5;
+  }
+  
+  /* Add a background color to the active link */
+  .navbar a.active {
+    background-color: #9879C5;
+    color: black;
+  }
+  
+  /* Hide the link that should open and close the navbar on small screens */
+  .navbar .icon {
+    display: none;
+  }
+
+
+
+/*
+footer {
+    height: 157px;
+    bottom: 0;
+    position: relative;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*overflow: hidden;
+}
+
+li {
+    display: inline;
+    border: dotted black;
+    float: center;
+    padding: 25px;
+    font-size: 25px;;
+    background-color: #ffffff;
+}
+
+li a {
+    color: black;
+    bottom: 0;
+}*/
