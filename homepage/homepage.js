@@ -45,7 +45,7 @@ function createCard(establishment, drink, description,){
 }
 
 
-/*Accessing server and putting information into cards*/
+/*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let request = new XMLHttpRequest();
 request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
 request.responseType = 'json';
