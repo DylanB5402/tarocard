@@ -2,6 +2,7 @@ const express = require('express')
 const Database = require('better-sqlite3')
 const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
+const pug = require('pug')
 
 const userDatabase = require('./user_database')
 
@@ -35,6 +36,8 @@ class TaroCardApp {
       })
     )
 
+    this.generateProfile = pug.compileFile('templates/profile_debug.pug')
+
     this.app.post('/signup', (req, res) => {
       const email = req.body.email
       const password = req.body.password
@@ -46,12 +49,26 @@ class TaroCardApp {
         if (result === userDatabase.InsertNewUserResult.SUCCESS) {
           this.userDB.logInUser(req, email, password)
           res.redirect('/debug/home')
+        } else {
+          res.send('invalid email')
         }
       }
     })
 
     this.app.post('/login', (req, res) => {
-      // const email = req.body
+      const email = req.body.email
+      const password = req.body.password
+      if (this.userDB.logInUser(req, email, password)) {
+        res.redirect('/debug/home')
+      } else {
+        res.send('invalid email and/or password')
+      }
+    })
+
+    this.app.post('/signout', (req, res) => {
+      req.session.email = undefined
+      req.session['logged-in'] = false
+      res.redirect('/debug/home')
     })
 
     // placeholder/debug routes begin here
@@ -59,7 +76,7 @@ class TaroCardApp {
       if (req.session['logged-in'] !== true) {
         res.send('please log in')
       } else {
-        res.send('Welcome ' + req.session.email)
+        res.send(this.generateProfile({ username: req.session.email }))
       }
     })
 
