@@ -47,16 +47,16 @@ function createCard(establishment, drink, description,){
 
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let request = new XMLHttpRequest();
-request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+request.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true);
 request.responseType = 'json';
 request.send();
 
 request.onload = function() {
-    const users = request.response.users;
-    for(let i = 0; i < users.length; i++) {
-        let x =  users[i]["image url"];
-        let y = users[i]["display name"];
-       let z =users[i]["username"];
+    const cards = request.response.cards;
+    for(let i = 0; i < cards.length; i++) {
+        let x =  cards[i]["Name of Establishment"];
+        let y = cards[i]["Name of Order"];
+       let z =cards[i]["Description"];
        createCard(x,y,z);
        console.log(i);
     }
