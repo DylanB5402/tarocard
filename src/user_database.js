@@ -8,7 +8,6 @@ class UserDatabase {
          */
     this.db = database
     this.createUserTable()
-    // this.printAll()
   }
 
   createUserTable () {
@@ -30,14 +29,17 @@ class UserDatabase {
     // default username is first 5 characters of email
     const username = email.substring(0, 5)
     if (this.isEmailInDatabase(email)) {
-      return InsertNewUserResult.INVALID_EMAIL
+      // return InsertNewUserResult.INVALID_EMAIL
+      return -1
     } else {
       const hash = this.encryptPassword(password)
       const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
       if (info.changes > 0) {
-        return InsertNewUserResult.SUCCESS
+        // return InsertNewUserResult.SUCCESS
+        return info.lastInsertRowid
       } else {
-        return InsertNewUserResult.ERROR
+        // return InsertNewUserResult.ERROR
+        return -1
       }
     }
   }
@@ -94,16 +96,20 @@ class UserDatabase {
     }
   }
 
+  selectUserId (email) {
+    return this.db.prepare(`SELECT uid FROM users WHERE email = '${email}';`).get().uid
+  }
+
   selectUserSessionData (email) {
     return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get()
   }
 
-  insertProfileData(email, display_name, username, bio) {
-    return this.db.prepare(`UPDATE users SET display_name = '${display_name}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run();
+  insertProfileData (email, displayName, username, bio) {
+    return this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run()
   }
 
-  selectProfileData(email) {
-    return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get();
+  selectProfileData (email) {
+    return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get()
   }
 
   /**

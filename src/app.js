@@ -44,11 +44,12 @@ class TaroCardApp {
         res.redirect('/signup.html')
       } else {
         const result = this.userDB.insertNewUser(email, password)
-        if (result === userDatabase.InsertNewUserResult.SUCCESS) {
+        // if (result === userDatabase.InsertNewUserResult.SUCCESS) {
+        if (result != -1) {
           this.userDB.logInUser(req, email, password)
           res.redirect('/debug/home')
         } else {
-          res.send('invalid email')
+          // res.send('invalid email')
         }
       }
     })

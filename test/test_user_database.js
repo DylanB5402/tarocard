@@ -1,13 +1,13 @@
 const { assert, expect } = require('chai')
 const Database = require('better-sqlite3')
-const chai = require('chai');
-const assertArrays = require('chai-arrays');
-chai.use(assertArrays);
+const chai = require('chai')
+const assertArrays = require('chai-arrays')
+chai.use(assertArrays)
 
 const userDatabase = require('../src/user_database')
 
 // const db = new Database('databases/sample.db', {verbose: console.log});
-const db = new Database('databases/sample.db')
+const db = new Database('databases/sample2.db')
 const userDb = new userDatabase.UserDatabase(db)
 userDb.deleteAllTableEntries()
 
@@ -62,17 +62,22 @@ describe('Testing UserDatabase', function () {
     assert.isFalse(userDb.checkPassword('user8@email.com', 'password123'))
   })
 
-  it('Test insertProfileData', function() {
+  it('Test insertProfileData', function () {
     userDb.insertNewUser('user9@email.com', 'password')
-    assert.equal(userDb.insertProfileData('user9@email.com', 'nine', 'nine', 'I am user nine')['changes'], 1);
+    assert.equal(userDb.insertProfileData('user9@email.com', 'nine', 'nine', 'I am user nine').changes, 1)
   })
 
-  it('Test selectProfileData', function() {
+  it('Test selectProfileData', function () {
     userDb.insertNewUser('user10@email.com', 'password')
     userDb.insertProfileData('user10@email.com', 'ten', 'ten', 'I am user ten')
-    var userData = userDb.selectProfileData('user10@email.com')
-    var userArray = [userData['username'], userData['display_name'], userData['bio']]
+    const userData = userDb.selectProfileData('user10@email.com')
+    const userArray = [userData.username, userData.display_name, userData.bio]
     expect(userArray).to.be.containingAllOf(['ten', 'ten', 'I am user ten'])
+  })
+
+  it('Test selectUserID', function () {
+    userDb.insertNewUser('user11@email.com', 'password')
+    assert.isNumber(userDb.selectUserId('user11@email.com'))
   })
 }
 )
