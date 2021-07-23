@@ -98,6 +98,14 @@ class UserDatabase {
     return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get()
   }
 
+  insertProfileData(email, display_name, username, bio) {
+    return this.db.prepare(`UPDATE users SET display_name = '${display_name}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run();
+  }
+
+  selectProfileData(email) {
+    return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get();
+  }
+
   /**
      * Delete all entries in table, should only be used for testing/debugging
      */

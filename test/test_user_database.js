@@ -1,5 +1,8 @@
-const { assert } = require('chai')
+const { assert, expect } = require('chai')
 const Database = require('better-sqlite3')
+const chai = require('chai');
+const assertArrays = require('chai-arrays');
+chai.use(assertArrays);
 
 const userDatabase = require('../src/user_database')
 
@@ -57,6 +60,19 @@ describe('Testing UserDatabase', function () {
   it('Test checkPassword failure', function () {
     userDb.insertNewUser('user8@email.com', 'password')
     assert.isFalse(userDb.checkPassword('user8@email.com', 'password123'))
+  })
+
+  it('Test insertProfileData', function() {
+    userDb.insertNewUser('user9@email.com', 'password')
+    assert.equal(userDb.insertProfileData('user9@email.com', 'nine', 'nine', 'I am user nine')['changes'], 1);
+  })
+
+  it('Test selectProfileData', function() {
+    userDb.insertNewUser('user10@email.com', 'password')
+    userDb.insertProfileData('user10@email.com', 'ten', 'ten', 'I am user ten')
+    var userData = userDb.selectProfileData('user10@email.com')
+    var userArray = [userData['username'], userData['display_name'], userData['bio']]
+    expect(userArray).to.be.containingAllOf(['ten', 'ten', 'I am user ten'])
   })
 }
 )

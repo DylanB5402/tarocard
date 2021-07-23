@@ -6,8 +6,6 @@ const pug = require('pug')
 
 const userDatabase = require('./user_database')
 
-// const db = new Database('databases/users4.db', {verbose: console.log});
-
 class TaroCardApp {
   /**
      *
