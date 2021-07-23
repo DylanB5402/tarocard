@@ -7,7 +7,7 @@ chai.use(assertArrays)
 const userDatabase = require('../src/user_database')
 
 // const db = new Database('databases/sample.db', {verbose: console.log});
-const db = new Database('databases/sample2.db')
+const db = new Database('databases/test_user.db')
 const userDb = new userDatabase.UserDatabase(db)
 userDb.deleteAllTableEntries()
 

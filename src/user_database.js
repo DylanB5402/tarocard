@@ -61,11 +61,11 @@ class UserDatabase {
   }
 
   selectHashedPassword (email) {
-    var row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
-    if (row == undefined) {
-      return undefined;
+    const row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
+    if (row === undefined) {
+      return undefined
     } else {
-      return row.password;
+      return row.password
     }
   }
 
@@ -77,7 +77,7 @@ class UserDatabase {
      */
   checkPassword (email, password) {
     const hashFromDatabase = this.selectHashedPassword(email)
-    if (hashFromDatabase != undefined) {
+    if (hashFromDatabase !== undefined) {
       return bcrypt.compareSync(password, hashFromDatabase)
     } else {
       return false
@@ -93,11 +93,11 @@ class UserDatabase {
      */
   logInUser (httpsRequest, email, password) {
     if (this.checkPassword(email, password)) {
-      httpsRequest.session['logged-in'] = true
+      httpsRequest.session.loggedin = true
       httpsRequest.session.email = email
       return true
     } else {
-      httpsRequest.session['logged-in'] = false
+      httpsRequest.session.loggedin = false
       return false
     }
   }
@@ -118,12 +118,18 @@ class UserDatabase {
     return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get()
   }
 
+  getUserByUID(uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get();
+  }
+  
   /**
      * Delete all entries in table, should only be used for testing/debugging
      */
   deleteAllTableEntries () {
     this.db.prepare('DELETE FROM users;').run()
   }
+
+  
 }
 
 /**
