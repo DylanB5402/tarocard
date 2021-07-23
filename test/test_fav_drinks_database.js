@@ -79,8 +79,8 @@ describe('Testing Favorite Drinks Relational Database', function () {
     const drink_id = drinksDb.addDrink('thai tea')
     userDb.insertNewUser('abg88@email.com', 'falsies')
     const user_id = userDb.getUserId('abg88@email.com')
+    favDrinksDb.addFavDrink(user_id, drink_id)
     favDrinksDb.starDrink(user_id, drink_id)
-    favDrinksDb.toString();
     assert.equal(favDrinksDb.unstarDrink(user_id, drink_id), true)
   })
 

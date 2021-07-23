@@ -151,7 +151,7 @@ class FavDrinksDatabase {
   /**
    * Stars a drink for a user from the database using its user id and drink id
    * @param {Integer} uid
-   * @param {Integer} id
+   * @param {Integer} drinkId
    * @returns {Boolean} true if successful, false otherwise
    */
    starDrink (uid, drinkId) {
@@ -170,7 +170,7 @@ class FavDrinksDatabase {
   /**
    * Unfavorites a drink for a user from the database using its user id and drink id
    * @param {Integer} uid
-   * @param {Integer} id
+   * @param {Integer} drinkId
    * @returns {Boolean} true if successful, false otherwise
    */
   unstarDrink (uid, drinkId) {
