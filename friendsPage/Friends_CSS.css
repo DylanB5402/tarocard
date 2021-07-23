@@ -4,13 +4,18 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+body {
+    min-width: 1060px;
+}
+
+
 .innerBody {
     background-color: rgba(238, 238, 238, 0.712);
     height: 100%;
     margin: auto;
-    width: 97%;
+    width: 100%;
     text-align: center;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    border-style: hidden;
 }
 
 .titleCard {
@@ -41,23 +46,43 @@
 
   }
 
-.innerBody input {
+#searchBar {
     height: fit-content;
     font-weight: lighter;
-    color: rgb(233, 233, 233);
+    color: rgb(95, 94, 94);
     width: 85%;
     font-size: 50px;
     border-style: hidden;
     padding-top: 15px;
     padding-bottom: 15px;
-    padding-left: 100px;
+    padding-left: 70px;
     margin: 30px;
     margin-top: 40px;
     border-radius: 30px;
-    background-image: url(./search.png);
+    /* background-image: url(./search.png);
     background-repeat: no-repeat;
-    background-size: 85px, 85px;
+    background-size: 85px, 85px; */
 }
+
+#searchBarButton {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    padding: 0px;
+    background: rgb(152, 121, 197);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    position: relative;
+    right: 70px;
+    top: 30px;
+}
+
+/*#friendsAll {
+    
+} */
 
 .friendElement {
     width: 97%;
@@ -85,7 +110,7 @@
     width: fit-content;
     height: fit-content;
     font-size: 40px;
-    font-weight: lighter;
+    font-weight: bold;
     position: relative;
     left: 260px;
     bottom: 115px;
@@ -98,6 +123,30 @@
     font-weight: lighter;
     color: rgba(187, 185, 185, 0.795);
     position: relative;
-    left: 262px;
+    left: 255px;
     bottom: 110px;
+}
+
+#letterHeading {
+    color: rgb(146, 106, 255);
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    font-size: 50px;
+    position: relative;
+    margin-top: 80px;
+    left: 30px;
+    bottom: 10px;
+}
+
+#headingLine {
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid rgb(146, 106, 255);;
+    padding: 0;
+    position: relative;
+    bottom: 40px;
+    left: 80px;
+    width: 90%;
 }
