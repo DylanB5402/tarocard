@@ -6,7 +6,11 @@ Purpose: This is a separate class/file to create a database for favorite drinks
 Credits: Dylan Barva & Peter Liu for skeleton code
 */
 
-//const bSQLite3 = require('better-sqlite3')
+/**
+ * @fileoverview fav_drinks_database
+ * @package better-sqlite3
+ */
+
 const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
 
@@ -82,7 +86,7 @@ class FavDrinksDatabase {
    * @param {Integer} drinkId id of drink
    * @return {Boolean} false if DNE, true if it does
    */
-  isExists (uid, drinkId) {
+  isExist (uid, drinkId) {
     const stmt = this.db.prepare(`SELECT * FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
             `AND uid = '${uid}' AND fav = 1`)
     const query = stmt.all() // all() returns an array or rows
@@ -103,10 +107,54 @@ class FavDrinksDatabase {
       return false
     } else {
       const stmt = this.db.prepare('INSERT INTO fav_drinks (uid, drink_id, fav, date)' +
-              `VALUES ('${uid}', '${drinkId}', 1, GETDATE())`)
+              `VALUES ('${uid}', '${drinkId}', 0, GETDATE())`)
       const query = stmt.run()
     }
     if (query.changes === 1) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * unfavorites a drink for a user
+   * @param {Integer} uid
+   * @param {Integer} drinkId
+   * @returns {Boolean} true if successful, false if failed
+   */
+   removeFavDrink (uid, drinkId) {
+    const userDB = new userDatabase.UserDatabase(this.db)
+    const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
+
+    // Check to make params are valid/exists
+    if (!userDB.isExist(uid) || !drinksDB.isExist(drinkId)) {
+      return false
+    } else {
+      const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE' + 
+              `uid = '${uid}' AND drink_id = '${drinkId}'`)
+      const query = stmt.run()
+    }
+    if (query.changes === 1) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Stars a drink for a user from the database using its user id and drink id
+   * @param {Integer} uid
+   * @param {Integer} id
+   * @returns {Boolean} true if successful, false otherwise
+   */
+   starDrink (uid, drinkId) {
+    const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
+            `drink_id = '${drinkId}'`)
+    const query = stmt.run()
+
+    // Checks if changes were made; changes are made upon successful boolean change
+    if (query.changes > 0) {
       return true
     } else {
       return false
@@ -119,8 +167,8 @@ class FavDrinksDatabase {
    * @param {Integer} id
    * @returns {Boolean} true if successful, false otherwise
    */
-  unfavDrink (uid, drinkId) {
-    const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
+  unstarDrink (uid, drinkId) {
+    const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
             `drink_id = '${drinkId}'`)
     const query = stmt.run()
 
@@ -138,6 +186,11 @@ class FavDrinksDatabase {
     console.log(query)
     return query.toString()
   }
+
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM fav_drinks')
+    const query = stmt.run()
+  }
 }
 
-module.exports = { DrinksDatabase }
+module.exports = { FavDrinksDatabase }

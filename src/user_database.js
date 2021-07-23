@@ -66,6 +66,17 @@ class UserDatabase {
     return query.length > 0
   }
 
+  /**
+   * Gets the uid of a user through email
+   * @param {String} email 
+   * @returns {Integer} uid
+   */
+  getUserId(email) {
+    const stmt = this.db.prepare(`SELECT uid FROM users WHERE email = '${email}'`)
+    const uid_query = stmt.pluck(); // Returns value of the first column that it retrieves
+    return uid_query
+  }
+
   printAll () {
     console.log(this.db.prepare('SELECT * FROM users;').all())
   }
@@ -76,6 +87,11 @@ class UserDatabase {
 
   checkPassword () {
 
+  }
+
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM users')
+    const query = stmt.run()
   }
 }
 
