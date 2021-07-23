@@ -29,16 +29,13 @@ class UserDatabase {
     // default username is first 5 characters of email
     const username = email.substring(0, 5)
     if (this.isEmailInDatabase(email)) {
-      // return InsertNewUserResult.INVALID_EMAIL
       return -1
     } else {
       const hash = this.encryptPassword(password)
       const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
       if (info.changes > 0) {
-        // return InsertNewUserResult.SUCCESS
         return info.lastInsertRowid
       } else {
-        // return InsertNewUserResult.ERROR
         return -1
       }
     }
@@ -64,7 +61,12 @@ class UserDatabase {
   }
 
   selectHashedPassword (email) {
-    return this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get().password
+    var row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
+    if (row == undefined) {
+      return undefined;
+    } else {
+      return row.password;
+    }
   }
 
   /**
@@ -75,7 +77,11 @@ class UserDatabase {
      */
   checkPassword (email, password) {
     const hashFromDatabase = this.selectHashedPassword(email)
-    return bcrypt.compareSync(password, hashFromDatabase)
+    if (hashFromDatabase != undefined) {
+      return bcrypt.compareSync(password, hashFromDatabase)
+    } else {
+      return false
+    }
   }
 
   /**
