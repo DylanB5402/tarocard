@@ -9,7 +9,7 @@ class UserDatabase {
          */
     this.db = database
     this.createUserTable()
-    this.printAll()
+    //this.printAll()
   }
 
   createUserTable () {
@@ -73,7 +73,7 @@ class UserDatabase {
    */
   getUserId(email) {
     const stmt = this.db.prepare(`SELECT uid FROM users WHERE email = '${email}'`)
-    const uid_query = stmt.pluck(); // Returns value of the first column that it retrieves
+    const uid_query = Number(stmt.get().uid); // Returns value of the first column that it retrieves
     return uid_query
   }
 

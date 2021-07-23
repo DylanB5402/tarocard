@@ -28,7 +28,8 @@ class FavDrinksDatabase {
    */
   createFavDrinkTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS fav_drinks' +
-      '(uid INTEGER , drink_id INTEGER, fav BOOL, date DATETIME);').run()
+      '(uid INTEGER UNIQUE, drink_id INTEGER UNIQUE, fav BOOL, date DATETIME);')
+    stmt.run();
   }
 
   /**
@@ -88,7 +89,7 @@ class FavDrinksDatabase {
    */
   isExist (uid, drinkId) {
     const stmt = this.db.prepare(`SELECT * FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
-            `AND uid = '${uid}' AND fav = 1`)
+            `AND uid = '${uid}'`)
     const query = stmt.all() // all() returns an array or rows
     return query.length > 0
   }
@@ -103,18 +104,22 @@ class FavDrinksDatabase {
     const userDB = new userDatabase.UserDatabase(this.db)
     const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
 
-    if (!userDB.isExist(uid) || !drinksDB.isExist(drinkId)) {
+    console.log(`This is the user id: ${uid}`);
+
+    if (!userDB.isExist(uid) && !drinksDB.isExist(drinkId)) {
       return false
     } else {
       const stmt = this.db.prepare('INSERT INTO fav_drinks (uid, drink_id, fav, date)' +
-              `VALUES ('${uid}', '${drinkId}', 0, GETDATE())`)
+              `VALUES ('${uid}', '${drinkId}', 0, date('now'))`)
       const query = stmt.run()
+
+      if (query.changes === 1) {
+        return true
+      } else {
+        return false
+      }
     }
-    if (query.changes === 1) {
-      return true
-    } else {
-      return false
-    }
+    
   }
 
   /**
@@ -131,14 +136,15 @@ class FavDrinksDatabase {
     if (!userDB.isExist(uid) || !drinksDB.isExist(drinkId)) {
       return false
     } else {
-      const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE' + 
+      const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' + 
               `uid = '${uid}' AND drink_id = '${drinkId}'`)
       const query = stmt.run()
-    }
-    if (query.changes === 1) {
-      return true
-    } else {
-      return false
+
+      if (query.changes === 1) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 
@@ -150,7 +156,7 @@ class FavDrinksDatabase {
    */
    starDrink (uid, drinkId) {
     const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
-            `drink_id = '${drinkId}'`)
+            `AND drink_id = '${drinkId}'`)
     const query = stmt.run()
 
     // Checks if changes were made; changes are made upon successful boolean change
@@ -169,7 +175,7 @@ class FavDrinksDatabase {
    */
   unstarDrink (uid, drinkId) {
     const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
-            `drink_id = '${drinkId}'`)
+            `AND drink_id = '${drinkId}'`)
     const query = stmt.run()
 
     // Checks if changes were made; changes are made upon successful boolean change
