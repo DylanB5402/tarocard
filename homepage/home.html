@@ -5,6 +5,17 @@
         <link rel="stylesheet" href="./home.css">
     </head>
     <body>
+        <form action="/cards" class="form-container" id="id01" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >X</button>
+                <button class="post-button" value="submit"> Post </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
+                <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
+                <textarea maxlength="100" class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
 
         <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
         <!-- Card Creation Form (Pop up? )-->
@@ -29,17 +40,6 @@
         </div> 
         <button id="add-card-btn" alt="add card button" onclick="openCardCreate()" > + </button> 
 
-            <form action="/cards" class="form-container" id="id01" method="POST">
-                <div class="card-bar">
-                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >X</button>
-                    <button class="post-button" value="submit"> Post </button>
-                </div>
-                <div class="userInput">
-                    <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
-                    <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
-                    <textarea maxlength="100" class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
-                </div>
-            </form>
     </body>
     <script type="text/javascript" src="homepage.js"></script>
 </html>
