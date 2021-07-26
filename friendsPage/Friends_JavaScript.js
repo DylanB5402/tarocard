@@ -32,7 +32,7 @@ function populateFriends(obj) {
            currentLetter = char;
            divHeaderCopy = document.importNode(divHeader, true);
            divHeaderCopy.querySelector("h1").textContent = currentLetter;
-            divAll.appendChild(divHeaderCopy);
+           divAll.appendChild(divHeaderCopy);
         }
         divCopy.querySelector("img", true).src = users[i]["image url"];
         divCopy.querySelector("h2",true).textContent = users[i]["display name"];
@@ -40,4 +40,8 @@ function populateFriends(obj) {
         divAll.appendChild(divCopy);
         body.appendChild(divAll);
     }
+}
+
+function afterSearchDisplay() {
+    document.getElementById("friendsAll").style.display = "none";
 }
