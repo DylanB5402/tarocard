@@ -18,8 +18,16 @@ class FriendDatabase {
     return schema
   }
 
+  /**
+   * Insert a new friendship status between two users, should not be called outside of this file except for testing
+   * @param {*} uid
+   * @param {*} friendUid
+   * @param {*} status
+   * @returns info (see better-sqlite3 docs for .run()) if successful, undefined otherwise if a friendship status between the two users already exists
+   */
   insertFriend (uid, friendUid, status) {
-    if (this.getFriendStatus(uid, friendUid !== undefined)) {
+    const friendStatus = this.getFriendStatus(uid, friendUid)
+    if (friendStatus === undefined) {
       return this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${status}');`).run()
     } else {
       return undefined
@@ -44,6 +52,12 @@ class FriendDatabase {
     this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS)
   }
 
+  /**
+   * Get the friendship status of two users, from the perspective of the user whose id is provided in the first argument
+   * @param {*} uid
+   * @param {*} friendUid
+   * @returns the friendship status if the two users have one, undefined otherwise
+   */
   getFriendStatus (uid, friendUid) {
     const row = this.db.prepare(`SELECT status FROM friends WHERE uid = ${uid} AND friend_uid = ${friendUid};`).get()
     if (row !== undefined) {
