@@ -34,7 +34,7 @@ body {
     object-position: center top;
     position: relative;
     bottom: 130px;
-    left: 80px;
+    left: 100px;
     z-index: 2;
 }
 
@@ -71,18 +71,16 @@ body {
     align-items: center;
     width: max-content;
     margin-left:100px;
- 
 }
 
 .profileTabs ul{
     display: inline-block;
     text-align: left;
-   
-    
 }
 .profileTabs span{
     font-size: 50px;
     text-align: center;
+    border: solid blue;
 }
 #profileText {
     width: 800px;
@@ -129,8 +127,8 @@ body {
 #userStats{
     align-items: center;
     width: max-content;
-
 }
+
 .userStats ul {
     display: inline;
     text-align: left;
@@ -193,9 +191,11 @@ body {
       margin-top: 40px;
       margin-bottom: 40px;
   }
-  #navProfileIcon{
+
+  #navProfileIcon {
     margin-bottom: 10px;
 }
+
   /* Style the links inside the navigation bar */
   .navbar a {
     float: left;
