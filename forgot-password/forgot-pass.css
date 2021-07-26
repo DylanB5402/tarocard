@@ -1,0 +1,100 @@
+body{
+    background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
+    height:1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.appName h1 {
+    font-family: 'Chewy',sans-serif;
+    font-size: 5vh;
+}
+
+.appName {
+    width: auto;
+    height:auto;
+    text-align: center;
+}
+
+.appName p{
+    width: auto;
+    margin: 40px;
+    font-size: 30px;
+    color: white;
+    font-family: 'Robot',sans-serif;
+}
+
+.userInput {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.userInput input{
+    width: 50vw;
+    height: 3vw;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color:white;
+    padding: 15px;
+    width: 50vw;
+    height: 3vw;
+    background-color: rgba(0,0,0,0.15);
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+}
+button {
+    width: 52vw;
+    height: 4vh;
+    border-radius: 3px;
+    border-width: 2px;
+    background-color: rgba(0,0,0,0.02);
+    border-color:white;
+    color: white;
+    margin: 10px;
+    font-size: 2vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+}
+
+hr {
+    padding: 0.05px;
+    margin: 0.01px;
+    height: 0px;
+}
+
+#or{
+    padding: 1px;
+    margin: 5px;
+    font-size: 4vh;
+    font-family: 'Robot',sans-serif;
+}
+#newAcc,#back2Login{
+    text-align: center;
+}
+#newAcc a{
+    width: auto;
+    height: auto;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+    text-decoration: none;
+}
+#back2Login a{
+    width: auto;
+    height: auto;
+    text-align: center;
+    position: relative;
+    top: 25vh;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+    text-decoration: none;
+}
