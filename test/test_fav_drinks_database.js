@@ -24,16 +24,14 @@ describe('Testing Favorite Drinks Relational Database', function () {
     assert.equal(favDrinksDb.addFavDrink(user_id, drink_id), true)
   })
 
-  // it('Test: Add New Fav Drink Relation Unsuccessfully', function () {
-  //   favDrinksDb.toString();
-  //   const drink_id = drinksDb.addDrink('Oolong Milk Tea')
-  //   userDb.insertNewUser('JeefHaWAB@nvidia.com', 'ToxicTeemoMain')
-  //   const user_id = userDb.getUserId('JeefHaWAB@nvidia.com')
-  //   favDrinksDb.addFavDrink(user_id, drink_id) // Checking duplicate entry
-  //   favDrinksDb.addFavDrink(user_id, drink_id) // Checking duplicate entry
-  //   favDrinksDb.toString();
-  //   assert.equal(favDrinksDb.addFavDrink(user_id, drink_id), false)
-  // })
+  it('Test: Add New Fav Drink Relation Unsuccessfully', function () {
+    const drink_id = drinksDb.addDrink('Oolong Milk Tea')
+    userDb.insertNewUser('JeefHaWAB@nvidia.com', 'ToxicTeemoMain')
+    const user_id = userDb.getUserId('JeefHaWAB@nvidia.com')
+    favDrinksDb.addFavDrink(user_id, drink_id) // Checking duplicate entry
+    favDrinksDb.addFavDrink(user_id, drink_id) // Checking duplicate entry
+    assert.equal(favDrinksDb.addFavDrink(user_id, drink_id), false)
+  })
 
   it('Test: Is Fav Drink Relation Exist', function () {
     const drink_id = drinksDb.addDrink('Wintermelon Milk Tea')
@@ -51,12 +49,12 @@ describe('Testing Favorite Drinks Relational Database', function () {
     assert.equal(favDrinksDb.removeFavDrink(user_id, drink_id), true)
   })
 
-  // it('Test: Remove User-Drink Relation Unsuccessfully', function () {
-  //   const drink_id = drinksDb.addDrink('coffee')
-  //   userDb.insertNewUser('starbies@email.com', 'caffeineAddict')
-  //   const user_id = userDb.getUserId('starbies@email.com')
-  //   assert.equal(favDrinksDb.removeFavDrink(user_id, drink_id), false)
-  // })
+  it('Test: Remove User-Drink Relation Unsuccessfully', function () {
+    const drink_id = drinksDb.addDrink('coffee')
+    userDb.insertNewUser('starbies@email.com', 'caffeineAddict')
+    const user_id = userDb.getUserId('starbies@email.com')
+    assert.equal(favDrinksDb.removeFavDrink(user_id, drink_id), false)
+  })
 
   it('Test: Star Drink Successfully', function () {
     const drink_id = drinksDb.addDrink('horchata')
@@ -66,14 +64,15 @@ describe('Testing Favorite Drinks Relational Database', function () {
     assert.equal(favDrinksDb.starDrink(user_id, drink_id), true)
   })
 
-  // it('Test: Star Drink Unsuccessfully (dupe)', function () {
-  //   const drink_id = drinksDb.addDrink('horchata')
-  //   userDb.insertNewUser('latoxicaaa@email.com', 'laChancla')
-  //   const user_id = userDb.getUserId('latoxicaaa@email.com')
-  //   favDrinksDb.addFavDrink(user_id, drink_id);
-  //   favDrinksDb.starDrink(user_id, drink_id)
-  //   assert.equal(favDrinksDb.starDrink(user_id, drink_id), false)
-  // })
+  it('Test: Star Drink Unsuccessfully (dupe)', function () {
+    favDrinksDb.purgeDb(); // Must purge or else the previous Star drink test will interfere. (Had failed UNIQUE constraint?)
+    const drink_id = drinksDb.addDrink('horchata')
+    userDb.insertNewUser('latoxicaaa@email.com', 'laChancla')
+    const user_id = userDb.getUserId('latoxicaaa@email.com')
+    favDrinksDb.addFavDrink(user_id, drink_id);
+    favDrinksDb.starDrink(user_id, drink_id)
+    assert.equal(favDrinksDb.starDrink(user_id, drink_id), false)
+  })
 
   it('Test: Unstar Drink Successfully', function () {
     const drink_id = drinksDb.addDrink('thai tea')
@@ -84,11 +83,11 @@ describe('Testing Favorite Drinks Relational Database', function () {
     assert.equal(favDrinksDb.unstarDrink(user_id, drink_id), true)
   })
 
-  // it('Test: Unstar Drink Unsuccessfully (dupe)', function () {
-  //   const drink_id = drinksDb.addDrink('thai tea')
-  //   userDb.insertNewUser('abg88@email.com', 'falsies')
-  //   const user_id = userDb.getUserId('abg88@email.com')
-  //   assert.equal(favDrinksDb.unstarDrink(user_id, drink_id), false)
-  // })
+  it('Test: Unstar Drink Unsuccessfully (dupe)', function () {
+    const drink_id = drinksDb.addDrink('thai tea')
+    userDb.insertNewUser('abg88@email.com', 'falsies')
+    const user_id = userDb.getUserId('abg88@email.com')
+    assert.equal(favDrinksDb.unstarDrink(user_id, drink_id), false)
+  })
 
 })

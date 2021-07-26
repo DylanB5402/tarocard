@@ -28,7 +28,7 @@ class FavDrinksDatabase {
    */
   createFavDrinkTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS fav_drinks' +
-      '(uid INTEGER UNIQUE, drink_id INTEGER UNIQUE, fav BOOL, date DATETIME);')
+      '(uid INTEGER, drink_id INTEGER, fav BOOL, date DATETIME);')
     stmt.run();
   }
 
@@ -88,10 +88,25 @@ class FavDrinksDatabase {
    * @return {Boolean} false if DNE, true if it does
    */
   isExist (uid, drinkId) {
-    const stmt = this.db.prepare(`SELECT * FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
+    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
             `AND uid = '${uid}'`)
-    const query = stmt.all() // all() returns an array or rows
-    return query.length > 0
+    const query = stmt.get(); // get runs the statement
+    let numEntries = query.count;
+    return numEntries > 0
+  }
+
+  /**
+   * Checks if a drink already favorited for a user
+   * @param {Integer} uid user id
+   * @param {Integer} drinkId id of drink
+   * @return {Boolean} false if DNE, true if it does
+   */
+   isStar (uid, drinkId) {
+    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
+            `AND uid = '${uid}' AND fav = 1`)
+    const query = stmt.get() // get runs the statement
+    let numStar = query.count;
+    return numStar > 0
   }
 
   /**
@@ -106,9 +121,16 @@ class FavDrinksDatabase {
 
     console.log(`This is the user id: ${uid}`);
 
+    // Check if user id and drink id exists in other DBs in the first place
     if (!userDB.isExist(uid) && !drinksDB.isExist(drinkId)) {
       return false
     } else {
+      // Check if the user-drink pair exists in fav_drinks_database already
+      // Duplicate Check
+      if (this.isExist(uid, drinkId)) {
+        console.log("This drink is already favorited!");
+        return false;
+      }
       const stmt = this.db.prepare('INSERT INTO fav_drinks (uid, drink_id, fav, date)' +
               `VALUES ('${uid}', '${drinkId}', 0, date('now'))`)
       const query = stmt.run()
@@ -133,18 +155,24 @@ class FavDrinksDatabase {
     const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
 
     // Check to make params are valid/exists
-    if (!userDB.isExist(uid) || !drinksDB.isExist(drinkId)) {
-      return false
-    } else {
-      const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' + 
-              `uid = '${uid}' AND drink_id = '${drinkId}'`)
-      const query = stmt.run()
+    if (userDB.isExist(uid) && drinksDB.isExist(drinkId)) {
 
-      if (query.changes === 1) {
-        return true
-      } else {
-        return false
+      if (this.isExist(uid, drinkId)) {
+        // Delete uid-drinkId pair from DB
+        const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' + 
+                `uid = '${uid}' AND drink_id = '${drinkId}'`)
+        const query = stmt.run()
+
+        // Check to make sure changes are made to DB
+        if (query.changes === 1) {
+          return true
+        }
       }
+
+      return false;
+      
+    } else {
+      return false;
     }
   }
 
@@ -155,16 +183,23 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
    starDrink (uid, drinkId) {
-    const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
+    // Check if not starred yet
+    if (!this.isStar(uid, drinkId)) {
+      
+      // Updates the DB
+      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
             `AND drink_id = '${drinkId}'`)
-    const query = stmt.run()
+      const query = stmt.run() // run the statement; returns 'info' object
 
-    // Checks if changes were made; changes are made upon successful boolean change
-    if (query.changes > 0) {
-      return true
-    } else {
-      return false
+      // Checks if changes were made; changes are made upon successful boolean change
+      if (query.changes > 0) {
+        return true
+      }
+      
     }
+    return false; // return false since query.changes was not greater than 0 or
+                  // drink is already starred
+    
   }
 
   /**
@@ -174,16 +209,19 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   unstarDrink (uid, drinkId) {
-    const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
-            `AND drink_id = '${drinkId}'`)
-    const query = stmt.run()
+     // Check if starred
+     if (this.isStar(uid, drinkId)) {
+      
+      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
+              `AND drink_id = '${drinkId}'`)
+      const query = stmt.run()
 
-    // Checks if changes were made; changes are made upon successful boolean change
-    if (query.changes > 0) {
-      return true
-    } else {
-      return false
+      // Checks if changes were made; changes are made upon successful boolean change
+      if (query.changes > 0) {
+        return true
+      }
     }
+    return false; // false if failed both if statements
   }
 
   toString () {
