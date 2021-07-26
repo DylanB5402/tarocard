@@ -23,7 +23,7 @@ class UserDatabase {
      *
      * @param {String} email
      * @param {String} password
-     * @returns {InsertNewUserResult} true if successful, false otherwise
+     * @returns {Integer} the UID assigned to the user, -1 if the operation failed
      */
   insertNewUser (email, password) {
     // default username is first 5 characters of email
@@ -107,7 +107,7 @@ class UserDatabase {
   }
 
   selectUserSessionData (email) {
-    return this.db.prepare(`SELECT username, display_name FROM users WHERE email = '${email}';`).get()
+    return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
   }
 
   insertProfileData (email, displayName, username, bio) {
@@ -118,18 +118,17 @@ class UserDatabase {
     return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get()
   }
 
-  getUserByUID(uid) {
-    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get();
+  // untested
+  getUserByUID (uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
   }
-  
+
   /**
      * Delete all entries in table, should only be used for testing/debugging
      */
   deleteAllTableEntries () {
     this.db.prepare('DELETE FROM users;').run()
   }
-
-  
 }
 
 /**

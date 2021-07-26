@@ -18,12 +18,14 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test InsertNewUser for a new user', function () {
-    assert.equal(userDb.insertNewUser('user@email.com', 'password'), userDatabase.InsertNewUserResult.SUCCESS)
+    const lastRowId = userDb.insertNewUser('user@email.com', 'password')
+    const emailRowId = userDb.selectUserSessionData('user@email.com').uid
+    assert.equal(lastRowId, emailRowId)
   })
 
   it('Test InsertNewUser user already exits', function () {
     userDb.insertNewUser('user2@email.com', 'password')
-    assert.equal(userDb.insertNewUser('user2@email.com', 'password'), userDatabase.InsertNewUserResult.INVALID_EMAIL)
+    assert.equal(userDb.insertNewUser('user2@email.com', 'password'), -1)
   })
 
   it('Test isEmailInDatabase', function () {
