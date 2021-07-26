@@ -9,7 +9,8 @@
     "sqlite3": "^5.0.2"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node src/main.js"
   },
   "devDependencies": {
     "chai": "^4.3.4",
