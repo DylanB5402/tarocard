@@ -119,9 +119,13 @@ class UserDatabase {
     return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get()
   }
 
-  // untested
   getUserByUID (uid) {
-    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+    // console.log('receive uid ' + uid)
+    if (!isNaN(uid)) {
+      return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE uid = ${uid};`).get()
+    } else {
+      return undefined
+    }
   }
 
   /**

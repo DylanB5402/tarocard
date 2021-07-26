@@ -22,6 +22,11 @@
   "standard": {
     "env": [
       "mocha"
+    ], 
+    "ignore": [
+      "src/sample/test_server.js",
+      "static/friends-page/Friends_JavaScript.js",
+      "static/homepage/homepage.js"
     ]
   }
 }

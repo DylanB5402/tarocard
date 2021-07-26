@@ -17,3 +17,5 @@ Dependencies:
 - chai
 - chai-http
 - connect-session-knex
+
+Run npm start to launch the app
