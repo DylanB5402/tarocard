@@ -107,4 +107,6 @@ function createCard2(establishment, drink, description, image){
     document.getElementById('cardContainer').appendChild(container);
 }
 
-module.export = { createCard2 };
+module.export = { createCard2 }
+
+/*Yes*/
