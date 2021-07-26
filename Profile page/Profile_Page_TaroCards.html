@@ -2,59 +2,103 @@
 
 <head>
     <title>Profile Page | Taro Cards</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="TaroStyle.css">
+    <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head> 
+    -->
+</head>
 
 <body>
     <img src="coolWallpaper.png" id="banner">
     <section id="profileTop">
         <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
+
         <h2 id="editButton">Edit Profile</h2>
-        <div id="profileText">
+
+        <section id="profileText">
             <h2 id="displayName">Jonathan</h2>
-            <aside id="username"><h3>@bobaLover49</h3></aside><br>
-            <!-- Max characters around 160 for description-->
+
+            <aside id="username">
+                <h3 id="userAt">@bobaLover49</h3>
+            </aside><br>
+            <!-- Max characters around 150 for description-->
             <p id="profileDescription">
                 <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
-                MAX CHAR LENGHT: 160. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus etf
+                MAX CHAR LENGTH: 150. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula
+                eget dolor. Aenean massa. Cum sociis natoque pen
             </p>
-        <br>
-        <div class="userStats" id="userFriends"> <p><strong>1,000 </strong> <span> Friends</span></p></div>
-        <div class="userStats" id="userCards"> <p><strong>1,000 </strong> <span> Cards</span></p></div>
+        </section>
+
+
+        <section id="userStats" class="userStats">
+            <ul>
+                <strong>1,000 </strong>
+                <span> Friends</span>
+            </ul>
+            <ul>
+                <strong>1,000 </strong>
+                <span> Cards</span>
+            </ul>
+        </section>
+        <section id="profileTabs" class="profileTabs">
+            <ul>
+                <span> Friends</span>
+            </ul>
+            <ul>
+                <span> Cards</span>
+            </ul>
+        </section>
     </section>
     <br>
 
     <section id="profileCards">
-        <h5>Favorites</h5>
+        <section id="favoritesSection">
+            <img id="favoritesStar" src=".\Nav Bar Icons\Star-Purple.png" />
+            <span id="favorites">Favorites</span>
+            <span
+                id="favoritesLine">------------------------------------------------------------------------------------------------</span>
+        </section>
         <div>
             <h4>Starbucks</h4>
-            <p>Double Chocolately Chip Frappuccino</p> 
+            <p>Double Chocolately Chip Frappuccino</p>
             <p>Just the basic drink</p>
         </div>
         <br>
         <div>
             <h4>U Dessert Eats</h4>
-            <p>Brown Sugar Milk Tea</p> 
+            <p>Brown Sugar Milk Tea</p>
             <p>With crystal boba</p>
         </div>
         <br>
         <div>
             <h4>Happy Lemon</h4>
-            <p>Salted Cheese Milk tea</p> 
+            <p>Salted Cheese Milk tea</p>
             <p>75% less ice and 75% sugar</p>
         </div>
     </section>
 </body>
 
 <div class="navbar" id="myNavbar">
-    <a href="#"><i class="fa fa-fw fa-home"></i></a>
-    <a href="#"><i class="fa fa-fw fa-search"></i></a>
-    <a href="#"><i class="fa fa-fw fa-bell"></i></a>
-    <a class="active" href="#"><i class="fa fa-fw fa-user"></i></a>
+    <a href="#"><i class="fa fa-fw fa-home"></i>
+        <img id="navHomeIcon" src=".\Nav Bar Icons\Home Icon.png" />
+    </a>
+
+    <a href="#"><i class="fa fa-fw fa-search"></i>
+        <img id="navSearchIcon" src=".\Nav Bar Icons\Search Icon.png" />
+    </a>
+
+    <a href="#"><i class="fa fa-fw fa-bell"></i>
+        <img id="navNotifsIcon" src=".\Nav Bar Icons\Notifs Icon.png" />
+    </a>
+
+    <a class="active" href="#"><i class="fa fa-fw fa-user"></i>
+        <img id="navProfileIcon" src=".\Nav Bar Icons\ProfileIcon.png" />
+    </a>
 
     <!--
     <a href="#home">Home</a>
