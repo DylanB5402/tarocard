@@ -28,7 +28,7 @@ class FavDrinksDatabase {
    */
   createFavDrinkTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS fav_drinks' +
-      '(uid INTEGER, drink_id INTEGER, fav BOOL, date DATETIME);')
+      '(uid INTEGER, drink_id INTEGER, fav BOOL, date DATETIME DEFAULT CURRENT_TIMESTAMP);')
     stmt.run();
   }
 
