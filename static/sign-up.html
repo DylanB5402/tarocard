@@ -12,13 +12,13 @@
                 <img src="./assets/TaroCardTransparent 2.png">
             </div>
             <div class="userInfo">
-                <form action="/login" method="post">
-                <input type="text" class="userInput" id="userEmail" placeholder="Email" name="email">
-                <input type="password" class="userInput" id="userPassword" placeholder="Password" name="password">
-                <input id='login-button' type="submit" value="Login"> 
+                <form action="/signup" method="post">
+                    <input type="text" class="userInput" placeholder="Email" name="email">
+                    <input type="password" class="userInput" placeholder="Password" name="password">
+                    <input type="password" class="userInput" id="confirmPass" placeholder="Confirm Password" name="repeatPassword">
+                    <input id='login-button' type="submit" value="Sign Up"> 
                 </form>
-                <!-- After form submits, server checks and will redirect them toward the homepage! -->
-                <p id="noAcc"> <a href="sign-up.html"> Don't have an account? <strong> Sign Up.</strong> </a> </p>
+                <p id="noAcc"> <a href="index.html"> Already have an account? <strong>  Log in.</strong> </a></p>
                 <div class="container">
                     <hr style="width: 50%; height: 0.1px;">
                     <p style="color:white" id="or"> or </p>
@@ -29,6 +29,6 @@
 
 
 
-            <script  type="text/javascript" src="app.js"></script>
+            <script src="app.js"></script>
     </body>
 </html>
