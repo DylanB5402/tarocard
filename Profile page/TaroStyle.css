@@ -202,9 +202,7 @@ body {
     display: block;
     color: black;
     text-align: center;
-    /*padding: 4% 9%;*/
     text-decoration: none;
-    /*font-size: 50px;*/
     width: 25%;
     height:160px;
     
@@ -227,35 +225,3 @@ body {
   .navbar .icon {
     display: none;
   }
-
- 
-
-
-
-/*
-footer {
-    height: 157px;
-    bottom: 0;
-    position: relative;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    /*overflow: hidden;
-}
-
-li {
-    display: inline;
-    border: dotted black;
-    float: center;
-    padding: 25px;
-    font-size: 25px;;
-    background-color: #ffffff;
-}
-
-li a {
-    color: black;
-    bottom: 0;
-}*/
