@@ -50,13 +50,13 @@ body {
     height: fit-content;
     font-weight: lighter;
     color: rgb(95, 94, 94);
-    width: 85%;
+    width: 90%;
     font-size: 50px;
     border-style: hidden;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 70px;
-    margin: 30px;
+    margin: auto;
     margin-top: 40px;
     border-radius: 30px;
     /* background-image: url(./search.png);
@@ -70,19 +70,19 @@ body {
     height: 70px;
     padding: 0px;
     background: rgb(152, 121, 197);
-    color: white;
+    color: rgb(2, 2, 2);
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-    position: relative;
-    right: 70px;
-    top: 30px;
+    position: absolute;
+    left: 85%;
+    top: 198px;
 }
 
-/*#friendsAll {
+#friendsAll {
     
-} */
+}
 
 .friendElement {
     width: 97%;
