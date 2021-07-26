@@ -47,11 +47,13 @@ class TaroCardApp {
         if (result !== -1) {
           this.userDB.logInUser(req, email, password)
         }
+        // console.log("user id " + result)
         res.redirect('/debug/home')
       }
     })
 
     this.app.post('/login', (req, res) => {
+      // console.log(req)
       const email = req.body.email
       const password = req.body.password
       if (this.userDB.logInUser(req, email, password)) {
@@ -64,11 +66,13 @@ class TaroCardApp {
     this.app.post('/signout', (req, res) => {
       req.session.email = undefined
       req.session.loggedin = false
+      req.session.uid = -1
       res.redirect('/debug/home')
     })
 
     // placeholder/debug routes begin here
     this.app.get('/debug/home', (req, res) => {
+      // console.log(req)
       if (req.session.loggedin !== true) {
         res.send('please log in')
       } else {

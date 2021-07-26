@@ -95,6 +95,7 @@ class UserDatabase {
     if (this.checkPassword(email, password)) {
       httpsRequest.session.loggedin = true
       httpsRequest.session.email = email
+      httpsRequest.session.uid = this.selectUserId(email)
       return true
     } else {
       httpsRequest.session.loggedin = false
