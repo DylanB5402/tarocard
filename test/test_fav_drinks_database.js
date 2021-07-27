@@ -19,7 +19,7 @@ userDb.deleteAllTableEntries()
 describe('Testing Favorite Drinks Relational Database', function () {
   it('Test: Add New Fav Drink Relation Successfully', function () {
     const drink_id = drinksDb.addDrink('Oolong Milk Tea')
-    userDb.insertNewUser('bobalover24@aol.com', 'lessIce') 
+    userDb.insertNewUser('bobalover24@aol.com', 'lessIce')
     const user_id = userDb.getUserId('bobalover24@aol.com')
     assert.equal(favDrinksDb.addFavDrink(user_id, drink_id), true)
   })
@@ -60,17 +60,17 @@ describe('Testing Favorite Drinks Relational Database', function () {
     const drink_id = drinksDb.addDrink('horchata')
     userDb.insertNewUser('latoxicaaa@email.com', 'laChancla')
     const user_id = userDb.getUserId('latoxicaaa@email.com')
-    favDrinksDb.addFavDrink(user_id, drink_id);
-    favDrinksDb.toString();
+    favDrinksDb.addFavDrink(user_id, drink_id)
+    favDrinksDb.toString()
     assert.equal(favDrinksDb.starDrink(user_id, drink_id), true)
   })
 
   it('Test: Star Drink Unsuccessfully (dupe)', function () {
-    favDrinksDb.purgeDb(); // Must purge or else the previous Star drink test will interfere. (Had failed UNIQUE constraint?)
+    favDrinksDb.purgeDb() // Must purge or else the previous Star drink test will interfere. (Had failed UNIQUE constraint?)
     const drink_id = drinksDb.addDrink('horchata')
     userDb.insertNewUser('latoxicaaa@email.com', 'laChancla')
     const user_id = userDb.getUserId('latoxicaaa@email.com')
-    favDrinksDb.addFavDrink(user_id, drink_id);
+    favDrinksDb.addFavDrink(user_id, drink_id)
     favDrinksDb.starDrink(user_id, drink_id)
     assert.equal(favDrinksDb.starDrink(user_id, drink_id), false)
   })
@@ -90,5 +90,4 @@ describe('Testing Favorite Drinks Relational Database', function () {
     const user_id = userDb.getUserId('abg88@email.com')
     assert.equal(favDrinksDb.unstarDrink(user_id, drink_id), false)
   })
-
 })
