@@ -143,6 +143,10 @@ class FavDrinksDatabase {
     }
     
   }
+  
+  // Need an edit drink method in drinks_database.js
+  // Implementation is to modify the drink desc in database and to keep uid and
+  // drinkId pair the same in fav_drinks_database.js
 
   /**
    * unfavorites a drink for a user

@@ -53,11 +53,12 @@ class TaroCardApp {
     // Form:    Name of Drink: *******
     //          Description: *******
     //
-    this.app.get( '/new_drink_card', (req, res) => {
+    this.app.post( '/new_drink_card', (req, res) => {
       // Get name and desc of drink from form request
       const nameOfDrink = req.body.nameOfDrink
       const drinkDesc = req.body.drinkDesc
 
+      // ASK DYLAN ABOUT THIS
       const uid = req.session.uid // get uid from current logged in state
 
       // Save return value to variable after adding drink to drink database
@@ -68,7 +69,19 @@ class TaroCardApp {
       if (drinkUid) {
         resultFavDrink = this.favDrinksDB.addFavDrink(uid, drinkUid)
       }
-      res.redirect('/profile')
+    })
+
+    // TODO:
+    // Edit a drink card
+    this.app.get('/edit_drink_card', (req, res) => {
+      
+      // Make sure previous info (drink name and desc) is shown 
+
+      // Get name and desc of drink from new form request
+      const nameOfDrink = req.body.nameOfDrink
+      const drinkDesc = req.body.drinkDesc
+
+      const result = this.drinksDB.editDrink()
     })
   }
 }
