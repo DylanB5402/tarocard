@@ -1,0 +1,240 @@
+ul {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    border-top: 1px solid black;
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    align-content: center;
+    background-color:  #f3f3f3 ;
+    bottom: 0;
+}
+html,body{
+    height: 100%;
+    background-color:#E5E5E5 ;
+}
+
+li {
+    float: left ;
+    display: block;
+    color: black;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+    width: 24vw;
+    text-decoration: none;
+    border-right: 1px solid black;
+    font-size: 2vh;
+}
+
+li:last-child{
+    border-right: none;
+}
+
+.active {
+    background-color: #D4D4D4;
+}
+
+
+/* Styling for the card creation button/pop up */ 
+#add-card-btn{
+    position: fixed;
+    left: 84vw;
+    top: 80vh;
+    width: 8vh;
+    height: 8vh;
+    font-size: 5vh;
+    border-radius: 100%;
+    border: none;
+    background-color: #9879C5;
+    color: white;
+}
+
+
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border:none;
+    display: none;
+    z-index: 10;
+    position: fixed;
+    background-color: #E5E5E5;
+    height: 100%;
+    top: 0;
+    
+}
+
+.small-input{
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color: black;
+    padding: 15px;
+    width: 80vw;
+    height: 4vw;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+    top: 10vh;
+    margin: 2.5vh ;
+
+}
+
+
+.userInput{
+    text-align: center;
+}
+
+.small-input::placeholder{
+    color: rgba(205, 93, 233, 0.5);
+}
+
+.large-input{
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color:black;
+    padding: 15px;
+    width: 80vw;
+    height: 30vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+    top: 10vh;
+    margin: 2.5vh;
+}
+
+.large-input::placeholder{
+    color: rgba(205, 93, 233, 0.5);
+}
+
+.card-bar{
+    width:100%;
+    height: 6vh;
+    background-color: white;
+}
+
+.del-button{
+    height: auto;
+    width: auto;
+    font-size: 4.5vh;
+    position: relative;
+    left: 2vw;
+    color:#9879C5;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transform: rotate(-90deg);
+}
+
+.post-button{
+    height: 4vh;
+    font-size: 2vh;
+    width: 15vw;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    position: relative;
+    left: 70vw;
+    top: 1vh;
+    background-color: #9879C5;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+    border-radius: 75px;
+}
+
+/* Styling for the Cards */
+.fonts{
+    font-family: 'Robot',sans-serif;
+    margin: 10px 10px 0px 10px;
+    word-wrap: break-word;
+}
+
+.card-template{
+    width: auto;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.cardContainer{
+    padding-top: 10vh;
+}
+
+.tag-pf-container{
+    margin: 10px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+}
+.tag-container {
+    word-wrap: break-word;
+    max-width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+
+.tag-container p{
+    margin: 10px;
+    font-family: 'Roboto',sans-serif;
+}
+
+
+.pfp-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 75px;
+    position: absolute;
+    left: 90%;
+    bottom: 5%;
+}
+
+
+/* Animation for w3schools */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+
+  .dezoom {
+      -webkit-animation: animatezoomout 0.6s;
+      animation: animatezoomout 0.6s;
+  }
+
+  @-webkit-keyframes animatezoomout {
+    from {-webkit-transform: scale(1)} 
+    to {-webkit-transform: scale(0)}
+  }
+    
+  @keyframes animatezoomout {
+    from {transform: scale(1)} 
+    to {transform: scale(0)}
+  }
