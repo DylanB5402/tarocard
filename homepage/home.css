@@ -55,6 +55,7 @@ li:last-child{
 
 
 .form-container{
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -207,6 +208,38 @@ li:last-child{
     bottom: 5%;
 }
 
+/* Modal Box/ Content CSS */
+
+.modal{
+    display: block;
+    position: fixed;
+    border: 1px black solid;
+    z-index: 2;
+    width: 100%;
+    margin: auto;
+    left: 0;
+    height: 20vh;
+}
+
+.modal-content{
+    border: 1px purple solid;
+    width: 100%;
+    left: 25vw;
+    align-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: auto;
+    margin: auto;
+}
+
+.modal-content button {
+    margin: 5px;
+    border: 1px blue solid;
+    height: 6vh;
+    font-size: 2vh;
+    width: 100vw;
+}
 
 /* Animation for w3schools */
 .animate {

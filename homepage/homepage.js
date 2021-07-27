@@ -1,3 +1,5 @@
+
+
 function openCardCreate(){
     document.getElementById('id01').style.display='block';
     document.getElementById('add-card-btn').style.display='none';
@@ -17,6 +19,9 @@ function closeCardCreate(){
     },500);
     document.getElementById('add-card-btn').style.display='block';
 }
+
+
+
 /* 
 * Request from server the cards information 
 * Then add that information into the cards
@@ -67,8 +72,7 @@ request.onload = function() {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-
-function createCard2(establishment, drink, description, image){
+ function createCard2(establishment, drink, description, image){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -76,7 +80,6 @@ function createCard2(establishment, drink, description, image){
     estab.classList.add("fonts");
     estab.innerHTML = establishment;
     /* Create drink element */
-
     let d = document.createElement("h2");
     d.classList.add("fonts");
     d.innerHTML = drink;
@@ -107,6 +110,3 @@ function createCard2(establishment, drink, description, image){
     document.getElementById('cardContainer').appendChild(container);
 }
 
-module.export = { createCard2 }
-
-/*Yes*/
