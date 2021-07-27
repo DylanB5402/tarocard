@@ -19,7 +19,10 @@ class TaroCardApp {
     this.db = new Database(database)
     this.server = undefined
     this.userDB = new userDatabase.UserDatabase(this.db)
-    const store = new KnexSessionStore()
+
+    // KNEX SESSION STORE IS KEEPING PROCESS FROM EXITING
+    this.store = new KnexSessionStore()
+
 
     this.tempEngine = new templateEngine.TemplateEngine()
 
@@ -30,7 +33,7 @@ class TaroCardApp {
     this.app.use(
       session({
         secret: 'ahjintpcc',
-        store: store,
+        store: this.store,
         saveUninitialized: false,
         resave: false
       })
