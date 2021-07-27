@@ -24,11 +24,11 @@
                         $("#searchBarButton").click(function(){        
                             $.post("/friends", 
                             {
-                                string: $("#searchBar").val()
+                                "string": $("#searchBar").val()
                             }
-                            ,function(data, status) {
+                            ,function(data, status, xhr) {
                                 populateFriends(data);
-                            } )
+                            })
                         });
                     });
                 </script>
