@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change Email | Taro Cards</title>
+        <link rel="stylesheet" href="ChangeEmail_CSS.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", "" ,function(data, status, xhr) {
+                    const currentEmail = data;
+                    const body = document.querySelector("body");
+                    let h2 = document.createElement("h2");
+                    h2.id = "currentEmailHeading";
+                    h2.textContent = "Your current email is " + currentEmail["email"][0]["email address"];
+                    body.appendChild(h2);
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="titleCard">
+            <a href="Settings_HTML.html"><div id="back"><img src="C:\Users\jsmit\Documents\Taro Cards\tarocard\assets\Back.png" alt="back button"></div></a>
+        </div>
+        <br /> <br /> <br /> <br /> <br />
+
+        <h1>Update your email address</h1>
+        
+    </body>
+</html>
