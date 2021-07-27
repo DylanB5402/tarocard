@@ -59,7 +59,6 @@ class TaroCardApp {
         // Get name and desc of drink from form request
         const nameOfDrink = req.body.nameOfDrink
         const drinkDesc = req.body.drinkDesc
-
         const uid = req.session.uid // get uid from current logged in state
 
         // Save return value to variable after adding drink to drink database
@@ -75,7 +74,7 @@ class TaroCardApp {
 
     // TODO:
     // Edit a drink card
-    this.app.get('/edit_drink_card', (req, res) => {
+    this.app.post('/edit_drink_card', (req, res) => {
       
       // Make sure previous info (drink name and desc) is shown 
 
