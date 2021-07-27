@@ -2,7 +2,6 @@ const express = require('express')
 const Database = require('better-sqlite3')
 const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
-var path = require('path');
 
 const userDatabase = require('./user_database')
 const templateEngine = require('./template_engine')
@@ -27,9 +26,6 @@ class TaroCardApp {
     this.app = express()
     this.app.use(express.json()) // for parsing this.application/json
     this.app.use(express.urlencoded({ extended: true })) // for parsing this.application/x-www-form-urlencoded
-    this.app.use(express.static('static'))
-    // this.app.use(express.static(path.join(__dirname, 'static')));
-
 
     this.app.use(
       session({
@@ -39,6 +35,16 @@ class TaroCardApp {
         resave: false
       })
     )
+
+    this.app.get('/', (req, res) => {
+      if (req.session.loggedin) {
+        res.redirect('/profile')
+      } else {
+        res.redirect('/index.html')
+      }
+    })
+
+    this.app.use(express.static('static'))
 
     this.app.post('/signup', (req, res) => {
       const email = req.body.email
@@ -76,19 +82,18 @@ class TaroCardApp {
 
     this.app.get('/profile/', (req, res) => {
       if (req.session.loggedin) {
-        // const uid = req.params.id
         const uid = req.session.uid
         const profileData = this.userDB.getUserByUID(uid)
-        if (profileData != undefined) {
+        if (profileData !== undefined) {
           const bio = profileData.bio
           const username = profileData.username
           const displayName = profileData.display_name
           res.send(this.tempEngine.getUserProfile(username, displayName, bio))
         } else {
-          res.redirect("/404")
+          res.redirect('/404')
         }
       } else {
-        res.redirect("/")
+        res.redirect('/')
       }
     })
 
@@ -98,7 +103,6 @@ class TaroCardApp {
       if (req.session.loggedin !== true) {
         res.send('please log in')
       } else {
-        // res.send(this.tempEngine.generateProfile({ username: req.session.email }))
         res.send('Hello ' + req.session.email)
       }
     })
