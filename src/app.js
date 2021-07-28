@@ -23,7 +23,6 @@ class TaroCardApp {
     // KNEX SESSION STORE IS KEEPING PROCESS FROM EXITING
     this.store = new KnexSessionStore()
 
-
     this.tempEngine = new templateEngine.TemplateEngine()
 
     this.app = express()
@@ -91,6 +90,8 @@ class TaroCardApp {
           const bio = profileData.bio
           const username = profileData.username
           const displayName = profileData.display_name
+          // res.cookie('debug_success', "successful")
+          res.append('profileAccess', 'successful')
           res.send(this.tempEngine.getUserProfile(username, displayName, bio))
         } else {
           res.redirect('/404')
