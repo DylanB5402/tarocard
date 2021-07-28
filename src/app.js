@@ -4,7 +4,6 @@ const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
 const userDatabase = require('./user_database')
-const path = require('path')
 
 const favDrinksDatabase = require('./fav_drinks_database')
 const drinksDatabase = require('./drinks_database')
@@ -56,10 +55,11 @@ class TaroCardApp {
       const email = req.body.email
       const password = req.body.password
       const repeatPassword = req.body.repeatPassword
+      const username = req.body.username
       if (password !== repeatPassword) {
         res.redirect('/signup.html')
       } else {
-        const result = this.userDB.insertNewUser(email, password)
+        const result = this.userDB.insertNewUser(email, password, username)
         if (result !== -1) {
           this.userDB.logInUser(req, email, password)
         }
