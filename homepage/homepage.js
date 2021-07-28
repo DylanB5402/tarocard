@@ -6,6 +6,7 @@ function openCardCreate(){
     if( document.getElementById('id01').classList.contains('dezoom')){
         document.getElementById('id01').classList.remove('dezoom');
     }
+    document.getElementById("modal-sheet").style.display="none";
     document.getElementById('id01').classList.add('animate');
 }
 
@@ -109,4 +110,37 @@ request.onload = function() {
     container.appendChild(tagContainer);
     document.getElementById('cardContainer').appendChild(container);
 }
+
+/* Open Modal Sheet */
+
+function openModalSheet(){
+    document.getElementById("modal-sheet").classList.add('slide-in');
+    document.getElementById("modal-sheet").classList.remove('slide-out');
+    document.getElementById("modal-sheet").style.display= 'block';
+    document.getElementById('add-card-btn').style.display='none';
+}
+
+function closeModalSheet(){
+    if( document.getElementById("modal-sheet").style.display == "block"){
+        document.getElementById("modal-sheet").classList.remove("slide-in");
+        document.getElementById("modal-sheet").classList.add('slide-out');
+        setTimeout(function(){
+            document.getElementById('modal-sheet').style.display='none';
+        },200);
+
+        document.getElementById("add-card-btn").style.display ="block";
+    }
+}
+
+document.addEventListener('click',function(event){
+    let OptionsBtn = document.getElementById("add-card-btn");
+    let sheet = document.getElementById("modal-sheet");
+    if( OptionsBtn.contains(event.target)){
+        openModalSheet();
+    } else {
+        if( sheet.style.display == "block"){
+            closeModalSheet();
+        }
+    }
+});
 

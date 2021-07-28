@@ -211,7 +211,7 @@ li:last-child{
 /* Modal Box/ Content CSS */
 
 .modal{
-    display: block;
+    display: none;
     position: fixed;
     z-index: 2;
     width: 98%;
@@ -219,6 +219,7 @@ li:last-child{
     background-color: white;
     border-radius: 15px;
     bottom: 0px;
+    box-shadow: 0 0 0 10000px #000000b0;
 }
 
 .modal-content{
@@ -232,7 +233,7 @@ li:last-child{
     margin: auto;
 }
 
-.modal-content button {
+.stuff {
     position: relative;
     height: 10vh;
     font-size: 3vh;
@@ -248,24 +249,36 @@ li:last-child{
     flex-direction: row;
     background-color: rgba(0, 0, 0, 0.0);
     border: none;
+    border-bottom: 2px solid black;
 
 }
 
 .modal-content button:last-child{
-    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }
 
 .modal-content button p{
     padding: 0%;
     margin-top: 1vh;
     margin-left: 10px;
+    text-decoration: none;
+    margin-bottom: 25px;
 }
 
-.modal-content button img{
+.stuff {
+    margin-top: 25px;
+    margin-left: 10px;
+    text-decoration: none !important;
+    color: black;
+}
+
+.modal-content button img,.stuff img{
     height: 100%;
     margin-left: 1vh;
     margin-right: 1vh;
 }
+
+
 
 
 
@@ -298,4 +311,42 @@ li:last-child{
   @keyframes animatezoomout {
     from {transform: scale(1)} 
     to {transform: scale(0)}
+  }
+
+
+  /* Animation Slide in */
+
+  .slide-in {
+    -webkit-animation: slide-in 0.3s;
+    animation: slide-in 0.3s;
+  }
+
+  @keyframes slide-in {
+      0% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+
+      100% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+      
+  }
+  .slide-out {
+    -webkit-animation: slide-out 0.3s;
+    animation: slide-out 0.3s;
+  }
+
+  @keyframes slide-out {
+      0% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+
+      100% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+      
   }
