@@ -1,3 +1,5 @@
+/**No need for this since we have two different pages 
+ * 
 document.getElementById('noAcc').addEventListener('click', signUp)
 
 function signUp () {
@@ -11,3 +13,7 @@ function signUp () {
     document.getElementById('login-button').innerHTML = ' Log in'
   }
 }
+* 
+*/ 
+
+
