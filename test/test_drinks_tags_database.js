@@ -12,9 +12,9 @@ const drinksTagsDb = new drinksTagsDatabase.DrinksTagsDatabase(db)
 const drinksDb = new drinksDatabase.DrinksDatabase(db)
 const tagsDb = new tagsDatabase.TagsDatabase(db)
 
-drinksTagsDb.purgeDb()
-drinksDb.purgeDb()
-tagsDb.purgeDb()
+drinksTagsDb.resetDb()
+drinksDb.resetDb()
+tagsDb.resetDb()
 
 describe('Testing Drinks-Tags Relational Database', function () {
   it('Test: Add New Drink-Tag Relation Successfully', function () {
@@ -138,7 +138,7 @@ describe('Testing Drinks-Tags Relational Database', function () {
     const drink6Name = 'acetone'
     const drink6Desc = 'totally edible'
     const drink6Id = drinksDb.addDrink(drink6Name, drink6Desc)
-    const drink6 = { id: drink6Id, name: drink6Name, desc: drink6Desc }
+    // const drink6 = { id: drink6Id, name: drink6Name, desc: drink6Desc }
 
     // Drink 1 Tags
     drinksTagsDb.addDrinkTag(drink1Id, tag1Id)
@@ -198,7 +198,7 @@ describe('Testing Drinks-Tags Relational Database', function () {
     const result6 = [drink4, drink5]
     const tags6 = [tag1Id, tag2Id, tag5Id]
 
-    assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags5), result5)
+    assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags6), result6)
 
     // Test 7: Result for searching: All
     const result7 = []
