@@ -29,36 +29,36 @@ class FavDrinksDatabase {
   createFavDrinkTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS fav_drinks' +
       '(uid INTEGER, drink_id INTEGER, fav BOOL, date DATETIME DEFAULT CURRENT_TIMESTAMP);')
-    stmt.run();
+    stmt.run()
   }
 
   /**
    * get all favorited drinks
-   * @param {Response} http_response
+   * @param {Response} httpResponse
    */
-  getAllDrinks (http_response) {
-    let response_string = ''
+  getAllDrinks (httpResponse) {
+    let responseString = ''
     this.db.prepare('SELECT * FROM fav_drinks;', (err, rows) => {
       rows.forEach((row) => {
-        response_string += '<p>' + JSON.stringify(row, null, 2) + '</p>'
+        responseString += '<p>' + JSON.stringify(row, null, 2) + '</p>'
       })
-      http_response.send(response_string)
+      httpResponse.send(responseString)
     })
   }
 
   /**
    * Get a specific drink by its id
    * @param {Integer} drinkId
-   * @param {Response} http_response
+   * @param {Response} httpResponse
    */
-  getDrink (drinkId, http_response) {
+  getDrink (drinkId, httpResponse) {
     this.db.prepare(`SELECT * FROM fav_drinks WHERE drink_id = ${drinkId};`, (err, row) => {
-      const response_string = JSON.stringify(row, null, 2)
-      // console.log(response_string);
-      if (response_string != undefined) {
-        http_response.send(response_string)
+      const responseString = JSON.stringify(row, null, 2)
+      // console.log(responseString);
+      if (responseString !== undefined) {
+        httpResponse.send(responseString)
       } else {
-        http_response.send(`Drink with id ${id} not found`)
+        httpResponse.send(`Drink with id ${drinkId} not found`)
       }
     })
   }
@@ -66,17 +66,17 @@ class FavDrinksDatabase {
   // /**
   //  * View a drink using the template from template_engine.js
   //  * @param {Integer} id
-  //  * @param {Response} http_response
+  //  * @param {Response} httpResponse
   //  */
-  // viewDrink(id, http_response) {
+  // viewDrink(id, httpResponse) {
   //   this.db.prepare(`SELECT * FROM fav_drinks WHERE id = ${id};`,(err, row) => {
   //     if (row != undefined) {
   //       var name = row['name'];
   //       var desc = row['desc'];
   //       var store = row['store'];
-  //       http_response.send(this.temp_engine.getUser(id, name, desc, store));
+  //       httpResponse.send(this.temp_engine.getUser(id, name, desc, store));
   //     } else {
-  //       http_response.send(`Drink with id ${id} not found`);
+  //       httpResponse.send(`Drink with id ${id} not found`);
   //     }
   //   })
   // }
@@ -90,8 +90,8 @@ class FavDrinksDatabase {
   isExist (uid, drinkId) {
     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
             `AND uid = '${uid}'`)
-    const query = stmt.get(); // get runs the statement
-    let numEntries = query.count;
+    const query = stmt.get() // get runs the statement
+    const numEntries = query.count
     return numEntries > 0
   }
 
@@ -101,11 +101,11 @@ class FavDrinksDatabase {
    * @param {Integer} drinkId id of drink
    * @return {Boolean} false if DNE, true if it does
    */
-   isStar (uid, drinkId) {
+  isStar (uid, drinkId) {
     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
             `AND uid = '${uid}' AND fav = 1`)
     const query = stmt.get() // get runs the statement
-    let numStar = query.count;
+    const numStar = query.count
     return numStar > 0
   }
 
@@ -119,7 +119,7 @@ class FavDrinksDatabase {
     const userDB = new userDatabase.UserDatabase(this.db)
     const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
 
-    console.log(`This is the user id: ${uid}`);
+    console.log(`This is the user id: ${uid}`)
 
     // Check if user id and drink id exists in other DBs in the first place
     if (!userDB.isExist(uid) && !drinksDB.isExist(drinkId)) {
@@ -128,8 +128,8 @@ class FavDrinksDatabase {
       // Check if the user-drink pair exists in fav_drinks_database already
       // Duplicate Check
       if (this.isExist(uid, drinkId)) {
-        console.log("This drink is already favorited!");
-        return false;
+        console.log('This drink is already favorited!')
+        return false
       }
       const stmt = this.db.prepare('INSERT INTO fav_drinks (uid, drink_id, fav, date)' +
               `VALUES ('${uid}', '${drinkId}', 0, date('now'))`)
@@ -141,9 +141,8 @@ class FavDrinksDatabase {
         return false
       }
     }
-    
   }
-  
+
   // Need an edit drink method in drinks_database.js
   // Implementation is to modify the drink desc in database and to keep uid and
   // drinkId pair the same in fav_drinks_database.js
@@ -154,16 +153,15 @@ class FavDrinksDatabase {
    * @param {Integer} drinkId
    * @returns {Boolean} true if successful, false if failed
    */
-   removeFavDrink (uid, drinkId) {
+  removeFavDrink (uid, drinkId) {
     const userDB = new userDatabase.UserDatabase(this.db)
     const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
 
     // Check to make params are valid/exists
     if (userDB.isExist(uid) && drinksDB.isExist(drinkId)) {
-
       if (this.isExist(uid, drinkId)) {
         // Delete uid-drinkId pair from DB
-        const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' + 
+        const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' +
                 `uid = '${uid}' AND drink_id = '${drinkId}'`)
         const query = stmt.run()
 
@@ -173,10 +171,9 @@ class FavDrinksDatabase {
         }
       }
 
-      return false;
-      
+      return false
     } else {
-      return false;
+      return false
     }
   }
 
@@ -186,10 +183,9 @@ class FavDrinksDatabase {
    * @param {Integer} drinkId
    * @returns {Boolean} true if successful, false otherwise
    */
-   starDrink (uid, drinkId) {
+  starDrink (uid, drinkId) {
     // Check if not starred yet
     if (!this.isStar(uid, drinkId)) {
-      
       // Updates the DB
       const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
             `AND drink_id = '${drinkId}'`)
@@ -199,11 +195,9 @@ class FavDrinksDatabase {
       if (query.changes > 0) {
         return true
       }
-      
     }
-    return false; // return false since query.changes was not greater than 0 or
-                  // drink is already starred
-    
+    return false // return false since query.changes was not greater than 0 or
+    // drink is already starred
   }
 
   /**
@@ -213,9 +207,8 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   unstarDrink (uid, drinkId) {
-     // Check if starred
-     if (this.isStar(uid, drinkId)) {
-      
+    // Check if starred
+    if (this.isStar(uid, drinkId)) {
       const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
               `AND drink_id = '${drinkId}'`)
       const query = stmt.run()
@@ -225,7 +218,7 @@ class FavDrinksDatabase {
         return true
       }
     }
-    return false; // false if failed both if statements
+    return false // false if failed both if statements
   }
 
   toString () {

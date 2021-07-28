@@ -18,36 +18,36 @@ tagsDb.purgeDb()
 
 describe('Testing Drinks-Tags Relational Database', function () {
   it('Test: Add New Drink-Tag Relation Successfully', function () {
-    const drink_id = drinksDb.addDrink('coke')
-    const tag_id = tagsDb.addTag('carbonated')
-    assert.equal(drinksTagsDb.addDrinkTag(drink_id, tag_id), true)
+    const drinkId = drinksDb.addDrink('coke')
+    const tagId = tagsDb.addTag('carbonated')
+    assert.equal(drinksTagsDb.addDrinkTag(drinkId, tagId), true)
   })
 
   it('Test: Add New Drink-Tag Relation Unsuccessfully', function () {
-    const drink_id = drinksDb.addDrink('coke')
-    const tag_id = tagsDb.addTag('teeth-eroding')
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
-    assert.equal(drinksTagsDb.addDrinkTag(drink_id, tag_id), false)
+    const drinkId = drinksDb.addDrink('coke')
+    const tagId = tagsDb.addTag('teeth-eroding')
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
+    assert.equal(drinksTagsDb.addDrinkTag(drinkId, tagId), false)
   })
 
   it('Test: Is Drink-Tag Relation Exist', function () {
-    const drink_id = drinksDb.addDrink('boba')
-    const tag_id = tagsDb.addTag('egirl drink wtf')
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
-    assert.equal(drinksTagsDb.isExist(drink_id, tag_id), true)
+    const drinkId = drinksDb.addDrink('boba')
+    const tagId = tagsDb.addTag('egirl drink wtf')
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
+    assert.equal(drinksTagsDb.isExist(drinkId, tagId), true)
   })
 
   it('Test: Remove Drink-Tag Relation Successfully', function () {
-    const drink_id = drinksDb.addDrink('coffee')
-    const tag_id = tagsDb.addTag('disgusting')
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
-    assert.equal(drinksTagsDb.removeDrinkTag(drink_id, tag_id), true)
+    const drinkId = drinksDb.addDrink('coffee')
+    const tagId = tagsDb.addTag('disgusting')
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
+    assert.equal(drinksTagsDb.removeDrinkTag(drinkId, tagId), true)
   })
 
   it('Test: Remove Drink-Tag Relation Unsuccessfully', function () {
-    const drink_id = drinksDb.addDrink('coffee')
-    const tag_id = tagsDb.addTag('disgusting')
-    assert.equal(drinksTagsDb.removeDrinkTag(drink_id, tag_id), false)
+    const drinkId = drinksDb.addDrink('coffee')
+    const tagId = tagsDb.addTag('disgusting')
+    assert.equal(drinksTagsDb.removeDrinkTag(drinkId, tagId), false)
   })
 
   it('Test: Get Tags From Drink', function () {
@@ -55,32 +55,32 @@ describe('Testing Drinks-Tags Relational Database', function () {
     drinksDb.purgeDb()
     tagsDb.purgeDb()
 
-    const drink_id = drinksDb.addDrink('cocoa')
+    const drinkId = drinksDb.addDrink('cocoa')
 
-    const tag1_name = 'sweet'
-    const tag1_desc = 'a savoury flavor'
-    let tag_id = tagsDb.addTag(tag1_name, tag1_desc)
-    const tag1 = { id: tag_id, name: tag1_name, desc: tag1_desc }
+    const tag1Name = 'sweet'
+    const tag1Desc = 'a savoury flavor'
+    let tagId = tagsDb.addTag(tag1Name, tag1Desc)
+    const tag1 = { id: tagId, name: tag1Name, desc: tag1Desc }
 
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
 
-    const tag2_name = 'sour'
-    const tag2_desc = 'dog flavor'
-    tag_id = tagsDb.addTag(tag2_name, tag2_desc)
-    const tag2 = { id: tag_id, name: tag2_name, desc: tag2_desc }
+    const tag2Name = 'sour'
+    const tag2Desc = 'dog flavor'
+    tagId = tagsDb.addTag(tag2Name, tag2Desc)
+    const tag2 = { id: tagId, name: tag2Name, desc: tag2Desc }
 
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
 
-    const tag3_name = 'chocolate'
-    const tag3_desc = 'comes from dried rasins'
-    tag_id = tagsDb.addTag(tag3_name, tag3_desc)
-    const tag3 = { id: tag_id, name: tag3_name, desc: tag3_desc }
+    const tag3Name = 'chocolate'
+    const tag3Desc = 'comes from dried rasins'
+    tagId = tagsDb.addTag(tag3Name, tag3Desc)
+    const tag3 = { id: tagId, name: tag3Name, desc: tag3Desc }
 
-    drinksTagsDb.addDrinkTag(drink_id, tag_id)
+    drinksTagsDb.addDrinkTag(drinkId, tagId)
 
     const tagArr = [tag1, tag2, tag3]
 
-    assert.deepEqual(drinksTagsDb.getTagsFromDrink(drink_id), tagArr)
+    assert.deepEqual(drinksTagsDb.getTagsFromDrink(drinkId), tagArr)
   })
 
   it('Test: Get Drinks From Tags', function () {
@@ -89,120 +89,120 @@ describe('Testing Drinks-Tags Relational Database', function () {
     tagsDb.purgeDb()
 
     // Simulated Tags
-    const tag1_name = 'sweet'
-    const tag1_desc = 'a savoury flavor'
-    const tag1_id = tagsDb.addTag(tag1_name, tag1_desc)
+    const tag1Name = 'sweet'
+    const tag1Desc = 'a savoury flavor'
+    const tag1Id = tagsDb.addTag(tag1Name, tag1Desc)
 
-    const tag2_name = 'sour'
-    const tag2_desc = 'dog flavor'
-    const tag2_id = tagsDb.addTag(tag2_name, tag2_desc)
+    const tag2Name = 'sour'
+    const tag2Desc = 'dog flavor'
+    const tag2Id = tagsDb.addTag(tag2Name, tag2Desc)
 
-    const tag3_name = 'chocolate'
-    const tag3_desc = 'comes from dried rasins'
-    const tag3_id = tagsDb.addTag(tag3_name, tag3_desc)
+    const tag3Name = 'chocolate'
+    const tag3Desc = 'comes from dried rasins'
+    const tag3Id = tagsDb.addTag(tag3Name, tag3Desc)
 
-    const tag4_name = 'boba'
-    const tag4_desc = 'egirl flavor'
-    const tag4_id = tagsDb.addTag(tag4_name, tag4_desc)
+    const tag4Name = 'boba'
+    const tag4Desc = 'egirl flavor'
+    const tag4Id = tagsDb.addTag(tag4Name, tag4Desc)
 
-    const tag5_name = 'fruit'
-    const tag5_desc = 'fruity'
-    const tag5_id = tagsDb.addTag(tag5_name, tag5_desc)
+    const tag5Name = 'fruit'
+    const tag5Desc = 'fruity'
+    const tag5Id = tagsDb.addTag(tag5Name, tag5Desc)
 
     // Simulate Drinks
-    const drink1_name = 'coco'
-    const drink1_desc = 'flavor of sweet choco'
-    const drink1_id = drinksDb.addDrink(drink1_name, drink1_desc)
-    const drink1 = { id: drink1_id, name: drink1_name, desc: drink1_desc }
+    const drink1Name = 'coco'
+    const drink1Desc = 'flavor of sweet choco'
+    const drink1Id = drinksDb.addDrink(drink1Name, drink1Desc)
+    const drink1 = { id: drink1Id, name: drink1Name, desc: drink1Desc }
 
-    const drink2_name = 'milk tea'
-    const drink2_desc = 'trash'
-    const drink2_id = drinksDb.addDrink(drink2_name, drink2_desc)
-    const drink2 = { id: drink2_id, name: drink2_name, desc: drink2_desc }
+    const drink2Name = 'milk tea'
+    const drink2Desc = 'trash'
+    const drink2Id = drinksDb.addDrink(drink2Name, drink2Desc)
+    const drink2 = { id: drink2Id, name: drink2Name, desc: drink2Desc }
 
-    const drink3_name = 'coconut '
-    const drink3_desc = 'tropical'
-    const drink3_id = drinksDb.addDrink(drink3_name, drink3_desc)
-    const drink3 = { id: drink3_id, name: drink3_name, desc: drink3_desc }
+    const drink3Name = 'coconut '
+    const drink3Desc = 'tropical'
+    const drink3Id = drinksDb.addDrink(drink3Name, drink3Desc)
+    const drink3 = { id: drink3Id, name: drink3Name, desc: drink3Desc }
 
-    const drink4_name = 'lemonade'
-    const drink4_desc = 'sour'
-    const drink4_id = drinksDb.addDrink(drink4_name, drink4_desc)
-    const drink4 = { id: drink4_id, name: drink4_name, desc: drink4_desc }
+    const drink4Name = 'lemonade'
+    const drink4Desc = 'sour'
+    const drink4Id = drinksDb.addDrink(drink4Name, drink4Desc)
+    const drink4 = { id: drink4Id, name: drink4Name, desc: drink4Desc }
 
-    const drink5_name = 'sprite'
-    const drink5_desc = 'refreshing'
-    const drink5_id = drinksDb.addDrink(drink5_name, drink5_desc)
-    const drink5 = { id: drink5_id, name: drink5_name, desc: drink5_desc }
+    const drink5Name = 'sprite'
+    const drink5Desc = 'refreshing'
+    const drink5Id = drinksDb.addDrink(drink5Name, drink5Desc)
+    const drink5 = { id: drink5Id, name: drink5Name, desc: drink5Desc }
 
-    const drink6_name = 'acetone'
-    const drink6_desc = 'totally edible'
-    const drink6_id = drinksDb.addDrink(drink6_name, drink6_desc)
-    const drink6 = { id: drink6_id, name: drink6_name, desc: drink6_desc }
+    const drink6Name = 'acetone'
+    const drink6Desc = 'totally edible'
+    const drink6Id = drinksDb.addDrink(drink6Name, drink6Desc)
+    const drink6 = { id: drink6Id, name: drink6Name, desc: drink6Desc }
 
     // Drink 1 Tags
-    drinksTagsDb.addDrinkTag(drink1_id, tag1_id)
-    drinksTagsDb.addDrinkTag(drink1_id, tag3_id)
+    drinksTagsDb.addDrinkTag(drink1Id, tag1Id)
+    drinksTagsDb.addDrinkTag(drink1Id, tag3Id)
 
     // Drink 2 Tags
-    drinksTagsDb.addDrinkTag(drink2_id, tag1_id)
-    drinksTagsDb.addDrinkTag(drink2_id, tag4_id)
+    drinksTagsDb.addDrinkTag(drink2Id, tag1Id)
+    drinksTagsDb.addDrinkTag(drink2Id, tag4Id)
 
     // Drink 3 Tags
-    drinksTagsDb.addDrinkTag(drink3_id, tag1_id)
-    drinksTagsDb.addDrinkTag(drink3_id, tag5_id)
+    drinksTagsDb.addDrinkTag(drink3Id, tag1Id)
+    drinksTagsDb.addDrinkTag(drink3Id, tag5Id)
 
     // Drink 4 Tags
-    drinksTagsDb.addDrinkTag(drink4_id, tag1_id)
-    drinksTagsDb.addDrinkTag(drink4_id, tag2_id)
-    drinksTagsDb.addDrinkTag(drink4_id, tag5_id)
+    drinksTagsDb.addDrinkTag(drink4Id, tag1Id)
+    drinksTagsDb.addDrinkTag(drink4Id, tag2Id)
+    drinksTagsDb.addDrinkTag(drink4Id, tag5Id)
 
     // Drink 5 Tags
-    drinksTagsDb.addDrinkTag(drink5_id, tag1_id)
-    drinksTagsDb.addDrinkTag(drink5_id, tag2_id)
-    drinksTagsDb.addDrinkTag(drink5_id, tag5_id)
+    drinksTagsDb.addDrinkTag(drink5Id, tag1Id)
+    drinksTagsDb.addDrinkTag(drink5Id, tag2Id)
+    drinksTagsDb.addDrinkTag(drink5Id, tag5Id)
 
     // Drink 6 Tags
 
     // Test 1: Result for searching: Sweet
     const result1 = [drink1, drink2, drink3, drink4, drink5]
-    const tags1 = [tag1_id]
+    const tags1 = [tag1Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags1), result1)
 
     // Test 2: Result for searching: Sweet & Sour
     const result2 = [drink4, drink5]
-    const tags2 = [tag1_id, tag2_id]
+    const tags2 = [tag1Id, tag2Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags2), result2)
 
     // Test 3: Result for searching: boba
     const result3 = [drink2]
-    const tags3 = [tag4_id]
+    const tags3 = [tag4Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags3), result3)
 
     // Test 4: Result for searching: Sweet & Fruity
     const result4 = [drink3, drink4, drink5]
-    const tags4 = [tag1_id, tag5_id]
+    const tags4 = [tag1Id, tag5Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags4), result4)
 
     // Test 5: Result for searching: Boba & Chocolate
     const result5 = []
-    const tags5 = [tag3_id, tag4_id]
+    const tags5 = [tag3Id, tag4Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags5), result5)
 
     // Test 6: Result for searching: Sweet, Sour, & Fruity
     const result6 = [drink4, drink5]
-    const tags6 = [tag1_id, tag2_id, tag5_id]
+    const tags6 = [tag1Id, tag2Id, tag5Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags5), result5)
 
     // Test 7: Result for searching: All
     const result7 = []
-    const tags7 = [tag1_id, tag2_id, tag3_id, tag4_id, tag5_id]
+    const tags7 = [tag1Id, tag2Id, tag3Id, tag4Id, tag5Id]
 
     assert.deepEqual(drinksTagsDb.getDrinksFromTags(tags7), result7)
   })
