@@ -17,7 +17,7 @@ class DrinksTagsDatabase {
   createTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks_tags ' +
             '(drink_id INTEGER, tag_id INTEGER)')
-    const query = stmt.run()
+    stmt.run()
   }
 
   /**
@@ -33,9 +33,8 @@ class DrinksTagsDatabase {
     if (!drinkDb.isExist(drinkId) || !tagsDb.isExist(tagId) || this.isExist(drinkId, tagId)) {
       return false
     } else {
-      const stmt = this.db.prepare('INSERT INTO drinks_tags (drink_id, tag_id) ' +
-                `VALUES ('${drinkId}', '${tagId}')`)
-      const query = stmt.run()
+      const stmt = this.db.prepare('INSERT INTO drinks_tags (drink_id, tag_id) VALUES (?, ?)')
+      const query = stmt.run(drinkId, tagId)
 
       if (query.changes === 1) {
         return true
@@ -52,9 +51,8 @@ class DrinksTagsDatabase {
      * @returns {boolean} false if failed, true is succeed
      */
   removeDrinkTag (drinkId, tagId) {
-    const stmt = this.db.prepare(`DELETE FROM drinks_tags WHERE drink_id = '${drinkId}' ` +
-            `AND tag_id = '${tagId}'`)
-    const query = stmt.run()
+    const stmt = this.db.prepare('DELETE FROM drinks_tags WHERE drink_id = ? AND tag_id = ?')
+    const query = stmt.run(drinkId, tagId)
 
     if (query.changes > 0) {
       return true
@@ -70,9 +68,8 @@ class DrinksTagsDatabase {
      * @returns {boolean} true if in the database, false if not
      */
   isExist (drinkId, tagId) {
-    const stmt = this.db.prepare(`SELECT * FROM drinks_tags WHERE drink_id = '${drinkId}' ` +
-            `AND tag_id = '${tagId}'`)
-    const query = stmt.all()
+    const stmt = this.db.prepare('SELECT * FROM drinks_tags WHERE drink_id = ? AND tag_id = ?')
+    const query = stmt.all(drinkId, tagId)
     return query.length > 0
   }
 
@@ -86,8 +83,8 @@ class DrinksTagsDatabase {
             'FROM drinks_tags ' +
             'INNER JOIN drinks ON drinks_tags.drink_id = drinks.drink_id ' +
             'INNER JOIN tags ON drinks_tags.tag_id = tags.tag_id ' +
-            `WHERE drinks_tags.drink_id = '${id}'`)
-    const query = stmt.all()
+            'WHERE drinks_tags.drink_id = ?')
+    const query = stmt.all(id)
     return query
   }
 
@@ -126,7 +123,13 @@ class DrinksTagsDatabase {
 
   purgeDb () {
     const stmt = this.db.prepare('DELETE FROM drinks_tags')
-    const query = stmt.run()
+    stmt.run()
+  }
+
+  resetDb () {
+    const stmt = this.db.prepare('DROP TABLE drinks_tags')
+    stmt.run()
+    this.createTable()
   }
 }
 
