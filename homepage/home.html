@@ -7,17 +7,19 @@
         <link rel="stylesheet" href="./home.css">
     </head>
     <body>
+        <!-- Modal Sheet for button -->
         <div class="modal">
             <div class="modal-content">
-                <button> Hello </button>
-                <button> World </button>
+                <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
+                <button onclick="openCardCreate()" > <img src="../assets/Add Card Icon.png"> <p> Card </p>  </button>
+                <button> <img src="../assets/Group Icon.png"> <p> Group Order </p></button>
             </div>
         </div>
 
         <!-- Hidden form for card creation -->
         <form action="/cards" class="form-container" id="id01" method="POST">
             <div class="card-bar">
-                <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >X</button>
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >&times;</button>
                 <button class="post-button" value="submit"> Post </button>
             </div>
             <div class="userInput">
@@ -52,3 +54,7 @@
     </body>
     <script src="homepage.js" type="text/javascript"></script>
 </html>
+
+
+
+

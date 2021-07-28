@@ -213,16 +213,15 @@ li:last-child{
 .modal{
     display: block;
     position: fixed;
-    border: 1px black solid;
     z-index: 2;
-    width: 100%;
+    width: 98%;
     margin: auto;
-    left: 0;
-    height: 20vh;
+    background-color: white;
+    border-radius: 15px;
+    bottom: 0px;
 }
 
 .modal-content{
-    border: 1px purple solid;
     width: 100%;
     left: 25vw;
     align-content: center;
@@ -234,12 +233,41 @@ li:last-child{
 }
 
 .modal-content button {
-    margin: 5px;
-    border: 1px blue solid;
-    height: 6vh;
-    font-size: 2vh;
-    width: 100vw;
+    position: relative;
+    height: 10vh;
+    font-size: 3vh;
+    width: 100%;
+    height: 0.01%;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    text-align: left;
+    align-content: center;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+
 }
+
+.modal-content button:last-child{
+    border-top: 2px solid black;
+}
+
+.modal-content button p{
+    padding: 0%;
+    margin-top: 1vh;
+    margin-left: 10px;
+}
+
+.modal-content button img{
+    height: 100%;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+
 
 /* Animation for w3schools */
 .animate {
