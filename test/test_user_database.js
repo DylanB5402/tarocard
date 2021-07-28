@@ -18,18 +18,18 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test InsertNewUser for a new user', function () {
-    const lastRowId = userDb.insertNewUser('user@email.com', 'password')
+    const lastRowId = userDb.insertNewUser('user@email.com', 'password', 'user')
     const emailRowId = userDb.selectUserSessionData('user@email.com').uid
     assert.equal(lastRowId, emailRowId)
   })
 
   it('Test InsertNewUser user already exits', function () {
-    userDb.insertNewUser('user2@email.com', 'password')
+    userDb.insertNewUser('user2@email.com', 'password', 'user2')
     assert.equal(userDb.insertNewUser('user2@email.com', 'password'), -1)
   })
 
   it('Test isEmailInDatabase', function () {
-    userDb.insertNewUser('user3@email.com', 'password')
+    userDb.insertNewUser('user3@email.com', 'password', 'user3')
     assert.equal(userDb.isEmailInDatabase('user3@email.com'), true)
   })
 
@@ -38,13 +38,13 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test selectUserSessionData check username', function () {
-    userDb.insertNewUser('user5@email.com', 'password')
+    userDb.insertNewUser('user5@email.com', 'password', 'user5')
     const sessionData = userDb.selectUserSessionData('user5@email.com')
     assert.equal(sessionData.username, 'user5')
   })
 
   it('Test selectUserSessionData check display_name', function () {
-    userDb.insertNewUser('user6@email.com', 'password')
+    userDb.insertNewUser('user6@email.com', 'password', 'user6')
     const sessionData = userDb.selectUserSessionData('user6@email.com')
     assert.equal(sessionData.display_name, 'user6')
   })
@@ -55,22 +55,22 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test checkPassword success', function () {
-    userDb.insertNewUser('user7@email.com', 'password')
+    userDb.insertNewUser('user7@email.com', 'password', 'user7')
     assert.isTrue(userDb.checkPassword('user7@email.com', 'password'))
   })
 
   it('Test checkPassword failure', function () {
-    userDb.insertNewUser('user8@email.com', 'password')
+    userDb.insertNewUser('user8@email.com', 'password', 'user8')
     assert.isFalse(userDb.checkPassword('user8@email.com', 'password123'))
   })
 
   it('Test insertProfileData', function () {
-    userDb.insertNewUser('user9@email.com', 'password')
+    userDb.insertNewUser('user9@email.com', 'password', 'user9')
     assert.equal(userDb.insertProfileData('user9@email.com', 'nine', 'nine', 'I am user nine').changes, 1)
   })
 
   it('Test selectProfileData', function () {
-    userDb.insertNewUser('user10@email.com', 'password')
+    userDb.insertNewUser('user10@email.com', 'password', 'user10')
     userDb.insertProfileData('user10@email.com', 'ten', 'ten', 'I am user ten')
     const userData = userDb.selectProfileData('user10@email.com')
     const userArray = [userData.username, userData.display_name, userData.bio]
@@ -78,7 +78,7 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test selectUserID', function () {
-    userDb.insertNewUser('user11@email.com', 'password')
+    userDb.insertNewUser('user11@email.com', 'password', 'user11')
     assert.isNumber(userDb.selectUserId('user11@email.com'))
   })
 }
