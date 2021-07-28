@@ -14,7 +14,7 @@ const userDb = new userDatabase.UserDatabase(db)
 
 favDrinksDb.purgeDb()
 drinksDb.purgeDb()
-userDb.purgeDb()
+userDb.deleteAllTableEntries()
 
 describe('Testing Favorite Drinks Relational Database', function () {
   it('Test: Add New Fav Drink Relation Successfully', function () {
