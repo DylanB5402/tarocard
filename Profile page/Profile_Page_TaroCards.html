@@ -21,7 +21,9 @@
 
             <aside id="username">
                 <h3 id="userAt">@bobaLover49</h3>
-            </aside><br>
+            </aside>
+
+            
             <!-- Max characters around 150 for description-->
             <p id="profileDescription">
                 <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
@@ -43,23 +45,25 @@
             </ul>
         </section>
         <section id="profileTabs" class="profileTabs">
-            <ul>
-                <span> Friends</span>
-            </ul>
-            <ul>
-                <span> Cards</span>
-            </ul>
+            <a class="active" href="#" class="hover">
+                <img id="addCard" src=".\Icons\AddCardIcon.png" />
+            </a>
+            <a class="active" href="#" class="hover">
+                <img id="groupOrder" src=".\Icons\GroupOrderIcon.png" />
+            </a>
         </section>
+
     </section>
-    <br>
+    
 
     <section id="profileCards">
-        <section id="favoritesSection">
+        <div id="favoritesSection">
             <img id="favoritesStar" src=".\Icons\Star-Purple.png" />
-            <span id="favorites">Favorites</span>
-            <span
-                id="favoritesLine">------------------------------------------------------------------------------------------------</span>
-        </section>
+            <p id="favorites">Favorites</p>
+            <hr style="width: 100%; height: 0.1px;">
+
+        </div>
+
         <div>
             <h4>Starbucks</h4>
             <p>Double Chocolately Chip Frappuccino</p>
