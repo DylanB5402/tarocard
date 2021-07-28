@@ -7,7 +7,7 @@ const app = require('../src/app')
 
 let authenticatedSession = null
 
-describe('Test App', function () {
+describe('Test Server', function () {
   const taroApp = new app.TaroCardApp('databases/test_server.db')
   taroApp.userDB.deleteAllTableEntries()
   taroApp.run()
@@ -74,39 +74,37 @@ describe('Test App', function () {
       if (err !== null) {
         console.log(err)
       }
-        authenticatedSession.get('/profile').end(function (err, res) {
-            if (err !== null) {
-              console.log(err)
-            } else {
-              assert.equal(res.header.profileaccess, 'successful')
-            }
-            return done()
-          })
-    })
-  })
-
-  it('test login failure', function(done) {
-    authenticatedSession.get('/debug/signout').end(function (err, res) {
+      authenticatedSession.get('/profile').end(function (err, res) {
         if (err !== null) {
           console.log(err)
         } else {
-        //   assert.equal(res.text, 'Found. Redirecting to /')
-        authenticatedSession.post('/login').send(
-            {
-              email: 'user1@email.com',
-              password: 'password_wrong'
-            }).end(function (err, res) {
-                if (err !== null) {
-                    console.log(err)
-                  } else {
-                      console.log(res.text)
-                      assert.equal(res.text, 'invalid email and/or password')
-                  }
-                  return done()
-            })
+          assert.equal(res.header.profileaccess, 'successful')
         }
-        
+        return done()
       })
+    })
+  })
+
+  it('test login failure', function (done) {
+    authenticatedSession.get('/debug/signout').end(function (err, res) {
+      if (err !== null) {
+        console.log(err)
+      } else {
+        authenticatedSession.post('/login').send(
+          {
+            email: 'user1@email.com',
+            password: 'password_wrong'
+          }).end(function (err, res) {
+          if (err !== null) {
+            console.log(err)
+          } else {
+            console.log(res.text)
+            assert.equal(res.text, 'invalid email and/or password')
+          }
+          return done()
+        })
+      }
+    })
   })
 
   after((done) => {

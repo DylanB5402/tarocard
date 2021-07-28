@@ -58,7 +58,7 @@ class TaroCardApp {
       const repeatPassword = req.body.repeatPassword
       const username = req.body.username
       if (password !== repeatPassword) {
-        res.redirect('/signup.html')
+        res.redirect('/sign-up.html')
       } else {
         const result = this.userDB.insertNewUser(email, password, username)
         if (result !== -1) {
