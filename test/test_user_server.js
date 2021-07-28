@@ -47,10 +47,66 @@ describe('Test App', function () {
       if (err !== null) {
         console.log(err)
       } else {
+        //   console.log(res.text)
         assert.equal(res.header.profileaccess, 'successful')
       }
       return done()
     })
+  })
+
+  it('test signout', function (done) {
+    authenticatedSession.get('/debug/signout').end(function (err, res) {
+      if (err !== null) {
+        console.log(err)
+      } else {
+        assert.equal(res.text, 'Found. Redirecting to /')
+      }
+      return done()
+    })
+  })
+
+  it('test login success', function (done) {
+    authenticatedSession.post('/login').send(
+      {
+        email: 'user1@email.com',
+        password: 'password'
+      }).end(function (err, res) {
+      if (err !== null) {
+        console.log(err)
+      }
+        authenticatedSession.get('/profile').end(function (err, res) {
+            if (err !== null) {
+              console.log(err)
+            } else {
+              assert.equal(res.header.profileaccess, 'successful')
+            }
+            return done()
+          })
+    })
+  })
+
+  it('test login failure', function(done) {
+    authenticatedSession.get('/debug/signout').end(function (err, res) {
+        if (err !== null) {
+          console.log(err)
+        } else {
+        //   assert.equal(res.text, 'Found. Redirecting to /')
+        authenticatedSession.post('/login').send(
+            {
+              email: 'user1@email.com',
+              password: 'password_wrong'
+            }).end(function (err, res) {
+                if (err !== null) {
+                    console.log(err)
+                  } else {
+                      console.log(res.text)
+                      assert.equal(res.text, 'invalid email and/or password')
+                  }
+                  return done()
+            })
+        }
+        
+      })
   })
 
   after((done) => {

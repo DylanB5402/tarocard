@@ -69,11 +69,9 @@ class TaroCardApp {
     })
 
     this.app.post('/login', (req, res) => {
-      // console.log(req)
       const email = req.body.email
       const password = req.body.password
       if (this.userDB.logInUser(req, email, password)) {
-        // res.redirect('/debug/home')
         res.redirect('/profile/')
       } else {
         res.send('invalid email and/or password')
@@ -127,11 +125,6 @@ class TaroCardApp {
       res.redirect('/')
     })
 
-    // 404, page can't be found
-    this.app.use(function (req, res) {
-      res.status(404).send('404 page not found')
-    })
-
     // Upon form submission at URL .../drink_card, send to database
     // Form:    Name of Drink: *******
     //          Description: *******
@@ -171,12 +164,17 @@ class TaroCardApp {
 
       const result = this.drinksDB.editDrink()
     })
+
+    // 404, page can't be found
+    this.app.use(function (req, res) {
+      res.status(404).send('404 page not found')
+    })
   }
 
   run () {
     const port = 3000
     this.server = this.app.listen(port, () => {
-      console.log(`Example app listening at http://localhost:${port}`)
+      console.log(`Taro Card app listening at http://localhost:${port}`)
     })
   }
 }
