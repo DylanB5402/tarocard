@@ -17,7 +17,7 @@ describe('Test App', function () {
 
   it('test connection', function (done) {
     taroSession.get('/debug/connect').end((err, res) => {
-      if (err !== undefined) {
+      if (err !== null) {
         console.log(err)
       } else {
         assert.equal(res.text, 'connected')
@@ -33,7 +33,7 @@ describe('Test App', function () {
         password: 'password',
         repeatPassword: 'password'
       }).end(function (err, res) {
-      if (err !== undefined) {
+      if (err !== null) {
         console.log(err)
       }
       authenticatedSession = taroSession
@@ -44,7 +44,7 @@ describe('Test App', function () {
 
   it('test profile', function (done) {
     authenticatedSession.get('/profile').end(function (err, res) {
-      if (err !== undefined) {
+      if (err !== null) {
         console.log(err)
       } else {
         assert.equal(res.header.profileaccess, 'successful')

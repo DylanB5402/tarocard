@@ -4,6 +4,10 @@ const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
 const userDatabase = require('./user_database')
+const path = require('path')
+
+const favDrinksDatabase = require('./fav_drinks_database')
+const drinksDatabase = require('./drinks_database')
 const templateEngine = require('./template_engine')
 
 class TaroCardApp {
@@ -22,7 +26,8 @@ class TaroCardApp {
 
     // KNEX SESSION STORE IS KEEPING PROCESS FROM EXITING
     this.store = new KnexSessionStore()
-
+    this.favDrinksDB = new favDrinksDatabase.FavDrinksDatabase(this.db)
+    this.drinksDB = new drinksDatabase.DrinksDatabase(this.db)
     this.tempEngine = new templateEngine.TemplateEngine()
 
     this.app = express()
@@ -125,6 +130,46 @@ class TaroCardApp {
     // 404, page can't be found
     this.app.use(function (req, res) {
       res.status(404).send('404 page not found')
+    })
+
+    // Upon form submission at URL .../drink_card, send to database
+    // Form:    Name of Drink: *******
+    //          Description: *******
+    //
+    this.app.post('/new_drink_card', (req, res) => {
+      if (req.session.loggedin) {
+        // Get name and desc of drink from form request
+        const nameOfDrink = req.body.nameOfDrink
+        const drinkDesc = req.body.drinkDesc
+        const uid = req.session.uid // get uid from current logged in state
+
+        // Save return value to variable after adding drink to drink database
+        const drinkUid = this.drinksDB.addDrink(nameOfDrink, drinkDesc)
+        const resultFavDrink = false // variable out of scope
+
+        // If truthy i.e. successfuly created id, add to fav drink database
+        if (drinkUid) {
+          resultFavDrink = this.favDrinksDB.addFavDrink(uid, drinkUid)
+        }
+        if (resultFavDrink) {
+          // Exit pop up or print "Drink Added!"
+        } else {
+          // Print "Could not add drink!"
+          // Give detail later e.g. "drink already exists"
+        }
+      }
+    })
+
+    // TODO:
+    // Edit a drink card
+    this.app.post('/edit_drink_card', (req, res) => {
+      // Make sure previous info (drink name and desc) is shown
+
+      // Get name and desc of drink from new form request
+      const nameOfDrink = req.body.nameOfDrink
+      const drinkDesc = req.body.drinkDesc
+
+      const result = this.drinksDB.editDrink()
     })
   }
 
