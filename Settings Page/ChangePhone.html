@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Change Email | Taro Cards</title>
+        <title>Change Phone | Taro Cards</title>
         <link rel="stylesheet" href="Changes_CSS.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
                 $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", "" ,function(data, status, xhr) {
-                    const currentEmail = data;
+                    const currentPhone = data;
                     const h1 = document.querySelector("h1");
                     let h2 = document.createElement("h2");
                     h2.id = "currentHeading";
-                    h2.textContent = "Your current email is " + currentEmail["email"][0]["email address"];
+                    h2.textContent = "Your current phone number is " + currentPhone["phone"][0]["phone number"];
                     h1.appendChild(h2);
                 });
             });
@@ -25,13 +25,15 @@
         </div>
         <br /> <br /> <br /> <br /> <br />
 
-        <h1 id="updateHeading">Update your email address</h1>
+        <h1 id="updateHeading">Update your phone number</h1>
         <!-- # = Place holder-->
         <form action="#" method="POST" class="changeTemplate" autocomplete="on" onsubmit="return validate()">
-            <label for="newEmail"> New Email: </label>
-            <input name="newEmail" id="new" type="email" required>
-            <label for="confirmEmail"> Confirm Email: </label>
-            <input name="confirmEmail" id="confirm" type="email" required>
+            <label for="newPhone"> New Phone Number: </label>
+            <input name="newPhone" id="new" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required placeholder="619-999-9999">
+            <label for="confirmPhone"> Confirm Phone Number: </label>
+            <input name="confirmPhone" id="confirm" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required>
             <input type="submit" value="Save Changes" id="saveChanges">
         </form>
 
@@ -45,7 +47,7 @@
                         let errorText = document.createElement("h3");
                         let h2 = document.querySelector("h2");
                         errorText.id = "errorText"
-                        errorText.textContent = "Alert: new and confirm email do not match";
+                        errorText.textContent = "Alert: new and confirm phone number do not match";
                         h2.appendChild(errorText);
                     }
                     return false;
