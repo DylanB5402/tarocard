@@ -25,9 +25,9 @@ class UserDatabase {
      * @param {String} password
      * @returns {Integer} the UID assigned to the user, -1 if the operation failed
      */
-  insertNewUser (email, password) {
+  insertNewUser (email, password, username) {
     // default username is first 5 characters of email
-    const username = email.substring(0, 5)
+    // const username = email.substring(0, 5)
     if (this.isEmailInDatabase(email)) {
       return -1
     } else {
