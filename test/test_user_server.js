@@ -3,16 +3,14 @@ const { assert } = require('chai')
 // const chai = require('chai')
 const session = require('supertest-session')
 const fs = require('fs')
+const config = require('../app/config.json')
 
 const app = require('../app/app')
 
 let authenticatedSession = null
 
 describe('Test Server', function () {
-  fs.unlink('databases/test_server.db', (err) => {
-    // console.log(err)
-  })
-  const taroApp = new app.TaroCardApp('databases/test_server.db')
+  const taroApp = new app.TaroCardApp()
   taroApp.run()
 
   let taroSession = null
@@ -50,7 +48,7 @@ describe('Test Server', function () {
       if (err !== null) {
         console.log(err)
       } else {
-        console.log(res.header)
+        // console.log(res.header)
         assert.equal(res.header.profileaccess, 'successful')
       }
       return done()

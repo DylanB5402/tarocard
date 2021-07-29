@@ -12,8 +12,9 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node src/server.js",
-    "style": "standard --fix"
+    "start": "node server.js",
+    "style": "standard --fix",
+    "clean": "rm databases/*"
   },
   "devDependencies": {
     "chai": "^4.3.4",
