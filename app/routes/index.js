@@ -34,6 +34,6 @@ router.get('/profile/', userController.profile)
 router.post('/new_drink_card', drinkController.newDrinkCard)
 
 // POST request for edit drink card.
-router.post('/edit_drink_card', drinkController.editDrinkCard)
+router.post('/:drinkId/edit_drink_card', drinkController.editDrinkCard)
 
 module.exports = router
