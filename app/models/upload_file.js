@@ -3,18 +3,17 @@
  * @package multer, uuidv4, path, fs
  */
 
-
 const multer = require('multer')
-const { v4: uuidv4 } = require('uuid');
-const path = require('path');
-const fs = require('fs');
+const { v4: uuidv4 } = require('uuid')
+const path = require('path')
+const fs = require('fs')
 
 /** A class that manages the uploading of files. */
 class UploadFile {
   constructor () {
-    fs.readdirSync(path.join(`uploads`)).forEach(dirs => {
-      //custom limits: https://github.com/expressjs/multer#limits
-      let storage = multer.diskStorage({
+    fs.readdirSync(path.join('uploads')).forEach(dirs => {
+      // custom limits: https://github.com/expressjs/multer#limits
+      const storage = multer.diskStorage({
         destination: function (req, file, cb) {
           cb(null, path.join(`uploads/${dirs}`))
         },
@@ -25,13 +24,13 @@ class UploadFile {
 
       this[`${dirs}`] = multer({ storage: storage })
       // console.log(this[`${dirs}`])
-    });
+    })
   }
 
   uploadImage (src, file, req, res) {
     if (src in this) {
       // file is the name attribute of <file> element in the form
-      let upload = this[`${src}`].single(file)
+      const upload = this[`${src}`].single(file)
 
       upload(req, res, (err) => {
         if (err instanceof multer.MulterError) {

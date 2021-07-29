@@ -2,14 +2,17 @@ const { assert } = require('chai')
 // const expect = require('chai').expect
 // const chai = require('chai')
 const session = require('supertest-session')
+const fs = require('fs')
 
-const app = require('../src/app')
+const app = require('../app/app')
 
 let authenticatedSession = null
 
 describe('Test Server', function () {
+  fs.unlink('databases/test_server.db', (err) => {
+    // console.log(err)
+  })
   const taroApp = new app.TaroCardApp('databases/test_server.db')
-  taroApp.userDB.deleteAllTableEntries()
   taroApp.run()
 
   let taroSession = null
@@ -47,7 +50,7 @@ describe('Test Server', function () {
       if (err !== null) {
         console.log(err)
       } else {
-        //   console.log(res.text)
+        console.log(res.header)
         assert.equal(res.header.profileaccess, 'successful')
       }
       return done()
@@ -109,7 +112,6 @@ describe('Test Server', function () {
 
   after((done) => {
     taroApp.server.close(done)
-    taroApp.db.close()
     taroApp.store.knex.destroy()
     // setTimeout(() => {
     //     wtf.dump()

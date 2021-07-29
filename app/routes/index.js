@@ -1,18 +1,18 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 // Require controller modules.
-const userController = require('../controllers/user_controller');
-const drinkController = require('../controllers/drink_controller');
+const userController = require('../controllers/user_controller')
+const drinkController = require('../controllers/drink_controller')
 
 // GET home page.
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   if (req.session.loggedin) {
     res.redirect('/profile')
   } else {
     res.redirect('/index.html')
   }
-});
+})
 
 /// USER ROUTES ///
 
