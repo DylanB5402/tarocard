@@ -128,6 +128,13 @@ class TaroCardApp {
       res.redirect('/')
     })
 
+    // ya like jazz
+    // Upload jazz
+    this.app.post('/upload/:uploadType', (req, res) => {
+      this.upload.uploadImage(req.params.uploadType, req.params.uploadType, req, res)
+      res.json(req.params)
+    })
+
     // 404, page can't be found
     this.app.use(function (req, res) {
       res.status(404).send('404 page not found')
