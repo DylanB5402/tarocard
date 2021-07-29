@@ -1,11 +1,13 @@
 const Database = require('better-sqlite3')
+const config = require('../../config.json');
 
 class FriendDatabase {
   constructor (database) {
-    /**
-         * @type {!Database}
-         */
-    this.db = database
+    if (database === undefined) {
+      this.db = new Database(config.db)
+    } else {
+      this.db = database
+    }
     this.createFriendsTable()
   }
 

@@ -1,7 +1,7 @@
 const { assert } = require('chai')
 const Database = require('better-sqlite3')
 
-const tagsDatabase = require('../src/tags_database')
+const tagsDatabase = require('../app/models/database/tags_database')
 
 // const db = new Database('databases/sample.db', {verbose: console.log});
 const db = new Database('databases/sample.db')

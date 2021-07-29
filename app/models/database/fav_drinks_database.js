@@ -11,12 +11,18 @@ Credits: Dylan Barva & Peter Liu for skeleton code
  * @package better-sqlite3
  */
 
+const Database = require('better-sqlite3')
 const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
+const config = require('../../config.json')
 
 class FavDrinksDatabase {
   constructor (database) {
-    this.db = database
+    if (database === undefined) {
+      this.db = new Database(config.db)
+    } else {
+      this.db = database
+    }
     this.createFavDrinkTable()
   }
 
@@ -116,8 +122,8 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false if failed
    */
   addFavDrink (uid, drinkId) {
-    const userDB = new userDatabase.UserDatabase(this.db)
-    const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
+    const userDB = new userDatabase.UserDatabase()
+    const drinksDB = new drinksDatabase.DrinksDatabase()
 
     console.log(`This is the user id: ${uid}`)
 
@@ -154,8 +160,8 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false if failed
    */
   removeFavDrink (uid, drinkId) {
-    const userDB = new userDatabase.UserDatabase(this.db)
-    const drinksDB = new drinksDatabase.DrinksDatabase(this.db)
+    const userDB = new userDatabase.UserDatabase()
+    const drinksDB = new drinksDatabase.DrinksDatabase()
 
     // Check to make params are valid/exists
     if (userDB.isExist(uid) && drinksDB.isExist(drinkId)) {

@@ -1,12 +1,14 @@
 const Database = require('better-sqlite3')
 const bcrypt = require('bcrypt')
+const config = require('../../config.json')
 
 class UserDatabase {
   constructor (database) {
-    /**
-         * @type {!Database}
-         */
-    this.db = database
+    if (database === undefined) {
+      this.db = new Database(config.db)
+    } else {
+      this.db = database
+    }
     this.createUserTable()
   }
 
