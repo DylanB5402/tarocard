@@ -1,3 +1,6 @@
 {
-  "db" : "databases/taroCard.db"
+  "db" : "databases/taroCard.db",
+
+  "allowed-ext-image" : "jpeg|jpg|png",
+  "allowed-ext-text" : "txt"
 }

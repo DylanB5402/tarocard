@@ -27,7 +27,8 @@ describe('Testing Tags Database', function () {
     const testTag = {
       tag_id: id,
       tag_name: name,
-      tag_desc: desc
+      tag_desc: desc,
+      tag_img: ''
     }
     assert.deepEqual(tagsDb.getTag(id), testTag)
   })
@@ -42,7 +43,8 @@ describe('Testing Tags Database', function () {
     const testTag = {
       tag_id: id,
       tag_name: newname,
-      tag_desc: newdesc
+      tag_desc: newdesc,
+      tag_img: ''
     }
 
     tagsDb.editTag(id, newname, newdesc)
@@ -59,7 +61,8 @@ describe('Testing Tags Database', function () {
     const testTag = {
       tag_id: id,
       tag_name: newname,
-      tag_desc: desc
+      tag_desc: desc,
+      tag_img: ''
     }
 
     tagsDb.editTag(id, newname, undefined)
@@ -76,14 +79,15 @@ describe('Testing Tags Database', function () {
     const testTag = {
       tag_id: id,
       tag_name: name,
-      tag_desc: newdesc
+      tag_desc: newdesc,
+      tag_img: ''
     }
 
     tagsDb.editTag(id, undefined, newdesc)
     assert.deepEqual(tagsDb.getTag(id), testTag)
   })
 
-  it('Test: Edit Drink, None', function () {
+  it('Test: Edit Tag, None', function () {
     const name = 'sour'
     const desc = 'it tastes kinda strange'
     const id = tagsDb.addTag(name, desc)
@@ -91,7 +95,26 @@ describe('Testing Tags Database', function () {
     assert.equal(tagsDb.editTag(id), false)
   })
 
-  it('Test: Edit Drink, Does Not Exist', function () {
+  it('Test: Edit Tag, Does Not Exist', function () {
     assert.equal(tagsDb.editTag(-1), false)
+  })
+
+  it('Test: Add Image To Tag Successfully', function () {
+    const name = 'sour'
+    const desc = 'it tastes kinda strange'
+    const id = tagsDb.addTag(name, desc)
+
+    const img = 'uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
+    tagsDb.addImage(id, img)
+    assert.equal(tagsDb.getTag(id).tag_img, img)
+  })
+
+  it('Test: Add Image To Tag Unsuccessfully', function () {
+    const name = 'sour'
+    const desc = 'it tastes kinda strange'
+    const id = tagsDb.addTag(name, desc)
+
+    const img = 'uploads/image/avatar/fake.jpg'
+    assert.equal(tagsDb.addImage(id, img), false)
   })
 })

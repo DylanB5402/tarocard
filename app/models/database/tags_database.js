@@ -1,9 +1,10 @@
 /**
  * @fileoverview tags_database
- * @package better-sqlite3
+ * @package better-sqlite3, fs
  */
 
 const Database = require('better-sqlite3')
+const fs = require('fs')
 const config = require('../../config.json')
 
 /** A class that manages the tags database table. */
@@ -19,7 +20,7 @@ class TagsDatabase {
 
   createTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS tags ' +
-            '(tag_id INTEGER PRIMARY KEY AUTOINCREMENT, tag_name TEXT, tag_desc TEXT)')
+            '(tag_id INTEGER PRIMARY KEY AUTOINCREMENT, tag_name TEXT, tag_desc TEXT, tag_img TEXT)')
     stmt.run()
   }
 
@@ -29,9 +30,13 @@ class TagsDatabase {
      * @param {String=} description an optional description
      * @returns {Integer} Id of the insert, null if none
      */
-  addTag (name, desc = '') {
-    const stmt = this.db.prepare('INSERT INTO tags (tag_name, tag_desc) VALUES (?, ?)')
-    const query = stmt.run(name, desc)
+  addTag (name, desc = '', img = '') {
+    if (!fs.existsSync(img)) {
+      img = ''
+    }
+
+    const stmt = this.db.prepare('INSERT INTO tags (tag_name, tag_desc, tag_img) VALUES (?, ?, ?)')
+    const query = stmt.run(name, desc, img)
 
     if (query.changes === 1) {
       return query.lastInsertRowid
@@ -65,26 +70,55 @@ class TagsDatabase {
   /**
    * Edit a tag
    * @param {Integer} id the tag id to search for
-   * @param {String=} name is the new name of the tag (null if none)
-   * @param {String=} desc is the new description of the tag (null if none)
+   * @param {String=} name is the new name of the tag (undefined if none)
+   * @param {String=} desc is the new description of the tag (undefined if none)
    * @returns {boolean} true if successful, false if not
    */
-  editTag (id, name = null, desc = null) {
-    let stmt = null
-    let query = null
+  editTag (id, name, desc) {
+    let edited = false
+    let stmtString = 'UPDATE tags SET '
 
-    if (name !== null && desc !== null) {
-      stmt = this.db.prepare('UPDATE tags SET tag_name = ?, tag_desc = ? WHERE tag_id = ?')
-      query = stmt.run(name, desc, id)
-    } else if (name !== null) {
-      stmt = this.db.prepare('UPDATE tags SET tag_name = ? WHERE tag_id = ?')
-      query = stmt.run(name, id)
-    } else if (desc !== null) {
-      stmt = this.db.prepare('UPDATE tags SET tag_desc = ? WHERE tag_id = ?')
-      query = stmt.run(desc, id)
+    if (name !== undefined) {
+      edited = true
+      stmtString += `tag_name = '${name}',`
+    }
+
+    if (desc !== undefined) {
+      edited = true
+      stmtString += `tag_desc = '${desc}',`
+    }
+
+    // Remove last comma
+    stmtString = stmtString.substring(0, stmtString.length - 1)
+    stmtString += ' WHERE tag_id = ?'
+
+    if (!edited) {
+      return false
+    }
+
+    const stmt = this.db.prepare(stmtString)
+    const query = stmt.run(id)
+
+    if (query.changes === 1) {
+      return true
     } else {
       return false
     }
+  }
+
+  /**
+   * Add/Replace an image source to a drink
+   * @param {Integer} id the drink id to search for
+   * @param {String=} img is the new source of the image for the drink
+   * @returns {boolean} true if successful, false if not
+   */
+  addImage (id, img) {
+    if (!fs.existsSync(img)) {
+      return false
+    }
+
+    const stmt = this.db.prepare('UPDATE tags SET tag_img = ? WHERE tag_id = ?')
+    const query = stmt.run(img, id)
 
     if (query.changes === 1) {
       return true

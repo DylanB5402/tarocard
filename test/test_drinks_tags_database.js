@@ -136,7 +136,7 @@ describe('Testing Drinks-Tags Relational Database', function () {
 
     const drink6Name = 'acetone'
     const drink6Desc = 'totally edible'
-    const drink6Id = drinksDb.addDrink(drink6Name, drink6Desc)
+    drinksDb.addDrink(drink6Name, drink6Desc)
     // const drink6 = { id: drink6Id, name: drink6Name, desc: drink6Desc }
 
     // Drink 1 Tags

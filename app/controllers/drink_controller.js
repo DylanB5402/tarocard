@@ -11,7 +11,7 @@ const drinksDB = new drinksDatabase.DrinksDatabase()
 exports.newDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get establishment, name, and desc of drink from form request
-    //const establishment = req.body.establishment
+    // const establishment = req.body.establishment
     const nameOfDrink = req.body.nameOfDrink
     const drinkDesc = req.body.drinkDesc
     const uid = req.session.uid // get uid from current logged in state
@@ -31,7 +31,7 @@ exports.newDrinkCard = (req, res) => {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
     }
-    res.redirect("/profile/") // redirect to profile always for now
+    res.redirect('/profile/') // redirect to profile always for now
   }
 }
 
@@ -40,8 +40,8 @@ exports.newDrinkCard = (req, res) => {
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
-    const drinkId = req.params.drinkId;
-    const uid = req.session.uid; // Get uid from cookie session
+    const drinkId = req.params.drinkId
+    const uid = req.session.uid // Get uid from cookie session
 
     // Make sure previous info (drink name and desc) is shown
 
@@ -49,10 +49,9 @@ exports.editDrinkCard = (req, res) => {
     const nameOfDrink = req.body.nameOfDrink
     const drinkDesc = req.body.drinkDesc
 
-    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc); // edit drink
+    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc) // edit drink
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
-    
   }
 }

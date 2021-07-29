@@ -18,6 +18,3 @@ exports.signout = (req, res) => {
   req.session.uid = -1
   res.redirect('/')
 }
-
-
-
