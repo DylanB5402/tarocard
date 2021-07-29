@@ -128,7 +128,7 @@ class FavDrinksDatabase {
     console.log(`This is the user id: ${uid}`)
 
     // Check if user id and drink id exists in other DBs in the first place
-    if (!userDB.isExist(uid) && !drinksDB.isExist(drinkId)) {
+    if (!userDB.getUserByUID(uid) && !drinksDB.isExist(drinkId)) {
       return false
     } else {
       // Check if the user-drink pair exists in fav_drinks_database already
@@ -164,7 +164,7 @@ class FavDrinksDatabase {
     const drinksDB = new drinksDatabase.DrinksDatabase()
 
     // Check to make params are valid/exists
-    if (userDB.isExist(uid) && drinksDB.isExist(drinkId)) {
+    if (userDB.getUserByUID(uid) && drinksDB.isExist(drinkId)) {
       if (this.isExist(uid, drinkId)) {
         // Delete uid-drinkId pair from DB
         const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' +

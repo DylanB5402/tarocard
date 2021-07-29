@@ -5,15 +5,15 @@
         <link rel="stylesheet" href="./home.css">
     </head>
     <body>
-        <form action="/cards" class="form-container" id="id01" method="POST">
+        <form action="/new_drink_card" class="form-container" id="id01" method="POST">
             <div class="card-bar">
                 <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >X</button>
                 <button class="post-button" value="submit"> Post </button>
             </div>
             <div class="userInput">
-                <input type="text" placeholder="Name of Establishment" name="Name of Establishment" class="small-input">
-                <input type="text" placeholder="Name of Order"  name="Name of Order" class="small-input" >
-                <textarea maxlength="100" class="large-input" name="Description" placeholder="Description or extra instructions for order"></textarea>
+                <input type="text" placeholder="Name of Establishment" name="establishment" class="small-input">
+                <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" >
+                <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
             </div>
         </form>
 
