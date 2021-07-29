@@ -1,7 +1,7 @@
 const assert = require('assert')
 const Database = require('better-sqlite3')
 
-const sampleDatabase = require('../src/sample/sample_database')
+const sampleDatabase = require('../app/sample/sample_database')
 
 const db = new Database('databases/sample.db')
 

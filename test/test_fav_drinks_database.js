@@ -1,9 +1,9 @@
 const { assert } = require('chai')
 const Database = require('better-sqlite3')
 
-const favDrinksDatabase = require('../src/fav_drinks_database')
-const drinksDatabase = require('../src/drinks_database')
-const userDatabase = require('../src/user_database')
+const favDrinksDatabase = require('../app/models/database/fav_drinks_database')
+const drinksDatabase = require('../app/models/database/drinks_database')
+const userDatabase = require('../app/models/database/user_database')
 
 // const db = new Database('databases/sample.db', {verbose: console.log});
 const db = new Database('databases/fav_drink_dummy.db')

@@ -12,7 +12,6 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node src/main.js",
     "style": "standard --fix"
   },
   "devDependencies": {

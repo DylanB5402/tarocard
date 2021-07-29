@@ -3,12 +3,17 @@
  * @package better-sqlite3
  */
 
-// const Database = require('better-sqlite3')
+const Database = require('better-sqlite3')
+const config = require('../../config.json')
 
 /** A class that manages the drinks database table. */
 class DrinksDatabase {
   constructor (database) {
-    this.db = database
+    if (database === undefined) {
+      this.db = new Database(config.db)
+    } else {
+      this.db = database
+    }
     this.createTable()
   }
 

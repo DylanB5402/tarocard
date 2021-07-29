@@ -10,13 +10,13 @@ const path = require('path');
 const fs = require('fs');
 
 /** A class that manages the uploading of files. */
-class Upload {
+class UploadFile {
   constructor () {
-    fs.readdirSync(path.join(__dirname, `/../uploads`)).forEach(dirs => {
+    fs.readdirSync(path.join(`uploads`)).forEach(dirs => {
       //custom limits: https://github.com/expressjs/multer#limits
       let storage = multer.diskStorage({
         destination: function (req, file, cb) {
-          cb(null, path.join(__dirname, `/../uploads/${dirs}`))
+          cb(null, path.join(`uploads/${dirs}`))
         },
         filename: function (req, file, cb) {
           cb(null, uuidv4().toUpperCase() + path.extname(file.originalname))
@@ -48,4 +48,4 @@ class Upload {
   }
 }
 
-module.exports = { Upload }
+module.exports = { UploadFile }

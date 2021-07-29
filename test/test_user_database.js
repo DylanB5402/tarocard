@@ -4,7 +4,7 @@ const chai = require('chai')
 const assertArrays = require('chai-arrays')
 chai.use(assertArrays)
 
-const userDatabase = require('../src/user_database')
+const userDatabase = require('../app/models/database/user_database')
 
 // const db = new Database('databases/sample.db', {verbose: console.log});
 const db = new Database('databases/test_user.db')
