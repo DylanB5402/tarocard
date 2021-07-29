@@ -1,9 +1,12 @@
 const userDatabase = require('../models/database/user_database')
 const templateEngine = require('../views/template_engine')
-
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
 exports.signup = (req, res) => {
   const email = req.body.email
   const password = req.body.password
@@ -39,6 +42,10 @@ exports.signout = (req, res) => {
   res.redirect('/debug/home')
 }
 
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
 exports.profile = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
@@ -47,6 +54,8 @@ exports.profile = (req, res) => {
       const bio = profileData.bio
       const username = profileData.username
       const displayName = profileData.display_name
+      // res.( JSON.stringify({ 'profileAccess': 'successful' }))
+      res.append('profileaccess', 'successful')
       res.send(tempEngine.getUserProfile(username, displayName, bio))
     } else {
       res.redirect('/404')

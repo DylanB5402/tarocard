@@ -1,5 +1,5 @@
 const Database = require('better-sqlite3')
-const config = require('../../config.json');
+const config = require('../../config.json')
 
 class FriendDatabase {
   constructor (database) {

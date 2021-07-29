@@ -3,10 +3,16 @@ const bcrypt = require('bcrypt')
 const config = require('../../config.json')
 
 class UserDatabase {
+  /**
+   * 
+   * @param {!String} database 
+   */
   constructor (database) {
     if (database === undefined) {
+      console.log(config.db)
       this.db = new Database(config.db)
     } else {
+      // this.db = new Database(database)
       this.db = database
     }
     this.createUserTable()

@@ -3,12 +3,11 @@ const Database = require('better-sqlite3')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')
 chai.use(assertArrays)
+const config = require('../app/config.json')
 
 const userDatabase = require('../app/models/database/user_database')
 
-// const db = new Database('databases/sample.db', {verbose: console.log});
-const db = new Database('databases/test_user.db')
-const userDb = new userDatabase.UserDatabase(db)
+const userDb = new userDatabase.UserDatabase()
 userDb.deleteAllTableEntries()
 
 describe('Testing UserDatabase', function () {

@@ -1,4 +1,4 @@
 node_modules
-!databases/sample.db
 databases/*
 .DS_Store
+connect-session-knex.sqlite

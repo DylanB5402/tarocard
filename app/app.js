@@ -6,13 +6,12 @@ const indexRouter = require('./routes/index')
 const debugRouter = require('./routes/debug_router')
 const uploadRouter = require('./routes/upload_router')
 
-
 // This code is clownfiesta. I have tried to clean it up
 // Please read: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
 
 class TaroCardApp {
   constructor () {
-    const store = new KnexSessionStore()
+    this.store = new KnexSessionStore()
 
     this.app = express()
     this.app.use(express.json()) // for parsing this.application/json
@@ -21,7 +20,7 @@ class TaroCardApp {
     this.app.use(
       session({
         secret: 'ahjintpcc',
-        store: store,
+        store: this.store,
         saveUninitialized: false,
         resave: false
       })
