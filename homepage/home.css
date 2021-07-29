@@ -165,7 +165,8 @@ li:last-child{
 }
 
 .card-template{
-    width: auto;
+    width: 87vw;
+    max-width: 1000px;
     background-color: white;
     padding: 10px;
     border-radius: 10px;
@@ -173,7 +174,7 @@ li:last-child{
     flex-direction: column;
     position: relative;
     margin-top: 50px;
-    margin-left: 50px;
+    margin-left: 10px;
     margin-right: 50px;
 }
 
@@ -182,13 +183,13 @@ li:last-child{
 }
 
 .tag-pf-container{
-    margin: 10px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
     display: flex;
     flex-direction: row;
 }
 .tag-container {
     word-wrap: break-word;
-    max-width: 90%;
+    max-width: 80%;
     display: flex;
     flex-direction: row;
 }
@@ -198,13 +199,19 @@ li:last-child{
     font-family: 'Roboto',sans-serif;
 }
 
+.card-template h2{
+    width: 75%;
+
+}
 
 .pfp-pic{
-    width: 50px;
-    height: 50px;
+    width: 3vw;
+    height: 3vw;
+    min-height: 30px;
+    min-width: 30px;
     border-radius: 75px;
     position: absolute;
-    left: 90%;
+    left: 85%;
     bottom: 5%;
 }
 
@@ -214,12 +221,13 @@ li:last-child{
     display: none;
     position: fixed;
     z-index: 2;
-    width: 98%;
+    width: 100%;
     margin: auto;
     background-color: white;
     border-radius: 15px;
-    bottom: 0px;
+    bottom: -10px;
     box-shadow: 0 0 0 10000px #000000b0;
+    left: 0px;
 }
 
 .modal-content{
