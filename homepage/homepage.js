@@ -60,7 +60,7 @@ request.send();
 request.onload = function() {
     const cards = request.response.cards;
     for(let i = 0; i < cards.length; i++) {
-        let x =  cards[i]["Name of Establishment"];
+        let x =  cards[i]["establishment"];
         let y = cards[i]["Name of Order"];
        let z =cards[i]["Description"];
        createCard2(x,y,z,"../assets/pfp-placeholder.png");
