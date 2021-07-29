@@ -4,9 +4,10 @@ const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
 const userDatabase = require('./user_database')
-
 const favDrinksDatabase = require('./fav_drinks_database')
 const drinksDatabase = require('./drinks_database')
+const upload = require('./upload')
+
 const templateEngine = require('./template_engine')
 
 class TaroCardApp {
@@ -24,6 +25,9 @@ class TaroCardApp {
     this.userDB = new userDatabase.UserDatabase(this.db)
     this.favDrinksDB = new favDrinksDatabase.FavDrinksDatabase(this.db)
     this.drinksDB = new drinksDatabase.DrinksDatabase(this.db)
+
+    this.upload = new upload.Upload()
+
     const store = new KnexSessionStore()
 
     this.tempEngine = new templateEngine.TemplateEngine()
