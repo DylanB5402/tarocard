@@ -1,9 +1,12 @@
+
+
 function openCardCreate(){
     document.getElementById('id01').style.display='block';
     document.getElementById('add-card-btn').style.display='none';
     if( document.getElementById('id01').classList.contains('dezoom')){
         document.getElementById('id01').classList.remove('dezoom');
     }
+    document.getElementById("modal-sheet").style.display="none";
     document.getElementById('id01').classList.add('animate');
 }
 
@@ -17,6 +20,9 @@ function closeCardCreate(){
     },500);
     document.getElementById('add-card-btn').style.display='block';
 }
+
+
+
 /* 
 * Request from server the cards information 
 * Then add that information into the cards
@@ -67,8 +73,7 @@ request.onload = function() {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-
-function createCard2(establishment, drink, description, image){
+ function createCard2(establishment, drink, description, image){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -76,7 +81,6 @@ function createCard2(establishment, drink, description, image){
     estab.classList.add("fonts");
     estab.innerHTML = establishment;
     /* Create drink element */
-
     let d = document.createElement("h2");
     d.classList.add("fonts");
     d.innerHTML = drink;
@@ -107,4 +111,36 @@ function createCard2(establishment, drink, description, image){
     document.getElementById('cardContainer').appendChild(container);
 }
 
-module.export = { createCard2 };
+/* Open Modal Sheet */
+
+function openModalSheet(){
+    document.getElementById("modal-sheet").classList.add('slide-in');
+    document.getElementById("modal-sheet").classList.remove('slide-out');
+    document.getElementById("modal-sheet").style.display= 'block';
+    document.getElementById('add-card-btn').style.display='none';
+}
+
+function closeModalSheet(){
+    if( document.getElementById("modal-sheet").style.display == "block"){
+        document.getElementById("modal-sheet").classList.remove("slide-in");
+        document.getElementById("modal-sheet").classList.add('slide-out');
+        setTimeout(function(){
+            document.getElementById('modal-sheet').style.display='none';
+        },200);
+
+        document.getElementById("add-card-btn").style.display ="block";
+    }
+}
+
+document.addEventListener('click',function(event){
+    let OptionsBtn = document.getElementById("add-card-btn");
+    let sheet = document.getElementById("modal-sheet");
+    if( OptionsBtn.contains(event.target)){
+        openModalSheet();
+    } else {
+        if( sheet.style.display == "block"){
+            closeModalSheet();
+        }
+    }
+});
+
