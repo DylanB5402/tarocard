@@ -96,6 +96,7 @@ body {
     color: white;
     border: hidden;
     border-radius: 20px;
+    
 }
 
 #errorText {
@@ -103,4 +104,12 @@ body {
     font-size: 20px;
     font-weight: lighter;
     margin-top: 15px;
+}
+
+#showPassword {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: 20%;
+    bottom: 95px;
 }
