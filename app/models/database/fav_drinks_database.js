@@ -47,13 +47,16 @@ class FavDrinksDatabase {
     const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
     let drinkArray = new Array() // array to be filled with drink objects
 
+    // SQL Statement:
+    //   selects all fields of drinks from the joining of fav_drinks and drinks 
+    //     tables to get all drinks that correspond to a user
     const stmt = this.db.prepare('SELECT d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ?')
     const query = stmt.all(uid) // an array of row (drink) objects
 
     // Iterate through the array of objects
     // `value` = drink object
     query.forEach( (value) => {
-      
+
       // Function to be called on each element (object) in the array
 
       drinkArray.push(value) // Push the drink object into the array
@@ -61,6 +64,8 @@ class FavDrinksDatabase {
     return drinkArray // return the filled array of drink objects
   }
 
+
+  // UNSURE TODO: display drinks and stuff prettily
   // /**
   //  * View a drink using the template from template_engine.js
   //  * @param {Integer} id

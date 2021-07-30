@@ -1,23 +1,29 @@
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const drinksDatabase = require('../models/database/drinks_database')
+const estabDatabase = require('../models/database/establishments_database')
 
 const favDrinksDB = new favDrinksDatabase.FavDrinksDatabase()
 const drinksDB = new drinksDatabase.DrinksDatabase()
+const estabDB = new estabDatabase.EstablishmentsDatabase()
 
-// Upon form submission at URL .../drink_card, send to database
-// Form:    Name of Drink: *******
-//          Description: *******
-//
+/**
+ * Creates new drink entry
+ * @param {httpRequest} req request
+ * @param {httpRequest} res response
+ */
 exports.newDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get establishment, name, and desc of drink from form request
-    // const establishment = req.body.establishment
+
+    // Development decision: user cannot enter establishment as a text, they must select from options
+    const establishment = req.body.establishment // id of establishment
     const nameOfDrink = req.body.nameOfDrink
     const drinkDesc = req.body.drinkDesc
     const uid = req.session.uid // get uid from current logged in state
 
+
     // Save return value to variable after adding drink to drink database
-    const drinkUid = drinksDB.addDrink(nameOfDrink, drinkDesc)
+    const drinkUid = drinksDB.addDrink(nameOfDrink, drinkDesc, establishment)
     let resultFavDrink = false // variable out of scope
 
     // If truthy i.e. successfuly created id, add to fav drink database
