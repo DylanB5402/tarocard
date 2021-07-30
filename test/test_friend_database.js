@@ -1,4 +1,4 @@
-const { assert } = require('chai')
+const { assert, expect } = require('chai')
 const Database = require('better-sqlite3')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')
@@ -56,5 +56,16 @@ describe('Testing Friend Database', function () {
     friendDb.sendFriendRequest(9, 10)
     friendDb.acceptFriendRequest(9, 10)
     assert.equal(friendDb.getFriendStatus(9, 10), friendDatabase.FriendStatus.FRIENDS)
+  })
+
+  it('Test getAllCurrentFriends', function () {
+    friendDb.insertFriend(11, 12, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(11, 13, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(11, 14, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(11, 15, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(11, 16, friendDatabase.FriendStatus.FRIENDS)
+    // const friends = friendDb.getCurrentFriends(11)
+
+    expect(friendDb.getAllCurrentFriends(11)).to.be.containingAllOf([12, 13, 14, 15, 16])
   })
 })

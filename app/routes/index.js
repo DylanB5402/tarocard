@@ -28,6 +28,8 @@ router.post('/signout', userController.signout)
 // GET request to view user profile
 router.get('/profile/', userController.profile)
 
+router.get('/profile/:id', userController.profileById)
+
 /// DRINK ROUTES ///
 
 // POST request for new drink card.

@@ -15,4 +15,6 @@ router.get('/connect', debugController.connect)
 // GET request for sign out
 router.get('/signout', debugController.signout)
 
+router.get('/users', debugController.users)
+
 module.exports = router

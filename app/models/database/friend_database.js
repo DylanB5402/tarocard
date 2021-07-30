@@ -44,9 +44,19 @@ class FriendDatabase {
     return this.db.prepare('DELETE FROM friends;').run()
   }
 
+  /**
+   * Add a friend request between the requester and requested
+   * @param {*} requesterUid
+   * @param {*} requestedUid
+   * @returns true if successful, false otherwise
+   */
   sendFriendRequest (requesterUid, requestedUid) {
-    this.insertFriend(requesterUid, requestedUid, FriendStatus.OUTGOING)
-    this.insertFriend(requestedUid, requesterUid, FriendStatus.INCOMING)
+    if (this.insertFriend(requesterUid, requestedUid, FriendStatus.OUTGOING) !== undefined) {
+      if (this.insertFriend(requestedUid, requesterUid, FriendStatus.INCOMING) !== undefined) {
+        return true
+      }
+    }
+    return false
   }
 
   acceptFriendRequest (uid, friendUid) {
@@ -67,6 +77,39 @@ class FriendDatabase {
     } else {
       return undefined
     }
+  }
+
+  /**
+   * Get all of a users current friends (not outgoing or incoming)
+   * @param {*} uid
+   * @returns an array containing the ids of all current friends of the user
+   */
+  getAllCurrentFriends (uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.FRIENDS)
+  }
+
+  getAllIncomingFriends(uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.INCOMING)
+  }
+
+  getAllOutgoingFriends(uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.OUTGOING)
+  }
+  
+
+ /**
+   * Get all of a users current friends (not outgoing or incoming)
+   * @param {*} uid
+   * @param {*} status
+   * @returns an array containing the ids of all current friends of the user
+   */
+  getAllFriendsByStatus (uid, status) {
+    const friends = this.db.prepare(`SELECT friend_uid FROM friends WHERE uid = ${uid} AND status = '${status}';`).all()
+    const friendIdArray = []
+    friends.forEach((friend) => {
+      friendIdArray.push(friend.friend_uid)
+    })
+    return friendIdArray
   }
 }
 

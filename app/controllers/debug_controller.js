@@ -1,3 +1,5 @@
+const userDatabase = require('../models/database/user_database')
+const userDB = new userDatabase.UserDatabase()
 
 exports.home = (req, res) => {
   // console.log(req)
@@ -17,4 +19,12 @@ exports.signout = (req, res) => {
   req.session.loggedin = false
   req.session.uid = -1
   res.redirect('/')
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.users = (req, res) => {
+  res.send(userDB.getAllUsers())
 }

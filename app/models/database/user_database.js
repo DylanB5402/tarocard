@@ -60,7 +60,11 @@ class UserDatabase {
   }
 
   printAll () {
-    console.log(this.db.prepare('SELECT * FROM users;').all())
+    console.log(this.getAllUsers())
+  }
+
+  getAllUsers () {
+    return this.db.prepare('SELECT * FROM users;').all()
   }
 
   encryptPassword (password) {
