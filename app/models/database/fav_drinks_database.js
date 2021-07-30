@@ -40,33 +40,25 @@ class FavDrinksDatabase {
 
   /**
    * get all favorited drinks
-   * @param {Response} httpResponse
+   * @param {Integer} uid
+   * @returns {Array[Object]} an array of drink objects
    */
-  getAllDrinks (httpResponse) {
-    let responseString = ''
-    this.db.prepare('SELECT * FROM fav_drinks;', (err, rows) => {
-      rows.forEach((row) => {
-        responseString += '<p>' + JSON.stringify(row, null, 2) + '</p>'
-      })
-      httpResponse.send(responseString)
-    })
-  }
+  getAllDrinks (uid) {
+    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
+    let drinkArray = new Array() // array to be filled with drink objects
 
-  /**
-   * Get a specific drink by its id
-   * @param {Integer} drinkId
-   * @param {Response} httpResponse
-   */
-  getDrink (drinkId, httpResponse) {
-    this.db.prepare(`SELECT * FROM fav_drinks WHERE drink_id = ${drinkId};`, (err, row) => {
-      const responseString = JSON.stringify(row, null, 2)
-      // console.log(responseString);
-      if (responseString !== undefined) {
-        httpResponse.send(responseString)
-      } else {
-        httpResponse.send(`Drink with id ${drinkId} not found`)
-      }
+    const stmt = this.db.prepare('SELECT d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ?')
+    const query = stmt.all(uid) // an array of row (drink) objects
+
+    // Iterate through the array of objects
+    // `value` = drink object
+    query.forEach( (value) => {
+      
+      // Function to be called on each element (object) in the array
+
+      drinkArray.push(value) // Push the drink object into the array
     })
+    return drinkArray // return the filled array of drink objects
   }
 
   // /**
@@ -124,8 +116,6 @@ class FavDrinksDatabase {
   addFavDrink (uid, drinkId) {
     const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase()
-
-    console.log(`This is the user id: ${uid}`)
 
     // Check if user id and drink id exists in other DBs in the first place
     if (!userDB.getUserByUID(uid) && !drinksDB.isExist(drinkId)) {

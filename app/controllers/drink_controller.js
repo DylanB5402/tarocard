@@ -55,3 +55,12 @@ exports.editDrinkCard = (req, res) => {
     // uid and drinkId, we don't need any changes to favDrinkDB
   }
 }
+
+// TODO: Get all drinks for a user
+exports.getAllDrinks = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid // Get uid from cookie session
+    const query = favDrinksDB.getAllDrinks(uid) // temp, will format better in future
+    res.send(query) // temp debug
+  }
+}
