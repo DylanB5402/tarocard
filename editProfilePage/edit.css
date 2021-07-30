@@ -7,23 +7,25 @@ html {
 }
 
 .page-header {
-    background-color: lightseagreen;
+    background-color: white;
+    /*opacity: 0.5;/**/
     height: 157px;
-    width: auto;
+    width: 100%;
     padding-left: 100px;
-    border: dotted blue;
+    position: fixed;
+    z-index: 2;
+    /*border: dotted blue;/**/
 }
 
 .page-header span {
-    padding: 0;
     color: #9879C5;
     font-size: 55px;
-    font-weight: medium;
-    border: dotted yellow;/**/
+    font-weight: medium;;
+    border: dotted lime;/**/
 }
 
 .page-header img {
-
+    margin-right: 5%;
     border: dotted black;/**/
 }
 
@@ -36,11 +38,16 @@ html {
 }
 
 #banner {
+    margin-top: 157px;
     height: 300px;
     max-width: 100%;
     min-width: 100%;
     object-fit: cover;
     object-position: center;
+    z-index: 0;
+    /*border-bottom-left-radius: -20px;
+    border-bottom-right-radius: -20px;*/
+    /*border: dotted 5px greenyellow;/**/
 }
 
 #profilePic {
@@ -56,7 +63,12 @@ html {
     z-index: 2;
 }
 
-body {
+.edit {
+    /*margin-top: -5%;/**/
     background-color: white;
-    border: dotted red;
+    border: dotted pink;
+    height: max-content;
+    /*border-top-left-radius: 20px;
+    border-top-right-radius: 20px;*/
+    z-index: 1;
 }
