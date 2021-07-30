@@ -1,0 +1,86 @@
+* {
+    font-family: "Roboto";
+}
+
+html {
+    background-color: #EFEFEF;
+}
+
+.page-header {
+    background-color: white;
+    /*opacity: 0.5;/**/
+    height: 157px;
+    max-width: 100%;
+    padding-left: 100px;
+    /*position: fixed;/**/
+    z-index: 2;
+    /*border: dotted blue;/**/
+}
+
+.page-header span {
+    color: #9879C5;
+    font-size: 55px;
+    font-weight: medium;;
+    border: dotted lime;/**/
+}
+
+.page-header img {
+    margin-right: 5%;
+    border: dotted black;/**/
+}
+
+.vertical-center {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#banner {
+    /*margin-top: 157px;/**/
+    height: 300px;
+    max-width: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    /*border-bottom-left-radius: -20px;
+    border-bottom-right-radius: -20px;*/
+    /*border: dotted 5px greenyellow;/**/
+}
+
+#profilePic {
+    height: 225px;
+    width: 225px;
+    border: 10px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    position: relative;
+    bottom: 130px;
+    left: 100px;
+    z-index: 2;
+}
+
+.edit {
+    /*margin-top: -5%;/**/
+    background-color: white;
+    border: dotted pink;
+    height: max-content;
+    width: 100%;
+    /*border-top-left-radius: 20px;
+    border-top-right-radius: 20px;*/
+    z-index: 1;
+}
+
+form {
+    font-size: 38px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    height: 80px;
+    display: block;
+}

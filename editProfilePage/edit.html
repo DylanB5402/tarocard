@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Edit Profile | Taro Cards</title>
+
+    <link rel="icon" href="..\assets\TaroCardTransparent 1.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="edit.css">
+</head>
+
+<div class="page-header">
+    <div class="vertical-center">
+        <img src="..\assets\Back.png" id="back">
+        <span>Edit Profile</span>
+    </div>
+</div>
+
+<img src="coolWallpaper.png" id="banner">
+<div class="edit">
+    <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
+    <form action="edit.html" method="POST">
+        <label for="display-name">Display Name</label><br>
+        <input type="text" name="display-name" id="display-name">
+        <br>
+
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="username">
+        <br>
+
+        <label for="bio">Bio</label><br>
+        <textarea id="bio" name="bio" rows="10%" cols="100%"></textarea>
+        <br>
+
+        <input type="submit" value="Save changes">
+    </form>
+</div>
