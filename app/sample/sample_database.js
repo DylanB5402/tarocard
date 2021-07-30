@@ -3,7 +3,7 @@ const Database = require('better-sqlite3')
 class SampleDatabase {
   constructor (database) {
     /**
-         * @type {!Database}
+         * @type {Database}
          */
     this.db = database
     this.createTable()

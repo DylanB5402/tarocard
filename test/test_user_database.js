@@ -1,9 +1,7 @@
 const { assert, expect } = require('chai')
-const Database = require('better-sqlite3')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')
 chai.use(assertArrays)
-const config = require('../app/config.json')
 
 const userDatabase = require('../app/models/database/user_database')
 

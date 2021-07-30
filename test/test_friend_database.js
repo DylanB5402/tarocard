@@ -1,4 +1,4 @@
-const { assert, expect } = require('chai')
+const { assert } = require('chai')
 const Database = require('better-sqlite3')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')

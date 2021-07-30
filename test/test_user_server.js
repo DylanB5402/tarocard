@@ -1,9 +1,5 @@
 const { assert } = require('chai')
-// const expect = require('chai').expect
-// const chai = require('chai')
 const session = require('supertest-session')
-const fs = require('fs')
-const config = require('../app/config.json')
 
 const app = require('../app/app')
 
