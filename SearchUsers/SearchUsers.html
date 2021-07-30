@@ -10,13 +10,12 @@
     <body style="background-color: rgba(238, 238, 238, 0.712); width: 100%; height: 100%; text-align: center;">
         <div class='innerBody'>
             <div class="titleCard">
-                <a href="C:\Users\jsmit\Documents\Taro Cards\tarocard\friendsPage\Friends_Page.html"><div id="back"><img src="C:\Users\jsmit\Documents\Taro Cards\tarocard\assets\Back.png" alt="back button"></div></a>
                 <h1>Discover Users</h1>
             </div>
-            <div style="width: 85%; margin: auto;">
-                <form id="friendSearch">
+            <div style="width: 85%; margin: auto; margin-top: 175px;">
+                <form id="friendSearch" autocomplete="off">
                     <input id="searchBar" type="text" placeholder="Search Users..." name="searchBar">
-                    <button id="searchBarButton" type="button" ><i class="fa fa-search" ></i></button>
+                    <button id="searchBarButton" type="button" ><i class="fa fa-search fa-3x" ></i></button>
                 </form>
 
                 <script>
@@ -33,7 +32,6 @@
                     });
                 </script>
             </div>
-            <br /> <br /> <br /> <br /> <br />
     
             <template id="friendsTemp">
                 <div id="headerElement">
@@ -46,6 +44,24 @@
                     <h3></h3>
                 </div>
             </template>
+        </div>
+
+        <div class="navbar" id="myNavbar">
+            <a href="#"></i>
+                <img id="navHomeIcon" src="..\Profile page\Icons\Home Icon.png" />
+            </a>
+        
+            <a href="#"></i>
+                <img id="navSearchIcon" src="..\Profile page\Icons\Search Icon.png" />
+            </a>
+        
+            <a href="#"></i>
+                <img id="navNotifsIcon" src="..\Profile page\Icons\Notifs Icon.png" />
+            </a>
+        
+            <a class="active" href="..\Profile page\Profile_Page_TaroCards.html"></i>
+                <img id="navProfileIcon" src="..\Profile page\Icons\ProfileIcon.png" />
+            </a>
         </div>
     
     </body>
