@@ -60,8 +60,12 @@ class FriendDatabase {
   }
 
   acceptFriendRequest (uid, friendUid) {
-    this.updateFriendStatus(uid, friendUid, FriendStatus.FRIENDS)
-    this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS)
+    if (this.updateFriendStatus(uid, friendUid, FriendStatus.FRIENDS).changes > 0) {
+      if (this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS) > 0) {
+        return true
+      }
+    }
+    return false
   }
 
   /**
@@ -88,16 +92,15 @@ class FriendDatabase {
     return this.getAllFriendsByStatus(uid, FriendStatus.FRIENDS)
   }
 
-  getAllIncomingFriends(uid) {
+  getAllIncomingFriends (uid) {
     return this.getAllFriendsByStatus(uid, FriendStatus.INCOMING)
   }
 
-  getAllOutgoingFriends(uid) {
+  getAllOutgoingFriends (uid) {
     return this.getAllFriendsByStatus(uid, FriendStatus.OUTGOING)
   }
-  
 
- /**
+  /**
    * Get all of a users current friends (not outgoing or incoming)
    * @param {*} uid
    * @param {*} status
