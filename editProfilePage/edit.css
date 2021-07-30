@@ -10,9 +10,9 @@ html {
     background-color: white;
     /*opacity: 0.5;/**/
     height: 157px;
-    width: 100%;
+    max-width: 100%;
     padding-left: 100px;
-    position: fixed;
+    /*position: fixed;/**/
     z-index: 2;
     /*border: dotted blue;/**/
 }
@@ -38,7 +38,7 @@ html {
 }
 
 #banner {
-    margin-top: 157px;
+    /*margin-top: 157px;/**/
     height: 300px;
     max-width: 100%;
     min-width: 100%;
@@ -68,7 +68,19 @@ html {
     background-color: white;
     border: dotted pink;
     height: max-content;
+    width: 100%;
     /*border-top-left-radius: 20px;
     border-top-right-radius: 20px;*/
     z-index: 1;
+}
+
+form {
+    font-size: 38px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    height: 80px;
+    display: block;
 }
