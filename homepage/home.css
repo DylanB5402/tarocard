@@ -287,7 +287,8 @@ li:last-child{
     margin-right: 1vh;
 }
 
-/* Hello */
+/* Group Order Page  */
+
 
 
 
@@ -321,7 +322,6 @@ li:last-child{
     from {transform: scale(1)} 
     to {transform: scale(0)}
   }
-
 
   /* Animation Slide in */
 
