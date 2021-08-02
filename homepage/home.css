@@ -168,7 +168,7 @@ li:last-child{
 .card-template{
     width: 87vw;
     max-width: 1000px;
-    background-color: white;
+    background-color: white ;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -289,7 +289,22 @@ li:last-child{
 
 /* Group Order Page  */
 
+.group-card {
+    width: 87vw;
+    max-width: 1000px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    border: 4px solid black;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
 
+}
 
 
 /* Animation for w3schools */
