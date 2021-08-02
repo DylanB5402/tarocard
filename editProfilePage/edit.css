@@ -2,16 +2,12 @@
     font-family: "Roboto";
 }
 
-html {
-    background-color: #EFEFEF;
-}
-
 .page-header {
     background-color: white;
     /*opacity: 0.5;/**/
-    height: 157px;
+    height: 150px;
     max-width: 100%;
-    padding-left: 100px;
+    padding-left: 80px;
     /*position: fixed;/**/
     z-index: 2;
     /*border: dotted blue;/**/
@@ -19,16 +15,16 @@ html {
 
 .page-header span {
     color: #9879C5;
-    font-size: 55px;
-    font-weight: medium;;
-    line-height: 157px;
+    font-size: 60px;
+    font-weight: medium;
+    line-height: 150px;
     vertical-align: middle;
 }
 
 .page-header img {
     margin-right: 5%;
     /*border: dotted black;/**/
-    line-height: 157px;
+    line-height: 150px;
     vertical-align: middle;
 }
 
@@ -58,10 +54,15 @@ html {
     z-index: 2;
 }
 
+#profilePic:hover {
+    background-color: black;
+    opacity: 1;
+}
+
 .edit {
     /*margin-top: -5%;/**/
     background-color: white;
-    border: dotted pink;
+    /*border: dotted pink;/**/
     height: max-content;
     width: 100%;
     /*border-top-left-radius: 20px;
@@ -70,12 +71,41 @@ html {
 }
 
 form {
+    margin-left: 5%;
     font-size: 38px;
-    text-align: center;
+}
+
+label {
+    font-size: 38px;
 }
 
 input {
-    width: 90%;
+    width: 94%;
     height: 80px;
     display: block;
+    object-position: center;
+}
+
+input[type=text] {
+    font-size: 35px;
+    border-radius: 10px;
+    border: solid 2px #C1C1C1;
+}
+
+textarea {
+    font-size: 35px;
+    border-radius: 10px;
+    width: 94%;
+    height: 270px;
+    border: solid 2px #C1C1C1;
+}
+
+input[type=submit] {
+    margin-top: 20%;
+    font-size: 35px;
+    width: 95%;
+    background-color: #9879C5;
+    color: white;
+    border: none;
+    border-radius: 10px;
 }
