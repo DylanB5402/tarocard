@@ -61,7 +61,7 @@ class FriendDatabase {
 
   acceptFriendRequest (uid, friendUid) {
     if (this.updateFriendStatus(uid, friendUid, FriendStatus.FRIENDS).changes > 0) {
-      if (this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS) > 0) {
+      if (this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS).changes > 0) {
         return true
       }
     }

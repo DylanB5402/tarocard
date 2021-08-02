@@ -26,7 +26,7 @@ exports.accept = (req, res) => {
   if (friendDb.acceptFriendRequest(uid, friendUid)) {
     res.send('success')
   } else {
-    res.send('failiure')
+    res.send('failure')
   }
 }
 

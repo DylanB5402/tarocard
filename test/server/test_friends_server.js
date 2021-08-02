@@ -1,9 +1,12 @@
-const { assert } = require('chai')
+const { assert, expect } = require('chai')
+const chai = require('chai')
+const assertArrays = require('chai-arrays')
+chai.use(assertArrays)
 const session = require('supertest-session')
 
 const app = require('../../app/app')
 
-let authenticatedSession = null
+const authenticatedSession = null
 
 describe('Test Server', function () {
   const taroApp = new app.TaroCardApp()
@@ -23,21 +26,95 @@ describe('Test Server', function () {
     })
   })
 
-  it('test friend request success', function(done) {
-      taroSession.post('/friends/request/1/2').end((err, res) => {
-          assert.equal(res.text, "success")
-      })
-      return done()
-  })
-
-  it('test friend request failure', function(done) {
+  it('test send friend request success', function (done) {
     taroSession.post('/friends/request/1/2').end((err, res) => {
-        assert.equal(res.text, "failure")
+      if (err) { console.log(err) }
+      assert.equal(res.text, 'success')
     })
     return done()
-})
+  })
 
-  
+  it('test send friend request failure', function (done) {
+    taroSession.post('/friends/request/1/2').end((err, res) => {
+      if (err) { console.log(err) }
+      assert.equal(res.text, 'failure')
+    })
+    return done()
+  })
+
+  it('test accept friend request', function (done) {
+    taroSession.post('/friends/request/2/3').end((err, res) => {
+      if (err) { console.log(err) }
+      taroSession.post('/friends/accept/3/2').end((err, res) => {
+        if (err) { console.log(err) }
+        assert.equal(res.text, 'success')
+        return done()
+      })
+    })
+  })
+
+  it('test current friends', function (done) {
+    taroSession.post('/friends/request/4/5').end((err, res) => {
+      if (err) { console.log(err) }
+      taroSession.post('/friends/accept/5/4').end((err, res) => {
+        if (err) { console.log(err) }
+        taroSession.post('/friends/request/4/6').end((err, res) => {
+          if (err) { console.log(err) }
+          taroSession.post('/friends/accept/6/4').end((err, res) => {
+            if (err) { console.log(err) }
+            taroSession.post('/friends/4').end((err, res) => {
+              if (err) { console.log(err) }
+              const friendsArr = JSON.parse(res.text).friend_ids
+              expect(friendsArr).to.be.containingAllOf([5, 6])
+              return done()
+            })
+          })
+        })
+      })
+    })
+  })
+
+  it('test outgoing friends', function (done) {
+    taroSession.post('/friends/request/6/7').end((err, res) => {
+      if (err) { console.log(err) }
+      taroSession.post('/friends/request/6/8').end((err, res) => {
+        if (err) { console.log(err) }
+        taroSession.post('/friends/request/6/9').end((err, res) => {
+          if (err) { console.log(err) }
+          taroSession.post('/friends/request/6/10').end((err, res) => {
+            if (err) { console.log(err) }
+            taroSession.post('/friends/outgoing/6').end((err, res) => {
+              if (err) { console.log(err) }
+              const friendsArr = JSON.parse(res.text).friend_ids
+              expect(friendsArr).to.be.containingAllOf([7, 8, 9, 10])
+              return done()
+            })
+          })
+        })
+      })
+    })
+  })
+
+  it('test incoming friends', function (done) {
+    taroSession.post('/friends/request/7/11').end((err, res) => {
+      if (err) { console.log(err) }
+      taroSession.post('/friends/request/8/11').end((err, res) => {
+        if (err) { console.log(err) }
+        taroSession.post('/friends/request/9/11').end((err, res) => {
+          if (err) { console.log(err) }
+          taroSession.post('/friends/request/10/11').end((err, res) => {
+            if (err) { console.log(err) }
+            taroSession.post('/friends/incoming/11').end((err, res) => {
+              if (err) { console.log(err) }
+              const friendsArr = JSON.parse(res.text).friend_ids
+              expect(friendsArr).to.be.containingAllOf([7, 8, 9, 10])
+              return done()
+            })
+          })
+        })
+      })
+    })
+  })
 
   after((done) => {
     taroApp.server.close(done)
