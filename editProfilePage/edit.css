@@ -21,20 +21,15 @@ html {
     color: #9879C5;
     font-size: 55px;
     font-weight: medium;;
-    border: dotted lime;/**/
+    line-height: 157px;
+    vertical-align: middle;
 }
 
 .page-header img {
     margin-right: 5%;
-    border: dotted black;/**/
-}
-
-.vertical-center {
-    margin: 0;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    /*border: dotted black;/**/
+    line-height: 157px;
+    vertical-align: middle;
 }
 
 #banner {
