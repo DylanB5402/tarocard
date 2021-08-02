@@ -23,7 +23,9 @@ body {
     height: 150px;
     background: white;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
-    z-index: -1;
+    z-index: 1;
+    position: fixed;
+    top: 0px;
 }
 
 .titleCard h1 {
@@ -33,8 +35,8 @@ body {
     height: fit-content;
     width: fit-content;
     position: relative;
-    left: 200px;
-    bottom: 55px;
+    left: 95px;
+    top: 40px;
 }
 
 #back {
@@ -80,7 +82,7 @@ body {
 }
 
 #friendsAll {
-    
+    margin-bottom: 150px;
 }
 
 .friendElement {
@@ -148,4 +150,61 @@ body {
     bottom: 40px;
     left: 80px;
     width: 90%;
+}
+
+.navbar {
+    background-color: #ffffff;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    display: flex; 
+    justify-content:center
+  }
+
+  .navbar img {
+      width: auto;
+      height: 80px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+  }
+
+  #navProfileIcon {
+    margin-bottom: 10px;
+}
+
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    width: 25%;
+    height:160px;
+    
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    background-color: #D4D4D4;
+    /*border: solid #9879C5;*/
+    color: #9879C5;
+  }
+  
+  /* Add a background color to the active link */
+  .navbar a.active {
+    background-color: #9879C5;
+    color: black;
+  }
+  
+  /* Hide the link that should open and close the navbar on small screens */
+  .navbar .icon {
+    display: none;
+  }
+
+
+#navProfileIcon {
+  margin-bottom: 10px;
 }
