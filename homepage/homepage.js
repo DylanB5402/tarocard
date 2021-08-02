@@ -111,6 +111,35 @@ request.onload = function() {
     document.getElementById('cardContainer').appendChild(container);
 }
 
+/* Function to Create a Group Card Div */ 
+
+function createGroupCard(){
+    const link = document.createElement('a'); // creates a link 
+    link.style.textDecoration = 'none'
+    link.href="groupOrder.html";
+    const container = document.createElement('div') // creates div element
+    link.appendChild(container); //this will put the div into the link
+
+    container.classList.add('group-card');
+    container.style.alignItems = "center";
+
+    let groupImage = document.createElement('img');
+    groupImage.src ="../assets/Group Icon.png"; //this should be replaced with variable
+
+    let groupName = document.createElement('h1');
+    groupName.classList.add('fonts');
+    groupName.style.color ='white';
+    groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
+
+    container.appendChild(groupImage);
+    container.appendChild(groupName);
+
+    document.getElementById('cardContainer').appendChild(link);
+}
+
+createGroupCard()
+
+
 /* Open Modal Sheet */
 
 function openModalSheet(){
@@ -143,4 +172,5 @@ document.addEventListener('click',function(event){
         }
     }
 });
+
 
