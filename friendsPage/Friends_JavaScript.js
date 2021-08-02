@@ -19,9 +19,9 @@ function populateFriends(obj) {
     template = document.getElementById('friendsTemp');
     div = template.content.querySelector(".friendElement");
     divHeader = template.content.querySelector("#headerElement")
-    const users = obj.users;
+    //const users = obj.users;
     // used to test different list of users
-    //const users = obj.usersOther
+    const users = obj.usersOther
     currentLetter = users[0]["display name"].charAt(0);
     divHeaderCopy = document.importNode(divHeader, true);
     divHeaderCopy.querySelector("h1").textContent = currentLetter;
