@@ -9,8 +9,6 @@ router.post('/request/:uid/:friendUid', friendController.request)
 
 router.post('/accept/:uid/:friendUid', friendController.accept)
 
-// router.post('/:uid', friendController.currentFriends)
-
 router.get('/current', friendController.currentFriends)
 
 router.post('/incoming/:uid', friendController.incomingFriends)

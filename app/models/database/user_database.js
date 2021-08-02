@@ -64,7 +64,7 @@ class UserDatabase {
   }
 
   /**
-   * 
+   *
    * @returns {Array}
    */
   getAllUsers () {
@@ -144,11 +144,11 @@ class UserDatabase {
     }
   }
 
-  getUserNamesByUID(uid) {
+  getUserNamesByUID (uid) {
     return this.db.prepare(`SELECT username, display_name FROM users WHERE uid = ${uid};`).get()
   }
 
-  getAllProfileData(uid) {
+  getAllProfileData (uid) {
     return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
   }
 

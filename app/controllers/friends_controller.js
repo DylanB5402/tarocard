@@ -4,7 +4,6 @@ const userDatabase = require('../models/database/user_database')
 const friendDb = new friendDatabase.FriendDatabase()
 const userDB = new userDatabase.UserDatabase()
 
-
 /**
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
@@ -40,19 +39,21 @@ exports.accept = (req, res) => {
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    var currentFriends = friendDb.getAllCurrentFriends(uid)
-    var friendArray = []
-    currentFriends.forEach( (friendID) => {
-      var userData = userDB.getUserNamesByUID(uid)
-      friendArray.push({
-        "display name" : userData.display_name,
-        "username" : userData.username,
-        "image url" : ""
-      })
+    const currentFriends = friendDb.getAllCurrentFriends(uid)
+    const friendArray = []
+    currentFriends.forEach((friendID) => {
+      const userData = userDB.getUserNamesByUID(friendID)
+      if (userData != undefined) {
+        friendArray.push({
+          'display name': userData.display_name,
+          username: userData.username,
+          'image url': ''
+        })
+      }
     })
-    res.json({'users' : friendArray, "success" : true})
+    res.json({ users: friendArray, success: true })
   } else {
-    res.json({'users' : [], "success" : false})
+    res.json({ users: [], success: false })
   }
   // res.json({ friend_ids: friendDb.getAllCurrentFriends(uid) })
 }

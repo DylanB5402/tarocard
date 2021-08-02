@@ -4,7 +4,6 @@ const userDB = new userDatabase.UserDatabase()
 const friendDatabase = require('../models/database/friend_database')
 const friendDb = new friendDatabase.FriendDatabase()
 
-
 exports.home = (req, res) => {
   // console.log(req)
   if (req.session.loggedin !== true) {
@@ -46,11 +45,11 @@ exports.debugHome = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.profile = (req, res) => {
-  var uid = req.params.uid
+  const uid = req.params.uid
   // res.send(toString(userDB.getAllUsers()) + '/n' + toString(friendDb.getAllFriendData(uid)))
-  var profileString = ""
+  // const profileString = ''
   // userDB.getUserByUID(uid)
-  res.send(JSON.stringify(userDB.getAllProfileData(uid)) +" <br/>" + friendDb.getAllFriendData(uid))
+  res.send(JSON.stringify(userDB.getAllProfileData(uid)) + ' <br/>' + friendDb.getAllFriendData(uid))
 }
 
 /**
@@ -58,10 +57,10 @@ exports.profile = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.allFriends = (req, res) => {
-  var allFriends = friendDb.getAllTableData()
-  var friendsString = ""
+  const allFriends = friendDb.getAllTableData()
+  let friendsString = ''
   allFriends.forEach((friend) => {
-    friendsString = friendsString + JSON.stringify(friend) + "<br/>"
+    friendsString = friendsString + JSON.stringify(friend) + '<br/>'
   })
   res.send(friendsString)
 }
@@ -71,9 +70,21 @@ exports.allFriends = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.addFriend = (req, res) => {
-  var uid = req.body.uid
-  var friend_uid = req.body.friend_uid
-  var status = req.body.status
+  const uid = req.body.uid
+  const friend_uid = req.body.friend_uid
+  const status = req.body.status
   friendDb.insertFriend(uid, friend_uid, status)
   res.redirect('/debug/friends')
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.addUser = (req, res) => {
+  for (let i = 0; i < req.body.num; i++) {
+    var username = "user" + Math.floor(Math.random() * 999)
+    userDB.insertNewUser(username, "password", username)
+  }
+  res.redirect('/debug/users')
 }

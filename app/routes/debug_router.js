@@ -26,4 +26,6 @@ router.get('/friends', debugController.allFriends)
 
 router.post('/addFriend', debugController.addFriend)
 
+router.post('/adduser', debugController.addUser )
+
 module.exports = router
