@@ -32,6 +32,7 @@
     ],
     "ignore": [
       "app/sample/test_server.js",
+      "static/*",
       "static/friends-page/Friends_JavaScript.js",
       "static/homepage/homepage.js"
     ]

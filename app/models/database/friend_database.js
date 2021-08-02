@@ -114,6 +114,19 @@ class FriendDatabase {
     })
     return friendIdArray
   }
+
+  getAllFriendData(uid) {
+    return this.db.prepare(`SELECT * FROM friends WHERE uid = ${uid};`).all()
+  }
+
+  /**
+   * 
+   * @param {*} uid 
+   * @returns {Array}
+   */
+  getAllTableData(uid) {
+    return this.db.prepare("SELECT * FROM friends;").all()
+  }
 }
 
 const FriendStatus = {

@@ -63,6 +63,10 @@ class UserDatabase {
     console.log(this.getAllUsers())
   }
 
+  /**
+   * 
+   * @returns {Array}
+   */
   getAllUsers () {
     return this.db.prepare('SELECT * FROM users;').all()
   }
@@ -138,6 +142,14 @@ class UserDatabase {
     } else {
       return undefined
     }
+  }
+
+  getUserNamesByUID(uid) {
+    return this.db.prepare(`SELECT username, display_name FROM users WHERE uid = ${uid};`).get()
+  }
+
+  getAllProfileData(uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
   }
 
   /**
