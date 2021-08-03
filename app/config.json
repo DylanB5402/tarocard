@@ -1,6 +1,18 @@
 {
   "db" : "databases/taroCard.db",
 
-  "allowed-ext-image" : "jpeg|jpg|png",
-  "allowed-ext-text" : "txt"
+  "upload" : {
+    "formFileName" : "file",
+    "expressStaticDir" : "static",
+    "uploadPath" : "assets/uploads",
+    "allowedExtImage" : "jpeg|jpg|png",
+    "allowedExtText" : "txt",
+
+    "dir" : {
+      "avatarImage" : "avatar",
+      "bannerImage" : "banner",
+      "drinksImage" : "drinks",
+      "tagsImage" : "tags"
+    }
+  }
 }

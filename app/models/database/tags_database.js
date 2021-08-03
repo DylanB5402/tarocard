@@ -113,10 +113,6 @@ class TagsDatabase {
    * @returns {boolean} true if successful, false if not
    */
   addImage (id, img) {
-    if (!fs.existsSync(img)) {
-      return false
-    }
-
     const stmt = this.db.prepare('UPDATE tags SET tag_img = ? WHERE tag_id = ?')
     const query = stmt.run(img, id)
 
@@ -131,7 +127,7 @@ class TagsDatabase {
     const stmt = this.db.prepare('SELECT * FROM tags')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return JSON.stringify(query)
   }
 
   purgeDb () {

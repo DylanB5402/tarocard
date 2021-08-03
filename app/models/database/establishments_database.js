@@ -33,10 +33,6 @@ class EstablishmentsDatabase {
       * @returns {Integer} Id of the insert, null if none
       */
   addEstablishment (name, desc = '', img = '') {
-    if (!fs.existsSync(img)) {
-      img = ''
-    }
-
     const stmt = this.db.prepare('INSERT INTO establishments (establishment_name, establishment_desc, establishment_img)' +
             'VALUES (?, ?, ?)')
     const query = stmt.run(name, desc, img)
@@ -116,10 +112,6 @@ class EstablishmentsDatabase {
    * @returns {boolean} true if successful, false if not
    */
   addImage (id, img) {
-    if (!fs.existsSync(img)) {
-      return false
-    }
-
     const stmt = this.db.prepare('UPDATE establishments SET establishment_img = ? WHERE establishment_id = ?')
     const query = stmt.run(img, id)
 
@@ -134,7 +126,7 @@ class EstablishmentsDatabase {
     const stmt = this.db.prepare('SELECT * FROM establishments')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return JSON.stringify(query)
   }
 
   purgeDb () {
