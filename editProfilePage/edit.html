@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="edit.css">
+    <!--<link rel="stylesheet" href="edit.css">-->
+    <link rel="stylesheet" href="..\temp.css">
 </head>
 
 <div class="page-header">
@@ -19,7 +20,7 @@
 <img src="coolWallpaper.png" id="banner">
 <div class="edit">
     <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
-    <form action="edit.html" method="POST">
+    <form action="edit.html" method="POST" id="edit">
         <!--
             Values will be whatever the user's current username/bio/etc is
         -->
@@ -36,7 +37,7 @@
             type="text"
             name="username"
             id="username"
-            value="[placeholder]">
+            value="[@usernamer]">
         <br>
 
         <label for="bio">Bio</label><br>
