@@ -742,7 +742,7 @@ CSS page for Notifications
 #accept {
     height: 80px;
     width: 210px;
-    background-image: url(../assets/checkmark.png);
+    background-image: url(./assets/checkmark.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60px 40px;
@@ -764,7 +764,7 @@ CSS page for Notifications
 #deny {
     height: 40px;
     width: 40px;
-    background-image: url(../assets/denyX.png);
+    background-image: url(./assets/denyX.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 40px 40px;
