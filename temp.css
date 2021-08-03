@@ -420,8 +420,20 @@ li:last-child{
     font-family: 'Roboto',sans-serif;
 }
 
+.card-template h1{
+    width: 75%;
+    font-size: 42px;
+
+}
+
 .card-template h2{
     width: 75%;
+    font-size: 32px;
+    font-weight: 100;
+}
+.card-template h2{
+    width: 75%;
+    font-size: 28px;
 
 }
 
@@ -671,7 +683,7 @@ html {
 #login-button {
     margin: 10px;
     margin-top: 40px;
-    width: 602px;
+    width: 622px;
     height: 80px;
     border-radius: 3px;
     border-width: 2px;
