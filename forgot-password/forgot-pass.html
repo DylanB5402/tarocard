@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
 <html>
     <head>
-        <link rel="stylesheet" href="./forgot-pass.css">
+        <link rel="stylesheet" href="..\temp.css">
         <title> Taro Cards </title>
+        <link rel="icon" href="..\assets\TaroCardTransparent 1.png">
     </head>
-    <body> 
+    <body class="forgot"> 
             <div class="appName">
                 <h1> Taro Cards </h1>
                 <img src="../assets/Lock Icon.png">
                 <p> Enter your email and we'll send you a link to get back into your account.</p>
             </div>
-
-            <div class="userInput">
+            <div class="userInfo">
                 <form action="/action_page.php" method="get">
-                    <input type="text">
+                    <input type="text" class="userInput">
                     <button> Send Login Link </button>
                 </form>
             </div>
+           
             <div class="container">
                 <hr style="width: 50%; height: 0.1px;">
                 <p style="color:white" id="or"> or </p>

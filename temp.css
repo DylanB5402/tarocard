@@ -114,9 +114,9 @@ input[type=submit] {
 
 
 /* FORGOT-PASS START */
-body{
+.forgot {
     background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
-    height:1vh;
+    height:100vh;
     display: flex;
     flex-direction: column;
 }
@@ -135,7 +135,7 @@ body{
 .appName p{
     width: auto;
     margin: 40px;
-    font-size: 30px;
+    font-size: 35px;
     color: white;
     font-family: 'Robot',sans-serif;
 }
@@ -146,9 +146,10 @@ body{
     text-align: center;
 }
 
+
 .userInput input{
-    width: 50vw;
-    height: 3vw;
+    width: 600px;
+    height: 80px;
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
     color:white;
@@ -160,6 +161,7 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: 2vh;
 }
+
 button {
     width: 52vw;
     height: 4vh;
@@ -597,7 +599,7 @@ li:last-child{
 /* INDEX START */
 .login {
     background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
-    height:1vh;
+    height:100vh;
     display: flex;
     flex-direction: column;
 }
@@ -623,36 +625,65 @@ html {
     height: 250px;
     width:  250px;
 }
-
+/*
 .userInput {
     border-radius: 10px;
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid white;
     color:white;
-    padding: 15px;
-    width: 50vw;
-    height: 3vw;
+    width: 600px;
+    height: 80px;
     background-color: rgba(255, 255, 255, 0.15);
     position: relative;
     margin: 10px;
-    /*font-family: 'Roboto', sans-serif;*/
-    font-size: 2vh;
+    font-size: 34px;
+
+    border: dotted green;
+}*/
+
+#userEmail, #userPassword {
+    border-radius: 10px;
+    border: 1px solid white;
+    color:white;
+    width: 600px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.15);
+    position: relative;
+    margin: 10px;
+    margin-bottom: 40px;
+    font-size: 35px;
+    text-align: left;
+    padding-left: 20px;
 }
+
+#userEmail::placeholder, #userPassword::placeholder {
+    color: white;
+    text-align: left;
+    /*padding-left: 20px;*/
+
+}
+
 
 .userInfo form{
-    text-align: center;
+    align-items: center;
 }
 
+
 #login-button {
-    width: 52vw;
-    height: 4vh;
+    margin: 10px;
+    margin-top: 40px;
+    width: 602px;
+    height: 80px;
     border-radius: 3px;
     border-width: 2px;
-    background-color: rgba(0,0,0,0.02);
-    border-color:white;
+    border:solid 1px white;
     color: white;
-    margin: 10px;
-    font-size: 2vh;
-    /*font-family: 'Roboto', sans-serif;*/
+    font-size: 35px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+#login {
+    margin: 0px;
 }
 
 .userInfo{
@@ -661,7 +692,9 @@ html {
     align-items: center;
     position: relative;
     top:15vh;
+    text-align: center;
 }
+
 #noAcc {
     color: white;
     font-weight: normal;
@@ -693,9 +726,10 @@ hr {
     padding: 0.05px;
     margin: 0.01px;
     height: 0px;
+    width: 420px;
 }
 
-#or{
+#or {
     padding: 1px;
     margin: 5px;
     font-size: 2vh;
@@ -712,8 +746,8 @@ h3 a{
     text-decoration: none;
 }
 
-#login-logo img{
-    width: 100px;
+#login-logo {
+    width: 315px;
     height: auto;
 }
 
