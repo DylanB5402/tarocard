@@ -14,7 +14,7 @@
     "test": "mocha",
     "start": "mkdir databases; node server.js",
     "style": "standard --fix",
-    "clean": "rm databases/*"
+    "clean": "rm databases/*; rm connect-session-knex.sqlite"
   },
   "devDependencies": {
     "chai": "^4.3.4",

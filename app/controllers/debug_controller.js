@@ -37,7 +37,8 @@ exports.users = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.debugHome = (req, res) => {
-  res.send('taco')
+  // res.send('taco')
+  res.redirect('/debug/debug.html')
 }
 
 /**

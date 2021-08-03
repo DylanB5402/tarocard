@@ -28,6 +28,9 @@ class FriendDatabase {
    * @returns info (see better-sqlite3 docs for .run()) if successful, undefined otherwise if a friendship status between the two users already exists
    */
   insertFriend (uid, friendUid, status) {
+    if (uid === friendUid) {
+      return undefined
+    }
     const friendStatus = this.getFriendStatus(uid, friendUid)
     if (friendStatus === undefined) {
       return this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${status}');`).run()

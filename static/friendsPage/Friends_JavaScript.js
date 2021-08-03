@@ -2,18 +2,21 @@
 const body = document.querySelector('body')
 
 const request = new XMLHttpRequest()
-request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true)
-// send request to '/friends/
+// request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true)
+// send request to '/friends/current/
+request.open('GET', 'http://localhost:3000/friends/current', true)
 request.responseType = 'json'
 request.send()
 
 request.onload = function () {
   const users = request.response
+  console.log(users)
   populateFriends(users)
 }
 
 // function is used to fill page with list of friends from a json file.
 function populateFriends (obj) {
+  console.log(obj)
   let template, divAll, div, divCopy, divHeader, divHeaderCopy, currentLetter, char
   divAll = document.createElement('div')
   divAll.id = 'friendsAll'
@@ -22,7 +25,9 @@ function populateFriends (obj) {
   divHeader = template.content.querySelector('#headerElement')
   // const users = obj.users;
   // used to test different list of users
-  const users = obj.usersOther
+  // const users = obj.usersOther
+  const users = obj.users
+  // currentLetter = users[0]['display name'].charAt(0)
   currentLetter = users[0]['display name'].charAt(0)
   divHeaderCopy = document.importNode(divHeader, true)
   divHeaderCopy.querySelector('h1').textContent = currentLetter
