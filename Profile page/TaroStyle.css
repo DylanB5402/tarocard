@@ -266,3 +266,6 @@ body {
     width: 260px;
 }
 
+button #edit-profile {
+    right: 100px;
+}
