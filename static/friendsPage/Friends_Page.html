@@ -24,7 +24,8 @@
                 <script>
                     $(document).ready(function(){
                         $("#searchBarButton").click(function(){        
-                            $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                            // $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                            $.post('/friends/search', 
                             {
                                 "string": $("#searchBar").val()
                             }
@@ -36,7 +37,8 @@
 
                     $(document).ready(function(){
                         $("#searchBarButton").keypress(function(){        
-                            $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                            // $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                            $.post('/friends/search', 
                             {
                                 "string": $("#searchBar").val()
                             }

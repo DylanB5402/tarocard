@@ -84,8 +84,8 @@ exports.addFriend = (req, res) => {
  */
 exports.addUser = (req, res) => {
   for (let i = 0; i < req.body.num; i++) {
-    var username = "user" + Math.floor(Math.random() * 999)
-    userDB.insertNewUser(username, "password", username)
+    const username = 'user' + Math.floor(Math.random() * 999)
+    userDB.insertNewUser(username, 'password', username)
   }
   res.redirect('/debug/users')
 }

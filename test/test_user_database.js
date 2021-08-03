@@ -78,5 +78,19 @@ describe('Testing UserDatabase', function () {
     userDb.insertNewUser('user11@email.com', 'password', 'user11')
     assert.isNumber(userDb.selectUserId('user11@email.com'))
   })
+
+  it('Test searchDatabase', function() {
+    userDb.insertNewUser('search_user1@email.com', 'password', 'search_user1')
+    userDb.insertNewUser('search_user2@email.com', 'password', 'search_user2')
+    userDb.insertNewUser('search_user3@email.com', 'password', 'search_user3')
+    userDb.insertNewUser('search_user4@email.com', 'password', 'search_user4')
+    // console.log(userDb.searchDatabase('search'))
+    var users = userDb.searchDatabase('search')
+    var usersArr = []
+    users.forEach( (user) => {
+      usersArr.push(user.username)
+    })
+    expect(usersArr).to.be.containingAllOf(['search_user1', 'search_user2','search_user3','search_user4'])
+  })
 }
 )

@@ -15,4 +15,5 @@ router.post('/incoming/:uid', friendController.incomingFriends)
 
 router.post('/outgoing/:uid', friendController.outgoingFriends)
 
+router.post('/search', friendController.searchFriends)
 module.exports = router

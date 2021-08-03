@@ -4,7 +4,7 @@ const body = document.querySelector('body')
 const request = new XMLHttpRequest()
 // request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true)
 // send request to '/friends/current/
-request.open('GET', 'http://localhost:3000/friends/current', true)
+request.open('GET', '/friends/current', true)
 request.responseType = 'json'
 request.send()
 

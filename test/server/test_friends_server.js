@@ -53,27 +53,6 @@ describe('Test Server', function () {
     })
   })
 
-  it('test current friends', function (done) {
-    taroSession.post('/friends/request/4/5').end((err, res) => {
-      if (err) { console.log(err) }
-      taroSession.post('/friends/accept/5/4').end((err, res) => {
-        if (err) { console.log(err) }
-        taroSession.post('/friends/request/4/6').end((err, res) => {
-          if (err) { console.log(err) }
-          taroSession.post('/friends/accept/6/4').end((err, res) => {
-            if (err) { console.log(err) }
-            taroSession.post('/friends/4').end((err, res) => {
-              if (err) { console.log(err) }
-              const friendsArr = JSON.parse(res.text).friend_ids
-              expect(friendsArr).to.be.containingAllOf([5, 6])
-              return done()
-            })
-          })
-        })
-      })
-    })
-  })
-
   it('test outgoing friends', function (done) {
     taroSession.post('/friends/request/6/7').end((err, res) => {
       if (err) { console.log(err) }

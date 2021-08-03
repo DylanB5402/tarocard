@@ -46,8 +46,9 @@ exports.currentFriends = (req, res) => {
       if (userData != undefined) {
         friendArray.push({
           'display name': userData.display_name,
-          username: userData.username,
-          'image url': ''
+          'username' : userData.username,
+          'image url': '',
+          'id' : friendID
         })
       }
     })
@@ -55,7 +56,6 @@ exports.currentFriends = (req, res) => {
   } else {
     res.json({ users: [], success: false })
   }
-  // res.json({ friend_ids: friendDb.getAllCurrentFriends(uid) })
 }
 
 /**
@@ -86,4 +86,13 @@ exports.friendsPage = (req, res) => {
   } else {
     res.redirect('/')
   }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.searchFriends = (req, res) => {
+  console.log(req.body)
+  res.send("687")
 }
