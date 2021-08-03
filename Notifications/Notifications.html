@@ -18,16 +18,10 @@
                 <img>
                 <h2></h2>
                 <h3></h3>
+                <button id="accept" type="button"></button>
+                <button id="deny" type="button"></button>
             </div>
         </template>
-
-        <div class="requestElement">
-            <img src="https://pa1.narvii.com/6465/71f4eb25d8686d2144351672dba27948435e71f2_hq.gif">
-            <h2>Jonathan</h2>
-            <h3>@IbukiRocks</h3>
-            <button id="accept" type="button"></button>
-            <button id="deny" type="button"></button>
-        </div>
 
         <div class="navbar" id="myNavbar">
             <a href="#"></i>
@@ -52,7 +46,6 @@
     <script>
         const body = document.querySelector('body');
 
-        /*
         let request = new XMLHttpRequest();
         request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
         request.responseType = 'json';
@@ -62,7 +55,6 @@
             const users = request.response;
             populateFriendRequests(users);
         }
-        */
 
         // function is used to fill page with list of friends from a json file.
         function populateFriendRequests(obj) {
