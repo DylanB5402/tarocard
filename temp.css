@@ -1,7 +1,7 @@
-/* EDIT START */
 * {
     font-family: "Roboto";
 }
+/* EDIT START */
 
 .page-header {
     background-color: white;
@@ -521,7 +521,6 @@ li:last-child{
     margin-left: auto;
     margin-right: auto;
     background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
-
 }
 
 
@@ -597,7 +596,7 @@ li:last-child{
 
 
 /* INDEX START */
-body{
+.login {
     background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
     height:1vh;
     display: flex;
@@ -636,7 +635,7 @@ html {
     background-color: rgba(255, 255, 255, 0.15);
     position: relative;
     margin: 10px;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     font-size: 2vh;
 }
 
@@ -654,7 +653,7 @@ html {
     color: white;
     margin: 10px;
     font-size: 2vh;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
 }
 
 
@@ -671,7 +670,7 @@ html {
     font-size: 2vh;
     text-align: left;
     width: 55vw;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     text-decoration: none;
 }
 
@@ -681,7 +680,7 @@ html {
     font-size: 2vh;
     text-align: left;
     width: 55vw;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     text-decoration: none;
 }
 .container{
@@ -708,16 +707,16 @@ hr {
 h3 a{
     color: white;
     font-weight: normal;
-    font-family: 'Roboto', sans-serif;   
+    /*font-family: 'Roboto', sans-serif;*/   
     font-style: normal;
     line-height: 46px;
     font-size: 2vh;
     text-decoration: none;
 }
 
-img{
+#login-logo img{
     width: 100px;
-    height: 100px;
+    height: auto;
 }
 
 /* INDEX END */
