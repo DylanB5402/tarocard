@@ -12,28 +12,42 @@
 </head>
 
 <div class="page-header">
-    <div class="vertical-center">
-        <img src="..\assets\Back.png" id="back">
-        <span>Edit Profile</span>
-    </div>
+    <img src="..\assets\Back.png" id="back">
+    <span>Edit Profile</span>
 </div>
 
 <img src="coolWallpaper.png" id="banner">
 <div class="edit">
     <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
     <form action="edit.html" method="POST">
+        <!--
+            Values will be whatever the user's current username/bio/etc is
+        -->
         <label for="display-name">Display Name</label><br>
-        <input type="text" name="display-name" id="display-name">
+        <input 
+            type="text"
+            name="display-name"
+            id="display-name"
+            value="[placeholder]">
         <br>
 
         <label for="username">Username</label><br>
-        <input type="text" name="username" id="username">
+        <input
+            type="text"
+            name="username"
+            id="username"
+            value="[placeholder]">
         <br>
 
         <label for="bio">Bio</label><br>
-        <textarea id="bio" name="bio" rows="10%" cols="100%"></textarea>
+        <textarea
+            id="bio"
+            name="bio"
+            maxlength="150"
+            value="[placeholder]">
+        </textarea>
         <br>
 
-        <input type="submit" value="Save changes">
+        <input type="submit" id="save" value="Save changes">
     </form>
 </div>
