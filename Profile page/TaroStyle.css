@@ -254,5 +254,15 @@ body {
   margin-bottom: 10px;
 }
 
-
+#edit-profile {
+    font-size: 32px;
+    font-weight: medium;
+    border: solid 3px #9879C5;
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
 
