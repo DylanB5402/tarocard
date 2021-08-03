@@ -16,9 +16,9 @@ request.onload = function() {
 function populateFriends(obj) {
     let template, divAll, div, divCopy, divHeader, divHeaderCopy, currentLetter, char;
     divAll = document.createElement("div");
-    divAll.id = "friendsAll";
-    template = document.getElementById('friendsTemp');
-    div = template.content.querySelector(".friendElement");
+    divAll.id = "UsersAll";
+    template = document.getElementById('UsersTemp');
+    div = template.content.querySelector(".UserElement");
     divHeader = template.content.querySelector("#headerElement")
     const users = obj.users;
     currentLetter = users[0]["display name"].charAt(0);
@@ -44,5 +44,5 @@ function populateFriends(obj) {
 }
 
 function afterSearchDisplay() {
-    document.getElementById("friendsAll").style.display = "none";
+    document.getElementById("UsersAll").style.display = "none";
 }
