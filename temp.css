@@ -826,7 +826,7 @@ body {
     background-color:rgb(255, 255, 255);
 }
 
-#editButton {
+#edit-profile {
     text-align: center;
     viewport-fit: 50px;
     width: 300px;
@@ -841,6 +841,11 @@ body {
     padding-bottom: 10px;
     top: 60px;
     right: 100px;
+}
+
+#edit-profile a {
+    text-decoration: none;
+    color:#9879C5;
 }
 
 
@@ -892,7 +897,6 @@ body {
 #userStats{
     align-items: center;
     width: max-content;
-
 }
 
 #userStats ul {
