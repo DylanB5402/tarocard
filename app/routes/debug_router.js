@@ -20,6 +20,8 @@ router.get('/signout', debugController.signout)
 
 router.get('/users', debugController.users)
 
+router.get('/users/json', debugController.usersJSON)
+
 router.get('/profile/:uid', debugController.profile)
 
 router.get('/friends', debugController.allFriends)
@@ -27,5 +29,7 @@ router.get('/friends', debugController.allFriends)
 router.post('/addFriend', debugController.addFriend)
 
 router.post('/adduser', debugController.addUser)
+
+// router.get('/populateUsers', debugController.populateUsers)
 
 module.exports = router

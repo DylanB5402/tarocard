@@ -160,11 +160,11 @@ class UserDatabase {
   }
 
   /**
-   * 
-   * @param {*} username 
+   *
+   * @param {*} username
    * @returns {Array}
    */
-  searchDatabase(username) {
+  searchDatabase (username) {
     return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
   }
 }

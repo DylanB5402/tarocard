@@ -31,14 +31,15 @@ describe('Test Server', function () {
     })
   })
 
-  it('test friends list', function(done) {
+  it('test friends list', function (done) {
     taroSession.post('/signup').send(
-        {
-          email: 'user2@email.com',
-          password: 'password',
-          repeatPassword: 'password'
-        }).end(function (err, res) {     
-        })
+      {
+        email: 'user2@email.com',
+        password: 'password',
+        repeatPassword: 'password'
+      }).end(function (err, res) {
+      console.log(err)
+    })
     //   authenticatedSession.get('/friends/current')
   })
 

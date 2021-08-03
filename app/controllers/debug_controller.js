@@ -29,7 +29,21 @@ exports.signout = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.users = (req, res) => {
-  res.send(userDB.getAllUsers())
+  res.json({ users: userDB.getAllUsers() })
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.usersJSON = (req, res) => {
+  // res.json({ 'users' : userDB.getAllUsers()})
+  const allUsers = userDB.getAllUsers()
+  const userJSON = {}
+  allUsers.forEach((user) => {
+    userJSON[user.username] = user.uid
+  })
+  res.json(userJSON)
 }
 
 /**

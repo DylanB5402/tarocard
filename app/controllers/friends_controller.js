@@ -43,12 +43,12 @@ exports.currentFriends = (req, res) => {
     const friendArray = []
     currentFriends.forEach((friendID) => {
       const userData = userDB.getUserNamesByUID(friendID)
-      if (userData != undefined) {
+      if (userData !== undefined) {
         friendArray.push({
           'display name': userData.display_name,
-          'username' : userData.username,
+          username: userData.username,
           'image url': '',
-          'id' : friendID
+          id: friendID
         })
       }
     })
@@ -94,5 +94,5 @@ exports.friendsPage = (req, res) => {
  */
 exports.searchFriends = (req, res) => {
   console.log(req.body)
-  res.send("687")
+  res.send('687')
 }
