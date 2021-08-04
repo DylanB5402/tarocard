@@ -10,7 +10,7 @@ request.send()
 
 request.onload = function () {
   const users = request.response
-  console.log(users)
+  // console.log(users)
   populateFriends(users)
 }
 

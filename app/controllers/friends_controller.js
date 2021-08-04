@@ -90,6 +90,23 @@ exports.friendsPage = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.searchFriends = (req, res) => {
-  console.log(req.body)
-  res.send('687')
+  // console.log(req.body)
+  var search = req.body.string
+  // res.send('687')
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const friendArray = []
+    const currentFriends = friendDb.searchFriends(uid, search)
+    currentFriends.forEach((friend) => {
+      friendArray.push({
+        'display name': friend.display_name,
+        username: friend.username,
+        'image url': '',
+        id: friend.uid
+      })
+    })
+    res.json({ users: friendArray, success: true })
+  } else {
+    res.json({ users: [], success: false })
+  }
 }

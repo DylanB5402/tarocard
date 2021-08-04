@@ -151,6 +151,15 @@ class FriendDatabase {
   getFriendDataByUid (uid) {
     return this.db.prepare(`SELECT users2.uid, users2.username, users2.display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' ORDER BY users2.username;`).all()
   }
+
+  /**
+   * Search for a user's friends which start with the given username string
+   * @param {*} uid 
+   * @param {*} username 
+   */
+  searchFriends(uid, username) {
+    return this.db.prepare(`SELECT users2.uid, users2.username, users2.display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' AND users2.username LIKE '${username}%' ORDER BY users2.username;`).all()
+  }
 }
 
 const FriendStatus = {

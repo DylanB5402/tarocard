@@ -30,7 +30,9 @@
                                 "string": $("#searchBar").val()
                             }
                             ,function(data, status, xhr) {
-                                searchFriends(data);
+                                console.log(data)
+                                // searchFriends(data);
+                                populateFriends(data)
                             })
                         });
                     });

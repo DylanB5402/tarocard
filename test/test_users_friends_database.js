@@ -30,13 +30,16 @@ describe('Testing UserDatabase and FriendDatabase', function () {
     userIds.push(userDb.insertNewUser('user3', 'password', 'user2'))
     userIds.push(userDb.insertNewUser('user2', 'password', 'user3'))
     userIds.push(userDb.insertNewUser('user1', 'password', 'user4'))
+    userIds.push(userDb.insertNewUser('user1', 'password', 'user5'))
     friendDb.addCurrentFriend(userIds[0], userIds[1])
     friendDb.addCurrentFriend(userIds[0], userIds[2])
     friendDb.addCurrentFriend(userIds[0], userIds[3])
     const currentFriends = friendDb.getFriendDataByUid(userIds[0])
-    console.log(currentFriends)
-    // currentFriends.forEach( (friend))
+    var friendUsernames = []
+    currentFriends.forEach( (friend) => {
+        friendUsernames.push(friend.username)
+    })
+    expect(friendUsernames).to.be.containingAllOf(['user2', 'user3', 'user4'])
 
-    assert.equal(2, 687)
   })
 })
