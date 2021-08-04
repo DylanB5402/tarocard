@@ -86,9 +86,10 @@ exports.allFriends = (req, res) => {
  */
 exports.addFriend = (req, res) => {
   const uid = req.body.uid
-  const friend_uid = req.body.friend_uid
-  const status = req.body.status
-  friendDb.insertFriend(uid, friend_uid, status)
+  const friendUid = req.body.friend_uid
+  // const status = req.body.status
+  // friendDb.insertFriend(uid, friend_uid, status)
+  friendDb.addCurrentFriend(uid, friendUid)
   res.redirect('/debug/friends')
 }
 

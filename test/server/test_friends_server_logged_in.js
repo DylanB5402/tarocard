@@ -32,7 +32,7 @@ describe('Test Server', function () {
   })
 
   it('test friends list', function (done) {
-    taroSession.post('/signup').send(
+    authenticatedSession.post('/signup').send(
       {
         email: 'user2@email.com',
         password: 'password',

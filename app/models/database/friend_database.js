@@ -130,6 +130,18 @@ class FriendDatabase {
   getAllTableData (uid) {
     return this.db.prepare('SELECT * FROM friends;').all()
   }
+
+  /**
+   * meant only for debug/dev purposes
+   * @param {*} uid
+   * @param {*} friendUid
+   */
+  addCurrentFriend (uid, friendUid) {
+    if (uid !== friendUid) {
+      this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
+      this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
+    }
+  }
 }
 
 const FriendStatus = {
