@@ -28,14 +28,16 @@ function populateFriends (obj) {
   // const users = obj.usersOther
   const users = obj.users
   // currentLetter = users[0]['display name'].charAt(0)
-  currentLetter = users[0]['display name'].charAt(0)
+  // currentLetter = users[0]['display name'].charAt(0)
+  currentLetter = users[0]['display name'].charAt(0).toUpperCase()
   divHeaderCopy = document.importNode(divHeader, true)
   divHeaderCopy.querySelector('h1').textContent = currentLetter
   divAll.appendChild(divHeaderCopy)
   for (let i = 0; i < users.length; i++) {
     divCopy = document.importNode(div, true)
     // char refers to first letter of current users display name
-    char = users[i]['display name'].charAt(0)
+    // char = users[i]['display name'].charAt(0)
+    char =  users[i]['display name'].charAt(0).toUpperCase()
     if (currentLetter !== char) {
       currentLetter = char
       divHeaderCopy = document.importNode(divHeader, true)
