@@ -128,8 +128,9 @@ input[type=submit] {
 
 .appName {
     width: auto;
-    height:auto;
+    height: 100%;
     text-align: center;
+    align-items: center;
 }
 
 .appName p{
@@ -138,84 +139,57 @@ input[type=submit] {
     font-size: 35px;
     color: white;
 }
-
-.forgot-form {
-    width: auto;
-    height: auto;
+.forgot form{
     text-align: center;
+    align-items: center;
+    margin: 0%;
+}
+.forgot form input {
+    text-align: left;
+    align-self: center;
+     display: block;
+     margin: auto;
 }
 
-
-.forgot-form input{
-    width: 600px;
+.forgot button {
+    margin: auto;
+    margin-top: 40px;
+    width: 622px;
     height: 80px;
-    border-radius: 10px;
-    border: 2px solid rgb(255, 255, 255);
-    color:white;
-    padding: 15px;
-    width: 50vw;
-    height: 3vw;
-    background-color: rgba(0,0,0,0.15);
-    margin: 10px;
-    font-size: 2vh;
-}
-
-button {
-    width: 52vw;
-    height: 4vh;
+    display: block;
     border-radius: 3px;
     border-width: 2px;
-    background-color: rgba(0,0,0,0.02);
-    border-color:white;
+    border:solid 1px white;
+    text-align: center;
     color: white;
-    margin: 10px;
-    font-size: 2vh;
+    font-size: 35px;
+    border-radius: 10px;
+    background-color: transparent;
 }
 
-.container{
-    position: relative;
+.forgot .container{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    width: auto;
 }
 
-hr {
-    padding: 0.05px;
-    margin: 0.01px;
-    height: 0px;
-}
-
-#or{
-    padding: 1px;
-    margin: 5px;
-    font-size: 4vh;
-}
-
-#newAcc {
-    bottom: 1%;
-    position: relative;
-}
-
-#newAcc,#back2Login{
-    text-align: center;
-}
-#newAcc a{
-    width: auto;
-    height: auto;
-    text-align: center;
-    color: white;
+.back2base {
     text-decoration: none;
-}
-#back2Login a{
-    width: auto;
-    height: auto;
-    text-align: center;
-    position: relative;
-    top: 25vh;
     color: white;
-    text-decoration: none;
+    font-size: 25px;
+    font-weight: 100;
+    object-fit: center;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 18px;
+    margin-top: 10px;
 }
+
+.forgot h1{
+    margin-top: 10px;
+}
+
+
+
 /* FORGOT-PASS END */
 
 /* HOME START */
