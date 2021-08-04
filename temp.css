@@ -139,7 +139,7 @@ input[type=submit] {
     font-size: 35px;
     color: white;
 }
-.forgot form{
+.landing form{
     text-align: center;
     align-items: center;
     margin: 0%;
@@ -151,7 +151,7 @@ input[type=submit] {
      margin: auto;
 }
 
-.forgot button {
+#landing-button {
     margin: auto;
     margin-top: 40px;
     width: 622px;
@@ -167,7 +167,7 @@ input[type=submit] {
     background-color: transparent;
 }
 
-.forgot .container{
+.landing .container{
     display: flex;
     flex-direction: row;
 }
@@ -183,12 +183,6 @@ input[type=submit] {
     padding: 18px;
     margin-top: 10px;
 }
-
-.forgot h1{
-    margin-top: 10px;
-}
-
-
 
 /* FORGOT-PASS END */
 
@@ -615,20 +609,6 @@ html {
     height: 250px;
     width:  250px;
 }
-/*
-.userInput {
-    border-radius: 10px;
-    border: 2px solid white;
-    color:white;
-    width: 600px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.15);
-    position: relative;
-    margin: 10px;
-    font-size: 34px;
-
-    border: dotted green;
-}*/
 
 #userEmail, #userPassword, #confirmPass, #accRecovery {
     border-radius: 10px;
@@ -651,8 +631,6 @@ html {
 #accRecovery::placeholder {
     color: white;
     text-align: left;
-    /*padding-left: 20px;*/
-
 }
 
 
@@ -664,22 +642,6 @@ html {
 #forgot-pass {
     bottom: 100px;
 }
-
-#landing-button {
-    margin: 10px;
-    margin-top: 40px;
-    width: 622px;
-    height: 80px;
-    border-radius: 3px;
-    border-width: 2px;
-    border:solid 1px white;
-    color: white;
-    font-size: 35px;
-    border-radius: 10px;
-    background-color: transparent;
-    object-position: center;
-}
-
 
 
 #login {
