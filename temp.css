@@ -121,7 +121,7 @@ input[type=submit] {
     flex-direction: column;
 }
 
-.appName h1 {
+#title-landing {
     font-family: 'Chewy';
     font-size: 5vh;
 }
@@ -630,7 +630,7 @@ html {
     border: dotted green;
 }*/
 
-#userEmail, #userPassword, #confirmPass {
+#userEmail, #userPassword, #confirmPass, #accRecovery {
     border-radius: 10px;
     border: 1px solid white;
     color:white;
@@ -647,7 +647,8 @@ html {
 
 #userEmail::placeholder,
 #userPassword::placeholder,
-#confirmPass::placeholder {
+#confirmPass::placeholder,
+#accRecovery::placeholder {
     color: white;
     text-align: left;
     /*padding-left: 20px;*/
@@ -676,6 +677,7 @@ html {
     font-size: 35px;
     border-radius: 10px;
     background-color: transparent;
+    object-position: center;
 }
 
 
