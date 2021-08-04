@@ -39,18 +39,15 @@ exports.accept = (req, res) => {
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const currentFriends = friendDb.getAllCurrentFriends(uid)
     const friendArray = []
-    currentFriends.forEach((friendID) => {
-      const userData = userDB.getUserNamesByUID(friendID)
-      if (userData !== undefined) {
-        friendArray.push({
-          'display name': userData.display_name,
-          username: userData.username,
-          'image url': '',
-          id: friendID
-        })
-      }
+    const currentFriends = friendDb.getFriendDataByUid(uid)
+    currentFriends.forEach((friend) => {
+      friendArray.push({
+        'display name': friend.display_name,
+        username: friend.username,
+        'image url': '',
+        id: friend.uid
+      })
     })
     res.json({ users: friendArray, success: true })
   } else {

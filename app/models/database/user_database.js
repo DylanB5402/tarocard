@@ -9,7 +9,7 @@ class UserDatabase {
    */
   constructor (database) {
     if (database === undefined) {
-      console.log(config.db)
+      // console.log(config.db)
       this.db = new Database(config.db)
     } else {
       // this.db = new Database(database)

@@ -142,6 +142,15 @@ class FriendDatabase {
       this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
     }
   }
+
+  /**
+   * Return the id, username, and display_name of all of a users's friends
+   * @param {*} uid
+   * @returns {Array}
+   */
+  getFriendDataByUid (uid) {
+    return this.db.prepare(`SELECT users2.uid, users2.username, users2.display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' ORDER BY users2.username;`).all()
+  }
 }
 
 const FriendStatus = {

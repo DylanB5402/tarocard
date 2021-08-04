@@ -9,7 +9,7 @@ const friendDatabase = require('../app/models/database/friend_database')
 const db = new Database('databases/test_friends.db')
 
 /**
- * @type {! FriendDatabase}
+ * @type {FriendDatabase}
  */
 const friendDb = new friendDatabase.FriendDatabase(db)
 friendDb.deleteAllTableEntires()

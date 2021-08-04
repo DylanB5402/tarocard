@@ -6,7 +6,7 @@ const session = require('supertest-session')
 
 const app = require('../../app/app')
 
-const authenticatedSession = null
+let authenticatedSession = null
 
 describe('Test Server', function () {
   const taroApp = new app.TaroCardApp()

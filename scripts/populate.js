@@ -29,7 +29,7 @@ axios.get('http://localhost:3000/debug/users/json').then((res) => {
     axios.post('http://localhost:3000/debug/addFriend',
       {
         uid: userIdJSON.Olivia,
-        friend_uid: userIdJSON[name],
+        friend_uid: userIdJSON[name]
         // status: 'friends'
       }).then((res) => {
     }).catch((err) => {
@@ -39,15 +39,13 @@ axios.get('http://localhost:3000/debug/users/json').then((res) => {
   for (let i = 1; i < names.length; i++) {
     console.log(names[i])
     axios.post('http://localhost:3000/debug/addFriend',
-    {
-      uid: userIdJSON.Emma,
-      friend_uid: userIdJSON[names[i]],
+      {
+        uid: userIdJSON.Emma,
+        friend_uid: userIdJSON[names[i]]
       // status: 'friends'
-    }).then((res) => {
-  }).catch((err) => {
-    console.log(err)
-  })
+      }).then((res) => {
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 })
-
-
