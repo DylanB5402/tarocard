@@ -586,7 +586,7 @@ li:last-child{
 
 
 /* INDEX START */
-.login {
+.landing {
     background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
     height:100vh;
     display: flex;
@@ -595,6 +595,7 @@ li:last-child{
 
 html {
     min-height: 100%;
+    background-color: #EFEFEF;
 }
 
 
@@ -629,7 +630,7 @@ html {
     border: dotted green;
 }*/
 
-#userEmail, #userPassword {
+#userEmail, #userPassword, #confirmPass {
     border-radius: 10px;
     border: 1px solid white;
     color:white;
@@ -644,7 +645,9 @@ html {
     padding-left: 20px;
 }
 
-#userEmail::placeholder, #userPassword::placeholder {
+#userEmail::placeholder,
+#userPassword::placeholder,
+#confirmPass::placeholder {
     color: white;
     text-align: left;
     /*padding-left: 20px;*/
@@ -654,10 +657,14 @@ html {
 
 .userInfo form{
     align-items: center;
+    margin-left: 0px;
 }
 
+#forgot-pass {
+    bottom: 100px;
+}
 
-#login-button {
+#landing-button {
     margin: 10px;
     margin-top: 40px;
     width: 622px;
@@ -670,6 +677,8 @@ html {
     border-radius: 10px;
     background-color: transparent;
 }
+
+
 
 #login {
     margin: 0px;
@@ -735,7 +744,7 @@ h3 a{
     text-decoration: none;
 }
 
-#login-logo {
+#landing-logo {
     width: 315px;
     height: auto;
 }
@@ -748,10 +757,6 @@ h3 a{
     margin: 0;
     padding: 0;
     font-family: "Roboto";
-}
-
-html {
-    background-color: #EFEFEF;
 }
 
 body {

@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-<html style="height: 100%;">
+<!--<html style="height: 100%;">-->
     <head>
-        <link rel="stylesheet" href="..\temp.css">
-        <title> Taro Cards </title>
-        <link rel="icon" href="..\assets\TaroCardTransparent 1.png">
+        <title>Account Recovery | Taro Cards </title>
+
+        <link rel="icon" href="assets\TaroCardTransparent 1.png">
+
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        
+        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+
+        <link rel="stylesheet" href="../temp.css">
     </head>
-    <body class="forgot"> 
+    <body class="landing"> 
             <div class="appName">
                 <h1> Taro Cards </h1>
                 <img src="../assets/Lock Icon.png">
                 <p> Enter your email and we'll send you a link to get back into your account.</p>
                 <form>
-                    <input style="width: 622px; object-position: center; padding-left: 10px;"type="text" name="Emai" placeholder="user@email.com">
-                    <button> Send Login Link </button>
+                    <input
+                        style="width: 622px; object-position: center; padding-left: 10px;"
+                        type="text"
+                        class="userInput"
+                        id="userEmail"
+                        placeholder="Email"
+                        name="Email">
+                    
+                        <button id="landing-button"> Send Login Link </button>
                 </form>
+
                 <div class="container" style="margin:auto;">
                     <hr style="width: 50%; height: 0.1px;">
                     <p style="color:white" id="or"> or </p>
