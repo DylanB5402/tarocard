@@ -1,21 +1,21 @@
 
 
-function openCardCreate(){
-    document.getElementById('id01').style.display='block';
+function openCardCreate( formID){
+    document.getElementById(formID).style.display='block';
     document.getElementById('add-card-btn').style.display='none';
-    if( document.getElementById('id01').classList.contains('dezoom')){
-        document.getElementById('id01').classList.remove('dezoom');
+    if( document.getElementById(formID).classList.contains('dezoom')){
+        document.getElementById(formID).classList.remove('dezoom');
     }
     document.getElementById("modal-sheet").style.display="none";
-    document.getElementById('id01').classList.add('animate');
+    document.getElementById(formID).classList.add('animate');
 }
 
-function closeCardCreate(){
-    document.getElementById('id01').classList.remove('animate');
-    document.getElementById('id01').classList.add('dezoom');
+function closeCardCreate( formID ){
+    document.getElementById(formID).classList.remove('animate');
+    document.getElementById(formID).classList.add('dezoom');
     setTimeout(function(){
         console.log("We did it bitches");
-        document.getElementById('id01').style.display='none';
+        document.getElementById(formID).style.display='none';
 
     },500);
     document.getElementById('add-card-btn').style.display='block';
@@ -102,10 +102,26 @@ request.onload = function() {
     let pfp = document.createElement("img");
     pfp.classList.add("pfp-pic");
     pfp.setAttribute("src", image);
-    
+
+    /* Options Button */
+    let options = document.createElement("img");
+    options.src = "../assets/menu-button.png";
+    options.classList.add("option-btn");
+    options.onclick = function(event){
+        openCardCreate("updateCard");
+        let form = document.getElementById('updateCard');
+        let estabInput = document.getElementById("estabInput");
+        estabInput.value = establishment;
+        let orderInput = document.getElementById("orderInput");
+        orderInput.value = drink;
+        let descInput = document.getElementById("descInput");
+        descInput.value = description;
+    }
+
     tagContainer.appendChild(pfp);
 
     container.appendChild(estab);
+    container.appendChild(options)
     container.appendChild(d);
     container.appendChild(desc);
     container.appendChild(tagContainer);
@@ -125,15 +141,25 @@ function createGroupCard(){
     container.style.alignItems = "center";
 
     let groupImage = document.createElement('img');
-    groupImage.src ="../assets/Group Icon.png"; //this should be replaced with variable
+    groupImage.src ="../assets/group-order.png"; //this should be replaced with variable
+    groupImage.style.width="50px"
 
     let groupName = document.createElement('h1');
     groupName.classList.add('fonts');
     groupName.style.color ='white';
     groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
 
+    let options = document.createElement("img");
+    options.src = "../assets/menu-button.png";
+    options.classList.add("option-btn");
+
+    container.appendChild(options)
+
     container.appendChild(groupImage);
     container.appendChild(groupName);
+    container.appendChild(options)
+
+    
 
     document.getElementById('cardContainer').appendChild(link);
 }
