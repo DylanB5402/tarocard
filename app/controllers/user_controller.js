@@ -80,6 +80,7 @@ exports.profileById = (req, res) => {
     res.append('profileaccess', 'successful')
     res.send(tempEngine.getUserProfile(username, displayName, bio))
   } else {
-    res.redirect('/404')
+    // res.redirect('/404')
+    res.send('no user with id ' + uid + 'found')
   }
 }

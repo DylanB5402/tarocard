@@ -24,10 +24,9 @@ class TaroCardApp {
       })
     )
 
-    this.app.use(express.static('static'))
-
     // Using the routers
     this.app.use('/', indexRouter)
+    this.app.use(express.static('static'))
     this.app.use('/debug', debugRouter)
     this.app.use('/upload', uploadRouter)
     this.app.use('/friends', friendRouter)

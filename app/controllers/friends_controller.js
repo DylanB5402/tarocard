@@ -91,7 +91,7 @@ exports.friendsPage = (req, res) => {
  */
 exports.searchFriends = (req, res) => {
   // console.log(req.body)
-  var search = req.body.string
+  const search = req.body.string
   // res.send('687')
   if (req.session.loggedin) {
     const uid = req.session.uid

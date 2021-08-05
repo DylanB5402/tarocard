@@ -14,8 +14,6 @@ router.get('/', function (req, res) {
   }
 })
 
-/// USER ROUTES ///
-
 // POST request for sign up.
 router.post('/signup', userController.signup)
 
@@ -25,10 +23,10 @@ router.post('/login', userController.login)
 // POST request for sign out
 router.post('/signout', userController.signout)
 
+router.get('/profile/:id', userController.profileById)
+
 // GET request to view user profile
 router.get('/profile/', userController.profile)
-
-router.get('/profile/:id', userController.profileById)
 
 /// DRINK ROUTES ///
 
