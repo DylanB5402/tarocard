@@ -31,13 +31,12 @@
         </template>
 
         <script>
-            $("#bodyNotify").on("click", ".accept", function(event) {
+            $(".notifs").on("click", ".accept", function(event) {
                 let buttonElement = event.target;
                 buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
                 let denyButton = event.target.parentElement.querySelector(".deny")
                 denyButton.style.display = "none";
                 let parentDiv = event.target.parentElement;
-                setTimeout(function(){ parentDiv.style.display = "none"; }, 3000);
                 /*
                 $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
 
@@ -45,7 +44,7 @@
                 */
             })
 
-            $("#bodyNotify").on("click", ".deny", function(event) {
+            $(".notifs").on("click", ".deny", function(event) {
                 let parentDiv = event.target.parentElement;
                 let acceptButton = parentDiv.querySelector(".accept");
                 acceptButton.style.opacity = "0";
