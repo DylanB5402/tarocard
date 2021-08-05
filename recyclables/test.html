@@ -86,3 +86,85 @@
 
 
 
+<!--NOTIFICATION START-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Friend Requests | Taro Cards</title>
+        <link rel="stylesheet" href="..\Global.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body id="bodyNotify">
+        <div class="titleCardNotifications">
+            <h1>Friend Requests</h1>
+        </div>
+
+
+        <template id="friendsRequestTemp">
+            <div class="requestElement">
+                <img>
+                <h2></h2>
+                <h3></h3>
+                <button id="accept" type="button"></button>
+                <button id="deny" type="button"></button>
+            </div>
+        </template>
+
+        <div class="navbar" id="myNavbar">
+            <a href="#"></i>
+                <img id="navHomeIcon" src="..\assets\home.png" />
+            </a>
+        
+            <a href="..\SearchUsers\SearchUsers.html"></i>
+                <img id="navSearchIcon" src="..\assets\search.png" />
+            </a>
+        
+            <a href="#"></i>
+                <img id="navNotifsIcon" src="..\assets\notifs.png" />
+            </a>
+        
+            <a class="active" href="..\Profile page\Profile_Page_TaroCards.html"></i>
+                <img id="navProfileIcon" src="..\assets\profile.png" />
+            </a>
+        </div>
+
+    </body>
+
+    <script>
+        const body = document.querySelector('body');
+
+        let request = new XMLHttpRequest();
+        request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+        request.responseType = 'json';
+        request.send();
+
+        request.onload = function() {
+            const users = request.response;
+            populateFriendRequests(users);
+        }
+
+        // function is used to fill page with list of friends from a json file.
+        function populateFriendRequests(obj) {
+            let template, divAll, div, divCopy, currentLetter, char;
+            divAll = document.createElement("div");
+            divAll.id = "friendsRequestAll";
+            template = document.getElementById('friendsRequestTemp');
+            div = template.content.querySelector(".requestElement");
+            const users = obj.users;
+            for(let i = 0; i < users.length; i++) {
+                divCopy = document.importNode(div, true);
+                // char refers to first letter of current users display name
+                char = users[i]["display name"].charAt(0);
+                divCopy.querySelector("img", true).src = users[i]["image url"];
+                divCopy.querySelector("h2",true).textContent = users[i]["display name"];
+                divCopy.querySelector("h3",true).textContent = users[i]["username"];
+                divAll.appendChild(divCopy);
+                body.appendChild(divAll);
+            }
+        }
+    </script>
+</html>
+
+<!--NOTIFICATION END-->

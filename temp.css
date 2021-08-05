@@ -1027,7 +1027,7 @@ button #edit-profile {
 #user-search {
     border-radius: 40px;
     outline: none;
-    padding-left: 120px;
+    padding-left: 110px;
 }
 
 .search-button {
@@ -1041,33 +1041,9 @@ button #edit-profile {
 }
 
 #search-icon {
-    padding-left: 10px;
+    padding-left: 15px;
     padding-top: 5px;
     width: 65px;
 }
-
-
-
-
-
-
-
-
-/*
-#search-bar {
-    height: 100px;
-    object-position: center;
-}
-
-#search-bar::placeholder {
-    color: #000000;
-    opacity: 0.4;
-}
-
-.search-button {
-
-}*/
-
-
 
 /* SEARCH END */
