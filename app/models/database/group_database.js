@@ -215,25 +215,23 @@ Credits: Dylan Barva & Peter Liu for skeleton code
    * Removes a specific entry from a group for a user
    * @param {Integer} uid id for a specific user
    * @param {Integer} groupId
-   * @param {Integer} friendUID
-   * @param {Integer} drinkId // id of friend's drink
+   * @param {Integer} drinkId // id of friend's drink NOTE: drinkIds are always associated with a single person
+   *                            every single drink created is created by one person
    * @returns {Boolean} true if successful, false if failed
    */
-  removeFromGroup (uid, groupId, friendUID, drinkId) {
+  removeFromGroup (uid, groupId, drinkId) {
     const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase()
 
     // Check to make params are valid/exists
     if (userDB.getUserByUID(uid) &&
-            userDB.getUserByUID(friendUID) &&
             drinksDB.isExist(drinkId) &&
             this.isExist(groupId)) {
 
       // Delete from group in DB
       const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
-              `uid = ? AND group_id = ? AND ` + 
-              `friend_uid = ? AND friends_drink_id = ?`)
-      const query = stmt.run(uid, groupId, friendUID, drinkId)
+              `uid = ? AND group_id = ? AND friends_drink_id = ?`)
+      const query = stmt.run(uid, friendUID, drinkId)
 
       // Check to make sure changes are made to DB
       if (query.changes === 1) {

@@ -66,6 +66,6 @@ exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid // Get uid from cookie session
     const query = favDrinksDB.getAllDrinks(uid) // temp, will format better in future
-    res.send(query) // temp debug
+    res.send(query) // display as json
   }
 }
