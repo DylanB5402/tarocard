@@ -211,6 +211,11 @@ ul {
     background-color:  #f3f3f3 ;
     bottom: 0;
 }
+
+#title-name {
+    font-family: "Chewy";
+}
+
 .home {
     height: 100%;
     background-color:#E5E5E5 ;
