@@ -28,6 +28,9 @@ class FriendDatabase {
    * @returns info (see better-sqlite3 docs for .run()) if successful, undefined otherwise if a friendship status between the two users already exists
    */
   insertFriend (uid, friendUid, status) {
+    if (uid === friendUid) {
+      return undefined
+    }
     const friendStatus = this.getFriendStatus(uid, friendUid)
     if (friendStatus === undefined) {
       return this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${status}');`).run()
@@ -44,14 +47,28 @@ class FriendDatabase {
     return this.db.prepare('DELETE FROM friends;').run()
   }
 
+  /**
+   * Add a friend request between the requester and requested
+   * @param {*} requesterUid
+   * @param {*} requestedUid
+   * @returns true if successful, false otherwise
+   */
   sendFriendRequest (requesterUid, requestedUid) {
-    this.insertFriend(requesterUid, requestedUid, FriendStatus.OUTGOING)
-    this.insertFriend(requestedUid, requesterUid, FriendStatus.INCOMING)
+    if (this.insertFriend(requesterUid, requestedUid, FriendStatus.OUTGOING) !== undefined) {
+      if (this.insertFriend(requestedUid, requesterUid, FriendStatus.INCOMING) !== undefined) {
+        return true
+      }
+    }
+    return false
   }
 
   acceptFriendRequest (uid, friendUid) {
-    this.updateFriendStatus(uid, friendUid, FriendStatus.FRIENDS)
-    this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS)
+    if (this.updateFriendStatus(uid, friendUid, FriendStatus.FRIENDS).changes > 0) {
+      if (this.updateFriendStatus(friendUid, uid, FriendStatus.FRIENDS).changes > 0) {
+        return true
+      }
+    }
+    return false
   }
 
   /**
@@ -67,6 +84,81 @@ class FriendDatabase {
     } else {
       return undefined
     }
+  }
+
+  /**
+   * Get all of a users current friends (not outgoing or incoming)
+   * @param {*} uid
+   * @returns an array containing the ids of all current friends of the user
+   */
+  getAllCurrentFriends (uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.FRIENDS)
+  }
+
+  getAllIncomingFriends (uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.INCOMING)
+  }
+
+  getAllOutgoingFriends (uid) {
+    return this.getAllFriendsByStatus(uid, FriendStatus.OUTGOING)
+  }
+
+  /**
+   * Get all of a users current friends (not outgoing or incoming)
+   * @param {*} uid
+   * @param {*} status
+   * @returns an array containing the ids of all current friends of the user
+   */
+  getAllFriendsByStatus (uid, status) {
+    const friends = this.db.prepare(`SELECT friend_uid FROM friends WHERE uid = ${uid} AND status = '${status}';`).all()
+    const friendIdArray = []
+    friends.forEach((friend) => {
+      friendIdArray.push(friend.friend_uid)
+    })
+    return friendIdArray
+  }
+
+  getAllFriendData (uid) {
+    return this.db.prepare(`SELECT * FROM friends WHERE uid = ${uid};`).all()
+  }
+
+  /**
+   *
+   * @param {*} uid
+   * @returns {Array}
+   */
+  getAllTableData (uid) {
+    return this.db.prepare('SELECT * FROM friends;').all()
+  }
+
+  /**
+   * meant only for debug/dev purposes
+   * @param {*} uid
+   * @param {*} friendUid
+   */
+  addCurrentFriend (uid, friendUid) {
+    if (uid !== friendUid) {
+      this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
+      this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
+    }
+  }
+
+  /**
+   * Return the id, username, and display_name of all of a users's friends
+   * @param {*} uid
+   * @returns {Array}
+   */
+  getFriendDataByUid (uid) {
+    return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' ORDER BY LOWER(users2.display_name);`).all()
+  }
+
+  /**
+   * Search for a user's friends which start with the given username string
+   * @param {*} uid
+   * @param {*} username
+   */
+  searchFriends (uid, username) {
+    return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' AND users2.username LIKE '${username}%' ORDER BY LOWER(users2.display_name);`).all()
   }
 }
 

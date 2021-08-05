@@ -1,7 +1,7 @@
 const { assert } = require('chai')
 const session = require('supertest-session')
 
-const app = require('../app/app')
+const app = require('../../app/app')
 
 let authenticatedSession = null
 

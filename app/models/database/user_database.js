@@ -9,7 +9,7 @@ class UserDatabase {
    */
   constructor (database) {
     if (database === undefined) {
-      console.log(config.db)
+      // console.log(config.db)
       this.db = new Database(config.db)
     } else {
       // this.db = new Database(database)
@@ -60,7 +60,15 @@ class UserDatabase {
   }
 
   printAll () {
-    console.log(this.db.prepare('SELECT * FROM users;').all())
+    console.log(this.getAllUsers())
+  }
+
+  /**
+   *
+   * @returns {Array}
+   */
+  getAllUsers () {
+    return this.db.prepare('SELECT * FROM users;').all()
   }
 
   encryptPassword (password) {
@@ -136,11 +144,28 @@ class UserDatabase {
     }
   }
 
+  getUserNamesByUID (uid) {
+    return this.db.prepare(`SELECT username, display_name FROM users WHERE uid = ${uid};`).get()
+  }
+
+  getAllProfileData (uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+  }
+
   /**
      * Delete all entries in table, should only be used for testing/debugging
      */
   deleteAllTableEntries () {
     this.db.prepare('DELETE FROM users;').run()
+  }
+
+  /**
+   *
+   * @param {*} username
+   * @returns {Array}
+   */
+  searchDatabase (username) {
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
   }
 }
 

@@ -5,9 +5,7 @@ const KnexSessionStore = require('connect-session-knex')(session)
 const indexRouter = require('./routes/index')
 const debugRouter = require('./routes/debug_router')
 const uploadRouter = require('./routes/upload_router')
-
-// This code is clownfiesta. I have tried to clean it up
-// Please read: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
+const friendRouter = require('./routes/friend_router')
 
 class TaroCardApp {
   constructor () {
@@ -26,12 +24,12 @@ class TaroCardApp {
       })
     )
 
-    this.app.use(express.static('static'))
-
     // Using the routers
     this.app.use('/', indexRouter)
+    this.app.use(express.static('static'))
     this.app.use('/debug', debugRouter)
     this.app.use('/upload', uploadRouter)
+    this.app.use('/friends', friendRouter)
 
     // 404, page can't be found
     this.app.use(function (req, res) {
