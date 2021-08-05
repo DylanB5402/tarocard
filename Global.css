@@ -474,9 +474,22 @@ CSS page for ChangePassword and ChangeEmail
 
 #errorText {
     color: red;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: lighter;
     margin-top: 15px;
+}
+
+#Success {
+    color: green;
+    background-color: lightgreen;
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-left: 4%;
 }
 
 #showPassword {
@@ -739,13 +752,13 @@ CSS page for Notifications
     bottom: 110px;
 }
 
-#accept {
+.accept {
     height: 80px;
     width: 210px;
-    background-image: url(./assets/checkmark.png);
+    background-image: url(./assets/add-button.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60px 40px;
+    background-size: 60px 60px;
     background-color: rgb(152, 121, 197);
     padding-top: 15px;
     padding-bottom: 15px;
@@ -757,11 +770,11 @@ CSS page for Notifications
     margin-right: 120px;
 }
 
-#accept:hover {
+.accept:hover {
     background-color: rgba(151, 121, 197, 0.863);
 }
 
-#deny {
+.deny {
     height: 40px;
     width: 40px;
     background-image: url(./assets/denyX.png);
@@ -774,4 +787,8 @@ CSS page for Notifications
     bottom: 165px;
     background-color: white;
     left: 290px;
+}
+
+.deny:hover {
+    background-image: url(./assets/denyXRed.png);
 }

@@ -18,10 +18,40 @@
                 <img>
                 <h2></h2>
                 <h3></h3>
-                <button id="accept" type="button"></button>
-                <button id="deny" type="button"></button>
+                <button class="accept" type="button" value="accept"></button>
+                <button class="deny" type="button" value="deny"></button>
             </div>
         </template>
+
+        <script>
+            $("#bodyNotify").on("click", ".accept", function(event) {
+                let buttonElement = event.target;
+                buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
+                let denyButton = event.target.parentElement.querySelector(".deny")
+                denyButton.style.display = "none";
+                let parentDiv = event.target.parentElement;
+                setTimeout(function(){ parentDiv.style.display = "none"; }, 3000);
+                /*
+                $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
+
+                })
+                */
+            })
+
+            $("#bodyNotify").on("click", ".deny", function(event) {
+                let parentDiv = event.target.parentElement;
+                let acceptButton = parentDiv.querySelector(".accept");
+                acceptButton.style.opacity = "0";
+                acceptButton.disabled = "true";
+                setTimeout(function(){ parentDiv.style.display = "none"; }, 1000);
+
+                /*
+                $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
+
+                })
+                */
+            })
+       </script>
 
         <div class="navbar" id="myNavbar">
             <a href="#"></i>
@@ -56,7 +86,7 @@
             populateFriendRequests(users);
         }
 
-        // function is used to fill page with list of friends from a json file.
+        // function is used to fill page with list of friends request from a json file.
         function populateFriendRequests(obj) {
             let template, divAll, div, divCopy, currentLetter, char;
             divAll = document.createElement("div");
