@@ -6,7 +6,7 @@ const indexRouter = require('./routes/index')
 const debugRouter = require('./routes/debug_router')
 const uploadRouter = require('./routes/upload_router')
 const friendRouter = require('./routes/friend_router')
-
+const settingsRouter = require('./routes/settings_router')
 class TaroCardApp {
   constructor () {
     this.store = new KnexSessionStore()
@@ -30,6 +30,7 @@ class TaroCardApp {
     this.app.use('/debug', debugRouter)
     this.app.use('/upload', uploadRouter)
     this.app.use('/friends', friendRouter)
+    this.app.use('/settings', settingsRouter)
 
     // 404, page can't be found
     this.app.use(function (req, res) {

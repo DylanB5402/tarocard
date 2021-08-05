@@ -167,6 +167,15 @@ class UserDatabase {
   searchDatabase (username) {
     return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
   }
+
+  updateEmail (uid, email) {
+    const info = this.db.prepare(`UPDATE users SET email = '${email}' WHERE uid = ${uid};`).run()
+    return info.changes > 0
+  }
+
+  getUserDataByID (uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+  }
 }
 
 /**
