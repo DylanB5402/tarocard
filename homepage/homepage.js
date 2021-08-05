@@ -89,6 +89,7 @@ request.onload = function() {
 
     let desc = document.createElement("h2");
     desc.classList.add("fonts");
+    desc.classList.add("description");
     desc.style = "font-weight: 100";
     desc.innerHTML = description;
 
