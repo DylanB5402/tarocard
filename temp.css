@@ -199,6 +199,20 @@ input[type=submit] {
 /* FORGOT-PASS END */
 
 /* HOME START */
+.page-header h1 {
+    font-family: "Chewy";
+    color: #9879C5;
+    font-size: 90px;
+    font-weight: 500;
+    line-height: 150px;
+    object-position: center;
+    text-align: center;
+}
+
+#home-page {
+    padding: 0;
+}
+
 ul {
     list-style-type: none;
     margin:0;
@@ -212,9 +226,7 @@ ul {
     bottom: 0;
 }
 
-#title-name {
-    font-family: "Chewy";
-}
+
 
 .home {
     height: 100%;
