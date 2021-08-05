@@ -45,7 +45,7 @@ class FavDrinksDatabase {
    */
   getAllDrinks (uid) {
     const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    const drinkArray = new Array() // array to be filled with drink objects
+    // const drinkArray = new Array() // array to be filled with drink objects
 
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
@@ -55,32 +55,14 @@ class FavDrinksDatabase {
 
     // Iterate through the array of objects
     // `value` = drink object
-    query.forEach((value) => {
-      // Function to be called on each element (object) in the array
+    // query.forEach((value) => {
+    //   // Function to be called on each element (object) in the array
 
-      drinkArray.push(value) // Push the drink object into the array
-    })
-    return drinkArray // return the filled array of drink objects
+    //   drinkArray.push(value) // Push the drink object into the array
+    // })
+    return query // return the filled array of drink objects
   }
 
-  // UNSURE TODO: display drinks and stuff prettily
-  // /**
-  //  * View a drink using the template from template_engine.js
-  //  * @param {Integer} id
-  //  * @param {Response} httpResponse
-  //  */
-  // viewDrink(id, httpResponse) {
-  //   this.db.prepare(`SELECT * FROM fav_drinks WHERE id = ${id};`,(err, row) => {
-  //     if (row != undefined) {
-  //       var name = row['name'];
-  //       var desc = row['desc'];
-  //       var store = row['store'];
-  //       httpResponse.send(this.temp_engine.getUser(id, name, desc, store));
-  //     } else {
-  //       httpResponse.send(`Drink with id ${id} not found`);
-  //     }
-  //   })
-  // }
 
   /**
    * Checks if a drink already favorited for a user

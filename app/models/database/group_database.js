@@ -26,119 +26,87 @@ Credits: Dylan Barva & Peter Liu for skeleton code
      this.createGroupTable()
    }
  
-   /**
-    * Creates a new drink database if DNE. Otherwise, does not create table.
-    * Table has 4 columns: Group Id, User Id, Friend Id, Drink ID
-    * Schema: multiple rows with the same group id designate a single group
-    *         whenever a new GROUP is created, the group id is autoincremented
-    *         whenever a new user-drink pair is added to the GROUP, then keep
-    *         the same group id
-    * @param none
-    * @return none
-    */
-   createGroupTable () {
-     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS groups' +
-       '(group_id INTEGER AUTOINCREMENT, uid INTEGER, group_name TEXT,' +
-       ' friend_uid INTEGER, friends_drink_id INTEGER);')
-     stmt.run()
-   }
+  /**
+   * Creates a new groups database if DNE. Otherwise, does not create table.
+   * Table has 5 columns: Group Id, User Id, Group Name, Friend Id, Drink ID
+   * Schema: multiple rows with the same group id designate a single group
+   *         whenever a new GROUP is created, the group id is autoincremented
+   *         whenever a new user-drink pair is added to the GROUP, then keep
+   *         the same group id
+   * @param none
+   * @return none
+   */
+  createGroupTable () {
+    const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS groups' +
+      '(group_id INTEGER AUTOINCREMENT, uid INTEGER, group_name TEXT,' +
+      ' friend_uid INTEGER, friends_drink_id INTEGER);')
+    stmt.run()
+  }
  
-/**
-    * TODO:
-    * get all favorited drinks
-    * @param {Integer} uid
-    * @returns {Array[Object]} an array of drink objects
-    */
+  /**
+   * TODO:
+   * Gets a group of a user by group id. The group is a collection (array) of
+   * rows from the table
+   * @param {Integer} uid
+   * @param {Integer} groupId
+   * @returns {Array[Object]} an array of friend-drink objects (the group)
+   */
   getGroup (uid, groupId) {
+    const userDB = new userDatabase.UserDatabase() // Using methods from user_database
     const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    const drinkArray = new Array() // array to be filled with drink objects
 
-    // SQL Statement:
-    //   selects all fields of drinks from the joining of groups and drinks
-    //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare('SELECT d.* FROM groups g INNER JOIN drinks d USING(drink_id) WHERE uid = ?')
-    const query = stmt.all(uid) // an array of row (drink) objects
+    // Safety check
+    if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
 
-    // Iterate through the array of objects
-    // `value` = drink object
-    query.forEach((value) => {
-      // Function to be called on each element (object) in the array
+      // SQL Statement:
+      //   selects all friend-drink pair associated with a specific groupId 
+      const stmt = this.db.prepare('SELECT * FROM groups WHERE uid = ? AND group_id = ?')
+      const query = stmt.all(uid, groupId) // an array of row objects (group)
 
-      drinkArray.push(value) // Push the drink object into the array
-    })
-    return drinkArray // return the filled array of drink objects
+      return query
+    }
+    else {
+      return null
+    }
   }
 
   /**
-  * TODO:
-  * get all favorited drinks
-  * @param {Integer} uid
-  * @returns {Array[Object]} an array of drink objects
-  */
+   * TODO:
+   * Get all Groups associated with a specific user
+   * Want to return group card info i.e. just id and name
+   * @param {Integer} uid
+   * @returns {Array[Object]} an array of objects containing group id and group name
+   */
   getAllGroups (uid) {
-    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    const drinkArray = new Array() // array to be filled with drink objects
+    const userDB = new userDatabase.UserDatabase() // Using methods from user_database
 
-    // SQL Statement:
-    //   selects all fields of drinks from the joining of groups and drinks
-    //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare('SELECT d.* FROM groups g INNER JOIN drinks d USING(drink_id) WHERE uid = ?')
-    const query = stmt.all(uid) // an array of row (drink) objects
+    // Safety Check
+    if (userDB.getUserByUID(uid)) {
+      // SQL Statement:
+      //   selects all groups with the same uid from the table, sorted by alphabetical order
+      const stmt = this.db.prepare('SELECT group_id, group_name FROM groups WHERE uid = ? ' + 
+              'ORDER BY group_name')
+      const query = stmt.all(uid) // an array of row objects containing group id and group name
 
-    // Iterate through the array of objects
-    // `value` = drink object
-    query.forEach((value) => {
-      // Function to be called on each element (object) in the array
-
-      drinkArray.push(value) // Push the drink object into the array
-    })
-    return drinkArray // return the filled array of drink objects
+      return query
+    }
+    else {
+      return null
+    }
+    
   }
  
-   // UNSURE TODO: display drinks and stuff prettily
-   // /**
-   //  * View a drink using the template from template_engine.js
-   //  * @param {Integer} id
-   //  * @param {Response} httpResponse
-   //  */
-   // viewDrink(id, httpResponse) {
-   //   this.db.prepare(`SELECT * FROM groups WHERE id = ${id};`,(err, row) => {
-   //     if (row != undefined) {
-   //       var name = row['name'];
-   //       var desc = row['desc'];
-   //       var store = row['store'];
-   //       httpResponse.send(this.temp_engine.getUser(id, name, desc, store));
-   //     } else {
-   //       httpResponse.send(`Drink with id ${id} not found`);
-   //     }
-   //   })
-   // }
- 
    /**
-    * Checks if a drink already favorited for a user
+    * Checks if a group already exists
     * @param {Integer} groupId id of group
     * @return {Boolean} false if DNE, true if it does
     */
-   isExist (groupId) {
-     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM groups WHERE group_id = ? `)
-     const query = stmt.get(groupId) // get runs the statement
-     const numEntries = query.count
-     return numEntries > 0
-   }
- 
-   /**
-    * Checks if a drink already favorited for a user
-    * @param {Integer} uid user id
-    * @param {Integer} drinkId id of drink
-    * @return {Boolean} false if DNE, true if it does
-    */
-   isStar (uid, drinkId) {
-     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM groups WHERE drink_id = '${drinkId}' ` +
-             `AND uid = '${uid}' AND fav = 1`)
-     const query = stmt.get() // get runs the statement
-     const numStar = query.count
-     return numStar > 0
-   }
+  isExist (groupId) {
+    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM groups WHERE group_id = ? `)
+    const query = stmt.get(groupId) // get runs the statement
+    const numEntries = query.count
+    return numEntries > 0
+  }
  
   /**
   * Creates a new group
@@ -210,96 +178,86 @@ Credits: Dylan Barva & Peter Liu for skeleton code
       }
     }
  
-   // Need an edit drink method in drinks_database.js
-   // Implementation is to modify the drink desc in database and to keep uid and
-   // drinkId pair the same in groups_database.js
+  // Need an edit group method 
+  // Implementation is to modify the drink desc in database and to keep uid and
+  // drinkId pair the same in groups_database.js
+
+  /**
+  * Removes an entire group for a user
+  * @param {Integer} uid id for a specific user
+  * @param {Integer} groupId id given to remove group
+  * @returns {Boolean} true if successful, false if failed
+  */
+  removeGroup (uid, groupId) {
+    const userDB = new userDatabase.UserDatabase()
+    const drinksDB = new drinksDatabase.DrinksDatabase()
+
+    // Check to make params are valid/exists
+    if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
+
+      // Delete group from DB
+      const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
+              `uid = ? AND group_id = ?`)
+      const query = stmt.run(uid, groupId)
+
+      // Check to make sure changes are made to DB
+      if (query.changes === 1) {
+        return true
+      }
+
+      return false // No changes made to table
+    } else {
+      return false //at least 1 ID DNE
+    }
+  }
+
+  /**
+   * Removes a specific entry from a group for a user
+   * @param {Integer} uid id for a specific user
+   * @param {Integer} groupId
+   * @param {Integer} friendUID
+   * @param {Integer} drinkId // id of friend's drink
+   * @returns {Boolean} true if successful, false if failed
+   */
+  removeFromGroup (uid, groupId, friendUID, drinkId) {
+    const userDB = new userDatabase.UserDatabase()
+    const drinksDB = new drinksDatabase.DrinksDatabase()
+
+    // Check to make params are valid/exists
+    if (userDB.getUserByUID(uid) &&
+            userDB.getUserByUID(friendUID) &&
+            drinksDB.isExist(drinkId) &&
+            this.isExist(groupId)) {
+
+      // Delete from group in DB
+      const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
+              `uid = ? AND group_id = ? AND ` + 
+              `friend_uid = ? AND friends_drink_id = ?`)
+      const query = stmt.run(uid, groupId, friendUID, drinkId)
+
+      // Check to make sure changes are made to DB
+      if (query.changes === 1) {
+        return true
+      }
+
+      return false // No changes made to table
+    } else {
+      return false //at least 1 ID DNE
+    }
+  }
  
-   /**
-    * unfavorites a drink for a user
-    * @param {Integer} uid
-    * @param {Integer} drinkId
-    * @returns {Boolean} true if successful, false if failed
-    */
-   removeFavDrink (uid, drinkId) {
-     const userDB = new userDatabase.UserDatabase()
-     const drinksDB = new drinksDatabase.DrinksDatabase()
- 
-     // Check to make params are valid/exists
-     if (userDB.getUserByUID(uid) && drinksDB.isExist(drinkId)) {
-       if (this.isExist(uid, drinkId)) {
-         // Delete uid-drinkId pair from DB
-         const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
-                 `uid = '${uid}' AND drink_id = '${drinkId}'`)
-         const query = stmt.run()
- 
-         // Check to make sure changes are made to DB
-         if (query.changes === 1) {
-           return true
-         }
-       }
- 
-       return false
-     } else {
-       return false
-     }
-   }
- 
-   /**
-    * Stars a drink for a user from the database using its user id and drink id
-    * @param {Integer} uid
-    * @param {Integer} drinkId
-    * @returns {Boolean} true if successful, false otherwise
-    */
-   starDrink (uid, drinkId) {
-     // Check if not starred yet
-     if (!this.isStar(uid, drinkId)) {
-       // Updates the DB
-       const stmt = this.db.prepare(`UPDATE groups SET fav = 1 WHERE uid = '${uid}' ` +
-             `AND drink_id = '${drinkId}'`)
-       const query = stmt.run() // run the statement; returns 'info' object
- 
-       // Checks if changes were made; changes are made upon successful boolean change
-       if (query.changes > 0) {
-         return true
-       }
-     }
-     return false // return false since query.changes was not greater than 0 or
-     // drink is already starred
-   }
- 
-   /**
-    * Unfavorites a drink for a user from the database using its user id and drink id
-    * @param {Integer} uid
-    * @param {Integer} drinkId
-    * @returns {Boolean} true if successful, false otherwise
-    */
-   unstarDrink (uid, drinkId) {
-     // Check if starred
-     if (this.isStar(uid, drinkId)) {
-       const stmt = this.db.prepare(`UPDATE groups SET fav = 0 WHERE uid = '${uid}' ` +
-               `AND drink_id = '${drinkId}'`)
-       const query = stmt.run()
- 
-       // Checks if changes were made; changes are made upon successful boolean change
-       if (query.changes > 0) {
-         return true
-       }
-     }
-     return false // false if failed both if statements
-   }
- 
-   toString () {
-     const stmt = this.db.prepare('SELECT * FROM groups')
-     const query = stmt.all()
-     console.log(query)
-     return query.toString()
-   }
- 
-   purgeDb () {
-     const stmt = this.db.prepare('DELETE FROM groups')
-     const query = stmt.run()
-   }
+  toString () {
+    const stmt = this.db.prepare('SELECT * FROM groups')
+    const query = stmt.all()
+    console.log(query)
+    return query.toString()
+  }
+
+  purgeDb () {
+    const stmt = this.db.prepare('DELETE FROM groups')
+    const query = stmt.run()
+  }
  }
  
- module.exports = { FavDrinksDatabase }
+ module.exports = { GroupDatabase }
  
