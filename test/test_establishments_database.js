@@ -105,17 +105,8 @@ describe('Testing Establishments Database', function () {
     const desc = 'borgar'
     const id = establishmentsDb.addEstablishment(name, desc)
 
-    const img = 'uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
+    const img = '/uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
     establishmentsDb.addImage(id, img)
     assert.equal(establishmentsDb.getEstablishment(id).establishment_img, img)
-  })
-
-  it('Test: Add Image To Establishment Unsuccessfully', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
-
-    const img = 'uploads/image/avatar/fake.jpg'
-    assert.equal(establishmentsDb.addImage(id, img), false)
   })
 })

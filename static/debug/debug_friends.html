@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Debug Friends</title>
+    </head>
+    <body>
+        <h1>Add Friends</h1>
+        <!-- this form automatically send a post request to /users/create with the input data when submit is pressed -->
+        <form action = "/debug/addfriend" method="post" target="_blank">
+
+            <label for="uid">uid:</label><br>
+            <input type="number" id="uid" name="uid"><br>
+
+            <label for="uid">friend_uid:</label><br>
+            <input type="number" id="friend_uid" name="friend_uid"><br>
+ 
+            <input type="radio" id="outgoing" name="status" value="outgoing">
+            <label for="outgoing"> outgoing </label><br>
+
+            <input type="radio" id="incoming" name="status" value="incoming">
+            <label for="incoming"> incoming </label><br>
+
+            <input type="radio" id="friends" name="status" value="friends">
+            <label for="friends"> friends </label><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>
+    </body>
+</html>

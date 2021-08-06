@@ -104,17 +104,8 @@ describe('Testing Tags Database', function () {
     const desc = 'it tastes kinda strange'
     const id = tagsDb.addTag(name, desc)
 
-    const img = 'uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
+    const img = '/uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
     tagsDb.addImage(id, img)
     assert.equal(tagsDb.getTag(id).tag_img, img)
-  })
-
-  it('Test: Add Image To Tag Unsuccessfully', function () {
-    const name = 'sour'
-    const desc = 'it tastes kinda strange'
-    const id = tagsDb.addTag(name, desc)
-
-    const img = 'uploads/image/avatar/fake.jpg'
-    assert.equal(tagsDb.addImage(id, img), false)
   })
 })

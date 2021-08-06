@@ -147,22 +147,13 @@ describe('Testing Drinks Database', function () {
     assert.equal(drinksDb.editDrink(-1), false)
   })
 
-  it('Test: Add Image To Drink Successfully', function () {
+  it('Test: Add Image To Drink', function () {
     const name = 'lemonade'
     const desc = 'a sour drink for summer'
     const id = drinksDb.addDrink(name, desc)
 
-    const img = 'uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
+    const img = '/uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
     drinksDb.addImage(id, img)
     assert.equal(drinksDb.getDrink(id).drink_img, img)
-  })
-
-  it('Test: Add Image To Drink Unsuccessfully', function () {
-    const name = 'lemonade'
-    const desc = 'a sour drink for summer'
-    const id = drinksDb.addDrink(name, desc)
-
-    const img = 'uploads/image/avatar/fake.jpg'
-    assert.equal(drinksDb.addImage(id, img), false)
   })
 })

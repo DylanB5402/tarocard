@@ -64,3 +64,23 @@ exports.profile = (req, res) => {
     res.redirect('/')
   }
 }
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.profileById = (req, res) => {
+  const uid = req.params.id
+  const profileData = userDB.getUserByUID(uid)
+  if (profileData !== undefined) {
+    const bio = profileData.bio
+    const username = profileData.username
+    const displayName = profileData.display_name
+    // res.( JSON.stringify({ 'profileAccess': 'successful' }))
+    res.append('profileaccess', 'successful')
+    res.send(tempEngine.getUserProfile(username, displayName, bio))
+  } else {
+    // res.redirect('/404')
+    res.send('no user with id ' + uid + 'found')
+  }
+}

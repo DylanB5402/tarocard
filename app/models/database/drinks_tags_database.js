@@ -123,7 +123,7 @@ class DrinksTagsDatabase {
     const stmt = this.db.prepare('SELECT * FROM drinks_tags')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return JSON.stringify(query)
   }
 
   purgeDb () {

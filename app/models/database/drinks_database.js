@@ -134,10 +134,6 @@ class DrinksDatabase {
    * @returns {boolean} true if successful, false if not
    */
   addImage (id, img) {
-    if (!fs.existsSync(img)) {
-      return false
-    }
-
     const stmt = this.db.prepare('UPDATE drinks SET drink_img = ? WHERE drink_id = ?')
     const query = stmt.run(img, id)
 
@@ -152,7 +148,7 @@ class DrinksDatabase {
     const stmt = this.db.prepare('SELECT * FROM drinks')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return JSON.stringify(query)
   }
 
   purgeDb () {
