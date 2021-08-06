@@ -50,11 +50,12 @@ exports.editDrinkCard = (req, res) => {
 
     // Make sure previous info (drink name and desc) is shown
 
-    // Get name and desc of drink from new form request
+    // Get name and desc and estasblishment of drink from new form request
     const nameOfDrink = req.body.nameOfDrink
     const drinkDesc = req.body.drinkDesc
+    const establishment = req.body.establishment
 
-    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc) // edit drink
+    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc, establishment) // edit drink
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
