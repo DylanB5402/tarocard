@@ -1114,7 +1114,7 @@ button #edit-profile {
     width: 90%;
     background-color: transparent;
     border-radius: 40px;/**/
-    position: fixed;
+    position: relative;/**/
     display: hidden;
 }
 
