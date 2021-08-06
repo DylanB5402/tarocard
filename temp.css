@@ -124,6 +124,31 @@ input[type=submit] {
 .edit-input {
     padding-left: 20px;
 }
+
+
+input[type=file] {
+    display: none;
+    height: fit-content;
+    width: fit-content;
+    margin: 0;
+    
+}
+
+#imgInputBanner {
+    opacity: 60%;
+    position: absolute;
+    right: 39%;
+    top: 210px;
+}
+
+#imgInputProfilePic {
+    opacity: 60%;
+    position: absolute;
+    left: 162px;
+    top: 390px;
+    z-index: 2;
+}
+
 /* EDIT END */
 
 
