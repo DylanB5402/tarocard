@@ -60,13 +60,7 @@ html {
     object-position: center top;
     position: relative;
     bottom: 130px;
-    left: 100px;
     z-index: 2;
-}
-
-#profilePic:hover {
-    background-color: black;
-    opacity: 1;
 }
 
 .edit {
@@ -81,9 +75,13 @@ html {
 }
 
 #edit {
-    margin-left: 5%;/**/
+    /*margin-left: 5%;/**/
     font-size: 38px;
     justify-content: center;
+}
+
+.text-input {
+    margin-left: 5%;
 }
 
 .label {
@@ -133,21 +131,41 @@ input[type=file] {
     margin: 0;
     
 }
-
+/*
 #imgInputBanner {
-    opacity: 60%;
     position: absolute;
-    right: 39%;
-    top: 210px;
+    top: 15%;
+    right: 47%;
+    opacity: 0.8;
+}*/
+
+
+.banner {
+    position: relative;
 }
 
-#imgInputProfilePic {
-    opacity: 60%;
+#upload-banner {
+    width: 100px;
+    
     position: absolute;
-    left: 162px;
-    top: 390px;
-    z-index: 2;
+    bottom: 30%;
+    right: 45%;
+    z-index: 3;
 }
+
+.pfp {
+    position: relative;
+    height: 175px;
+}
+
+#upload-pfp {
+    width: 75px;
+    position: absolute;
+    left: 30%;
+    bottom: 35%;
+    z-index: 3;
+}
+
 
 /* EDIT END */
 
