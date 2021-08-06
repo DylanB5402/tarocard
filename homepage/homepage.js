@@ -59,14 +59,13 @@ request.send();
 
 request.onload = function() {
     /* This should be the array of cards */
-    const user = request.response.session; // 
-    const cards = request.response.cards; 
+    const cards = request.response; 
     /*getAllDrinks(uid) */
 
     for(let i = 0; i < cards.length; i++) {
-        let x =  cards[i]["Name of Establishment"]; //establishment_id
-        let y = cards[i]["Name of Order"]; // drink_name
-       let z =cards[i]["Description"]; //drink_desc
+        let x =  cards[i]["establishment"]; //establishment
+        let y = cards[i]["name"]; // name
+       let z =cards[i]["desc"]; //desc
        /* let u = cards[i][drink_id]*/
        createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img
        console.log(i);
