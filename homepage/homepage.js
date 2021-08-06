@@ -53,7 +53,7 @@ function createCard(establishment, drink, description){
 
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let request = new XMLHttpRequest();
-request.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true);
+request.open('GET', '/drinks', true); //change to /cards for Alex later
 request.responseType = 'json';
 request.send();
 
@@ -65,7 +65,7 @@ request.onload = function() {
     for(let i = 0; i < cards.length; i++) {
         let x =  cards[i]["establishment"]; //establishment
         let y = cards[i]["name"]; // name
-       let z =cards[i]["desc"]; //desc
+        let z =cards[i]["desc"]; //desc
        /* let u = cards[i][drink_id]*/
        createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img
        console.log(i);
@@ -140,7 +140,7 @@ request.onload = function() {
 function createGroupCard(){
     const link = document.createElement('a'); // creates a link 
     link.style.textDecoration = 'none'
-    link.href="groupOrder-edit.html";
+    link.href="groupOrderView.html";
     const container = document.createElement('div') // creates div element
     link.appendChild(container); //this will put the div into the link
 
@@ -155,23 +155,27 @@ function createGroupCard(){
     groupName.classList.add('fonts');
     groupName.style.color ='white';
     groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
-
+    
+    let optionLink = document.createElement('a');
+    optionLink.href = "./groupOrder-edit.html";
     let options = document.createElement("img");
     options.src = "../assets/menu-button.png";
     options.classList.add("option-btn");
-
-    container.appendChild(options)
-
+    optionLink.appendChild(options)
     container.appendChild(groupImage);
     container.appendChild(groupName);
-    container.appendChild(options)
-
-    
-
+    container.appendChild(optionLink);
     document.getElementById('cardContainer').appendChild(link);
+
+    container.onclick = function(event){
+        if(event.target.classList.contains("option-btn")){
+            window.location.replace("http://www.w3schools.com")
+        }
+    }
 }
 
 createGroupCard()
+
 
 
 /* Open Modal Sheet */
