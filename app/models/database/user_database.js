@@ -125,8 +125,9 @@ class UserDatabase {
     return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
   }
 
-  insertProfileData (email, displayName, username, bio) {
-    return this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run()
+  insertProfileData (uid, displayName, username, bio) {
+    var info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
+    return info.changes > 0
   }
 
   selectProfileData (email) {
