@@ -289,9 +289,9 @@ li:last-child{
 /* Group Order Page  */
 
 .group-card {
-    width: 87vw;
-    max-width: 1000px;
-    padding: 10px;
+    width: 50vw;
+    display: block;
+    max-width: 100px;
     border-radius: 10px;
     display: flex;
     flex-direction: row;

@@ -224,6 +224,20 @@ input[type=file] {
 /* FORGOT-PASS END */
 
 /* HOME START */
+.page-header h1 {
+    font-family: "Chewy";
+    color: #9879C5;
+    font-size: 90px;
+    font-weight: 500;
+    line-height: 150px;
+    object-position: center;
+    text-align: center;
+}
+
+#home-page {
+    padding: 0;
+}
+
 ul {
     list-style-type: none;
     margin:0;
@@ -236,9 +250,18 @@ ul {
     background-color:  #f3f3f3 ;
     bottom: 0;
 }
+
+
+
 .home {
-    height: 100%;
+    height: 100vh;
     background-color:#E5E5E5 ;
+    top: 0%;
+}
+
+.option-btn {
+    position: absolute;
+    left: 94%
 }
 
 li {
@@ -294,6 +317,7 @@ li:last-child{
     background-color: #E5E5E5;
     height: 100%;
     top: 0;
+    width: 100vw;
     
 }
 
@@ -303,6 +327,7 @@ li:last-child{
     color: black;
     padding: 15px;
     width: 80vw;
+    display: block;
     height: 4vw;
     background-color: rgba(255, 255, 255, 0.5);
     position: relative;
@@ -326,17 +351,19 @@ li:last-child{
 .large-input{
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
-    color:black;
+    color: black;
     padding: 15px;
     width: 80vw;
-    height: 30vh;
+    display: block;
+    height: 4vw;
     background-color: rgba(255, 255, 255, 0.5);
     position: relative;
     margin: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: 2vh;
     top: 10vh;
-    margin: 2.5vh;
+    margin: 2.5vh ;
+
 }
 
 .large-input::placeholder{
@@ -344,7 +371,7 @@ li:last-child{
 }
 
 .card-bar{
-    width:100%;
+    width:100% ;
     height: 6vh;
     background-color: white;
 }
@@ -392,7 +419,7 @@ li:last-child{
 
 .card-template{
     width: 87vw;
-    max-width: 900px;
+    max-width: 800px;
     min-height: 85px;
     background-color: white ;
     padding: 10px;
@@ -531,7 +558,7 @@ li:last-child{
 
 .group-card {
     width: 87vw;
-    max-width: 1000px;
+    max-width: 800px;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -1073,3 +1100,92 @@ button #edit-profile {
 }
 
 /* SEARCH END */
+
+/* NOTIFS START */
+.requestElement {
+    width: 100%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.requestElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.requestElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.requestElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
+.accept {
+    height: 80px;
+    width: 210px;
+    background-image: url(./assets/add-button.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60px 60px;
+    background-color: rgb(152, 121, 197);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    border-style: hidden;
+    border-radius: 40px;
+    float: right;
+    bottom: 188px;
+    margin-right: 120px;
+}
+
+.accept:hover {
+    background-color: rgba(151, 121, 197, 0.863);
+}
+
+.deny {
+    height: 40px;
+    width: 40px;
+    background-image: url(./assets/denyX.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40px 40px;
+    border: hidden;
+    position: relative;
+    float: right;
+    bottom: 165px;
+    background-color: white;
+    left: 290px;
+}
+
+.deny:hover {
+    background-image: url(./assets/denyXRed.png);
+}
+
+
+
+/* NOTIFS END */
