@@ -45,16 +45,16 @@ function createCard (establishment, drink, description) {
 
 /* Accessing server and putting information into cards // taken from Johnothan's friendpage */
 const request = new XMLHttpRequest()
-request.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true)
+request.open('GET', '/drinks', true)
 request.responseType = 'json'
 request.send()
 
 request.onload = function () {
   const cards = request.response.cards
   for (let i = 0; i < cards.length; i++) {
-    const x = cards[i]['Name of Establishment']
-    const y = cards[i]['Name of Order']
-    const z = cards[i].Description
+    const x = cards[i]['establishment']
+    const y = cards[i]['name']
+    const z = cards[i]['desc']
     createCard2(x, y, z, '../assets/pfp-placeholder.png')
     console.log(i)
   }
