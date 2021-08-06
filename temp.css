@@ -6,6 +6,8 @@ html {
     min-height: 100%;
     background-color: #EFEFEF;
 } 
+
+
 /* EDIT START */
 
 
@@ -227,12 +229,6 @@ ul {
 }
 
 
-
-.home {
-    height: 100vh;
-    background-color:#E5E5E5 ;
-    top: 0%;
-}
 
 .option-btn {
     position: absolute;
