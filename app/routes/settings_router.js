@@ -7,4 +7,6 @@ router.get('/', settingsController.settingsPage)
 
 router.post('/updateEmail', settingsController.updateEmail)
 
+router.post('/updatePassword', settingsController.updatePassword)
+
 module.exports = router

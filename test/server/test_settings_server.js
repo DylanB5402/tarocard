@@ -50,8 +50,9 @@ describe('Test Server', function () {
         new_email: 'user2@email.com',
         confirm_email: 'user2@email.com'
       }).end((err, res) => {
-        // console.log(res.text)
-        // assert.equal(2,3)
+        if (err) {
+          console.log(err)
+        }
         assert.equal(res.text, 'success')
         return done()
       })
@@ -61,8 +62,5 @@ describe('Test Server', function () {
   after((done) => {
     taroApp.server.close(done)
     taroApp.store.knex.destroy()
-    // setTimeout(() => {
-    //     wtf.dump()
-    // }, 1000)
   })
 })

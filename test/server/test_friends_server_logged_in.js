@@ -1,4 +1,4 @@
-const { assert, expect } = require('chai')
+const { assert } = require('chai')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')
 chai.use(assertArrays)
@@ -6,7 +6,7 @@ const session = require('supertest-session')
 
 const app = require('../../app/app')
 
-let authenticatedSession = null
+// let authenticatedSession = null
 
 describe('Test Server', function () {
   const taroApp = new app.TaroCardApp()

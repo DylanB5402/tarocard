@@ -8,18 +8,23 @@ const tempEngine = new templateEngine.TemplateEngine()
  * @param {!import('express').Response} res
  */
 exports.signup = (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
-  const repeatPassword = req.body.repeatPassword
-  const username = req.body.username
-  if (password !== repeatPassword) {
-    res.redirect('/signup.html')
-  } else {
-    const result = userDB.insertNewUser(email, password, username)
-    if (result !== -1) {
-      userDB.logInUser(req, email, password)
-    }
+  if (req.session.loggedin) {
+    // res.append({'already-logged-in' : true})
     res.redirect('/profile/')
+  } else {
+    const email = req.body.email
+    const password = req.body.password
+    const repeatPassword = req.body.repeatPassword
+    const username = req.body.username
+    if (password !== repeatPassword) {
+      res.redirect('/signup.html')
+    } else {
+      const result = userDB.insertNewUser(email, password, username)
+      if (result !== -1) {
+        userDB.logInUser(req, email, password)
+      }
+      res.redirect('/profile/')
+    }
   }
 }
 

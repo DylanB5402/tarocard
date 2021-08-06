@@ -9,10 +9,8 @@ class UserDatabase {
    */
   constructor (database) {
     if (database === undefined) {
-      // console.log(config.db)
       this.db = new Database(config.db)
     } else {
-      // this.db = new Database(database)
       this.db = database
     }
     this.createUserTable()
@@ -175,6 +173,12 @@ class UserDatabase {
 
   getUserDataByID (uid) {
     return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+  }
+
+  updatePassword (uid, password) {
+    const hashedPassword = this.encryptPassword(password)
+    const info = this.db.prepare(`UPDATE users SET password = '${hashedPassword}' WHERE uid = ${uid};`).run()
+    return info.changes > 0
   }
 }
 
