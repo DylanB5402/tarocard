@@ -65,7 +65,24 @@ exports.editDrinkCard = (req, res) => {
 exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid // Get uid from cookie session
-    const query = favDrinksDB.getAllDrinks(uid) // temp, will format better in future
-    res.send(query) // display as json
+    const allDrinks = favDrinksDB.getAllDrinks(uid) // temp, will format better in future
+    const drinkArray = []
+
+    // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
+    // Iterate through the array of drinks and make objects out of their properties
+    allDrinks.forEach((drink) => {
+      drinkArray.push({
+        name: drink.drink_name,
+        desc: drink.drink_desc,
+        establishment: drink.establishment_id,
+        'image url': drink.drink_img,
+        id: drink.drink_id
+      })
+    })
+
+    // send the custom drink array as a json
+    res.json({ drinks: drinkArray, success: true })
+  } else {
+    res.json({ drinks: [], success: false })
   }
 }

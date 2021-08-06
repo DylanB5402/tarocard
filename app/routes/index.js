@@ -38,6 +38,6 @@ router.post('/:drinkId/edit_drink_card', drinkController.editDrinkCard)
 
 // DEBUG
 // GET request to view all drinks corresponding to one user
-router.get('/debug_display_drinks', drinkController.getAllDrinks)
+router.get('/drinks', drinkController.getAllDrinks)
 
 module.exports = router

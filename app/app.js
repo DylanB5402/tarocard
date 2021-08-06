@@ -6,6 +6,7 @@ const indexRouter = require('./routes/index')
 const debugRouter = require('./routes/debug_router')
 const uploadRouter = require('./routes/upload_router')
 const friendRouter = require('./routes/friend_router')
+const groupsRouter = require('./routes/groups_router')
 
 class TaroCardApp {
   constructor () {
@@ -30,6 +31,7 @@ class TaroCardApp {
     this.app.use('/debug', debugRouter)
     this.app.use('/upload', uploadRouter)
     this.app.use('/friends', friendRouter)
+    this.app.use('/groups', groupsRouter)
 
     // 404, page can't be found
     this.app.use(function (req, res) {
