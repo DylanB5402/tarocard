@@ -1,5 +1,5 @@
 let request = new XMLHttpRequest();
-request.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true);
+request.open('GET', '/drinks', true);
 request.responseType = 'json';
 request.send();
 
