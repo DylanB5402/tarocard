@@ -5,7 +5,7 @@
 
 const Database = require('better-sqlite3')
 const fs = require('fs')
-const config = require('../../config.json')
+const config = require('../../../config.json')
 
 /** A class that manages the tags database table. */
 class TagsDatabase {
@@ -75,29 +75,30 @@ class TagsDatabase {
    * @returns {boolean} true if successful, false if not
    */
   editTag (id, name, desc) {
-    let edited = false
     let stmtString = 'UPDATE tags SET '
+    let parameters = []
 
     if (name !== undefined) {
-      edited = true
-      stmtString += `tag_name = '${name}',`
+      stmtString += `tag_name = ?,`
+      parameters.push(name) 
     }
 
     if (desc !== undefined) {
-      edited = true
-      stmtString += `tag_desc = '${desc}',`
+      stmtString += `tag_desc = ?,`
+      parameters.push(desc) 
     }
 
     // Remove last comma
     stmtString = stmtString.substring(0, stmtString.length - 1)
     stmtString += ' WHERE tag_id = ?'
+    parameters.push(id) 
 
-    if (!edited) {
+    if (parameters.length === 1) {
       return false
     }
 
     const stmt = this.db.prepare(stmtString)
-    const query = stmt.run(id)
+    const query = stmt.run(...parameters)
 
     if (query.changes === 1) {
       return true

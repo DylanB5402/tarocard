@@ -6,7 +6,7 @@
 const Database = require('better-sqlite3')
 const establishmentsDatabase = require('./establishments_database')
 const fs = require('fs')
-const config = require('../../config.json')
+const config = require('../../../config.json')
 
 /** A class that manages the drinks database table. */
 class DrinksDatabase {
@@ -22,7 +22,7 @@ class DrinksDatabase {
   createTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS drinks ' +
             '(drink_id INTEGER PRIMARY KEY AUTOINCREMENT, drink_name TEXT,' +
-            'drink_desc TEXT, establishment_id INTEGER, drink_img TEXT)')
+            'drink_desc TEXT, establishment_id TEXT, drink_img TEXT)')
     stmt.run()
   }
 
@@ -34,15 +34,15 @@ class DrinksDatabase {
      * @param {String=} img an optional image source location
      * @returns {Integer} Id of the insert, null if none
      */
-  addDrink (name, desc = '', establishment = -1, img = '') {
+  addDrink (name, desc = '', establishment = null, img = '') {
     if (!fs.existsSync(img)) {
       img = ''
     }
 
-    if (establishment !== -1) {
+    if (establishment !== null) {
       const establishmentsDb = new establishmentsDatabase.EstablishmentsDatabase(this.db)
       if (!establishmentsDb.isExist(establishment)) {
-        establishment = -1
+        establishment = null
       }
     }
 
@@ -88,37 +88,39 @@ class DrinksDatabase {
    * @returns {boolean} true if successful, false if not
    */
   editDrink (id, name, desc, establishment) {
-    let edited = false
+    let parameters = []
     let stmtString = 'UPDATE drinks SET '
 
     if (name !== undefined) {
-      edited = true
-      stmtString += `drink_name = '${name}',`
+      stmtString += `drink_name = ?,`
+      parameters.push(name)
     }
 
     if (desc !== undefined) {
-      edited = true
-      stmtString += `drink_desc = '${desc}',`
+      stmtString += `drink_desc = ?,`
+      parameters.push(desc)
     }
 
     if (establishment !== undefined) {
       const establishmentsDb = new establishmentsDatabase.EstablishmentsDatabase(this.db)
       if (establishmentsDb.isExist(establishment)) {
-        edited = true
-        stmtString += `establishment_id = '${establishment}',`
+        stmtString += `establishment_id = ?,`
+        parameters.push(establishment)
       }
     }
 
     // Remove last comma
     stmtString = stmtString.substring(0, stmtString.length - 1)
     stmtString += ' WHERE drink_id = ?'
+    parameters.push(id)
 
-    if (!edited) {
+    if (parameters.length == 1) {
       return false
     }
 
     const stmt = this.db.prepare(stmtString)
-    const query = stmt.run(id)
+
+    const query = stmt.run(...parameters)
 
     if (query.changes === 1) {
       return true

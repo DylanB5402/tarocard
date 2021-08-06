@@ -6,7 +6,7 @@
 const Database = require('better-sqlite3')
 const drinksDatabase = require('./drinks_database')
 const tagsDatabase = require('./tags_database')
-const config = require('../../config.json')
+const config = require('../../../config.json')
 
 /** A class that manages the drinks tags database relations table. */
 class DrinksTagsDatabase {
@@ -106,16 +106,19 @@ class DrinksTagsDatabase {
             'GROUP BY drinks_tags.drink_id ' +
             'HAVING '
 
+    let parameters = []
     for (let i = 0; i < ids.length; i++) {
       if (i !== ids.length - 1) {
-        stmtString += `SUM(tags.tag_id = '${ids[i]}')` + ' AND '
+        stmtString += `SUM(tags.tag_id = ?)` + ' AND '
+        parameters.push(ids[i])
       } else {
-        stmtString += `SUM(tags.tag_id = '${ids[i]}')`
+        stmtString += `SUM(tags.tag_id = ?)`
+        parameters.push(ids[i])
       }
     }
 
     const stmt = this.db.prepare(stmtString)
-    const query = stmt.all()
+    const query = stmt.all(...parameters)
     return query
   }
 

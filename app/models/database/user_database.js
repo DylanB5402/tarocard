@@ -1,6 +1,6 @@
 const Database = require('better-sqlite3')
 const bcrypt = require('bcrypt')
-const config = require('../../config.json')
+const config = require('../../../config.json')
 
 class UserDatabase {
   /**

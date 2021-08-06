@@ -7,7 +7,7 @@ const multer = require('multer')
 const { v4: uuidv4 } = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const config = require('../config.json').upload
+const config = require('../../config.json').upload
 
 /** A class that manages the uploading of files. */
 class UploadFile {

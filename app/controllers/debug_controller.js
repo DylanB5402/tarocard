@@ -7,12 +7,14 @@ const friendDb = new friendDatabase.FriendDatabase()
 const uploadFile = require('../models/upload_file')
 const drinksDatabase = require('../models/database/drinks_database')
 const tagsDatabase = require('../models/database/tags_database')
+const establishmentsDatabase = require('../models/database/establishments_database')
 
 const upload = new uploadFile.UploadFile()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
+const establishmentsDB = new establishmentsDatabase.EstablishmentsDatabase()
 
-const config = require('../config.json')
+const config = require('../../config.json')
 
 exports.home = (req, res) => {
   // console.log(req)
@@ -169,4 +171,37 @@ exports.drinksReset = (req, res) => {
   drinksDB.addDrink('drink3')
 
   res.send(drinksDB.toString())
+}
+
+exports.establishments = (req, res) => {
+  // get everything
+  let establishments = establishmentsDB.searchEstablishment('') 
+  let style = 'style="height: 100%; width: 100%; object-fit: cover"'
+  let htmlBuilder = `
+    <p style="font-size:100px">${establishments.length} establishments found</p>
+  `
+
+  establishments.forEach((establishment) => {
+    htmlBuilder += `<div style="display: flex; overflow: hidden; background-color: #b19cd9; border-style: double;">
+      <h1>${establishment.name} </h1>
+      <h2>(${establishment.address1})</h2>
+      <ul>
+        <li>Alias: ${establishment.alias}</li>
+        <li>Phone: ${establishment.phone}</li>
+        <li>Display Phone: ${establishment.display_phone}</li>
+        <li>Review Count: ${establishment.review_count}</li>
+        <li>Rating: ${establishment.rating} Stars</li>
+        <li>Address 1: ${establishment.address1}</li>
+        <li>Address 2: ${establishment.address2}</li>
+        <li>Address 3: ${establishment.address3}</li>
+        <li>City: ${establishment.city}</li>
+        <li>Zip Code: ${establishment.zip_code}</li>
+        <li>Country: ${establishment.country}</li>
+        <li>State: ${establishment.state}</li>
+        <li>Price: ${establishment.price}</li>
+      </ul>
+      <img ${style} src=${establishment.img}>
+    </div>`
+  })
+  res.send(htmlBuilder)
 }
