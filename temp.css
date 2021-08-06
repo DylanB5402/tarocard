@@ -271,8 +271,6 @@ ul {
     bottom: 0;
 }
 
-
-
 .option-btn {
     position: absolute;
     left: 94%
@@ -433,10 +431,11 @@ li:last-child{
 
 .card-template{
     width: 87vw;
+    height: 14vh;
     max-width: 800px;
     min-height: 85px;
     background-color: white ;
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -464,23 +463,22 @@ li:last-child{
 
 .tag-container p{
     margin: 10px;
-    font-family: 'Roboto',sans-serif;
 }
 
 .card-template h1{
     width: 75%;
-    font-size: 20px;
+    font-size: 3vh;
     margin-top: 0px;
 }
 
 .card-template h2{
     width: 75%;
-    font-size: 15px;
+    font-size: 2vh;
     margin-top: 5px;
 }
 .card-template .description{
     width: 75%;
-    font-size: 13px;
+    font-size: 1.7vh;
     font-weight: 100;
     margin-top: 15px;
 }

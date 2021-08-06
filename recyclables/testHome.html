@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color:#E5E5E5">
     <head>
-        <title>Taro Cards</title>
+        <link rel="icon" href="..\assets\TaroCardTransparent 1.png">
 
-        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+        <title> Taro Cards </title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="../temp.css">
+        <!--<link rel="stylesheet" href="./home.css">-->
+        <link rel="stylesheet" href="..\temp.css">
     </head>
-    
-    <div class="page-header" id="home-page">
-        <h1>Taro Cards</h1>
+
+    <div class="page-header">
+        <span>Taro Cards</span>
     </div>
+
 
     <body class="home">
         <!-- Modal Sheet for button -->
         <div id="modal-sheet" class="modal">
             <div class="modal-content">
                 <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
-                <button onclick="openCardCreate()" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
+                <button onclick='openCardCreate("id01")' class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
                 <a class="stuff" href="../friendsPage/Friends_Page.html"> <img src="../assets/group-order.png"> <p style="text-decoration: none;"></p> Group Order </p></a>
             </div>
         </div>
@@ -32,7 +35,7 @@
         <!-- Hidden form for card creation -->
         <form action="/cards" class="form-container" id="id01" method="POST">
             <div class="card-bar">
-                <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >&times;</button>
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
                 <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
             </div>
             <div class="userInput">
@@ -41,6 +44,21 @@
                 <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
             </div>
         </form>
+
+        <form action="/cards" class="form-container" id="updateCard" method="PUT">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
+                <button type=button style="left: 10px; position: relative; margin-top: auto;" > Delete </button>
+                <button class="post-button" style="left: 70vw;"value="submit"> Update </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Update Card " id="estabInput" name="=establishment" class="small-input">
+                <input type="text" placeholder="Name of Order" id="orderInput"  name="nameOfOrder" class="small-input" >
+                <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
+
+
 
         <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
         <!-- Card Creation Form (Pop up? )-->
@@ -67,22 +85,20 @@
         <button id="add-card-btn" alt="add card button" > + </button> 
     </body>
 
-    
-
     <div class="navbar" id="myNavbar">
-        <a class="active" href="#">
+        <a class="active" href="#"></i>
             <img id="navHomeIcon" src="../assets/home.png" />
         </a>
     
-        <a href="../SearchUsers/SearchUsers.html">
+        <a href="../SearchUsers/SearchUsers.html"></i>
             <img id="navSearchIcon" src="../assets/search.png" />
         </a>
     
-        <a href="../Notifications/Notifications.html">
+        <a href="../Notifications/Notifications.html"></i>
             <img id="navNotifsIcon" src="../assets/notifs.png" />
         </a>
     
-        <a href="../Profile page/Profile_Page_TaroCards.html">
+        <a href="../Profile page/Profile_Page_TaroCards.html"></i>
             <img id="navProfileIcon" src="../assets/profile.png" />
         </a>
     </div>
