@@ -53,7 +53,6 @@ Credits: Dylan Barva & Peter Liu for skeleton code
    */
   getGroup (uid, groupId) {
     const userDB = new userDatabase.UserDatabase() // Using methods from user_database
-    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
 
     // Safety check
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
@@ -73,7 +72,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
   /**
    * TODO:
    * Get all Groups associated with a specific user
-   * Want to return group card info i.e. just id and name
+   * Want to return group card info i.e. just id and name to display as preview
    * @param {Integer} uid
    * @returns {Array[Object]} an array of objects containing group id and group name
    */
