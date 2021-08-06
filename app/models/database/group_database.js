@@ -98,40 +98,42 @@ Credits: Dylan Barva & Peter Liu for skeleton code
    /**
     * Checks if a group already exists
     * @param {Integer} groupId id of group
-    * @return {Boolean} false if DNE, true if it does
+    * @return {Integer} 0 if DNE, any integer > 0 if it does
     */
   isExist (groupId) {
     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM groups WHERE group_id = ? `)
     const query = stmt.get(groupId) // get runs the statement
     const numEntries = query.count
-    return numEntries > 0
+    return numEntries
   }
  
   /**
   * Creates a new group
   * Duplicate group names are allowed
   * Upon creating a new group, all initial fields for friend id, drink id are null
+  * IDEA: open a popup where the user enters the name of the group then proceed
+  * to adding friends drinks to the group
   * @param {Integer} uid
   * @param {String} groupName initially empty string
   * @param {Integer} friendUID initially -1 because this method only creates new group
   * @param {Integer} friendsDrinkID same as friendUID
-  * @returns {Boolean} true if successful, false if failed
+  * @returns {Integer} id of group
   */
   createNewGroup (uid, groupName = '', friendUID = -1, friendsDrinkID = -1) {
     const userDB = new userDatabase.UserDatabase()
 
     // Check if user id exists in other DBs in the first place
     if (!userDB.getUserByUID(uid)) {
-      return false
+      return null
     } else {
       const stmt = this.db.prepare('INSERT INTO groups (uid, group_name, friend_uid, friends_drink_id)' +
               `VALUES (?, ?, ?, ?)`)
       const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
 
       if (query.changes === 1) {
-        return true
+        return query.lastInsertRowid
       } else {
-        return false
+        return null
       }
     }
   }
@@ -157,15 +159,28 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 
         // Get group name for data insertion
         const nameStmt = this.db.prepare('SELECT group_name FROM groups WHERE' +
-                ' group_id = ?')
+        ' group_id = ?')
         const groupName = nameStmt.get(groupId).group_name
 
-        // insert user-drink pair into table
-        const stmt = this.db.prepare('INSERT INTO groups ' + 
-                '(group_id, uid, group_name, friend_uid, friends_drink_id)' +
-                `VALUES (?, ?, ?, ?, ?)`)
-        const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
-  
+
+        // Cover case of brand new group (friend id and drink id = -1)
+        const numEntries = this.isExist(groupId)
+        if (numEntries === 1) {
+          
+          // update first and only entry where ids = -1
+          const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
+                  'friends_drink_id = ? WHERE group_id = ?') 
+          const firstQuery = firstStmt.run(friendUID, drinkId, groupId)
+        }
+        else {
+          
+          // insert user-drink pair into table
+          const stmt = this.db.prepare('INSERT INTO groups ' + 
+                  '(group_id, uid, group_name, friend_uid, friends_drink_id)' +
+                  `VALUES (?, ?, ?, ?, ?)`)
+          const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
+        }
+
         // Check to make sure table was changed
         if (query.changes === 1) {
           return true
