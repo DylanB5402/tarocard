@@ -58,12 +58,17 @@ request.responseType = 'json';
 request.send();
 
 request.onload = function() {
-    const cards = request.response.cards;
+    /* This should be the array of cards */
+    const user = request.response.session; // 
+    const cards = request.response.cards; 
+    /*getAllDrinks(uid) */
+
     for(let i = 0; i < cards.length; i++) {
-        let x =  cards[i]["Name of Establishment"];
-        let y = cards[i]["Name of Order"];
-       let z =cards[i]["Description"];
-       createCard2(x,y,z,"../assets/pfp-placeholder.png");
+        let x =  cards[i]["Name of Establishment"]; //establishment_id
+        let y = cards[i]["Name of Order"]; // drink_name
+       let z =cards[i]["Description"]; //drink_desc
+       /* let u = cards[i][drink_id]*/
+       createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img
        console.log(i);
     }
 }
@@ -110,6 +115,9 @@ request.onload = function() {
     options.onclick = function(event){
         openCardCreate("updateCard");
         let form = document.getElementById('updateCard');
+        /* 
+        form.setAttribute("action", "/{id}/edit_drink_card");
+        */
         let estabInput = document.getElementById("estabInput");
         estabInput.value = establishment;
         let orderInput = document.getElementById("orderInput");
@@ -129,11 +137,11 @@ request.onload = function() {
 }
 
 /* Function to Create a Group Card Div */ 
-
+/* add parameters so that it goes to a different page depending on group order */
 function createGroupCard(){
     const link = document.createElement('a'); // creates a link 
     link.style.textDecoration = 'none'
-    link.href="groupOrder.html";
+    link.href="groupOrder-edit.html";
     const container = document.createElement('div') // creates div element
     link.appendChild(container); //this will put the div into the link
 

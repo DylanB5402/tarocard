@@ -9,7 +9,7 @@ request.onload = function() {
         let x =  cards[i]["Name of Establishment"];
         let y = cards[i]["Name of Order"];
        let z =cards[i]["Description"];
-       createCard2(x,y,z,"../assets/pfp-placeholder.png");
+       createCard(x,y,z,"../assets/pfp-placeholder.png");
        console.log(i);
     }
 }
@@ -18,8 +18,8 @@ request.onload = function() {
 *  Styling needed for each one, thus the class added to them so everyone might
 *  need to add the stylesheet for cards if they plan to have cards
 */
-
- function createCard2(establishment, drink, description, image){
+/* add the card id */
+ function createCard(establishment, drink, description, image){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -47,8 +47,38 @@ request.onload = function() {
     let pfp = document.createElement("img");
     pfp.classList.add("pfp-pic");
     pfp.setAttribute("src", image);
+
+
+    /* Trash Icon Button */
+    let deleteBtn  = document.createElement('img');
+    deleteBtn.src="../assets/trash-icon.png";
+    deleteBtn.setAttribute('width','30px')
+    deleteBtn.style.display = "inline-block";
+    deleteBtn.style.position = "absolute";
+    deleteBtn.style.right = "0px";
+    deleteBtn.style.margin = "10px";
+
+    deleteBtn.onclick = function(){
+        console.log("whats good bro");
+        container.style.display = "none";
+        /*Delete based on the cardID */
+
+        const url = "https://my-json-server.typicode.com/shadydrako/cardData/cards" /* +"/" + userID */
+
+        const deleteData = async () => {
+            const response = await fetch('url',{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: null
+            });
+        }
+    }
+
     
     tagContainer.appendChild(pfp);
+    container.appendChild(deleteBtn);
 
     container.appendChild(estab);
     container.appendChild(d);
