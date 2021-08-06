@@ -426,13 +426,11 @@ li:last-child{
     top: 1vh;
     background-color: #9879C5;
     color: white;
-    font-family: 'Roboto',sans-serif;
     border-radius: 75px;
 }
 
 /* Styling for the Cards */
 .fonts{
-    font-family: 'Robot',sans-serif;
     margin: 10px 10px 0px 10px;
     word-wrap: break-word;
     font-size: 3vh;
@@ -494,14 +492,15 @@ li:last-child{
 
 
 .pfp-pic{
-    width: 3vw;
-    height: 3vw;
+    width: 8vw;
+    height: 8vw;
     min-height: 30px;
     min-width: 30px;
-    border-radius: 75px;
+    border-radius: 50%;
     position: absolute;
     left: 85%;
     bottom: 5%;
+    border: solid black; /* temp | only for visibility */
 }
 
 /* Modal Box/ Content CSS */
