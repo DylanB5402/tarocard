@@ -18,6 +18,8 @@ class TaroCardUser {
         if (err) {
           console.log(err)
         }
+        // console.log(res)
+        // console.log(this.session.cookies)
         if (callback !== undefined) {
           return callback(res)
         }
@@ -26,6 +28,7 @@ class TaroCardUser {
 
   getLogInStatus(callback) {
     this.session.get('/debug/loggedin').end((err, res) => {
+      // console.log(res)
       if (err) {
         console.log(err)
       }
