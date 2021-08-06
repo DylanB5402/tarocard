@@ -5,9 +5,27 @@
     </head>
     <body>
         <h1>Upload Image</h1>
+        <script>
+            const action = '/debug/upload/drinks'
+            function changeAction1() {
+                console.log("changed 1")
+                document.getElementById("myform").action = `${action}/1`
+            }
+            function changeAction2() {
+                console.log("changed 2")
+                document.getElementById("myform").action = `${action}/2`
+            }
+            function changeAction3() {
+                console.log("changed 3")
+                document.getElementById("myform").action = `${action}/3`
+            }
+        </script>
+        <button onclick="changeAction1()">1</button>
+        <button onclick="changeAction2()">2</button>
+        <button onclick="changeAction3()">3</button>
         <!-- this form sends a post to /upload -->
-        <form method="post" enctype="multipart/form-data" action="/upload/avatar">
-          <input type="file" name="avatar">
+        <form id="myform" method="post" enctype="multipart/form-data">
+          <input type="file" name="file">
           <input type="submit" value="Submit">
         </form>
     </body>

@@ -32,4 +32,16 @@ router.post('/adduser', debugController.addUser)
 
 // router.get('/populateUsers', debugController.populateUsers)
 
+// POST request for upload.
+router.post('/upload/:uploadType/:uploadId', debugController.upload)
+
+// GET request to view drinks database
+router.get('/drinks', debugController.drinks)
+
+// GET request to view uploaded images in drinks database
+router.get('/drinks/images', debugController.drinksImages)
+
+// GET request to reset drinks database
+router.get('/drinks/reset', debugController.drinksReset)
+
 module.exports = router
