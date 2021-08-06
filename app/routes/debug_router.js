@@ -30,6 +30,5 @@ router.post('/addFriend', debugController.addFriend)
 
 router.post('/adduser', debugController.addUser)
 
-// router.get('/populateUsers', debugController.populateUsers)
-
+router.get('/loggedin', debugController.loggedIn)
 module.exports = router

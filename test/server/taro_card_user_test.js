@@ -14,10 +14,15 @@ describe('Test Server', function () {
 
   it('test signup', function (done) {
     taroUser.signUpUser('user@email.com', 'password', 'user', (res) => {
-      console.log(687)
+      assert.equal(res.text, 'Found. Redirecting to /profile/')
+      return done()
+    })
+  })
+
+  it('test logged in', function(done) {
+    taroUser.getLogInStatus((res) => {
       console.log(res.text)
-      console.log(res)
-      assert.equal(1, 2)
+      assert.equal(JSON.parse(res.text)['user-logged-in'], true)
       return done()
     })
   })

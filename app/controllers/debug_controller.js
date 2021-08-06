@@ -104,3 +104,15 @@ exports.addUser = (req, res) => {
   }
   res.redirect('/debug/users')
 }
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.loggedIn = (req, res) => {
+  if (req.session.loggedin) {
+    res.json({"user-logged-in" : true, "uid" : req.session.uid})
+  } else {
+    res.json({"user-logged-in" : false, "uid" : -1})
+  }
+}

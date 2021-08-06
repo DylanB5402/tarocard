@@ -15,7 +15,7 @@ class TaroCardUser {
         username: username
       }).end(
       function (err, res) {
-        if (err !== null) {
+        if (err) {
           console.log(err)
         }
         if (callback !== undefined) {
@@ -24,7 +24,14 @@ class TaroCardUser {
       })
   }
 
-//   }
+  getLogInStatus(callback) {
+    this.session.get('/debug/loggedin').end((err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      return callback(res)
+    })
+  }
 }
 
 module.exports = { TaroCardUser }
