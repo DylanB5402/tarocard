@@ -5,7 +5,7 @@
     "formFileName" : "file",
     "expressStaticDir" : "static",
     "uploadPath" : "assets/uploads",
-    "allowedExtImage" : "jpeg|jpg|png",
+    "allowedExtImage" : "jpeg|jpg|png|gif",
     "allowedExtText" : "txt",
 
     "dir" : {
