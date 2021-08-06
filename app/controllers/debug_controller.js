@@ -113,6 +113,8 @@ exports.addUser = (req, res) => {
     userDB.insertNewUser(username, 'password', username)
   }
   res.redirect('/debug/users')
+}
+
 /// DEBUG - UPLOAD IMAGES ///
 
 exports.upload = (req, res) => {
