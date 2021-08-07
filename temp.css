@@ -283,7 +283,7 @@ ul {
 .option-btn {
     position: absolute;
     left: 94%;
-    z-index: 2;
+    z-index: 0;
     height: 40px;
     top: 10px;
 }
