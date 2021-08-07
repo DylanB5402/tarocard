@@ -40,11 +40,12 @@ function populateFriends(obj) {
         divCopy.querySelector("h3",true).textContent = users[i]["username"];
 
         /* Added Button to add to friends list */
-        let gOAddBtn = document.createElement("h1");
-        gOAddBtn.innerHTML = "HELLO";
 
         divAll.appendChild(divCopy);
-        divAll.appendChild(gOAddBtn);
         body.appendChild(divAll);
     }
+}
+
+function testBtn(){
+    console.log("i'm gonna cry");
 }

@@ -1240,3 +1240,14 @@ button #edit-profile {
 
 
 /* NOTIFS END */
+
+/* Group Order Friends */
+
+.btn-circle.btn-xl {
+    width: 100px;
+    height: 100px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 55px;
+}

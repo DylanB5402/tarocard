@@ -5,8 +5,10 @@
     <head>
         <title>Friends Page | Taro Cards</title>
         <link rel="stylesheet" href="..\Global.css">
+        <link rel="stylesheet" href="..\temp.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="../friendsPage/jquery-3.6.0.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
         <link rel="icon" href="..\assets\TaroCardTransparent 1.png">
 
@@ -27,32 +29,6 @@
                     <input id="searchBar" type="text" placeholder="Search Friends..." name="searchBar">
                     <button id="searchBarButton" type="button" ><i class="fa fa-search fa-3x" ></i></button>
                 </form>
-
-                <script>
-                    $(document).ready(function(){
-                        $("#searchBarButton").click(function(){        
-                            $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
-                            {
-                                "string": $("#searchBar").val()
-                            }
-                            ,function(data, status, xhr) {
-                                searchFriends(data);
-                            })
-                        });
-                    });
-
-                    $(document).ready(function(){
-                        $("#searchBarButton").keypress(function(){        
-                            $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
-                            {
-                                "string": $("#searchBar").val()
-                            }
-                            ,function(data, status, xhr) {
-                                searchFriends(data);
-                            })
-                        });
-                    });
-                </script>
             </div>
 
             <template id="friendsTemp">
@@ -60,14 +36,45 @@
                     <h1 id="letterHeading"></h1>
                     <hr id="headingLine">
                 </div>
-                <div class="friendElement">
-                    <img>
+                <div class="friendElement" style="position: relative; display: block;">
+                    <img src="../assets/pfp-placeholder.png">
                     <h2></h2>
                     <h3></h3>
-                    <input type="button" value="+">
+                    <button type="button" class="btn btn-info btn-circle btn-xl" onclick="testBtn()" style="right: 1%; position: absolute; top: 30%;"><i class="glyphicon glyphicon-ok"></i></button>
                 </div>
             </template>
+            <div class="friendElement" style="position: relative;display:block">
+                <img src="../assets/pfp-placeholder.png"> 
+                <h2></h2>
+                <h3></h3>
+                <button type="button" class="btn btn-info btn-circle btn-xl" style="right: 1%; position: absolute; top: 30%;"><i class="glyphicon glyphicon-ok"></i></button>
+            </div>
         </div>
     </body>
     <script type="text/javascript" src="./gO-friends.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#searchBarButton").click(function(){        
+                $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                {
+                    "string": $("#searchBar").val()
+                }
+                ,function(data, status, xhr) {
+                    searchFriends(data);
+                })
+            });
+        });
+
+        $(document).ready(function(){
+            $("#searchBarButton").keypress(function(){        
+                $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
+                {
+                    "string": $("#searchBar").val()
+                }
+                ,function(data, status, xhr) {
+                    searchFriends(data);
+                })
+            });
+        });
+    </script>
 </html>
