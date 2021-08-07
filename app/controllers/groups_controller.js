@@ -41,3 +41,10 @@ exports.createGroup = (req, res) => {
     // redirect to edit group stage for a specific group
   }
 }
+
+exports.addToGroup = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    
+  }
+}

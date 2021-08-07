@@ -38,7 +38,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
    */
   createGroupTable () {
     const stmt = this.db.prepare('CREATE TABLE IF NOT EXISTS groups' +
-      '(group_id INTEGER AUTOINCREMENT, uid INTEGER, group_name TEXT,' +
+      '(group_id INTEGER, uid INTEGER, group_name TEXT,' +
       ' friend_uid INTEGER, friends_drink_id INTEGER);')
     stmt.run()
   }
@@ -126,8 +126,8 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     if (!userDB.getUserByUID(uid)) {
       return null
     } else {
-      const stmt = this.db.prepare('INSERT INTO groups (uid, group_name, friend_uid, friends_drink_id)' +
-              `VALUES (?, ?, ?, ?)`)
+      const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
+              `VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)`)
       const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
 
       if (query.changes === 1) {

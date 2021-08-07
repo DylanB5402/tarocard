@@ -45,18 +45,19 @@ function createCard (establishment, drink, description) {
 
 /* Accessing server and putting information into cards // taken from Johnothan's friendpage */
 const request = new XMLHttpRequest()
-request.open('GET', '/drinks', true)
+request.open('GET', '/drinks/', true)
 request.responseType = 'json'
 request.send()
 
 request.onload = function () {
-  const cards = request.response.cards
-  for (let i = 0; i < cards.length; i++) {
-    const x = cards[i]['establishment']
-    const y = cards[i]['name']
-    const z = cards[i]['desc']
+  const cards = request.response.drinks
+  console.log(cards)
+  for (const drinkCard in cards) {
+    console.log(drinkCard)
+    const x = cards[drinkCard]['establishment']
+    const y = cards[drinkCard]['name']
+    const z = cards[drinkCard]['desc']
     createCard2(x, y, z, '../assets/pfp-placeholder.png')
-    console.log(i)
   }
 }
 
@@ -104,4 +105,3 @@ function createCard2 (establishment, drink, description, image) {
   document.getElementById('cardContainer').appendChild(container)
 }
 
-module.export = { createCard2 }
