@@ -5,6 +5,11 @@ const groupDatabase = require('../models/database/group_database')
 const userDB = new userDatabase.UserDatabase()
 const groupDB = new groupDatabase.GroupDatabase()
 
+/**
+ * Gets all the groups for a user
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
 exports.getAllGroups = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
@@ -28,6 +33,12 @@ exports.getAllGroups = (req, res) => {
   }
 }
 
+/**
+ * Creates a brand new group
+ * Do not worry about friendUID and friendsgroupId; they are -1 by default
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
 exports.createGroup = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
@@ -42,9 +53,45 @@ exports.createGroup = (req, res) => {
   }
 }
 
+/**
+ * TODO: Send me the friendUID and drinkId in the req.body!
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
 exports.addToGroup = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    
+    const groupId = req.params.groupId
+    const friendUID = req.body.friendUID
+    const drinkId = req.body.friendDrinkId
+    groupDB.addToGroup(groupId, uid, friendUID, drinkId)
+  }
+}
+
+/**
+ * Removes a group for a user
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
+exports.removeGroup = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const groupId = req.params.groupId
+    groupDB.removeGroup(uid, groupId)
+  }
+}
+
+/**
+ * Removes a user-drink pair from a group
+ * drinkId is found in the body!
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
+exports.removeFromGroup = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const groupId = req.params.groupId
+    const drinkId = req.body.drinkId
+    groupDB.removeFromGroup(uid, groupId, drinkId)
   }
 }
