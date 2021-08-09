@@ -479,7 +479,7 @@ CSS page for ChangePassword and ChangeEmail
     margin-top: 15px;
 }
 
-#Success {
+#SuccessText {
     color: green;
     background-color: lightgreen;
     font-size: 30px;

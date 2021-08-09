@@ -1411,6 +1411,26 @@ button #edit-profile {
     color: #C1C1C1;
 }
 
+#SuccessText {
+    color: green;
+    background-color: lightgreen;
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-bottom: 10px;
+}
+
+#errorText {
+    color: red;
+    font-size: 30px;
+    font-weight: lighter;
+    margin-top: 15px;
+}
+
 /* EMAIL END */
 
 /* PASSWORD START */
