@@ -63,22 +63,15 @@ request.onload = function() {
   /*getAllDrinks(uid) */
   console.log(cards);
   for(let i = 0; i < cards.length; i++) {
-      let x =  cards[i]["Name of Establishment"]; //establishment
-      let y = cards[i]["Name of Order"]; // name
-      let z =cards[i]["Description"]; //desc
-     /* let u = cards[i][drink_id]*/
-
-     /*
-          This is for when we use Alex's stuff
          const cards = request.response.cards;
           for(let i = 0; i < cards.length; i++) {
-              let x =  cards[i]["Name of Establishment"];
-              let y = cards[i]["Name of Order"];
-              let z =cards[i]["Description"];
-              createCard(x,y,z,"../assets/pfp-placeholder.png");
+              let u = cards[i]["drink_id"];
+              let x =  cards[i]["establishment"];
+              let y = cards[i]["name"];
+              let z =cards[i]["desc"];
+              createCard(x,y,z,"../assets/pfp-placeholder.png",u);
               console.log(i);
           }
-     */
      createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img
      console.log(i);
   }
@@ -89,7 +82,7 @@ request.onload = function() {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createCard2(establishment, drink, description, image){
+function createCard2(establishment, drink, description, image, drinkId){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -135,6 +128,9 @@ function createCard2(establishment, drink, description, image){
       orderInput.value = drink;
       let descInput = document.getElementById("descInput");
       descInput.value = description;
+
+      form.action = "/drinks/editDrinkCard/" + drinkId;
+
   }
 
   tagContainer.appendChild(pfp);
