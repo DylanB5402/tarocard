@@ -1,5 +1,4 @@
 const session = require('supertest-session')
-const { use } = require('../../app/routes')
 
 class TaroCardUser {
   constructor (app) {
@@ -32,7 +31,7 @@ class TaroCardUser {
       if (err) {
         console.log(err)
       }
-      if (callback != undefined) {
+      if (callback !== undefined) {
         return callback(res)
       }
     })
@@ -47,8 +46,8 @@ class TaroCardUser {
     })
   }
 
-  getProfile(callback) {
-    this.session.get('/profile').end( (err, res) => {
+  getProfile (callback) {
+    this.session.get('/profile').end((err, res) => {
       if (err) {
         console.log(err)
       }
@@ -56,8 +55,8 @@ class TaroCardUser {
     })
   }
 
-  getProfileData(callback) {
-    this.session.get('/debug/profile').end( (err, res) => {
+  getProfileData (callback) {
+    this.session.get('/debug/profile').end((err, res) => {
       if (err) {
         console.log(err)
       }
@@ -65,7 +64,7 @@ class TaroCardUser {
     })
   }
 
-  sendGetRequest(route, callback) {
+  sendGetRequest (route, callback) {
     this.session.get(route).end((err, res) => {
       if (err) {
         console.log(err)
@@ -74,8 +73,8 @@ class TaroCardUser {
     })
   }
 
-  sendPostRequest(route, formData, callback) {
-    this.session.post(route).send(formData).end( (err, res) => {
+  sendPostRequest (route, formData, callback) {
+    this.session.post(route).send(formData).end((err, res) => {
       if (err) {
         console.log(err)
       }

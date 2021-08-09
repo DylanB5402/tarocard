@@ -124,9 +124,9 @@ exports.loggedIn = (req, res) => {
  */
 exports.currentProfileData = (req, res) => {
   if (req.session.loggedin) {
-    var uid = req.session.uid
+    const uid = req.session.uid
     res.json(userDB.getAllProfileData(uid))
   } else {
-    res.json({'uid' : -1})
+    res.json({ uid: -1 })
   }
 }

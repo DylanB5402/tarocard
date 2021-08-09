@@ -25,7 +25,7 @@ describe('Test Server', function () {
       if (err !== null) {
         console.log(err)
       }
-      authenticatedSession = taroSession
+      // authenticatedSession = taroSession
       assert.equal(res.text, 'Found. Redirecting to /profile/')
       return done()
     })

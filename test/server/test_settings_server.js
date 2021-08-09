@@ -12,24 +12,22 @@ describe('Test Server', function () {
   const taroUser = new TaroCardUser(taroApp.app)
   taroUser.signUpUser('user2@email.com', 'password', 'user2')
 
-  beforeEach( (done) => {
+  beforeEach((done) => {
     taroUser.loginUser('user2@email.com', 'password', (res) => {
       return done()
     })
   })
 
-  it('test change email', function(done) {
+  it('test change email', function (done) {
     taroUser.sendPostRequest('/settings/updateEmail', {
-        new_email : 'user2@email.com',
-        confirm_email : 'user2@email.com'
-      }, (res) => {
-        console.log(res.text)
-        assert.equal(res.text, 'success')
-        return done()
-
-      })
+      new_email: 'user2@email.com',
+      confirm_email: 'user2@email.com'
+    }, (res) => {
+      console.log(res.text)
+      assert.equal(res.text, 'success')
+      return done()
+    })
   })
-  
 
   after((done) => {
     taroApp.server.close(done)

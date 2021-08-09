@@ -34,5 +34,4 @@ router.post('/adduser', debugController.addUser)
 
 router.get('/loggedin', debugController.loggedIn)
 
-
 module.exports = router

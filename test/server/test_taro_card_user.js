@@ -12,22 +12,21 @@ describe('Test Server', function () {
   const taroUser = new TaroCardUser(taroApp.app)
   taroUser.signUpUser('user1@email.com', 'password', 'user1@email.com')
 
-  this.beforeEach( (function(done) {
+  this.beforeEach(function (done) {
     taroUser.loginUser('user1@email.com', 'password', (res) => {
       return done()
     })
-    
-  }))
-  
-  it('test is logged in', function(done) {
-    taroUser.getLogInStatus((res) => {
-            console.log(res.text)
-            assert.equal(JSON.parse(res.text)['user-logged-in'], true)
-            return done()
-          })
   })
 
-  it('test profile', function(done) {
+  it('test is logged in', function (done) {
+    taroUser.getLogInStatus((res) => {
+      console.log(res.text)
+      assert.equal(JSON.parse(res.text)['user-logged-in'], true)
+      return done()
+    })
+  })
+
+  it('test profile', function (done) {
     taroUser.getProfile((res) => {
       assert.equal(res.headers.profileaccess, 'successful')
       return done()
