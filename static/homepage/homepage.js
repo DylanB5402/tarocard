@@ -102,7 +102,10 @@ function createCard2(establishment, drink, description, image, drinkId){
       let descInput = document.getElementById("descInput");
       descInput.value = description;
 
-      form.action = "/drinks/editDrinkCard/" + drinkId;
+      let drinkID = document.getElementById("drinkId");
+      drinkID.value = drinkId;
+
+      form.action = "/drinks/editDrinkCard";
 
   }
 
