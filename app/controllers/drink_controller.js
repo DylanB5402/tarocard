@@ -49,7 +49,8 @@ exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
     const drinkId = req.params.drinkId
-    const uid = req.session.uid // Get uid from cookie session
+
+    console.log(drinkId)
 
     // Make sure previous info (drink name and desc) is shown
 
@@ -58,7 +59,11 @@ exports.editDrinkCard = (req, res) => {
     const drinkDesc = req.body.drinkDesc
     const establishment = req.body.establishment
 
-    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc, establishment) // edit drink
+    let testBool = drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc, establishment) // edit drink
+
+    console.log(testBool)
+
+    drinksDB.toString()
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB

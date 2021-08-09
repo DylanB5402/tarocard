@@ -8,7 +8,7 @@ const drinkController = require('../controllers/drink_controller')
 router.post('/newDrinkCard', drinkController.newDrinkCard)
 
 // POST request for edit drink card.
-router.post('/editDrinkCard/:drinkId', drinkController.editDrinkCard)
+router.put('/editDrinkCard/:drinkId', drinkController.editDrinkCard)
 
 // GET request to view all drinks corresponding to one user
 router.get('/', drinkController.getAllDrinks)
