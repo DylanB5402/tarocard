@@ -1,0 +1,794 @@
+/*
+CSS needed for all pages
+
+*/
+
+* {
+    margin: 0;
+    padding: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#back {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 23px;
+    left: 60px;
+}
+
+.navbar {
+    background-color: #ffffff;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    display: flex; 
+    justify-content:center
+  }
+
+  .navbar img {
+      width: auto;
+      height: 80px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+  }
+
+  #navProfileIcon {
+    margin-bottom: 10px;
+}
+
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    width: 25%;
+    height:160px;
+    
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    background-color: #D4D4D4;
+    /*border: solid #9879C5;*/
+    color: #9879C5;
+  }
+  
+  /* Add a background color to the active link */
+  .navbar a.active {
+    background-color: #9879C5;
+    color: black;
+  }
+  
+  /* Hide the link that should open and close the navbar on small screens */
+  .navbar .icon {
+    display: none;
+  }
+
+
+#navProfileIcon {
+  margin-bottom: 10px;
+}
+
+/* 
+Alert: Going to new Page
+
+
+
+
+
+
+
+
+
+
+CSS page for FrendsList 
+*/
+
+#bodyFriends {
+    min-width: 1060px;
+}
+
+
+.innerBody {
+    background-color: rgba(238, 238, 238, 0.712);
+    height: 100%;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    border-style: hidden;
+}
+
+.titleCardFriends {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+}
+
+.titleCardFriends h1 {
+    font-weight: lighter;
+    font-size: 58px;
+    color: rgb(152, 121, 197);
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 200px;
+    bottom: 55px;
+}
+
+#searchBar {
+    height: fit-content;
+    font-weight: lighter;
+    color: rgb(95, 94, 94);
+    width: 90%;
+    font-size: 50px;
+    border-style: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 70px;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    /* background-image: url(./search.png);
+    background-repeat: no-repeat;
+    background-size: 85px, 85px; */
+}
+
+#searchbar :focus {
+    border: hidden;
+}
+
+#searchBarButton {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    padding: 0px;
+    background: rgb(152, 121, 197);
+    color: rgb(2, 2, 2);
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    position: relative;
+    left: 39vw;
+    bottom: 105px;
+}
+
+#friendsAll {
+    margin-bottom: 150px;
+}
+
+.friendElement {
+    width: 97%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.friendElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.friendElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.friendElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
+#letterHeading {
+    color: rgb(146, 106, 255);
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    font-size: 50px;
+    position: relative;
+    margin-top: 80px;
+    left: 30px;
+    bottom: 10px;
+}
+
+#headingLine {
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid rgb(146, 106, 255);;
+    padding: 0;
+    position: relative;
+    bottom: 40px;
+    left: 80px;
+    width: 90%;
+}
+
+
+/* 
+Alert: Going to New Page
+
+
+
+
+
+
+
+
+
+CSS page for Settings
+*/
+
+#bodySettings {
+    background-color: rgba(238, 238, 238, 0.712);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.titleCardSettings {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    position: fixed;
+    z-index: 1;
+}
+
+.titleCardSettings h1 {
+    font-weight: lighter;
+    font-size: 58px;
+    color: rgb(152, 121, 197);
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 200px;
+    bottom: 55px;
+}
+
+.settingsElement {
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settingsElement img {
+    height: 50px;
+    width: 80px;
+    position: relative;
+    top: 45px;
+    left: 70px;
+}
+
+.settingsElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 65px;
+    font-weight: normal;
+    position: relative;
+    left: 200px;
+    bottom: 21px;
+}
+
+.header {
+    text-align: left;
+    height: fit-content;
+    width: fit-content;
+    margin-left: 25px;
+    margin-bottom: 5px;
+    font-size: 40px;
+    font-weight: 300;
+    color: rgb(193, 193, 193);
+}
+
+#arrowEmail {
+    height: 99px;
+    width: 50px;
+    position: absolute;
+    left: 93%;
+    top: 312px;
+}
+
+#phoneIcon {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    top: 40px;
+    left: 65px;
+}
+
+#arrowPhone {
+    height: 99px;
+    width: 50px;
+    position: absolute;
+    left: 93%;
+    top: 462px;
+}
+
+#logoutIcon {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    top: 35px;
+    left: 70px;
+}
+
+#arrowPassword {
+    height: 99px;
+    width: 50px;
+    position: absolute;
+    left: 93%;
+    top: 755px;
+}
+
+#passwordIcon {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    top: 35px;
+    left: 70px;
+}
+
+/* 
+Alert: Going to New Page
+
+
+
+
+
+
+
+
+
+CSS page for ChangePassword and ChangeEmail
+*/
+
+#bodyChanges {
+    background-color: rgba(238, 238, 238, 0.712);
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+#back {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 23px;
+    left: 60px;
+}
+
+.titleCardChanges {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    z-index: -1;
+}
+
+#updateHeading {
+    margin-left: 4%;
+    font-size: 35px;
+    font-weight: bolder;
+}
+
+#currentHeading {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+#current {
+    height: fit-content;
+    padding: 10px;
+    font-size: 30px;
+    margin: auto;
+    display: block;
+    margin-top: 100px;
+    width: 90%;
+}
+
+#new {
+    height: fit-content;
+    padding: 10px;
+    font-size: 30px;
+    margin: auto;
+    display: block;
+    margin-top: 100px;
+    width: 90%;
+}
+
+#confirm{
+    height: fit-content;
+    padding: 10px;
+    font-size: 30px;
+    margin: auto;
+    margin-top: 100px;
+    display: block;
+    width: 90%;
+}
+
+.changeTemplate label {
+    display: block;
+    position: relative;
+    top: 90px;
+    left: 4%;
+    font-size: 30px;
+    font-weight: normal;
+    text-align: left;
+    width: fit-content;
+} 
+
+.changeTemplate {
+    text-align: right;
+}
+
+#saveChanges {
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-right: 4%;
+    background-color: rgb(152, 121, 197);
+    color: white;
+    border: hidden;
+    border-radius: 20px;
+    
+}
+
+#errorText {
+    color: red;
+    font-size: 30px;
+    font-weight: lighter;
+    margin-top: 15px;
+}
+
+#Success {
+    color: green;
+    background-color: lightgreen;
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-left: 4%;
+}
+
+#showPassword {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: 20%;
+    bottom: 95px;
+}
+
+/* 
+Alert: Going to New Page
+
+
+
+
+
+
+
+
+
+CSS page for SearchUsers
+*/
+
+#bodySearchUsers {
+    min-width: 1060px;
+}
+
+
+.innerBody {
+    background-color: rgba(238, 238, 238, 0.712);
+    height: 100%;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    border-style: hidden;
+}
+
+.titleCardSearch {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+}
+
+.titleCardSearch h1 {
+    font-weight: lighter;
+    font-size: 58px;
+    color: rgb(152, 121, 197);
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 95px;
+    top: 40px;
+}
+
+#back {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: 23px;
+    left: 60px;
+}
+
+#searchUsersBar {
+    height: fit-content;
+    font-weight: lighter;
+    color: rgb(95, 94, 94);
+    width: 90%;
+    font-size: 50px;
+    border-style: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 70px;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 30px;
+    /* background-image: url(./search.png);
+    background-repeat: no-repeat;
+    background-size: 85px, 85px; */
+}
+
+#searchUsersBarButton {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    padding: 0px;
+    background: rgb(152, 121, 197);
+    color: rgb(2, 2, 2);
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    position: relative;
+    left: 39vw;
+    bottom: 105px;
+}
+
+#UsersAll {
+    margin-bottom: 150px;
+}
+
+.UserElement {
+    width: 97%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.UserElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.UserElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.UserElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
+#letterHeading {
+    color: rgb(146, 106, 255);
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    font-size: 50px;
+    position: relative;
+    margin-top: 80px;
+    left: 30px;
+    bottom: 10px;
+}
+
+#headingLine {
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid rgb(146, 106, 255);;
+    padding: 0;
+    position: relative;
+    bottom: 40px;
+    left: 80px;
+    width: 90%;
+}
+
+/* 
+Alert: Going to New Page
+
+
+
+
+
+
+
+
+
+CSS page for Notifications
+*/
+
+#bodyNotify {
+    background-color: rgba(238, 238, 238, 0.712);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.titleCardNotifications {
+    width: 100%;
+    height: 150px;
+    background: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+}
+
+.titleCardNotifications h1 {
+    font-weight: lighter;
+    font-size: 58px;
+    color: rgb(152, 121, 197);
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    left: 95px;
+    top: 40px;
+}
+
+#friendsRequestAll {
+    margin-bottom: 150px;
+    margin-top: 150px;
+}
+
+.requestElement {
+    width: 100%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.requestElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.requestElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.requestElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
+.accept {
+    height: 80px;
+    width: 210px;
+    background-image: url(./assets/add-button.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60px 60px;
+    background-color: rgb(152, 121, 197);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    border-style: hidden;
+    border-radius: 40px;
+    float: right;
+    bottom: 188px;
+    margin-right: 120px;
+}
+
+.accept:hover {
+    background-color: rgba(151, 121, 197, 0.863);
+}
+
+.deny {
+    height: 40px;
+    width: 40px;
+    background-image: url(./assets/denyX.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40px 40px;
+    border: hidden;
+    position: relative;
+    float: right;
+    bottom: 165px;
+    background-color: white;
+    left: 290px;
+}
+
+.deny:hover {
+    background-image: url(./assets/denyXRed.png);
+}

@@ -20,8 +20,8 @@ router.post('/signup', userController.signup)
 // POST request for login.
 router.post('/login', userController.login)
 
-// POST request for sign out
-router.post('/signout', userController.signout)
+// GET request for sign out
+router.get('/signout', userController.signout)
 
 router.get('/profile/:id', userController.profileById)
 

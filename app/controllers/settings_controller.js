@@ -7,8 +7,7 @@ const userDB = new userDatabase.UserDatabase()
  */
 exports.settingsPage = (req, res) => {
   if (req.session.loggedin) {
-    // res.redirect()
-    res.send('settings')
+    res.redirect('/settings-page/Settings_HTML.html')
   } else {
     res.redirect('/')
   }
@@ -38,13 +37,15 @@ exports.updateEmail = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.updatePassword = (req, res) => {
-  // const oldPassword = req.body.old_password
+  const currentPassword = req.body.current_password
   const newPassword = req.body.new_password
-  const repeatNewPassword = req.body.repeat_new_password
-  if (req.session.loggedin && newPassword === repeatNewPassword) {
+  const confirmPassword = req.body.confirm_password
+  console.log(currentPassword, newPassword, confirmPassword)
+  if (req.session.loggedin && newPassword === confirmPassword && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
     const uid = req.session.uid
     if (userDB.updatePassword(uid, newPassword)) {
-      res.send('success')
+      // res.send('success')
+      res.redirect('/settings-page/ChangePasswordSuccess.html')
     } else {
       res.send('failure')
     }

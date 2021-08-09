@@ -84,13 +84,25 @@ class UserDatabase {
   }
 
   /**
-     *
-     * @param {*} password unencrypted password
-     * @param {*} hashFromDatabase encrypted password from the database
      * @returns {Boolean}, true if successful, false otherwise
      */
   checkPassword (email, password) {
     const hashFromDatabase = this.selectHashedPassword(email)
+    if (hashFromDatabase !== undefined) {
+      return bcrypt.compareSync(password, hashFromDatabase)
+    } else {
+      return false
+    }
+  }
+
+  selectPasswordByUID(uid) {
+    var stmt = this.db.prepare('SELECT password FROM users WHERE uid = ?')
+    return stmt.get(uid).password
+  }
+
+  checkPasswordByUid(uid, password) {
+    const hashFromDatabase = this.selectPasswordByUID(uid)
+    console.log(uid, password, hashFromDatabase)
     if (hashFromDatabase !== undefined) {
       return bcrypt.compareSync(password, hashFromDatabase)
     } else {
