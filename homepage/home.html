@@ -23,8 +23,8 @@
         <div id="modal-sheet" class="modal">
             <div class="modal-content">
                 <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
-                <button onclick="openCardCreate()" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
-                <a class="stuff" href="../friendsPage/Friends_Page.html"> <img src="../assets/group-order.png"> <p style="text-decoration: none;"></p> Group Order </p></a>
+                <button onclick="openCardCreate('id01')" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
+                <a class="stuff" href="../group-things/groupOrder-friends.html"> <img src="../assets/group-order.png"> <p style="text-decoration: none;"></p> Group Order </p></a>
             </div>
         </div>
 
@@ -32,13 +32,25 @@
         <!-- Hidden form for card creation -->
         <form action="/cards" class="form-container" id="id01" method="POST">
             <div class="card-bar">
-                <button type=button style="float:left" class="del-button" onclick="closeCardCreate()" >&times;</button>
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
                 <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
             </div>
             <div class="userInput">
                 <input type="text" placeholder="Name of Establishment" name="=establishment" class="small-input">
                 <input type="text" placeholder="Name of Order"  name="nameOfOrder" class="small-input" >
                 <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
+        <!-- Hiddene form for card update -->
+        <form action="/cards" class="form-container" id="updateCard" method="PUT">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
+                <button class="post-button" style="left: 70vw;"value="submit"> UPDATE  </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Establishment" id="estabInput" name="=establishment" class="small-input">
+                <input type="text" placeholder="Name of Order" id="orderInput" name="nameOfOrder" class="small-input" >
+                <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
             </div>
         </form>
 

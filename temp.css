@@ -3,7 +3,7 @@
 }
 
 html {
-    min-height: 165%;
+    min-height: 100%;
     background-color: #EFEFEF;
 } 
 
@@ -282,7 +282,10 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 94%
+    left: 94%;
+    z-index: 0;
+    height: 40px;
+    top: 10px;
 }
 
 li {
@@ -1284,3 +1287,142 @@ button #edit-profile {
 
 
 /* NOTIFS END */
+
+/* Group Order Friends */
+
+.btn-circle.btn-xl {
+    width: 100px;
+    height: 100px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 55px;
+}
+
+/* SETTINGS START */
+
+.settings-spacer {
+    /*background-color: red;/**/
+    height: 110px;
+    width: 100%;
+}
+
+.settings-spacer h3 {
+    font-size: 38px;
+    font-weight: 400;
+    color: #C1C1C1;
+    padding-top: 6%;
+    padding-left: 3%;
+}
+
+.settings-tab {
+    background-color: white;
+    height: 125px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+}
+
+.settings-tab span {
+    font-size: 55px;
+    line-height: 125px;
+    vertical-align: middle;
+}
+
+.settings-tab img {
+    margin-left: 5%;
+    margin-right: 3%;
+    width: 60px;
+    /*border: dotted black;/**/
+    line-height: 125px;
+    vertical-align: middle;
+}
+
+.settings-tab button {
+    height: 125px;
+    width: 125px;
+    background-color: transparent;/**/
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 0;
+}
+
+#logout {
+    text-decoration: none;
+}
+
+#logout:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#settings-arrow {
+    width: 32px;
+}
+
+/* SETTINGS END */
+
+/* EMAIL START */
+.update {
+    /*background-color: red;/**/
+    height: 200px;
+    width: 100%;
+    padding-top: 8%;
+    margin-bottom: 0;
+    
+}
+
+.margin-update {
+    margin-left: 6%;
+    /*background-color: turquoise;/**/
+}
+
+.update h2 {
+    font-size: 52px;
+    font-style: bold;
+}
+
+.update p {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.change-info {
+    /*background-color: tomato;/**/
+    height: max-content;
+    width: 100%;
+}
+
+
+.change-info label {
+    font-size: 38px;
+    font-weight: 400;
+}
+
+.settings-input {
+    font-size: 36px;
+    padding-left: 25px;
+    border-radius: 10px;
+    border: solid 2px #C1C1C1;
+    outline: none;
+    width: 91%;
+}
+
+.settings-input::placeholder {
+    color: #C1C1C1;
+}
+
+/* EMAIL END */
+
+/* PASSWORD START */
+.checkbox-pwd {
+    /*background-color: violet;/**/
+    margin-top: 1%;/**/
+}
+
+#showPassword {
+    height: 30px;
+    width: 30px;
+    position: relative;
+}
+
+/* PASSWORD END */
