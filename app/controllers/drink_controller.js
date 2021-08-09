@@ -48,7 +48,7 @@ exports.newDrinkCard = (req, res) => {
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
-    const drinkId = req.params.drinkId
+    const drinkId = req.body.drinkId
 
     console.log(drinkId)
 
