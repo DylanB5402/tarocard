@@ -12,67 +12,65 @@
 
         <link rel="stylesheet" href="../temp.css">
     </head>
+    <body>
+        <div class="page-header">
+            <span>Discover Users</span>
+        </div>
     
-    <div class="page-header">
-        <span>Discover Users</span>
-    </div>
-
-    <div class="search">
-        <div class="search-container">
-            <input
-                type="text"
-                class="search-bar" 
-                id="user-search"
-                placeholder="Search users..."
-                name="search-bar-users">
-            <button type="submit" class="search-button" id="search-button"><img src="../assets/search-bar.png" id="search-icon"></button>  
-        </div>   
-    </div>
-
-
-        <script>
-            $(document).ready(function(){
-                $("#search-button").click(function(){        
-                    $.post("/users", 
-                    {
-                        "string": $("#user-search").val()
-                    }
-                    ,function(data, status, xhr) {
-                        populateFriends(data);
-                    })
+        <div class="search">
+            <div class="search-container">
+                <input
+                    type="text"
+                    class="search-bar" 
+                    id="user-search"
+                    placeholder="Search users..."
+                    name="search-bar-users">
+                <button type="submit" class="search-button" id="search-button"><img src="../assets/search-bar.png" id="search-icon"></button>  
+            </div>   
+        </div>
+    
+    
+            <script>
+                $(document).ready(function(){
+                    $("#search-icon").click(function(){        
+                        $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                        {
+                            "string": $("#user-search").val()
+                        }
+                        ,function(data, status, xhr) {
+                            populateUsers(data);
+                        })
+                    });
                 });
-            });
-        </script>
-
-        <template id="UsersTemp">
-            <div id="headerElement">
-                <h1 id="letterHeading"></h1>
-                <hr id="headingLine">
-            </div>
-            <div class="UserElement">
-                <img>
-                <h2></h2>
-                <h3></h3>
-            </div>
-        </template>        
-
-    <div class="navbar" id="myNavbar">
-        <a href="../homePage/home.html"></i>
-            <img id="navHomeIcon" src="..\assets\home.png" />
-        </a>
+            </script>
     
-        <a class="active" href="#"></i>
-            <img id="navSearchIcon" src="..\assets\search.png" />
-        </a>
+            <template id="UsersTemp">
+                <div class="UserElement">
+                    <a><img></a>
+                    <a><h2></h2></a>
+                    <a><h3></h3></a>
+                </div>
+            </template>        
     
-        <a href="..\Notifications\Notifications.html"></i>
-            <img id="navNotifsIcon" src="..\assets\notifs.png" />
-        </a>
+        <div class="navbar" id="myNavbar">
+            <a href="../homePage/home.html"></i>
+                <img id="navHomeIcon" src="..\assets\home.png" />
+            </a>
+        
+            <a class="active" href="#"></i>
+                <img id="navSearchIcon" src="..\assets\search.png" />
+            </a>
+        
+            <a href="..\Notifications\Notifications.html"></i>
+                <img id="navNotifsIcon" src="..\assets\notifs.png" />
+            </a>
+        
+            <a href="..\Profile page\Profile_Page_TaroCards.html"></i>
+                <img id="navProfileIcon" src="..\assets\profile.png" />
+            </a>
+        </div>
+    </body>
     
-        <a href="..\Profile page\Profile_Page_TaroCards.html"></i>
-            <img id="navProfileIcon" src="..\assets\profile.png" />
-        </a>
-    </div>
 
     <script type="text/javascript" src="SearchUsers_Functions.js"></script>
 </html>

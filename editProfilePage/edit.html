@@ -32,6 +32,7 @@
                 <input
                     id="inputBanner"
                     type="file"
+                    name="Banner"
                     accept=".jpg, .png, .gif">
             </div>
 
@@ -88,10 +89,16 @@
     <script>
         $("#inputBanner").change(function(event) {
             alert("You choose: " + event.target.value + " as your Banner.");
+            let currentBanner = document.getElementById("banner");
+            var tmppath = URL.createObjectURL(event.target.files[0]);
+            currentBanner.src = tmppath;
         })
 
         $("#inputProfilePic").change(function(event) {
             alert("You choose: " + event.target.value + " as your Profile Picture.");
+            let currentProfilePic = document.getElementById("profilePic");
+            var tmppath = URL.createObjectURL(event.target.files[0]);
+            currentProfilePic.src = tmppath;
         })
     </script>
     

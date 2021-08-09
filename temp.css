@@ -1147,6 +1147,53 @@ button #edit-profile {
     width: 65px;
 }
 
+#UsersAll {
+    margin-bottom: 150px;
+}
+
+.UserElement {
+    width: 97%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.UserElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.UserElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.UserElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
 /* SEARCH END */
 
 /* NOTIFS START */
