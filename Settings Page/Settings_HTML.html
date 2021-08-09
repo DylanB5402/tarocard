@@ -1,47 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Settings Page | Taro Cards</title>
-        <link rel="stylesheet" href="..\Global.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Settings | Taro Cards</title>
+
+        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <script src="jquery-3.6.0.min.js"></script>
+
+        <link rel="stylesheet" href="../temp.css">
     </head>
     
-    <body id="bodySettings"> 
-        <div class="titleCardSettings">
-            <a href="..\Profile page\Profile_Page_TaroCards.html"><div id="back"><img src="..\assets\Back.png" alt="back button"></div></a>
-            <h1>Settings</h1>
-        </div>
-        <br /> <br /> <br /> <br /> <br />
+    <div class="page-header">
+        <a href="../Profile Page/Profile_Page_TaroCards.html"><img src="../assets/Back.png" id="back"></a>
+        <span>Settings</span>
+    </div>
 
-        <h1 class="header" style="margin-top: 150px;">Account</h1>
-        <div class="settingsElement">
-            <img src="..\assets\email.png">
-            <h2>Email</h2>
-            <a href="ChangeEmail.html"><img id="arrowEmail" src="..\assets\arrow.png"></a>
-        </div>
-        <!-- This is the phone element that was taken out
-        <div class="settingsElement">
-            <img id="phoneIcon" src="..\assets\phone.png">
-            <h2 style="bottom: 45px;">Phone Number</h2>
-            <a href="ChangePhone.html"><img id="arrowPhone" src="..\assets\arrow.png"></a>
-        </div>
-        -->
-
-        <div class="settingsElement">
-            <a href="..\sign-up.html"><img id="logoutIcon" src="..\assets\logout.png"></a>
-            <h2 style="bottom: 45px;">Log out</h2>
-        </div>
-        <br /> <br /> <br /> <br /> <br />
-
-        <h1 class="header">Security</h1>
-        <div class="settingsElement">
-            <img id="passwordIcon" src="..\assets\lock.png">
-            <h2 style="bottom: 40px;">Change Password</h2>
-            <a href="ChangePassword.html"><img id="arrowPassword" src="..\assets\arrow.png"></a>
+    <body class="settings"> 
+        <div class="settings-spacer">
+            <h3>Account</h3>
         </div>
 
+        <div class="settings-tab">
+            <img src="../assets/email.png" class="settings-icon">
+            <span>Email</span>
+            <button href="../Settings Page/ChangeEmail.html" ><img src="../assets/arrow.png" id="settings-arrow" ></button>
+        </div>
+        
+        <div class="settings-tab">
+            <img src="../assets/phone.png" class="settings-icon">
+            <span>Phone number</span>
+            <button href="../Settings Page/ChangePhone.html"><img src="../assets/arrow.png" id="settings-arrow" ></button>
+        </div>
 
+        <a href="Logout_Test.html" id="logout">
+            <div class="settings-tab">
+                <img src="../assets/logout.png" class="settings-icon">
+                <span>Log out</span>
+                
+            </div>
+        </a>
+
+        <div class="settings-spacer">
+            <h3>Security</h3>
+        </div>
+        <div class="settings-tab">
+            <img src="../assets/lock.png" class="settings-icon">
+            <span>Change password</span>
+            <button href="../Settings Page/ChangePassword.html"><img src="../assets/arrow.png" id="settings-arrow"></button>
+        </div>
 
     </body>
 </html>
