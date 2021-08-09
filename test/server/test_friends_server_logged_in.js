@@ -31,23 +31,6 @@ describe('Test Server', function () {
     })
   })
 
-  // it('test friends list', function (done) {
-  //   authenticatedSession.post('/signup').send(
-  //     {
-  //       email: 'user2@email.com',
-  //       password: 'password',
-  //       repeatPassword: 'password'
-  //     }).end(function (err, res) {
-  //       console.log(err)
-  //       authenticatedSession.get('friends/current').end((err, res) => {
-  //         console.log(res)
-  //         assert.equal(1, 2)
-  //         return done()
-  //       })
-  //   })
-  //   authenticatedSession.get('/friends/current')
-  // })
-
   after((done) => {
     taroApp.server.close(done)
     taroApp.store.knex.destroy()

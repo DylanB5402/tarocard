@@ -55,6 +55,33 @@ class TaroCardUser {
       return callback(res)
     })
   }
+
+  getProfileData(callback) {
+    this.session.get('/debug/profile').end( (err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      return callback(res)
+    })
+  }
+
+  sendGetRequest(route, callback) {
+    this.session.get(route).end((err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      return callback(res)
+    })
+  }
+
+  sendPostRequest(route, formData, callback) {
+    this.session.post(route).send(formData).end( (err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      return callback(res)
+    })
+  }
 }
 
 module.exports = { TaroCardUser }

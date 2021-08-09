@@ -117,3 +117,16 @@ exports.loggedIn = (req, res) => {
     res.json({ 'user-logged-in': false, uid: -1 })
   }
 }
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.currentProfileData = (req, res) => {
+  if (req.session.loggedin) {
+    var uid = req.session.uid
+    res.json(userDB.getAllProfileData(uid))
+  } else {
+    res.json({'uid' : -1})
+  }
+}

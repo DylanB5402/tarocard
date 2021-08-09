@@ -1,63 +1,35 @@
 const { assert } = require('chai')
-const session = require('supertest-session')
+const chai = require('chai')
+const assertArrays = require('chai-arrays')
+chai.use(assertArrays)
 
 const app = require('../../app/app')
-
-let authenticatedSession = null
-
-// const taroApp = null
-// const taroSession = null
+const TaroCardUser = require('./taro_card_user').TaroCardUser
+const taroApp = new app.TaroCardApp()
+taroApp.run()
 
 describe('Test Server', function () {
-  const taroApp = new app.TaroCardApp()
-  taroApp.run()
+  const taroUser = new TaroCardUser(taroApp.app)
+  taroUser.signUpUser('user2@email.com', 'password', 'user2')
 
-  let taroSession = null
-  taroSession = session(taroApp.app)
-
-  //   before((done) => {
-  //     taroApp = new app.TaroCardApp()
-  //     taroApp.run()
-
-  //     taroSession = session(taroApp.app)
-  //     return done()
-  //   })
-
-  it('test connection', function (done) {
-    taroSession.get('/debug/connect').end((err, res) => {
-      if (err !== null) {
-        console.log(err)
-      } else {
-        assert.equal(res.text, 'connected')
-      }
+  beforeEach( (done) => {
+    taroUser.loginUser('user2@email.com', 'password', (res) => {
       return done()
     })
   })
 
-  it('test update email', function (done) {
-    taroSession.post('/signup').send(
-      {
-        email: 'user1@email.com',
-        password: 'password',
-        repeatPassword: 'password',
-        username: 'user1'
-      }).end(function (err, res) {
-      if (err !== null) {
-        console.log(err)
-      }
-      authenticatedSession = taroSession
-      authenticatedSession.post('/settings/updateEmail').send({
-        new_email: 'user2@email.com',
-        confirm_email: 'user2@email.com'
-      }).end((err, res) => {
-        if (err) {
-          console.log(err)
-        }
+  it('test change email', function(done) {
+    taroUser.sendPostRequest('/settings/updateEmail', {
+        new_email : 'user2@email.com',
+        confirm_email : 'user2@email.com'
+      }, (res) => {
+        console.log(res.text)
         assert.equal(res.text, 'success')
         return done()
+
       })
-    })
   })
+  
 
   after((done) => {
     taroApp.server.close(done)
