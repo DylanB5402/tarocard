@@ -31,45 +31,25 @@ function closeCardCreate( formID ){
 
 let cardDiv = document.getElementById("cardContainer");
 
-function createCard(establishment, drink, description){
-  /* first step is to get the template*/
-  let template = document.getElementById('card-template');
-  let tcontent = template.content.querySelector('div');
-  let divCopy = document.importNode(tcontent,true);
-  /* Adds the class 'card-template' so cards will look like actual template'*/
-  divCopy.classList.add('card-template');
-
-  /* Changes fields */
-
-   divCopy.querySelector("#establishment").innerHTML = establishment; //establishment
-   divCopy.querySelector("#drink").innerHTML = drink; //drinks
-   divCopy.querySelector("#description").innerHTML = description; //description
-   divCopy.querySelector('div').querySelector('img').setAttribute("src","https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg");
-
-  /*Adds the card to the card container div */
-  cardDiv.appendChild(divCopy);
-}
-
-
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let request = new XMLHttpRequest();
-request.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/cards', true); //change to /cards/ for Alex later
+request.open('GET', '/drinks', true); 
 request.responseType = 'json';
 request.send();
 
 request.onload = function() {
   /* This should be the array of cards */
-  const cards = request.response; 
-  /*getAllDrinks(uid) */
+  const cards = request.response.drinks; 
+ 
   console.log(cards);
   for(let i = 0; i < cards.length; i++) {
          const cards = request.response.cards;
           for(let i = 0; i < cards.length; i++) {
-              let u = cards[i]["drink_id"];
-              let x =  cards[i]["establishment"];
-              let y = cards[i]["name"];
-              let z =cards[i]["desc"];
-              createCard(x,y,z,"../assets/pfp-placeholder.png",u);
+              let drinkId = cards[i]["drink_id"];
+              let drinkEstablishment =  cards[i]["establishment"];
+              let drinkName = cards[i]["name"];
+              let drinkDesc =cards[i]["desc"];
+              createCard2(drinkEstablishment,drinkName,drinkDesc,"../assets/pfp-placeholder.png",drinkId);
               console.log(i);
           }
      createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img

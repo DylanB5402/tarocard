@@ -30,7 +30,7 @@
 
 
         <!-- Hidden form for card creation -->
-        <form action="/cards" class="form-container" id="id01" method="POST">
+        <form action="/drinks/newDrinkCard" class="form-container" id="id01" method="POST">
             <div class="card-bar">
                 <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
                 <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
@@ -42,7 +42,7 @@
             </div>
         </form>
         <!-- Hiddene form for card update -->
-        <form action="/drinks/editDrinkCard/:drinkID" class="form-container" id="updateCard" method="PUT">
+        <form action="/drinks/editDrinkCard/:drinkId" class="form-container" id="updateCard" method="PUT">
             <div class="card-bar">
                 <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
                 <button class="post-button" style="left: 70vw;"value="submit"> UPDATE  </button>
