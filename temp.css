@@ -1359,6 +1359,12 @@ button #edit-profile {
     width: 32px;
 }
 
+.settingsLinks {
+    color: black;
+    text-decoration: none;
+    cursor: auto;
+    }
+
 /* SETTINGS END */
 
 /* EMAIL START */

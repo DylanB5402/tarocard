@@ -14,12 +14,12 @@
         
         <script>
             $(document).ready(function() {
-                $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", "" ,function(data, status, xhr) {
+                $.get("https://my-json-server.typicode.com/VitalKilla/userData/email", "" ,function(data, status, xhr) {
                     const currentEmail = data;
                     const div = document.querySelector(".margin-update");
                     const header = div.querySelector("h2");
                     let p = document.createElement("p");
-                    p.textContent = "Your current email is " + currentEmail["email"][0]["email address"];
+                    p.textContent = "Your current email is " + currentEmail[0]["email address"];
                     header.appendChild(p);
 
                     let errorText = document.createElement("p");
