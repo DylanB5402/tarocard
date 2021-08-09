@@ -8,8 +8,8 @@ const estabDB = new estabDatabase.EstablishmentsDatabase()
 
 /**
  * Creates new drink entry
- * @param {httpRequest} req request
- * @param {httpRequest} res response
+ * @param {!import('express').Request} req request
+ * @param {!import('express').Request} res response
  */
 exports.newDrinkCard = (req, res) => {
   if (req.session.loggedin) {
@@ -40,8 +40,11 @@ exports.newDrinkCard = (req, res) => {
   }
 }
 
-// TODO:
-// Edit a drink card
+/**
+ * Edits an existing drink card data
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
@@ -62,7 +65,11 @@ exports.editDrinkCard = (req, res) => {
   }
 }
 
-// TODO: Get all drinks for a user
+/**
+ * Gets all favorited drinks for a user and returns the data as a json
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
 exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid // Get uid from cookie session
@@ -85,5 +92,44 @@ exports.getAllDrinks = (req, res) => {
     res.json({ drinks: drinkArray, success: true })
   } else {
     res.json({ drinks: [], success: false })
+  }
+}
+
+/**
+ * Stars a drink
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
+exports.starDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const drinkId = req.params.drinkId
+    favDrinksDB.starDrink(uid, drinkId)
+  }
+}
+
+/**
+ * Unstars a drink
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
+exports.unstarDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const drinkId = req.params.drinkId
+    favDrinksDB.unstarDrink(uid, drinkId)
+  }
+}
+
+/**
+ * Removes a drink card
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Request} res 
+ */
+exports.removeFavDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const drinkId = req.params.drinkId
+    favDrinksDB.removeFavDrink(uid, drinkId)
   }
 }
