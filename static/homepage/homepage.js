@@ -37,23 +37,16 @@ request.open('GET', '/drinks', true);
 request.responseType = 'json';
 request.send();
 
-request.onload = function() {
-  /* This should be the array of cards */
-  const cards = request.response.drinks; 
- 
-  console.log(cards);
-  for(let i = 0; i < cards.length; i++) {
-         const cards = request.response.cards;
-          for(let i = 0; i < cards.length; i++) {
-              let drinkId = cards[i]["drink_id"];
-              let drinkEstablishment =  cards[i]["establishment"];
-              let drinkName = cards[i]["name"];
-              let drinkDesc =cards[i]["desc"];
-              createCard2(drinkEstablishment,drinkName,drinkDesc,"../assets/pfp-placeholder.png",drinkId);
-              console.log(i);
-          }
-     createCard2(x,y,z,"../assets/pfp-placeholder.png"); //drink_img
-     console.log(i);
+request.onload = function () {
+  const cards = request.response.drinks
+  console.log(cards)
+  for (const drinkCard in cards) {
+    console.log(drinkCard)
+    const drinkEst = cards[drinkCard]['establishment']
+    const drinkName = cards[drinkCard]['name']
+    const drinkDesc = cards[drinkCard]['desc']
+    const drinkId = cards[drinkCard]['id']
+    createCard2(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
   }
 }
 
