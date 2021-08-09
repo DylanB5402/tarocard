@@ -61,7 +61,7 @@ exports.createGroup = (req, res) => {
 exports.addToGroup = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const groupId = req.params.groupId
+    const groupId = req.body.groupId
     const friendUID = req.body.friendUID
     const drinkId = req.body.friendDrinkId
     groupDB.addToGroup(groupId, uid, friendUID, drinkId)
