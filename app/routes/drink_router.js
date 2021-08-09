@@ -5,7 +5,7 @@ const router = express.Router()
 const drinkController = require('../controllers/drink_controller')
 
 // POST request for new drink card.
-router.post('/new_drink_card', drinkController.newDrinkCard)
+router.post('/newDrinkCard', drinkController.newDrinkCard)
 
 // POST request for edit drink card.
 router.post('/editDrinkCard/:drinkId', drinkController.editDrinkCard)
