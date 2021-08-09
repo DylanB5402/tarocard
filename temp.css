@@ -1292,7 +1292,7 @@ button #edit-profile {
 .settings-tab button {
     height: 125px;
     width: 125px;
-    background-color: red;/**/
+    background-color: transparent;/**/
     border: none;
     outline: none;
     position: absolute;
@@ -1365,3 +1365,17 @@ button #edit-profile {
 }
 
 /* EMAIL END */
+
+/* PASSWORD START */
+.checkbox-pwd {
+    /*background-color: violet;/**/
+    margin-top: 1%;/**/
+}
+
+#showPassword {
+    height: 30px;
+    width: 30px;
+    position: relative;
+}
+
+/* PASSWORD END */
