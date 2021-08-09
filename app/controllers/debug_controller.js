@@ -112,8 +112,8 @@ exports.addUser = (req, res) => {
 exports.loggedIn = (req, res) => {
   // console.log(req.session)
   if (req.session.loggedin) {
-    res.json({"user-logged-in" : true, "uid" : req.session.uid})
+    res.json({ 'user-logged-in': true, uid: req.session.uid })
   } else {
-    res.json({"user-logged-in" : false, "uid" : -1})
+    res.json({ 'user-logged-in': false, uid: -1 })
   }
 }

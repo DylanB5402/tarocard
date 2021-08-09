@@ -8,28 +8,31 @@ const TaroCardUser = require('./taro_card_user').TaroCardUser
 const taroApp = new app.TaroCardApp()
 taroApp.run()
 
-const taroUser = new TaroCardUser(taroApp.app)
 describe('Test Server', function () {
-  
+  const taroUser = new TaroCardUser(taroApp.app)
+  taroUser.signUpUser('user1@email.com', 'password', 'user1@email.com')
 
-  it('test signup', function (done) {
-    taroUser.signUpUser('user@email.com', 'password', 'user', (res) => {
-      // assert.equal(res.text, 'Found. Redirecting to /profile/')
-      taroUser.getLogInStatus((res) => {
-        console.log(res.text)
-        assert.equal(JSON.parse(res.text)['user-logged-in'], true)
-        return done()
-      })
+  this.beforeEach( (function(done) {
+    taroUser.loginUser('user1@email.com', 'password', (res) => {
+      return done()
     })
+    
+  }))
+  
+  it('test is logged in', function(done) {
+    taroUser.getLogInStatus((res) => {
+            console.log(res.text)
+            assert.equal(JSON.parse(res.text)['user-logged-in'], true)
+            return done()
+          })
   })
 
-  // it('test logged in', function(done) {
-  //   taroUser.getLogInStatus((res) => {
-  //     console.log(res.text)
-  //     assert.equal(JSON.parse(res.text)['user-logged-in'], true)
-  //     return done()
-  //   })
-  // })
+  it('test profile', function(done) {
+    taroUser.getProfile((res) => {
+      assert.equal(res.headers.profileaccess, 'successful')
+      return done()
+    })
+  })
 
   after((done) => {
     taroApp.server.close(done)

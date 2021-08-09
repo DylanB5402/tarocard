@@ -126,7 +126,7 @@ class UserDatabase {
   }
 
   insertProfileData (uid, displayName, username, bio) {
-    var info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
+    const info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
     return info.changes > 0
   }
 

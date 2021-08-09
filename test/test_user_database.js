@@ -62,12 +62,12 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test insertProfileData', function () {
-    var uid = userDb.insertNewUser('user9@email.com', 'password', 'user9')
+    const uid = userDb.insertNewUser('user9@email.com', 'password', 'user9')
     assert.equal(userDb.insertProfileData(uid, 'nine', 'nine', 'I am user nine'), true)
   })
 
   it('Test selectProfileData', function () {
-    var uid = userDb.insertNewUser('user10@email.com', 'password', 'user10')
+    const uid = userDb.insertNewUser('user10@email.com', 'password', 'user10')
     userDb.insertProfileData(uid, 'ten', 'ten', 'I am user ten')
     const userData = userDb.selectProfileData('user10@email.com')
     const userArray = [userData.username, userData.display_name, userData.bio]

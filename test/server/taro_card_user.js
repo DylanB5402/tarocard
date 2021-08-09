@@ -13,22 +13,42 @@ class TaroCardUser {
         password: password,
         repeatPassword: password,
         username: username
-      }).end(
-      function (err, res) {
-        if (err) {
-          console.log(err)
-        }
-        // console.log(res)
-        // console.log(this.session.cookies)
-        if (callback !== undefined) {
-          return callback(res)
-        }
-      })
+      }).end((err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      if (callback !== undefined) {
+        return callback(res)
+      }
+    })
   }
 
-  getLogInStatus(callback) {
+  loginUser (email, password, callback) {
+    this.session.post('/login').send(
+      {
+        email: email,
+        password: password
+      }).end((err, res) => {
+      if (err) {
+        console.log(err)
+      }
+      if (callback != undefined) {
+        return callback(res)
+      }
+    })
+  }
+
+  getLogInStatus (callback) {
     this.session.get('/debug/loggedin').end((err, res) => {
-      // console.log(res)
+      if (err) {
+        console.log(err)
+      }
+      return callback(res)
+    })
+  }
+
+  getProfile(callback) {
+    this.session.get('/profile').end( (err, res) => {
       if (err) {
         console.log(err)
       }
