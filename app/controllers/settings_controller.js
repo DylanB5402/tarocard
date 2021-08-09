@@ -45,11 +45,23 @@ exports.updatePassword = (req, res) => {
     const uid = req.session.uid
     if (userDB.updatePassword(uid, newPassword)) {
       // res.send('success')
-      res.redirect('/settings-page/ChangePasswordSuccess.html')
+      res.redirect('/updatePassword/success')
     } else {
-      res.send('failure')
+      res.status(500).send('failure')
     }
   } else {
-    res.send('failure')
+    res.status(500).send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.updatePasswordSuccess = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect('/settings-page/ChangePasswordSuccess.html')
+  } else {
+    res.status(500).redirect('/index.html')
   }
 }

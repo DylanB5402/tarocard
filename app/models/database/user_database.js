@@ -95,14 +95,13 @@ class UserDatabase {
     }
   }
 
-  selectPasswordByUID(uid) {
-    var stmt = this.db.prepare('SELECT password FROM users WHERE uid = ?')
+  selectPasswordByUID (uid) {
+    const stmt = this.db.prepare('SELECT password FROM users WHERE uid = ?')
     return stmt.get(uid).password
   }
 
-  checkPasswordByUid(uid, password) {
+  checkPasswordByUid (uid, password) {
     const hashFromDatabase = this.selectPasswordByUID(uid)
-    console.log(uid, password, hashFromDatabase)
     if (hashFromDatabase !== undefined) {
       return bcrypt.compareSync(password, hashFromDatabase)
     } else {

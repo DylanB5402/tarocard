@@ -40,7 +40,6 @@ exports.login = (req, res) => {
 }
 
 exports.signout = (req, res) => {
-  console.log(987)
   req.session.email = undefined
   req.session.loggedin = false
   req.session.uid = -1
