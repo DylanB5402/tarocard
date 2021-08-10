@@ -285,13 +285,7 @@ ul {
     bottom: 0;
 }
 
-.option-btn {
-    position: absolute;
-    left: 94%;
-    z-index: 0;
-    height: 40px;
-    top: 10px;
-}
+
 
 li {
     float: left ;
@@ -444,6 +438,14 @@ li:last-child{
     font-size: 3vh;
 }
 
+.option-btn {
+    position: absolute;
+    left: 94%;
+    z-index: 0;
+    height: 40px;
+    top: 10px;
+}
+
 .card-template{
     width: 87vw;
     height: 14vh;
@@ -486,6 +488,24 @@ li:last-child{
     margin-top: 0px;
 }
 
+/* Stands for add to a groupOrder Button */
+.add-gO-btn { 
+    display: block;
+    position: absolute;
+    width: 5%;
+    font-size: 40px;
+    border: 4px rgba(151, 121, 197, 0.863) solid;
+    text-align: center;
+    left: 90%;
+    top: 5px;
+    border-radius: 10px;
+  }
+
+  .add-gO-btn:hover{ 
+    background-color: rgba(151, 121, 197, 0.863);
+    transition: ease-in 0.15s;
+  }
+
 .card-template h2{
     width: 75%;
     font-size: 2vh;
@@ -526,6 +546,20 @@ li:last-child{
     left: 0px;
 }
 
+.modal-GO{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    margin: auto;
+    height: fit-content;
+    box-shadow: 0 0 0 10000px #000000b0;
+    background-color: #000000b0;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    border: none;
+}
+
 .modal-content{
     width: 100%;
     left: 25vw;
@@ -555,6 +589,27 @@ li:last-child{
     border: none;
     border-bottom: 2px solid black;
 
+}
+
+.gO-modal {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    border: none;
+  }
+
+.gO-modal input{
+    margin: auto;
+    font-size: 40px;
+    width: 100%;
+}
+
+.gO-modal select{
+    width: 300px;
+    position: relative;
+    font-size: 30px;
+    height: 100px;
+    left: 0px;
 }
 
 .modal-content button:last-child{
@@ -601,7 +656,7 @@ li:last-child{
 }
 
 
-/* Animation for w3schools */
+/* Animation from w3schools */
 .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
@@ -667,6 +722,7 @@ li:last-child{
           transform: translateY(120vh);
       }
   }
+
 
 /* HOME END */
 
