@@ -51,16 +51,21 @@ html {
     /*border: dotted 5px greenyellow;/**/
 }
 
-#profilePic {
-    height: 225px;
-    width: 225px;
-    border: 10px solid white;
+.settings-menu {
+    background-color: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: none;
     border-radius: 50%;
-    object-fit: cover;
-    object-position: center top;
-    position: relative;
-    bottom: 130px;
-    z-index: 2;
+    width: fit-content;
+    position: absolute;
+    right: 4%;
+    top: 1%;
+
+}
+
+#settings-menu {
+    height: 60px;
+    width: 60px;
 }
 
 .edit {
@@ -280,13 +285,7 @@ ul {
     bottom: 0;
 }
 
-.option-btn {
-    position: absolute;
-    left: 94%;
-    z-index: 0;
-    height: 40px;
-    top: 10px;
-}
+
 
 li {
     float: left ;
@@ -439,6 +438,14 @@ li:last-child{
     font-size: 3vh;
 }
 
+.option-btn {
+    position: absolute;
+    left: 94%;
+    z-index: 0;
+    height: 40px;
+    top: 10px;
+}
+
 .card-template{
     width: 87vw;
     height: 14vh;
@@ -481,6 +488,24 @@ li:last-child{
     margin-top: 0px;
 }
 
+/* Stands for add to a groupOrder Button */
+.add-gO-btn { 
+    display: block;
+    position: absolute;
+    width: 5%;
+    font-size: 40px;
+    border: 4px rgba(151, 121, 197, 0.863) solid;
+    text-align: center;
+    left: 90%;
+    top: 5px;
+    border-radius: 10px;
+  }
+
+  .add-gO-btn:hover{ 
+    background-color: rgba(151, 121, 197, 0.863);
+    transition: ease-in 0.15s;
+  }
+
 .card-template h2{
     width: 75%;
     font-size: 2vh;
@@ -521,6 +546,20 @@ li:last-child{
     left: 0px;
 }
 
+.modal-GO{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    margin: auto;
+    height: fit-content;
+    box-shadow: 0 0 0 10000px #000000b0;
+    background-color: #000000b0;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    border: none;
+}
+
 .modal-content{
     width: 100%;
     left: 25vw;
@@ -550,6 +589,27 @@ li:last-child{
     border: none;
     border-bottom: 2px solid black;
 
+}
+
+.gO-modal {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    border: none;
+  }
+
+.gO-modal input{
+    margin: auto;
+    font-size: 40px;
+    width: 100%;
+}
+
+.gO-modal select{
+    width: 300px;
+    position: relative;
+    font-size: 30px;
+    height: 100px;
+    left: 0px;
 }
 
 .modal-content button:last-child{
@@ -596,7 +656,7 @@ li:last-child{
 }
 
 
-/* Animation for w3schools */
+/* Animation from w3schools */
 .animate {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
@@ -662,6 +722,7 @@ li:last-child{
           transform: translateY(120vh);
       }
   }
+
 
 /* HOME END */
 
@@ -840,18 +901,6 @@ h3 a{
     position: relative;
 }
 
-#banner {
-    height: 300px;
-    max-width: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    object-position: center;
-    /*
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
-    z-index:-1;*/
-}
 
 #profilePic {
     height: 225px;
@@ -947,13 +996,60 @@ h3 a{
     right:200px;
     
 }
- 
-#userStats{
+
+.user-stats {
+    /*background-color: mediumaquamarine;/**/
+    display: flex;
+    padding-left: 100px;
+}
+
+.stat {
+    /*background-color: mediumorchid;/**/
+    width: fit-content;
+    vertical-align: center;
+    width: 50%;
+
+}
+
+.stat p {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.stat span {
+    font-size: 32px;
+    color: #C1C1C1;
+    
+}
+
+.tabs {
+    display: flex;
+}
+
+.my-tab {
+    /*background-color: cadetblue;/**/
+    width: 50%;
+    height: 95px;
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.my-tab img {
+    padding-top: 15px;
+    height: 60px;
+    width: 60px;
+    /*padding-left: 41%;/**/
+    
+}
+
+
+/* #userStats{
     align-items: center;
     width: max-content;
 }
 
-#userStats ul {
+#stats {
     display: inline;
     text-align: left;
     width:fit-content;
@@ -965,23 +1061,25 @@ h3 a{
 .userStats strong {
     font-weight: bolder;
     font-size: 60px;
+    background-color: blue;
 }
 
 
 .userStats span {
-    font-weight: lighter;
+    font-weight: 400;
     font-size: 40px;
     color: #C1C1C1;
-    background-color: rgb(255, 255, 255);
-}
+    background-color: red;
+} */
 
-.profileTabs{
+/* .profileTabs{
     
     height:80px;
     display:inline-flex;
-    justify-content:center;
+    justify-content: center;
     width: 100%;
     bottom:-20px;
+    background-color: white;
 }
 
 .profileTabs a{
@@ -997,11 +1095,11 @@ h3 a{
 }
 
 .profileTabs a:hover{
-    background-color: #D4D4D4;
-}
+    background-color: red;
+}*/
 #profileCards {
     background-color: #EFEFEF;
-}
+} 
 
 #favoritesSection{
     align-items: center;
@@ -1200,6 +1298,46 @@ button #edit-profile {
 /* SEARCH END */
 
 /* NOTIFS START */
+.requests {
+    background-color: teal;
+    height: 175px;
+    width: 100%;
+    vertical-align: center;
+}
+
+#pfp-request {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.request-text {
+    position: relative;
+    object-position: left;
+
+}
+
+
+.request-text h6 {
+    font-size: 40px;
+    text-align: left;
+    /*background-color: tomato;/**/
+    width: fit-content;/**/
+}
+
+#request-arrow {
+    width: 32px;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+
+
+
+
+
 .requestElement {
     width: 100%;
     height: 225px;
@@ -1311,7 +1449,7 @@ button #edit-profile {
     font-size: 38px;
     font-weight: 400;
     color: #C1C1C1;
-    padding-top: 6%;
+    padding-top: 60px;
     padding-left: 3%;
 }
 
@@ -1358,6 +1496,12 @@ button #edit-profile {
 #settings-arrow {
     width: 32px;
 }
+
+.settingsLinks {
+    color: black;
+    text-decoration: none;
+    cursor: auto;
+    }
 
 /* SETTINGS END */
 
@@ -1409,6 +1553,26 @@ button #edit-profile {
 
 .settings-input::placeholder {
     color: #C1C1C1;
+}
+
+#SuccessText {
+    color: green;
+    background-color: lightgreen;
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-bottom: 10px;
+}
+
+#errorText {
+    color: red;
+    font-size: 30px;
+    font-weight: lighter;
+    margin-top: 15px;
 }
 
 /* EMAIL END */
