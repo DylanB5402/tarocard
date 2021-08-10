@@ -15,13 +15,13 @@ router.post('/editDrinkCard', drinkController.editDrinkCard)
 router.get('/', drinkController.getAllDrinks)
 
 // PUT request for starring a drink
-router.put('/starDrink', drinkController.starDrink)
+router.post('/starDrink', drinkController.starDrink)
 
 // PUT request for unstarring a drink
-router.put('/unstarDrink', drinkController.unstarDrink)
+router.post('/unstarDrink', drinkController.unstarDrink)
 
 // DELETE request for removing a favorited drink
-router.delete('removeDrink', drinkController.removeFavDrink)
+router.post('/removeDrink', drinkController.removeFavDrink)
 
 // TESTING ROUTE
 // router.post('/editDrinkCard', drinkController.testConnection)
