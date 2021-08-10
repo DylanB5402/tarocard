@@ -48,7 +48,6 @@ exports.newDrinkCard = (req, res) => {
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
 
-    console.log('We made it to editDrinkCard!') // DID NOT WORK
     // Get drink id of drink being edited: Do this through use of req.params
     const drinkId = req.body.drinkId
 
@@ -63,13 +62,8 @@ exports.editDrinkCard = (req, res) => {
 
     console.log(testBool)
 
-    drinksDB.toString()
-
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
-  }
-  else {
-    console.log("WHY ARE WE NOT LOGGED IN") //debug statement
   }
   res.redirect("/homepage/home.html")
 }
@@ -88,10 +82,11 @@ exports.getAllDrinks = (req, res) => {
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
     // Iterate through the array of drinks and make objects out of their properties
     allDrinks.forEach((drink) => {
+      let establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
         name: drink.drink_name,
         desc: drink.drink_desc,
-        establishment: drink.establishment_id,
+        establishment: establishmentName,
         'image url': drink.drink_img,
         id: drink.drink_id
       })
