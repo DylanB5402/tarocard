@@ -36,7 +36,7 @@ exports.newDrinkCard = (req, res) => {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
     }
-    res.redirect('/profile/') // redirect to profile always for now
+    res.redirect('/homepage/home.html') // redirect to homepage/home.html always for now
   }
 }
 
@@ -58,14 +58,15 @@ exports.editDrinkCard = (req, res) => {
     const drinkDesc = req.body.drinkDesc
     const establishment = req.body.establishment
 
-    let testBool = drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc, establishment) // edit drink
-
-    console.log(testBool)
+    drinksDB.editDrink(drinkId, nameOfDrink, drinkDesc, establishment)
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
-  }
-  res.redirect("/homepage/home.html")
+    res.redirect("/homepage/home.html")
+
+  } else {
+    res.redirect("/")
+  } 
 }
 
 /**
@@ -107,8 +108,16 @@ exports.getAllDrinks = (req, res) => {
 exports.starDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.params.drinkId
-    favDrinksDB.starDrink(uid, drinkId)
+    const drinkId = req.body.drinkId
+    const success = favDrinksDB.starDrink(uid, drinkId)
+
+    if (success) {
+      res.send('success')
+    } else {
+      res.send('failure')
+    }
+  } else {
+    res.redirect('/')
   }
 }
 
@@ -120,8 +129,16 @@ exports.starDrink = (req, res) => {
 exports.unstarDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.params.drinkId
-    favDrinksDB.unstarDrink(uid, drinkId)
+    const drinkId = req.body.drinkId
+    const success = favDrinksDB.unstarDrink(uid, drinkId)
+
+    if (success) {
+      res.send('success')
+    } else {
+      res.send('failure')
+    }
+  } else {
+    res.redirect('/')
   }
 }
 
@@ -133,11 +150,11 @@ exports.unstarDrink = (req, res) => {
 exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.params.drinkId
+    const drinkId = req.body.drinkId
     favDrinksDB.removeFavDrink(uid, drinkId)
-  }
-}
 
-exports.testConnection = (req, res) => {
-  res.send("tester")
+    res.redirect('/homepage/home.html') // refreshes
+  } else {
+    res.redirect('/')
+  }
 }
