@@ -66,6 +66,7 @@ html {
 #settings-menu {
     height: 60px;
     width: 60px;
+
 }
 
 .edit {
@@ -285,7 +286,13 @@ ul {
     bottom: 0;
 }
 
-
+.option-btn {
+    position: absolute;
+    left: 94%;
+    z-index: 0;
+    height: 40px;
+    top: 10px;
+}
 
 li {
     float: left ;
@@ -436,14 +443,6 @@ li:last-child{
     margin: 10px 10px 0px 10px;
     word-wrap: break-word;
     font-size: 3vh;
-}
-
-.option-btn {
-    position: absolute;
-    left: 94%;
-    z-index: 0;
-    height: 40px;
-    top: 10px;
 }
 
 .card-template{
@@ -722,7 +721,6 @@ li:last-child{
           transform: translateY(120vh);
       }
   }
-
 
 /* HOME END */
 
