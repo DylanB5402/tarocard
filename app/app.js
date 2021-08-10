@@ -34,6 +34,7 @@ class TaroCardApp {
 
     // 404, page can't be found
     this.app.use(function (req, res) {
+      console.log(req)
       res.status(404).send('404 page not found')
     })
   }

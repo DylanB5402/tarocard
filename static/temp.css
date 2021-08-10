@@ -1568,6 +1568,19 @@ button #edit-profile {
     margin-bottom: 10px;
 }
 
+#FailureText {
+    color: rgb(165, 0, 0);
+    background-color: rgb(247, 201, 201);
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-bottom: 10px;
+}
+
 #errorText {
     color: red;
     font-size: 30px;

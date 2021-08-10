@@ -50,20 +50,20 @@ exports.currentEmail = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.updatePassword = (req, res) => {
-  const currentPassword = req.body.current_password
-  const newPassword = req.body.new_password
-  const confirmPassword = req.body.confirm_password
-  console.log(currentPassword, newPassword, confirmPassword)
-  if (req.session.loggedin && newPassword === confirmPassword && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
+  const currentPassword = req.body['current-password']
+  const newPassword = req.body['new-password']
+  const confirmPassword = req.body['confirm-password']
+  // console.log(currentPassword, newPassword, confirmPassword)
+  console.log(req.session.loggedin)
+  if (req.session.loggedin && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
     const uid = req.session.uid
     if (userDB.updatePassword(uid, newPassword)) {
-      // res.send('success')
-      res.redirect('/updatePassword/success')
+      res.redirect('/settings-page/ChangePasswordSuccess.html')
     } else {
-      res.status(500).send('failure')
+      res.status(500).send('Internal Server Error, please try again')
     }
   } else {
-    res.status(500).send('failure')
+    res.redirect('/settings-page/ChangePasswordFailure.html')
   }
 }
 
