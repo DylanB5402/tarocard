@@ -1221,10 +1221,10 @@ button #edit-profile {
 }
 
 
-.request-text h6, p {
+.request-text h6 {
     font-size: 40px;
     text-align: left;
-    background-color: tomato;
+    /*background-color: tomato;/**/
     width: fit-content;/**/
 }
 
