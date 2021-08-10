@@ -1,0 +1,170 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search | Taro Cards</title>
+
+        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="jquery-3.6.0.min.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="..\temp.css">
+    </head>
+    
+    <div class="page-header">
+        <span>Discover Users</span>
+    </div>
+
+    <body>
+        <div class='innerBody'>
+            <div style="width: 85%; margin: auto; margin-top: 175px;">
+                <form id="UsersSearch" autocomplete="off">
+                    <input
+                        id="searchUsersBar"
+                        type="text"
+                        placeholder="Search Users..."
+                        name="searchUsersBar">
+
+                    <button id="searchUsersBarButton" type="button"><i class="fa fa-search fa-3x" ></i></button>
+                </form>
+
+                <script>
+                    $(document).ready(function(){
+                        $("#searchUsersBarButton").click(function(){        
+                            $.post("/users", 
+                            {
+                                "string": $("#searchUsersBar").val()
+                            }
+                            ,function(data, status, xhr) {
+                                populateFriends(data);
+                            })
+                        });
+                    });
+                </script>
+            </div>
+    
+            <template id="UsersTemp">
+                <div id="headerElement">
+                    <h1 id="letterHeading"></h1>
+                    <hr id="headingLine">
+                </div>
+                <div class="UserElement">
+                    <img>
+                    <h2></h2>
+                    <h3></h3>
+                </div>
+            </template>
+        </div>  
+    </body>
+
+    <div class="navbar" id="myNavbar">
+        <a href="#"></i>
+            <img id="navHomeIcon" src="..\assets\home.png" />
+        </a>
+    
+        <a href="#"></i>
+            <img id="navSearchIcon" src="..\assets\search.png" />
+        </a>
+    
+        <a href="..\Notifications\Notifications.html"></i>
+            <img id="navNotifsIcon" src="..\assets\notifs.png" />
+        </a>
+    
+        <a class="active" href="..\Profile page\Profile_Page_TaroCards.html"></i>
+            <img id="navProfileIcon" src="..\assets\profile.png" />
+        </a>
+    </div>
+
+    <script type="text/javascript" src="SearchUsers_Functions.js"></script>
+</html>-->
+
+
+
+
+
+<!--NOTIFICATION START-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Friend Requests | Taro Cards</title>
+        <link rel="stylesheet" href="..\Global.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body id="bodyNotify">
+        <div class="titleCardNotifications">
+            <h1>Friend Requests</h1>
+        </div>
+
+
+        <template id="friendsRequestTemp">
+            <div class="requestElement">
+                <img>
+                <h2></h2>
+                <h3></h3>
+                <button id="accept" type="button"></button>
+                <button id="deny" type="button"></button>
+            </div>
+        </template>
+
+        <div class="navbar" id="myNavbar">
+            <a href="#"></i>
+                <img id="navHomeIcon" src="..\assets\home.png" />
+            </a>
+        
+            <a href="..\SearchUsers\SearchUsers.html"></i>
+                <img id="navSearchIcon" src="..\assets\search.png" />
+            </a>
+        
+            <a href="#"></i>
+                <img id="navNotifsIcon" src="..\assets\notifs.png" />
+            </a>
+        
+            <a class="active" href="..\Profile page\Profile_Page_TaroCards.html"></i>
+                <img id="navProfileIcon" src="..\assets\profile.png" />
+            </a>
+        </div>
+
+    </body>
+
+    <script>
+        const body = document.querySelector('body');
+
+        let request = new XMLHttpRequest();
+        request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+        request.responseType = 'json';
+        request.send();
+
+        request.onload = function() {
+            const users = request.response;
+            populateFriendRequests(users);
+        }
+
+        // function is used to fill page with list of friends from a json file.
+        function populateFriendRequests(obj) {
+            let template, divAll, div, divCopy, currentLetter, char;
+            divAll = document.createElement("div");
+            divAll.id = "friendsRequestAll";
+            template = document.getElementById('friendsRequestTemp');
+            div = template.content.querySelector(".requestElement");
+            const users = obj.users;
+            for(let i = 0; i < users.length; i++) {
+                divCopy = document.importNode(div, true);
+                // char refers to first letter of current users display name
+                char = users[i]["display name"].charAt(0);
+                divCopy.querySelector("img", true).src = users[i]["image url"];
+                divCopy.querySelector("h2",true).textContent = users[i]["display name"];
+                divCopy.querySelector("h3",true).textContent = users[i]["username"];
+                divAll.appendChild(divCopy);
+                body.appendChild(divAll);
+            }
+        }
+    </script>
+</html>
+
+<!--NOTIFICATION END-->
