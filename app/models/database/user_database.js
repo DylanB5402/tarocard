@@ -192,6 +192,11 @@ class UserDatabase {
     const info = this.db.prepare(`UPDATE users SET password = '${hashedPassword}' WHERE uid = ${uid};`).run()
     return info.changes > 0
   }
+
+  getEmailByUID(uid) {
+    const stmt = this.db.prepare('SELECT email FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
 }
 
 /**
@@ -204,3 +209,4 @@ const InsertNewUserResult = {
 }
 
 module.exports = { UserDatabase, InsertNewUserResult }
+ 

@@ -39,8 +39,15 @@ exports.updateEmail = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.currentEmail = (req, res) => {
-  if (req.session.loggedin) {
-    res.json({ 'email-address': req.session.email })
+  var email_data = userDB.getEmailByUID(req.session.uid)
+  if (email_data == undefined) {
+    res.json({ 'email-address': 'EMAIL NOT FOUND'})
+  } else {
+    if (req.session.loggedin) {
+      res.json({ 'email-address': email_data.email})
+    } else {
+      res.json({ 'email-address': 'EMAIL NOT FOUND'})
+    }
   }
 }
 
@@ -51,7 +58,6 @@ exports.currentEmail = (req, res) => {
 exports.updatePassword = (req, res) => {
   const currentPassword = req.body['current-password']
   const newPassword = req.body['new-password']
-  console.log(req.session.loggedin)
   if (req.session.loggedin && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
     const uid = req.session.uid
     if (userDB.updatePassword(uid, newPassword)) {
