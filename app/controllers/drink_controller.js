@@ -47,12 +47,12 @@ exports.newDrinkCard = (req, res) => {
  */
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
+
+    console.log('We made it to editDrinkCard!') // DID NOT WORK
     // Get drink id of drink being edited: Do this through use of req.params
     const drinkId = req.body.drinkId
 
     console.log(drinkId)
-
-    // Make sure previous info (drink name and desc) is shown
 
     // Get name and desc and estasblishment of drink from new form request
     const nameOfDrink = req.body.nameOfDrink
@@ -68,6 +68,10 @@ exports.editDrinkCard = (req, res) => {
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
   }
+  else {
+    console.log("WHY ARE WE NOT LOGGED IN") //debug statement
+  }
+  res.redirect("/homepage/home.html")
 }
 
 /**
@@ -137,4 +141,8 @@ exports.removeFavDrink = (req, res) => {
     const drinkId = req.params.drinkId
     favDrinksDB.removeFavDrink(uid, drinkId)
   }
+}
+
+exports.testConnection = (req, res) => {
+  res.send("tester")
 }

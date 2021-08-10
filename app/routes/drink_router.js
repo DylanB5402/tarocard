@@ -9,7 +9,7 @@ router.post('/newDrinkCard', drinkController.newDrinkCard)
 
 // POST request for edit drink card.
 // IDEA: I want to do /editDrinkCard/:drinkId but apparently that doesn't work ;-;
-router.put('/editDrinkCard', drinkController.editDrinkCard)
+router.post('/editDrinkCard', drinkController.editDrinkCard)
 
 // GET request to view all drinks corresponding to one user
 router.get('/', drinkController.getAllDrinks)
@@ -22,5 +22,8 @@ router.put('/unstarDrink/:drinkId', drinkController.unstarDrink)
 
 // DELETE request for removing a favorited drink
 router.delete('removeDrink/:drinkId', drinkController.removeFavDrink)
+
+// TESTING ROUTE
+// router.post('/editDrinkCard', drinkController.testConnection)
 
 module.exports = router
