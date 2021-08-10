@@ -5,10 +5,14 @@ const settingsController = require('../controllers/settings_controller')
 
 router.get('/', settingsController.settingsPage)
 
-router.post('/updateEmail', settingsController.updateEmail)
+router.post('/update/email', settingsController.updateEmail)
 
-router.post('/updatePassword', settingsController.updatePassword)
+router.get('/current/email', settingsController.currentEmail)
 
-router.get('/updatePassword/success', settingsController.updatePasswordSuccess)
+router.post('/update/email/success', (req, res) => {res.send('687')})
+
+router.post('/update/password', settingsController.updatePassword)
+
+router.get('/update/password/success', settingsController.updatePasswordSuccess)
 
 module.exports = router

@@ -1,3 +1,4 @@
+const e = require('express')
 const userDatabase = require('../models/database/user_database')
 const userDB = new userDatabase.UserDatabase()
 
@@ -18,17 +19,29 @@ exports.settingsPage = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.updateEmail = (req, res) => {
-  const email = req.body.new_email
-  const confirmEmail = req.body.confirm_email
+  const email = req.body['new-email']
+  const confirmEmail = req.body['confirm-email']
   if (req.session.loggedin && email === confirmEmail) {
     const uid = req.session.uid
     if (userDB.updateEmail(uid, email)) {
-      res.send('success')
+      req.session.email = email
+      // res.send('success')
+      res.redirect('/settings-page/ChangeEmailSuccess.html')
     } else {
       res.send('failure')
     }
   } else {
     res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.currentEmail = (req, res) => {
+  if (req.session.loggedin) {
+    res.json({'email-address' : req.session.email})
   }
 }
 
@@ -65,3 +78,5 @@ exports.updatePasswordSuccess = (req, res) => {
     res.status(500).redirect('/index.html')
   }
 }
+
+exports.get
