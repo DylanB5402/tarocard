@@ -2,5 +2,20 @@
   "db" : "databases/test/testTaroCard.db",
   "prod_db" : "databases/taroCard.db",
   "allowed-ext-image" : "jpeg|jpg|png",
-  "allowed-ext-text" : "txt"
+  "allowed-ext-text" : "txt",
+
+  "upload" : {
+    "formFileName" : "file",
+    "expressStaticDir" : "static",
+    "uploadPath" : "assets/uploads",
+    "allowedExtImage" : "jpeg|jpg|png|gif",
+    "allowedExtText" : "txt",
+
+    "dir" : {
+      "avatarImage" : "avatar",
+      "bannerImage" : "banner",
+      "drinksImage" : "drinks",
+      "tagsImage" : "tags"
+    }
+  }
 }
