@@ -79,7 +79,7 @@ exports.incomingFriends = (req, res) => {
  */
 exports.friendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/friendsPage/Friends_Page.html')
+    res.redirect('/friends-page/Friends_Page.html')
   } else {
     res.redirect('/')
   }
