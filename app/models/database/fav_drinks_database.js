@@ -63,7 +63,6 @@ class FavDrinksDatabase {
     return query // return the filled array of drink objects
   }
 
-
   /**
    * Checks if a drink already favorited for a user
    * @param {Integer} uid user id

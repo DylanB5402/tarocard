@@ -9,10 +9,8 @@ class UserDatabase {
    */
   constructor (database) {
     if (database === undefined) {
-      // console.log(config.db)
       this.db = new Database(config.db)
     } else {
-      // this.db = new Database(database)
       this.db = database
     }
     this.createUserTable()
@@ -86,13 +84,24 @@ class UserDatabase {
   }
 
   /**
-     *
-     * @param {*} password unencrypted password
-     * @param {*} hashFromDatabase encrypted password from the database
      * @returns {Boolean}, true if successful, false otherwise
      */
   checkPassword (email, password) {
     const hashFromDatabase = this.selectHashedPassword(email)
+    if (hashFromDatabase !== undefined) {
+      return bcrypt.compareSync(password, hashFromDatabase)
+    } else {
+      return false
+    }
+  }
+
+  selectPasswordByUID (uid) {
+    const stmt = this.db.prepare('SELECT password FROM users WHERE uid = ?')
+    return stmt.get(uid).password
+  }
+
+  checkPasswordByUid (uid, password) {
+    const hashFromDatabase = this.selectPasswordByUID(uid)
     if (hashFromDatabase !== undefined) {
       return bcrypt.compareSync(password, hashFromDatabase)
     } else {
@@ -127,8 +136,9 @@ class UserDatabase {
     return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
   }
 
-  insertProfileData (email, displayName, username, bio) {
-    return this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run()
+  insertProfileData (uid, displayName, username, bio) {
+    const info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
+    return info.changes > 0
   }
 
   selectProfileData (email) {
@@ -166,6 +176,21 @@ class UserDatabase {
    */
   searchDatabase (username) {
     return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
+  }
+
+  updateEmail (uid, email) {
+    const info = this.db.prepare(`UPDATE users SET email = '${email}' WHERE uid = ${uid};`).run()
+    return info.changes > 0
+  }
+
+  getUserDataByID (uid) {
+    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+  }
+
+  updatePassword (uid, password) {
+    const hashedPassword = this.encryptPassword(password)
+    const info = this.db.prepare(`UPDATE users SET password = '${hashedPassword}' WHERE uid = ${uid};`).run()
+    return info.changes > 0
   }
 }
 

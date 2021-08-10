@@ -42,12 +42,11 @@ exports.newDrinkCard = (req, res) => {
 
 /**
  * Edits an existing drink card data
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
-
     // Get drink id of drink being edited: Do this through use of req.params
     const drinkId = req.body.drinkId
 
@@ -71,8 +70,8 @@ exports.editDrinkCard = (req, res) => {
 
 /**
  * Gets all favorited drinks for a user and returns the data as a json
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
@@ -83,7 +82,7 @@ exports.getAllDrinks = (req, res) => {
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
     // Iterate through the array of drinks and make objects out of their properties
     allDrinks.forEach((drink) => {
-      let establishmentName = estabDB.getEstablishment(drink.establishment_id).name
+      const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
         name: drink.drink_name,
         desc: drink.drink_desc,
@@ -102,8 +101,8 @@ exports.getAllDrinks = (req, res) => {
 
 /**
  * Stars a drink
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.starDrink = (req, res) => {
   if (req.session.loggedin) {
@@ -123,8 +122,8 @@ exports.starDrink = (req, res) => {
 
 /**
  * Unstars a drink
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.unstarDrink = (req, res) => {
   if (req.session.loggedin) {
@@ -144,8 +143,8 @@ exports.unstarDrink = (req, res) => {
 
 /**
  * Removes a drink card
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {

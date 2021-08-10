@@ -1,4 +1,4 @@
-const { assert, expect } = require('chai')
+const { assert } = require('chai')
 const chai = require('chai')
 const assertArrays = require('chai-arrays')
 chai.use(assertArrays)
@@ -6,7 +6,7 @@ const session = require('supertest-session')
 
 const app = require('../../app/app')
 
-let authenticatedSession = null
+// let authenticatedSession = null
 
 describe('Test Server', function () {
   const taroApp = new app.TaroCardApp()
@@ -25,28 +25,11 @@ describe('Test Server', function () {
       if (err !== null) {
         console.log(err)
       }
-      authenticatedSession = taroSession
+      // authenticatedSession = taroSession
       assert.equal(res.text, 'Found. Redirecting to /profile/')
       return done()
     })
   })
-
-  // it('test friends list', function (done) {
-  //   authenticatedSession.post('/signup').send(
-  //     {
-  //       email: 'user2@email.com',
-  //       password: 'password',
-  //       repeatPassword: 'password'
-  //     }).end(function (err, res) {
-  //       console.log(err)
-  //       authenticatedSession.get('friends/current').end((err, res) => {
-  //         console.log(res)
-  //         assert.equal(1, 2)
-  //         return done()
-  //       })
-  //   })
-  //   authenticatedSession.get('/friends/current')
-  // })
 
   after((done) => {
     taroApp.server.close(done)

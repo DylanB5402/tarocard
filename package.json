@@ -15,8 +15,8 @@
     "test": "mocha",
     "start": "node server.js",
     "style": "standard --fix",
-    "clean": "rm databases/*; rm connect-session-knex.sqlite",
-    "populate": "node scripts/populate.js"
+    "clean": "rm databases/test/*; rm connect-session-knex.sqlite",
+    "populate" : "node scripts/populate.js"
   },
   "devDependencies": {
     "chai": "^4.3.4",

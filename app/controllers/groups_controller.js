@@ -1,14 +1,13 @@
 const userDatabase = require('../models/database/user_database')
 const groupDatabase = require('../models/database/group_database')
 
-
 const userDB = new userDatabase.UserDatabase()
 const groupDB = new groupDatabase.GroupDatabase()
 
 /**
  * Gets all the groups for a user
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.getAllGroups = (req, res) => {
   if (req.session.loggedin) {
@@ -36,8 +35,8 @@ exports.getAllGroups = (req, res) => {
 /**
  * Creates a brand new group
  * Do not worry about friendUID and friendsgroupId; they are -1 by default
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.createGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -45,18 +44,18 @@ exports.createGroup = (req, res) => {
     const groupName = req.body.groupName
     const friendUID = req.body.friendUID
     const friendsgroupID = req.body.friendsgroupID
-    
+
     const groupId = groupDB.createNewGroup(uid, groupName, friendUID, friendsgroupID)
 
-    res.redirect(`/editGroup/${groupId}`) 
+    res.redirect(`/editGroup/${groupId}`)
     // redirect to edit group stage for a specific group
   }
 }
 
 /**
  * TODO: Send me the friendUID and drinkId in the req.body!
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.addToGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -70,8 +69,8 @@ exports.addToGroup = (req, res) => {
 
 /**
  * Removes a group for a user
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.removeGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -84,8 +83,8 @@ exports.removeGroup = (req, res) => {
 /**
  * Removes a user-drink pair from a group
  * drinkId is found in the body!
- * @param {!import('express').Request} req 
- * @param {!import('express').Request} res 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Request} res
  */
 exports.removeFromGroup = (req, res) => {
   if (req.session.loggedin) {

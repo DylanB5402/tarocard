@@ -62,13 +62,13 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test insertProfileData', function () {
-    userDb.insertNewUser('user9@email.com', 'password', 'user9')
-    assert.equal(userDb.insertProfileData('user9@email.com', 'nine', 'nine', 'I am user nine').changes, 1)
+    const uid = userDb.insertNewUser('user9@email.com', 'password', 'user9')
+    assert.equal(userDb.insertProfileData(uid, 'nine', 'nine', 'I am user nine'), true)
   })
 
   it('Test selectProfileData', function () {
-    userDb.insertNewUser('user10@email.com', 'password', 'user10')
-    userDb.insertProfileData('user10@email.com', 'ten', 'ten', 'I am user ten')
+    const uid = userDb.insertNewUser('user10@email.com', 'password', 'user10')
+    userDb.insertProfileData(uid, 'ten', 'ten', 'I am user ten')
     const userData = userDb.selectProfileData('user10@email.com')
     const userArray = [userData.username, userData.display_name, userData.bio]
     expect(userArray).to.be.containingAllOf(['ten', 'ten', 'I am user ten'])
