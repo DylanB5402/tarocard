@@ -6,9 +6,6 @@
 
     <link rel="icon" href="../assets/TaroCardTransparent 1.png">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="jquery-3.6.0.min.js"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -17,102 +14,28 @@
 </head>
 
 <div class="page-header">
-    <span>Friend Requests</span>
+    <span>Activity</span>
 </div>
 
 <body class="notifs" style="z-index: -2;">
-    <template id="friendsRequestTemp">
-        <div class="requestElement">
-            <img>
-            <h2></h2>
-            <h3></h3>
-            <button class="accept" type="button" value="accept"></button>
-            <button class="deny" type="button" value="deny"></button>
+    <a href="../Notifications/friend-requests.html">
+        <div class="requests">
+            <img src="../assets/pfp-placeholder.png" id="pfp-request">
+            <div class="request-text">
+                <h6>Friend Requests</h6>
+                <p>Approve or ignore requests</p>
+            </div>
+        <!--<img src="../assets/arrow.png" id="request-arrow" >-->
         </div>
-    </template>
+            
+            
 
-    <script>
-        $(".notifs").on("click", ".accept", function (event) {
-            let buttonElement = event.target;
-            buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
-            let denyButton = event.target.parentElement.querySelector(".deny")
-            denyButton.style.display = "none";
-            let parentDiv = event.target.parentElement;
-            /*
-            $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
+    </a>
 
-            })
-            */
-        })
-
-        $(".notifs").on("click", ".deny", function (event) {
-            let parentDiv = event.target.parentElement;
-            let acceptButton = parentDiv.querySelector(".accept");
-            acceptButton.style.opacity = "0";
-            acceptButton.disabled = "true";
-            setTimeout(function () { parentDiv.style.display = "none"; }, 1000);
-
-            /*
-            $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
-
-            })
-            */
-        })
-    </script>
-
-    <div class="navbar" id="myNavbar" style="z-index: 2;">
-        <a href="../homePage/home.html"></i>
-            <img id="navHomeIcon" src="../assets/home.png" />
-        </a>
-
-        <a href="../SearchUsers/SearchUsers.html"></i>
-            <img id="navSearchIcon" src="../assets/search.png" />
-        </a>
-
-        <a class="active" href="#"></i>
-            <img id="navNotifsIcon" src="../assets/notifs.png" />
-        </a>
-
-        <a href="../Profile page/Profile_Page_TaroCards.html"></i>
-            <img id="navProfileIcon" src="../assets/profile.png" />
-        </a>
-    </div>
 
 </body>
 
-<script>
-    const body = document.querySelector('body');
 
-    let request = new XMLHttpRequest();
-    request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
-    request.responseType = 'json';
-    request.send();
-
-    request.onload = function () {
-        const users = request.response;
-        populateFriendRequests(users);
-    }
-
-    // function is used to fill page with list of friends request from a json file.
-    function populateFriendRequests(obj) {
-        let template, divAll, div, divCopy, currentLetter, char;
-        divAll = document.createElement("div");
-        divAll.id = "friendsRequestAll";
-        template = document.getElementById('friendsRequestTemp');
-        div = template.content.querySelector(".requestElement");
-        const users = obj.users;
-        for (let i = 0; i < users.length; i++) {
-            divCopy = document.importNode(div, true);
-            // char refers to first letter of current users display name
-            char = users[i]["display name"].charAt(0);
-            divCopy.querySelector("img", true).src = users[i]["image url"];
-            divCopy.querySelector("h2", true).textContent = users[i]["display name"];
-            divCopy.querySelector("h3", true).textContent = users[i]["username"];
-            divAll.appendChild(divCopy);
-            body.appendChild(divAll);
-        }
-    }
-</script>
 
 <div class="navbar" id="myNavbar">
     <a href="../homePage/home.html"></i>
@@ -133,3 +56,11 @@
 </div>
 
 </html>
+
+<!--<div class="requests">
+        <img src="../assets/pfp-placeholder.png" class="requests-pfp">
+        <div class="request-text">
+            <h6>Friend Requests</h6>
+            <p>Approve or ignore requests</p>
+        </div>
+    </div>-->
