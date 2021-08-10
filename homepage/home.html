@@ -24,7 +24,22 @@
             <div class="modal-content">
                 <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
                 <button onclick="openCardCreate('id01')" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
-                <a class="stuff" href="../group-things/groupOrder-friends.html"> <img src="../assets/group-order.png"> <p style="text-decoration: none;"></p> Group Order </p></a>
+                <button onclick="openCardCreate('createGroupOrder')" class="stuff"> <img src="../assets/group-order.png"> <p> Group Order </p></button>
+            </div>
+        </div>
+
+         <!-- Hidden Modal For Group Card -->
+        <div id="groupOrder-add" class="modal-GO">
+            <div class="gO-modal">
+                <h1> Add to.... </h1> 
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('groupOrder-add')" >&times;</button>
+                <select id="groupOrders" name="groupOrders">
+                    <option value="Group Order1"> Group Order 1</option>
+                    <option value="Group Order2"> Group Order 2</option>
+                    <option value="Group Order3"> Group Order 3</option>
+                    <option value="Group Order4"> Group Order 4</option>
+                </select>
+                <input type="button" value="submit">
             </div>
         </div>
 
@@ -55,25 +70,28 @@
         </form>
 
         <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
-        <!-- Card Creation Form (Pop up? )-->
         <!-- The Button that starts it all :00 -->
         <!-- <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button" onclick="document.getElementById('id01').style.display='block'"> -->
-        <div id="cardContainer">
-            <!-- Card Template: Gives the formatting of what a card would look like -->
-            <!-- each div should have card-template class on it -->
-            <template id='card-template'>
-                <div>
-                    <h1 id="establishment" class="fonts"> Starbucks </h1>
-                    <h2 id="drink" class="fonts"> Double chocolate chip frappuccino </h2>
-                    <h2 id="description" style="font-weight: 100" class="fonts"> white mocha syrrup INSTEAD of the regular one </h3>
-                    <div class="tag-container">
-                        <p></p>
-                        <img class="pfp-pic" src="../assets/pfp-placeholder.png">
-                    </div>
+        <form class="form-container" id="createGroupOrder" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('createGroupOrder')" >&times;</button>
+                <button class="post-button" style="left: 60vw; width: 300px;"value="submit" onclick="closeCardCreate('createGroupOrder')" > CREATE  </button>
             </div>
-            </template>
-
-            <div class="card-container" >
+            <h1 style="position: relative; font-size: 90px; margin: auto; text-align: center; top: 200px;" class="fonts"> Group Order Name </h1>
+            <input type="text" placeholder="Group Name" id="groupName" name="groupName" class="small-input">
+            
+        </form>
+        <div id="cardContainer">
+            <div class="card-template">
+                <h1 class="fonts"> Friend's Card </h1>
+                <h2 class="fonts"> Friend's Drink </h2>
+                <h2 class="fonts description"> Fight me whore, do it you won't I have the power of god and anime on my side AHAHAHAHAHAHAHAHAH...pain </h2>
+                <div class="tag-container">
+                    <img class="pfp-pic"src="../assets/pfp-placeholder.png">
+                    <p> Hello </p>
+                    <p> Tag 2 </p>
+                </div>
+                <p class="add-gO-btn" onclick="openCardCreate('groupOrder-add')"> &plus; </p>
             </div>
         </div>
         <button id="add-card-btn" alt="add card button" > + </button> 
