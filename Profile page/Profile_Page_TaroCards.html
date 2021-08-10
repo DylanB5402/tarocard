@@ -12,8 +12,18 @@
     </head>
 
     <body class="profile">
-        <img src="coolWallpaper.png" id="banner">
+        <div>
+            <!-- banner will pull from user DB -->
+            <img src="coolWallpaper.png" id="banner">
+            <button class="settings-menu">
+                <a href="../Settings Page/Settings_HTML.html">
+                    <img src="../assets/menu-white.png" id="settings-menu">
+                </a>
+            </button>
+        </div>
+        
         <section id="profileTop">
+            <!-- pfp will pull from user DB -->
             <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
         
             <button type="button" id="edit-profile"><a href="..\editProfilePage\edit.html">Edit Profile</a></button>
@@ -37,25 +47,47 @@
                 </p>
             </section>
 
+            <div class="user-stats">
+                <div class="stat">
+                    <p>1000
+                    <span> Friends</span></p>
+                </div>
+                <div class="stat">
+                    <p>1000
+                    <span> Cards</span></p>
+                </div>
+            </div>
 
+            <div class="tabs">
+                <div class="my-tab">
+                    <img id="addCard" src="../assets/add-card.png" />
+                </div>
+
+                <div class="my-tab">
+                    <img id="groupOrder" src="../assets/group-order.png" />
+                </div>
+
+            </div>
+
+            <!--
             <section id="userStats" class="userStats">
-                <ul>
+                <ul class="stats">
                     <strong> 1,000 </strong>
                     <span> Friends</span>
                 </ul>
-                <ul>
+                <ul class="stats">
                     <strong>1,000 </strong>
                     <span> Cards</span>
                 </ul>
-            </section>
-            <section id="profileTabs" class="profileTabs">
+            </section>-->
+            <!-- <section id="profileTabs" class="profileTabs">
                 <a class="active" href="#" class="hover">
                     <img id="addCard" src="..\assets\add-card.png" />
                 </a>
                 <a class="active" href="#" class="hover">
                     <img id="groupOrder" src="..\assets\group-order.png" />
                 </a>
-            </section>
+            </section> -->
 
         </section>
         

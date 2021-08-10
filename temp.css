@@ -51,6 +51,23 @@ html {
     /*border: dotted 5px greenyellow;/**/
 }
 
+.settings-menu {
+    background-color: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    width: fit-content;
+    position: absolute;
+    right: 4%;
+    top: 1%;
+
+}
+
+#settings-menu {
+    height: 60px;
+    width: 60px;
+}
+
 .edit {
     /*margin-top: -5%;/**/
     background-color: white;
@@ -923,13 +940,60 @@ h3 a{
     right:200px;
     
 }
- 
-#userStats{
+
+.user-stats {
+    /*background-color: mediumaquamarine;/**/
+    display: flex;
+    padding-left: 100px;
+}
+
+.stat {
+    /*background-color: mediumorchid;/**/
+    width: fit-content;
+    vertical-align: center;
+    width: 50%;
+
+}
+
+.stat p {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.stat span {
+    font-size: 32px;
+    color: #C1C1C1;
+    
+}
+
+.tabs {
+    display: flex;
+}
+
+.my-tab {
+    /*background-color: cadetblue;/**/
+    width: 50%;
+    height: 95px;
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.my-tab img {
+    padding-top: 15px;
+    height: 60px;
+    width: 60px;
+    /*padding-left: 41%;/**/
+    
+}
+
+
+/* #userStats{
     align-items: center;
     width: max-content;
 }
 
-#userStats ul {
+#stats {
     display: inline;
     text-align: left;
     width:fit-content;
@@ -941,23 +1005,25 @@ h3 a{
 .userStats strong {
     font-weight: bolder;
     font-size: 60px;
+    background-color: blue;
 }
 
 
 .userStats span {
-    font-weight: lighter;
+    font-weight: 400;
     font-size: 40px;
     color: #C1C1C1;
-    background-color: rgb(255, 255, 255);
-}
+    background-color: red;
+} */
 
-.profileTabs{
+/* .profileTabs{
     
     height:80px;
     display:inline-flex;
-    justify-content:center;
+    justify-content: center;
     width: 100%;
     bottom:-20px;
+    background-color: white;
 }
 
 .profileTabs a{
@@ -973,11 +1039,11 @@ h3 a{
 }
 
 .profileTabs a:hover{
-    background-color: #D4D4D4;
-}
+    background-color: red;
+}*/
 #profileCards {
     background-color: #EFEFEF;
-}
+} 
 
 #favoritesSection{
     align-items: center;

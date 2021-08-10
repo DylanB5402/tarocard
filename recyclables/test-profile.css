@@ -1,25 +1,42 @@
+* {
+    font-family: "Roboto";
+}
+
+html {
+    background-color: lightslategray;
+    width: 100%;
+}
+
 body {
     margin: 0;
+    width: 100%;
 }
 
 .profile {
     width: 100%;
     height: 720px;
-    background-color: wheat;
     margin: 0;
 }
 
 .banner-header {
-    margin: 0;
+    /*margin: 0;/**/
     height: 225px;
+    min-width: 100%;
+    max-width: 100%;
     z-index: 0;
-    /*border: dotted 5px red;*/
+    object-position: center;
+    background-color: wheat;
+    border: dotted 5px red;
 }
 
-.banner-header img{
-    width: 100%;
-    height: 225px;
+.banner {
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-position: center;
     object-fit: cover;
+    position: relative;
+    /*display: none;/**/
     
 }
 
@@ -35,21 +52,21 @@ body {
 
 }
 
-.settings-menu img {
+#settings-menu {
     height: 60px;
     width: 52px;
 }
 
 .profile-info {
-    position: relative;
     margin: 0;
     padding-left: 6%;
     height: 500px;
-    width: 100%;
-    background-color: lightseagreen;/**/
+    width: 100vw;
+    background-color: teal;/**/
     opacity: 1;
-    z-index: 1;
-    overflow: hidden;/**/
+    position: relative;
+    z-index: 2;
+    /*overflow: hidden;/**/
 }
 
 #pfp {
@@ -60,7 +77,16 @@ body {
     object-fit: cover;
     object-position: center top;
     position: relative;
-    top: 0;
-    z-index: 2;
+    top: -112.5px;
+    z-index: 3;
     overflow: visible;
+    margin: 0;
+}
+
+.names {
+    border: dotted 2px yellow;
+    width:fit-content;
+    position: relative;
+    right: 0;
+
 }
