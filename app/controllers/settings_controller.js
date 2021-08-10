@@ -1,4 +1,3 @@
-const e = require('express')
 const userDatabase = require('../models/database/user_database')
 const userDB = new userDatabase.UserDatabase()
 
@@ -41,7 +40,7 @@ exports.updateEmail = (req, res) => {
  */
 exports.currentEmail = (req, res) => {
   if (req.session.loggedin) {
-    res.json({'email-address' : req.session.email})
+    res.json({ 'email-address': req.session.email })
   }
 }
 
@@ -52,8 +51,6 @@ exports.currentEmail = (req, res) => {
 exports.updatePassword = (req, res) => {
   const currentPassword = req.body['current-password']
   const newPassword = req.body['new-password']
-  const confirmPassword = req.body['confirm-password']
-  // console.log(currentPassword, newPassword, confirmPassword)
   console.log(req.session.loggedin)
   if (req.session.loggedin && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
     const uid = req.session.uid
@@ -78,5 +75,3 @@ exports.updatePasswordSuccess = (req, res) => {
     res.status(500).redirect('/index.html')
   }
 }
-
-exports.get

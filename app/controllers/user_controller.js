@@ -8,7 +8,6 @@ const tempEngine = new templateEngine.TemplateEngine()
  * @param {!import('express').Response} res
  */
 exports.signup = (req, res) => {
-  // console.log(req.session)
   if (req.session.loggedin) {
     // res.append({'already-logged-in' : true})
     res.redirect('/profile/')

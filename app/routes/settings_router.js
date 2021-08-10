@@ -9,7 +9,7 @@ router.post('/update/email', settingsController.updateEmail)
 
 router.get('/current/email', settingsController.currentEmail)
 
-router.post('/update/email/success', (req, res) => {res.send('687')})
+router.post('/update/email/success', (req, res) => { res.send('687') })
 
 router.post('/update/password', settingsController.updatePassword)
 

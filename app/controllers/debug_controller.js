@@ -15,7 +15,6 @@ const tagsDB = new tagsDatabase.TagsDatabase()
 const config = require('../config.json')
 
 exports.home = (req, res) => {
-  // console.log(req)
   if (req.session.loggedin !== true) {
     res.send('please log in')
   } else {
@@ -120,7 +119,6 @@ exports.addUser = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.loggedIn = (req, res) => {
-  // console.log(req.session)
   if (req.session.loggedin) {
     res.json({ 'user-logged-in': true, uid: req.session.uid })
   } else {
