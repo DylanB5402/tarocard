@@ -16,7 +16,7 @@ exports.newDrinkCard = (req, res) => {
     // Get establishment, name, and desc of drink from form request
 
     // Development decision: user cannot enter establishment as a text, they must select from options
-    const establishment = req.body.establishment // id of establishment
+    const establishment = req.body.establishment // name of establishment
     const nameOfDrink = req.body.nameOfDrink
     const drinkDesc = req.body.drinkDesc
     const uid = req.session.uid // get uid from current logged in state
