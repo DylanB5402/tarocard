@@ -1,7 +1,9 @@
 const userDatabase = require('../models/database/user_database')
+const friendDatabase = require('../models/database/friend_database')
 const templateEngine = require('../views/template_engine')
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
+const friendDb = new friendDatabase.FriendDatabase()
 
 /**
  * @param {!import('express').Request} req
@@ -57,8 +59,9 @@ exports.profile = (req, res) => {
       const bio = profileData.bio
       const username = profileData.username
       const displayName = profileData.display_name
+      const numFriends = friendDb.getNumFriends(uid)
       res.append('profileaccess', 'successful')
-      res.send(tempEngine.getUserProfile(username, displayName, bio))
+      res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends))
     } else {
       res.redirect('/')
     }

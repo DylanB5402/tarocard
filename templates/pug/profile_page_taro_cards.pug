@@ -35,7 +35,7 @@ html
           button.to-friends
             a(href='../friendsPage/Friends_Page.html')
               p
-                | 1000
+                | #{numFriends}
 
                 span Friends
         .stat
@@ -71,7 +71,7 @@ html
                     </section> 
     section#profileCards
       #favoritesSection
-        img#favoritesStar(src='..\assets\star-Purple.png')
+        img#favoritesStar(src='../assets/star-purple.png')
         p#favorites Favorites
         hr(style='width: 100%; height: 0.1px;')
       #cardContainer

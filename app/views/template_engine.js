@@ -5,11 +5,12 @@ class TemplateEngine {
     this.generateProfile = pug.compileFile('templates/pug/profile_page_taro_cards.pug')
   }
 
-  getUserProfile (profileUsername, profileDisplayName, profileBio) {
+  getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends) {
     return this.generateProfile({
       username: profileUsername,
       displayName: profileDisplayName,
-      bio: profileBio
+      bio: profileBio,
+      numFriends: numberFriends
     })
   }
 }
