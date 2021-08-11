@@ -105,7 +105,7 @@ function openCardCreate( formID){
         let drinkID = document.getElementById("drinkId");
         drinkID.value = drinkId;
   
-        form.action = "/drinks/editDrinkCard";
+        form.action = "/drinks/editDrinkCard/" + drinkId;
   
     }
   

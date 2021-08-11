@@ -31,7 +31,7 @@ exports.newDrinkCard = (req, res) => {
     }
     if (resultFavDrink) {
       // Exit pop up or print "Drink Added!"
-      drinksDB.toString()
+      // drinksDB.toString()
     } else {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
@@ -48,9 +48,7 @@ exports.newDrinkCard = (req, res) => {
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
-    const drinkId = req.body.drinkId
-
-    console.log(drinkId)
+    const drinkId = req.params.drinkId
 
     // Get name and desc and estasblishment of drink from new form request
     const nameOfDrink = req.body.nameOfDrink
@@ -108,7 +106,7 @@ exports.getAllDrinks = (req, res) => {
 exports.starDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     const success = favDrinksDB.starDrink(uid, drinkId)
 
     if (success) {
@@ -129,7 +127,7 @@ exports.starDrink = (req, res) => {
 exports.unstarDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     const success = favDrinksDB.unstarDrink(uid, drinkId)
 
     if (success) {
@@ -150,7 +148,7 @@ exports.unstarDrink = (req, res) => {
 exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     favDrinksDB.removeFavDrink(uid, drinkId)
 
     res.redirect('/homepage/home.html') // refreshes
