@@ -34,6 +34,8 @@ router.post('/adduser', debugController.addUser)
 
 router.get('/loggedin', debugController.loggedIn)
 
+/// UPLOAD DEBUG ///
+
 // POST request for upload.
 router.post('/upload/:uploadType/:uploadId', debugController.upload)
 
@@ -45,5 +47,10 @@ router.get('/drinks/images', debugController.drinksImages)
 
 // GET request to reset drinks database
 router.get('/drinks/reset', debugController.drinksReset)
+
+/// ESTABLISHMENTS DEBUG ///
+
+// GET request to show establishments
+router.get('/BIG/FUNNY', debugController.establishments)
 
 module.exports = router
