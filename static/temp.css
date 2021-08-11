@@ -16,6 +16,7 @@ html {
     /*opacity: 0.5;/**/
     height: 150px;
     max-width: 100%;
+    min-width: 100%;
     padding-left: 80px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
     /*position: fixed;/**/
@@ -285,13 +286,7 @@ ul {
     bottom: 0;
 }
 
-.option-btn {
-    position: absolute;
-    left: 94%;
-    z-index: 0;
-    height: 40px;
-    top: 10px;
-}
+
 
 li {
     float: left ;
@@ -442,6 +437,14 @@ li:last-child{
     margin: 10px 10px 0px 10px;
     word-wrap: break-word;
     font-size: 3vh;
+}
+
+.option-btn {
+    position: absolute;
+    left: 94%;
+    z-index: 0;
+    height: 40px;
+    top: 10px;
 }
 
 .card-template{
@@ -720,6 +723,7 @@ li:last-child{
           transform: translateY(120vh);
       }
   }
+
 
 /* HOME END */
 
@@ -1023,6 +1027,20 @@ h3 a{
     display: flex;
 }
 
+.to-friends {
+    background-color: transparent;
+}
+
+.to-friends a{
+   
+    text-decoration: none;
+}
+
+.to-friends a:visited {
+    text-decoration: none;
+    color: black;
+}
+
 .my-tab {
     /*background-color: cadetblue;/**/
     width: 50%;
@@ -1152,7 +1170,7 @@ h3 a{
     text-align: center;
     text-decoration: none;
     width: 25%;
-    height:160px;
+    height: 160px;
     
   }
   
@@ -1223,7 +1241,7 @@ button #edit-profile {
     background-color: white;
 }
 
-#user-search {
+#user-search, #friend-search {
     border-radius: 40px;
     outline: none;
     padding-left: 110px;
@@ -1298,7 +1316,8 @@ button #edit-profile {
 .requests {
     background-color: teal;
     height: 175px;
-    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
     vertical-align: center;
 }
 
@@ -1483,12 +1502,14 @@ button #edit-profile {
 
 #logout {
     text-decoration: none;
+    color: black
 }
 
 #logout:visited {
     text-decoration: none;
     color: black;
 }
+
 
 #settings-arrow {
     width: 32px;
@@ -1600,3 +1621,80 @@ button #edit-profile {
 }
 
 /* PASSWORD END */
+
+/* FRIEND LIST START */
+#friendsAll {
+    margin-bottom: 150px;
+}
+
+.friends {
+    overflow: hidden;
+}
+
+.friendElement {
+    width: 97%;
+    height: 225px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.friendElement img {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.friendElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 260px;
+    bottom: 115px;
+}
+
+.friendElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(187, 185, 185, 0.795);
+    position: relative;
+    left: 255px;
+    bottom: 110px;
+}
+
+#letterHeading {
+    color: rgb(146, 106, 255);
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    font-size: 50px;
+    position: relative;
+    margin-top: 80px;
+    left: 30px;
+    bottom: 10px;
+}
+
+#headingLine {
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid rgb(146, 106, 255);;
+    padding: 0;
+    position: relative;
+    bottom: 40px;
+    left: 80px;
+    width: 90%;
+}
+/* FRIEND LIST END */
