@@ -1,5 +1,6 @@
 const userDatabase = require('../models/database/user_database')
 const groupDatabase = require('../models/database/group_database')
+const { home } = require('./debug_controller')
 
 const userDB = new userDatabase.UserDatabase()
 const groupDB = new groupDatabase.GroupDatabase()
@@ -64,6 +65,10 @@ exports.addToGroup = (req, res) => {
     const friendUID = req.body.friendUID
     const drinkId = req.body.friendDrinkId
     groupDB.addToGroup(groupId, uid, friendUID, drinkId)
+
+    res.redirect('/homepage/home.html')
+  } else {
+    res.redirect('/')
   }
 }
 
@@ -77,6 +82,10 @@ exports.removeGroup = (req, res) => {
     const uid = req.session.uid
     const groupId = req.params.groupId
     groupDB.removeGroup(uid, groupId)
+
+    res.redirect('homepage/home.html')
+  } else {
+    res.redirect('/')
   }
 }
 
@@ -92,5 +101,9 @@ exports.removeFromGroup = (req, res) => {
     const groupId = req.params.groupId
     const drinkId = req.body.drinkId
     groupDB.removeFromGroup(uid, groupId, drinkId)
+    
+    res.redirect('homepage/home.html')
+  } else {
+    res.redirect('/')
   }
 }
