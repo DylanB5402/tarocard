@@ -138,8 +138,6 @@ class FriendDatabase {
    */
   addCurrentFriend (uid, friendUid) {
     if (uid !== friendUid) {
-      // this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
-      // this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
       this.insertFriend(uid, friendUid, FriendStatus.FRIENDS)
       this.insertFriend(friendUid, uid, FriendStatus.FRIENDS)
     }
