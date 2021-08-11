@@ -2,6 +2,7 @@
 <html style="width: 100%;">
     <head>
         <link rel="stylesheet" href="./home.css">
+        <link rel="stylesheet" href="../temp.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> Group Order </title>
         <script>
@@ -60,17 +61,21 @@
 
         /* Delete Button */
         let deleteBtn = document.createElement("img");
-        deleteBtn.src=""
+        deleteBtn.src="../assets/trash-icon.png";
+        deleteBtn.classList.add("trash-card");
 
-
-        
+        deleteBtn.onclick = function(){
+            container.style.display = "none";
+            /* Sending a delete request with this button */
+        }
         tagContainer.appendChild(pfp);
     
         container.appendChild(estab);
         container.appendChild(d);
-          container.appendChild(options);
+        container.appendChild(options);
         container.appendChild(desc);
         container.appendChild(tagContainer);
+        container.appendChild(deleteBtn);
         document.getElementById('cardContainer').appendChild(container);
         }
     

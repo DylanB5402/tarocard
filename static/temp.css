@@ -287,9 +287,9 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 94%;
+    left: 93%;
     z-index: 0;
-    height: 40px;
+    height: 30px;
     top: 10px;
 }
 
@@ -1600,3 +1600,13 @@ button #edit-profile {
 }
 
 /* PASSWORD END */
+
+/* Group Order View Page */
+
+.trash-card{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: 85%;
+    top: 5%;
+}
