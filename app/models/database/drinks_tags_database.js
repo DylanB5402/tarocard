@@ -6,7 +6,7 @@
 const Database = require('better-sqlite3')
 const drinksDatabase = require('./drinks_database')
 const tagsDatabase = require('./tags_database')
-const config = require('../../../config.json')
+const config = require('../../config.json')
 
 /** A class that manages the drinks tags database relations table. */
 class DrinksTagsDatabase {

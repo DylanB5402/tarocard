@@ -3,7 +3,7 @@ const Database = require('better-sqlite3')
 const yelp = require('yelp-fusion')
 
 const client = yelp.client(process.env.YELP_API_KEY)
-const config = require('../config.json').yelp
+const config = require('../app/config.json').yelp
 const categories = require('./categories.json')
 
 const establishmentsDatabase = require('../app/models/database/establishments_database')
@@ -27,6 +27,7 @@ tags.forEach((tag) => {
 
 console.log(`Performing Yelp Search On: [${obtainedCategories}]`)
 
+// Recursive search
 let search = (categories, idx, location, offset, rate, added) => {
   client.search({
     categories: categories[idx],

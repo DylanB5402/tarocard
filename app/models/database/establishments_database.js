@@ -5,7 +5,7 @@
 
 const Database = require('better-sqlite3')
 const fs = require('fs')
-const config = require('../../../config.json')
+const config = require('../../config.json')
 
 /** A class that manages the drinks database table. */
 class EstablishmentsDatabase {
@@ -233,7 +233,7 @@ class EstablishmentsDatabase {
     // Remove last comma
     stmtString = stmtString.substring(0, stmtString.length - 1)
     stmtString += ' WHERE id = ?'
-    parameters.push(establishment.id) 
+    parameters.push(id) 
 
     if (parameters.length === 1) {
       return false

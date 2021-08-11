@@ -14,7 +14,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 const Database = require('better-sqlite3')
 const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
-const config = require('../../../config.json')
+const config = require('../../config.json')
 
 class FavDrinksDatabase {
   constructor (database) {

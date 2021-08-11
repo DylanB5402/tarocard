@@ -14,7 +14,7 @@ const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
 const establishmentsDB = new establishmentsDatabase.EstablishmentsDatabase()
 
-const config = require('../../config.json')
+const config = require('../config.json')
 
 exports.home = (req, res) => {
   // console.log(req)
