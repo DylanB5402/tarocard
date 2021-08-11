@@ -112,7 +112,7 @@ function openCardCreate( formID){
     tagContainer.appendChild(pfp);
   
     container.appendChild(estab);
-    container.appendChild(options)
+    container.appendChild(options);
     container.appendChild(d);
     container.appendChild(desc);
     container.appendChild(tagContainer);
@@ -196,4 +196,5 @@ function openCardCreate( formID){
   });
   
   
+
   

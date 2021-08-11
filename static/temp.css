@@ -545,17 +545,17 @@ li:last-child{
 }
 
 .modal-GO{
-    display: none;
+    display: block;
     position: fixed;
     z-index: 2;
     margin: auto;
     height: fit-content;
-    box-shadow: 0 0 0 10000px #000000b0;
-    background-color: #000000b0;
+    box-shadow: 0 0 0 100000px #000000b0;
+    background-color:#000000b0 ;
     align-items: center;
     text-align: center;
     width: 100%;
-    border: none;
+    border: transparent;
 }
 
 .modal-content{
@@ -591,8 +591,8 @@ li:last-child{
 
 .gO-modal {
     background-color: white;
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    position: relative;
     border: none;
   }
 
