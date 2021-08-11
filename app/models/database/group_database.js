@@ -11,21 +11,21 @@ Credits: Dylan Barva & Peter Liu for skeleton code
  * @package better-sqlite3
  */
 
- const Database = require('better-sqlite3')
- const drinksDatabase = require('./drinks_database')
- const userDatabase = require('./user_database')
- const config = require('../../config.json')
- 
- class GroupDatabase {
-   constructor (database) {
-     if (database === undefined) {
-       this.db = new Database(config.db)
-     } else {
-       this.db = database
-     }
-     this.createGroupTable()
-   }
- 
+const Database = require('better-sqlite3')
+const drinksDatabase = require('./drinks_database')
+const userDatabase = require('./user_database')
+const config = require('../../config.json')
+
+class GroupDatabase {
+  constructor (database) {
+    if (database === undefined) {
+      this.db = new Database(config.db)
+    } else {
+      this.db = database
+    }
+    this.createGroupTable()
+  }
+
   /**
    * Creates a new groups database if DNE. Otherwise, does not create table.
    * Table has 5 columns: Group Id, User Id, Group Name, Friend Id, Drink ID
@@ -42,7 +42,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
       ' friend_uid INTEGER, friends_drink_id INTEGER);')
     stmt.run()
   }
- 
+
   /**
    * TODO:
    * Gets a group of a user by group id. The group is a collection (array) of
@@ -56,15 +56,13 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 
     // Safety check
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
-
       // SQL Statement:
-      //   selects all friend-drink pair associated with a specific groupId 
+      //   selects all friend-drink pair associated with a specific groupId
       const stmt = this.db.prepare('SELECT * FROM groups WHERE uid = ? AND group_id = ?')
       const query = stmt.all(uid, groupId) // an array of row objects (group)
 
       return query
-    }
-    else {
+    } else {
       return null
     }
   }
@@ -83,30 +81,28 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     if (userDB.getUserByUID(uid)) {
       // SQL Statement:
       //   selects all groups with the same uid from the table, sorted by alphabetical order
-      const stmt = this.db.prepare('SELECT group_id, group_name FROM groups WHERE uid = ? ' + 
+      const stmt = this.db.prepare('SELECT group_id, group_name FROM groups WHERE uid = ? ' +
               'ORDER BY group_name')
       const query = stmt.all(uid) // an array of row objects containing group id and group name
 
       return query
-    }
-    else {
+    } else {
       return null
     }
-    
   }
- 
-   /**
+
+  /**
     * Checks if a group already exists
     * @param {Integer} groupId id of group
     * @return {Integer} 0 if DNE, any integer > 0 if it does
     */
   isExist (groupId) {
-    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM groups WHERE group_id = ? `)
+    const stmt = this.db.prepare('SELECT COUNT(*) count FROM groups WHERE group_id = ? ')
     const query = stmt.get(groupId) // get runs the statement
     const numEntries = query.count
     return numEntries
   }
- 
+
   /**
   * Creates a new group
   * Duplicate group names are allowed
@@ -127,7 +123,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
       return null
     } else {
       const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
-              `VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)`)
+              'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
       const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
 
       if (query.changes === 1) {
@@ -138,7 +134,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     }
   }
 
-   /**
+  /**
     * Adds friend-drink pair to group
     * Make sure to check if this is a fresh new group to update null values
     * @param {Integer} groupId
@@ -147,52 +143,47 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     * @param {Integer} drinkId
     * @returns {Boolean} true if successful, false if failed
     */
-    addToGroup (groupId, uid, friendUID, drinkId) {
-      const userDB = new userDatabase.UserDatabase()
-      const drinksDB = new drinksDatabase.DrinksDatabase()
-  
-      // Check if ids exists in the first place
-      if (userDB.getUserByUID(uid) &&
+  addToGroup (groupId, uid, friendUID, drinkId) {
+    const userDB = new userDatabase.UserDatabase()
+    const drinksDB = new drinksDatabase.DrinksDatabase()
+
+    // Check if ids exists in the first place
+    if (userDB.getUserByUID(uid) &&
               userDB.getUserByUID(friendUID) &&
               drinksDB.isExist(drinkId) &&
               this.isExist(groupId)) {
-
-        // Get group name for data insertion
-        const nameStmt = this.db.prepare('SELECT group_name FROM groups WHERE' +
+      // Get group name for data insertion
+      const nameStmt = this.db.prepare('SELECT group_name FROM groups WHERE' +
         ' group_id = ?')
-        const groupName = nameStmt.get(groupId).group_name
+      const groupName = nameStmt.get(groupId).group_name
 
-
-        // Cover case of brand new group (friend id and drink id = -1)
-        const numEntries = this.isExist(groupId)
-        if (numEntries === 1) {
-          
-          // update first and only entry where ids = -1
-          const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
-                  'friends_drink_id = ? WHERE group_id = ?') 
-          const firstQuery = firstStmt.run(friendUID, drinkId, groupId)
-        }
-        else {
-          
-          // insert user-drink pair into table
-          const stmt = this.db.prepare('INSERT INTO groups ' + 
+      // Cover case of brand new group (friend id and drink id = -1)
+      const numEntries = this.isExist(groupId)
+      if (numEntries === 1) {
+        // update first and only entry where ids = -1
+        const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
+                  'friends_drink_id = ? WHERE group_id = ?')
+        const firstQuery = firstStmt.run(friendUID, drinkId, groupId)
+      } else {
+        // insert user-drink pair into table
+        const stmt = this.db.prepare('INSERT INTO groups ' +
                   '(group_id, uid, group_name, friend_uid, friends_drink_id)' +
-                  `VALUES (?, ?, ?, ?, ?)`)
-          const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
-        }
+                  'VALUES (?, ?, ?, ?, ?)')
+        const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
+      }
 
-        // Check to make sure table was changed
-        if (query.changes === 1) {
-          return true
-        } else {
-          return false
-        }
+      // Check to make sure table was changed
+      if (query.changes === 1) {
+        return true
       } else {
         return false
       }
+    } else {
+      return false
     }
- 
-  // Need an edit group method 
+  }
+
+  // Need an edit group method
   // Implementation is to modify the drink desc in database and to keep uid and
   // drinkId pair the same in groups_database.js
 
@@ -208,10 +199,9 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 
     // Check to make params are valid/exists
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
-
       // Delete group from DB
       const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
-              `uid = ? AND group_id = ?`)
+              'uid = ? AND group_id = ?')
       const query = stmt.run(uid, groupId)
 
       // Check to make sure changes are made to DB
@@ -221,7 +211,7 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 
       return false // No changes made to table
     } else {
-      return false //at least 1 ID DNE
+      return false // at least 1 ID DNE
     }
   }
 
@@ -241,10 +231,9 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     if (userDB.getUserByUID(uid) &&
             drinksDB.isExist(drinkId) &&
             this.isExist(groupId)) {
-
       // Delete from group in DB
       const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
-              `uid = ? AND group_id = ? AND friends_drink_id = ?`)
+              'uid = ? AND group_id = ? AND friends_drink_id = ?')
       const query = stmt.run(uid, friendUID, drinkId)
 
       // Check to make sure changes are made to DB
@@ -254,10 +243,10 @@ Credits: Dylan Barva & Peter Liu for skeleton code
 
       return false // No changes made to table
     } else {
-      return false //at least 1 ID DNE
+      return false // at least 1 ID DNE
     }
   }
- 
+
   toString () {
     const stmt = this.db.prepare('SELECT * FROM groups')
     const query = stmt.all()
@@ -269,7 +258,6 @@ Credits: Dylan Barva & Peter Liu for skeleton code
     const stmt = this.db.prepare('DELETE FROM groups')
     const query = stmt.run()
   }
- }
- 
- module.exports = { GroupDatabase }
- 
+}
+
+module.exports = { GroupDatabase }

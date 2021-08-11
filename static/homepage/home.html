@@ -56,7 +56,7 @@
                 <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
             </div>
         </form>
-        <!-- Hiddene form for card update -->
+        <!-- Hidden form for card update -->
         <form action="/drinks/editDrinkCard" class="form-container" id="updateCard" method="POST">
             <div class="card-bar">
                 <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
@@ -65,7 +65,7 @@
             <div class="userInput">
                 <input type="text" placeholder="Name of Establishment" id="estabInput" name="=establishment" class="small-input">
                 <input type="text" placeholder="Name of Order" id="orderInput" name="nameOfDrink" class="small-input" >
-                <input type="text" name="drinkId" id="drinkId" class="small-input">
+                <input type="hidden" name="drinkId" id="drinkId" class="small-input">
                 <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
             </div>
         </form>
@@ -93,7 +93,8 @@
                     <p> Hello </p>
                     <p> Tag 2 </p>
                 </div>
-                <p class="add-gO-btn" onclick="openCardCreate('groupOrder-add')"> &plus; </p>
+                <img class= "option-btn" src="../assets/menu-button.png" >
+                <p class="add-gO-btn" style="display: none;" onclick="openCardCreate('groupOrder-add')"> &plus; </p>
             </div>
         </div>
         <button id="add-card-btn" alt="add card button" > + </button> 

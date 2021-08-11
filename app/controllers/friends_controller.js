@@ -2,7 +2,6 @@ const friendDatabase = require('../models/database/friend_database')
 const userDatabase = require('../models/database/user_database')
 
 const friendDb = new friendDatabase.FriendDatabase()
-const userDB = new userDatabase.UserDatabase()
 
 /**
  * @param {!import('express').Request} req
@@ -79,7 +78,7 @@ exports.incomingFriends = (req, res) => {
  */
 exports.friendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/friendsPage/Friends_Page.html')
+    res.redirect('/friends-page/Friends_Page.html')
   } else {
     res.redirect('/')
   }
@@ -90,7 +89,6 @@ exports.friendsPage = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.searchFriends = (req, res) => {
-  // console.log(req.body)
   const search = req.body.string
   // res.send('687')
   if (req.session.loggedin) {

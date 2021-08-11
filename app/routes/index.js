@@ -20,12 +20,26 @@ router.post('/signup', userController.signup)
 // POST request for login.
 router.post('/login', userController.login)
 
-// POST request for sign out
-router.post('/signout', userController.signout)
+// GET request for sign out
+router.get('/signout', userController.signout)
 
 router.get('/profile/:id', userController.profileById)
 
 // GET request to view user profile
 router.get('/profile/', userController.profile)
+
+/// DRINK ROUTES ///
+
+// POST request for new drink card.
+router.post('/new_drink_card', drinkController.newDrinkCard)
+
+// POST request for edit drink card.
+router.post('/:drinkId/edit_drink_card', drinkController.editDrinkCard)
+
+// DEBUG
+// GET request to view all drinks corresponding to one user
+router.get('/debug_display_drinks', drinkController.getAllDrinks)
+
+router.post('/updateProfile', userController.updateProfile)
 
 module.exports = router

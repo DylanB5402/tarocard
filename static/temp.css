@@ -66,7 +66,6 @@ html {
 #settings-menu {
     height: 60px;
     width: 60px;
-
 }
 
 .edit {
@@ -288,9 +287,9 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 94%;
+    left: 93%;
     z-index: 0;
-    height: 40px;
+    height: 30px;
     top: 10px;
 }
 
@@ -546,17 +545,17 @@ li:last-child{
 }
 
 .modal-GO{
-    display: none;
+    display: block;
     position: fixed;
     z-index: 2;
     margin: auto;
     height: fit-content;
-    box-shadow: 0 0 0 10000px #000000b0;
-    background-color: #000000b0;
+    box-shadow: 0 0 0 100000px #000000b0;
+    background-color:#000000b0 ;
     align-items: center;
     text-align: center;
     width: 100%;
-    border: none;
+    border: transparent;
 }
 
 .modal-content{
@@ -592,8 +591,8 @@ li:last-child{
 
 .gO-modal {
     background-color: white;
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    position: relative;
     border: none;
   }
 
@@ -1605,6 +1604,19 @@ button #edit-profile {
     margin-bottom: 10px;
 }
 
+#FailureText {
+    color: rgb(165, 0, 0);
+    background-color: rgb(247, 201, 201);
+    font-size: 30px;
+    padding: 10px;
+    border: hidden;
+    border-radius: 20px;
+    height: fit-content;
+    width: fit-content;
+    font-weight: lighter;
+    margin-bottom: 10px;
+}
+
 #errorText {
     color: red;
     font-size: 30px;
@@ -1627,3 +1639,13 @@ button #edit-profile {
 }
 
 /* PASSWORD END */
+
+/* Group Order View Page */
+
+.trash-card{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: 85%;
+    top: 5%;
+}

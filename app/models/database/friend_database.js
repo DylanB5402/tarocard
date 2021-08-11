@@ -33,14 +33,14 @@ class FriendDatabase {
     }
     const friendStatus = this.getFriendStatus(uid, friendUid)
     if (friendStatus === undefined) {
-      return this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${status}');`).run()
+      return this.db.prepare('INSERT INTO friends VALUES (?, ?, ?);').run(uid, friendUid, status)
     } else {
       return undefined
     }
   }
 
   updateFriendStatus (uid, friendUid, status) {
-    return this.db.prepare(`UPDATE friends SET status = '${status}' WHERE uid = ${uid} AND friend_uid = ${friendUid};`).run()
+    return this.db.prepare('UPDATE friends SET status = ? WHERE uid = ? AND friend_uid = ?;').run(status, uid, friendUid)
   }
 
   deleteAllTableEntires () {
@@ -78,7 +78,7 @@ class FriendDatabase {
    * @returns the friendship status if the two users have one, undefined otherwise
    */
   getFriendStatus (uid, friendUid) {
-    const row = this.db.prepare(`SELECT status FROM friends WHERE uid = ${uid} AND friend_uid = ${friendUid};`).get()
+    const row = this.db.prepare('SELECT status FROM friends WHERE uid = ? AND friend_uid = ?;').get(uid, friendUid)
     if (row !== undefined) {
       return row.status
     } else {
@@ -110,7 +110,7 @@ class FriendDatabase {
    * @returns an array containing the ids of all current friends of the user
    */
   getAllFriendsByStatus (uid, status) {
-    const friends = this.db.prepare(`SELECT friend_uid FROM friends WHERE uid = ${uid} AND status = '${status}';`).all()
+    const friends = this.db.prepare('SELECT friend_uid FROM friends WHERE uid = ? AND status = ?;').all(uid, status)
     const friendIdArray = []
     friends.forEach((friend) => {
       friendIdArray.push(friend.friend_uid)
@@ -119,7 +119,7 @@ class FriendDatabase {
   }
 
   getAllFriendData (uid) {
-    return this.db.prepare(`SELECT * FROM friends WHERE uid = ${uid};`).all()
+    return this.db.prepare('SELECT * FROM friends WHERE uid = ?').all(uid)
   }
 
   /**
@@ -138,8 +138,10 @@ class FriendDatabase {
    */
   addCurrentFriend (uid, friendUid) {
     if (uid !== friendUid) {
-      this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
-      this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
+      // this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
+      // this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
+      this.insertFriend(uid, friendUid, FriendStatus.FRIENDS)
+      this.insertFriend(friendUid, uid, FriendStatus.FRIENDS)
     }
   }
 
@@ -149,7 +151,7 @@ class FriendDatabase {
    * @returns {Array}
    */
   getFriendDataByUid (uid) {
-    return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' ORDER BY LOWER(users2.display_name);`).all()
+    return this.db.prepare('SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = \'friends\' ORDER BY LOWER(users2.display_name);').all(uid)
   }
 
   /**
@@ -158,7 +160,7 @@ class FriendDatabase {
    * @param {*} username
    */
   searchFriends (uid, username) {
-    return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ${uid} AND friends.status = 'friends' AND users2.username LIKE '${username}%' ORDER BY LOWER(users2.display_name);`).all()
+    return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = 'friends' AND users2.username LIKE '${username}%' ORDER BY LOWER(users2.display_name);`).all(uid)
   }
 }
 

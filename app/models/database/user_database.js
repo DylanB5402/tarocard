@@ -9,10 +9,8 @@ class UserDatabase {
    */
   constructor (database) {
     if (database === undefined) {
-      // console.log(config.db)
       this.db = new Database(config.db)
     } else {
-      // this.db = new Database(database)
       this.db = database
     }
     this.createUserTable()
@@ -34,13 +32,14 @@ class UserDatabase {
      * @returns {Integer} the UID assigned to the user, -1 if the operation failed
      */
   insertNewUser (email, password, username) {
-    // default username is first 5 characters of email
-    // const username = email.substring(0, 5)
     if (this.isEmailInDatabase(email)) {
       return -1
     } else {
       const hash = this.encryptPassword(password)
-      const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
+     
+      // const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
+      const stmt = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);`)
+      const info = stmt.run(email, hash, username, username, '', 0, 0)
       if (info.changes > 0) {
         return info.lastInsertRowid
       } else {
@@ -55,7 +54,9 @@ class UserDatabase {
      * @returns {boolean} true if in the database, false if not
      */
   isEmailInDatabase (email) {
-    const rows = this.db.prepare(`SELECT * FROM users WHERE email = '${email}'`).all()
+    // const rows = this.db.prepare(`SELECT * FROM users WHERE email = '${email}'`).all()
+    const stmt = this.db.prepare('SELECT * FROM users WHERE email = ?;')
+    const rows = stmt.all(email)
     return (rows.length > 0)
   }
 
@@ -77,7 +78,9 @@ class UserDatabase {
   }
 
   selectHashedPassword (email) {
-    const row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
+    // const row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
+    const stmt = this.db.prepare('SELECT password FROM users WHERE email = ?;')
+    var row = stmt.get(email)
     if (row === undefined) {
       return undefined
     } else {
@@ -86,13 +89,24 @@ class UserDatabase {
   }
 
   /**
-     *
-     * @param {*} password unencrypted password
-     * @param {*} hashFromDatabase encrypted password from the database
      * @returns {Boolean}, true if successful, false otherwise
      */
   checkPassword (email, password) {
     const hashFromDatabase = this.selectHashedPassword(email)
+    if (hashFromDatabase !== undefined) {
+      return bcrypt.compareSync(password, hashFromDatabase)
+    } else {
+      return false
+    }
+  }
+
+  selectPasswordByUID (uid) {
+    const stmt = this.db.prepare('SELECT password FROM users WHERE uid = ?')
+    return stmt.get(uid).password
+  }
+
+  checkPasswordByUid (uid, password) {
+    const hashFromDatabase = this.selectPasswordByUID(uid)
     if (hashFromDatabase !== undefined) {
       return bcrypt.compareSync(password, hashFromDatabase)
     } else {
@@ -120,36 +134,46 @@ class UserDatabase {
   }
 
   selectUserId (email) {
-    return this.db.prepare(`SELECT uid FROM users WHERE email = '${email}';`).get().uid
+    // return this.db.prepare(`SELECT uid FROM users WHERE email = '${email}';`).get().uid
+    var row = this.db.prepare('SELECT uid FROM users WHERE email = ?;').get(email)
+    if (row != undefined) {
+      return row.uid
+    } else {
+      return undefined
+    }
   }
 
   selectUserSessionData (email) {
-    return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
+    // return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
+    var stmt = this.db.prepare('SELECT uid, username, display_name FROM users WHERE email = ?;')
+    return stmt.get(email)
   }
 
-  insertProfileData (email, displayName, username, bio) {
-    return this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE email = '${email}';`).run()
+  insertProfileData (uid, displayName, username, bio) {
+    // const info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
+    const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
+    var info = stmt.run(displayName, username, bio, uid)
+    return info.changes > 0
   }
 
   selectProfileData (email) {
-    return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE email = '${email}';`).get()
+    return this.db.prepare('SELECT username, display_name, bio FROM users WHERE email = ?').get(email)
   }
 
   getUserByUID (uid) {
-    // console.log('receive uid ' + uid)
     if (!isNaN(uid)) {
-      return this.db.prepare(`SELECT username, display_name, bio FROM users WHERE uid = ${uid};`).get()
+      return this.db.prepare('SELECT username, display_name, bio FROM users WHERE uid = ?;').get(uid)
     } else {
       return undefined
     }
   }
 
   getUserNamesByUID (uid) {
-    return this.db.prepare(`SELECT username, display_name FROM users WHERE uid = ${uid};`).get()
+    return this.db.prepare('SELECT username, display_name FROM users WHERE uid = ?;').get(uid)
   }
 
   getAllProfileData (uid) {
-    return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+    return this.db.prepare('SELECT * FROM users WHERE uid = ?;').get(uid)
   }
 
   /**
@@ -165,7 +189,31 @@ class UserDatabase {
    * @returns {Array}
    */
   searchDatabase (username) {
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
+    // return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE ?%';`).all(username)
+  }
+
+  updateEmail (uid, email) {
+    // const info = this.db.prepare(`UPDATE users SET email = '${email}' WHERE uid = ${uid};`).run()
+    const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
+    return info.changes > 0
+  }
+
+  getUserDataByID (uid) {
+    // return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
+    return this.db.prepare('SELECT * FROM users WHERE uid = ?;').get(uid)
+  }
+
+  updatePassword (uid, password) {
+    const hashedPassword = this.encryptPassword(password)
+    // const info = this.db.prepare(`UPDATE users SET password = '${hashedPassword}' WHERE uid = ${uid};`).run()
+    const info = this.db.prepare(`UPDATE users SET password = ? WHERE uid = ?;`).run(hashedPassword, uid)
+    return info.changes > 0
+  }
+
+  getEmailByUID(uid) {
+    const stmt = this.db.prepare('SELECT email FROM users WHERE uid = ?;')
+    return stmt.get(uid)
   }
 }
 
@@ -179,3 +227,4 @@ const InsertNewUserResult = {
 }
 
 module.exports = { UserDatabase, InsertNewUserResult }
+ 

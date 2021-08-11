@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html style="width: 100%;">
     <head>
-        <link rel="stylesheet" href="./home.css"> 
+        <link rel="stylesheet" href="./home.css">
+        <link rel="stylesheet" href="../temp.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> Group Order </title>
         <script>
@@ -33,13 +34,48 @@
         let pfp = document.createElement("img");
         pfp.classList.add("pfp-pic");
         pfp.setAttribute("src", image);
-        
+
+        /* Options Button */
+        let options = document.createElement("img");
+        options.src = "../assets/menu-button.png";
+        options.classList.add("option-btn");
+        options.onclick = function(event){
+        openCardCreate("updateCard");
+        let form = document.getElementById('updateCard');
+        /* 
+        form.setAttribute("action", "/{id}/edit_drink_card");
+        */
+        let estabInput = document.getElementById("estabInput");
+        estabInput.value = establishment;
+        let orderInput = document.getElementById("orderInput");
+        orderInput.value = drink;
+        let descInput = document.getElementById("descInput");
+        descInput.value = description;
+  
+        let drinkID = document.getElementById("drinkId");
+        drinkID.value = drinkId;
+  
+        form.action = "/drinks/editDrinkCard";
+  
+    }
+
+        /* Delete Button */
+        let deleteBtn = document.createElement("img");
+        deleteBtn.src="../assets/trash-icon.png";
+        deleteBtn.classList.add("trash-card");
+
+        deleteBtn.onclick = function(){
+            container.style.display = "none";
+            /* Sending a delete request with this button */
+        }
         tagContainer.appendChild(pfp);
     
         container.appendChild(estab);
         container.appendChild(d);
+        container.appendChild(options);
         container.appendChild(desc);
         container.appendChild(tagContainer);
+        container.appendChild(deleteBtn);
         document.getElementById('cardContainer').appendChild(container);
         }
     
