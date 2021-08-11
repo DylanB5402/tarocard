@@ -7,6 +7,9 @@ const groupsController = require('../controllers/groups_controller')
 // GET request to get all groups for a user
 router.get('/', groupsController.getAllGroups)
 
+// GET request to get a group for a user
+router.get('/:groupId', groupsController.getGroup)
+
 // POST request to create a fresh group for a user
 router.post('/createGroup', groupsController.createGroup)
 

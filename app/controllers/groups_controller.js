@@ -8,7 +8,7 @@ const groupDB = new groupDatabase.GroupDatabase()
 /**
  * Gets all the groups for a user
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.getAllGroups = (req, res) => {
   if (req.session.loggedin) {
@@ -34,10 +34,41 @@ exports.getAllGroups = (req, res) => {
 }
 
 /**
+ * 
+ * @param {!import('express').Request} req 
+ * @param {!import('express').Response} res 
+ */
+exports.getGroup = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const groupId = req.params.groupId
+    const group = groupDB.getGroup(uid, groupId) // a specific group
+
+    // Send as json for front end
+    const groupContent = []
+
+    // group object: {group_id, group_name}
+    // Iterate through the group and make objects out of the properties
+    group.forEach((pair) => {
+      groupContent.push({
+        groupName: pair.group_name,
+        id: pair.group_id,
+        friendUID: pair.friend_uid,
+        drink: pair.friends_drink_id
+      })
+    })
+
+    res.json({ groupContents: groupContent, success: true }) // send as json
+  } else {
+    res.json({ groupContents: [], success: false })
+  }
+}
+
+/**
  * Creates a brand new group
  * Do not worry about friendUID and friendsgroupId; they are -1 by default
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.createGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -48,15 +79,18 @@ exports.createGroup = (req, res) => {
 
     const groupId = groupDB.createNewGroup(uid, groupName, friendUID, friendsgroupID)
 
-    res.redirect(`/editGroup/${groupId}`)
+    res.end()
+    // res.redirect(`/editGroup/${groupId}`)
     // redirect to edit group stage for a specific group
   }
 }
 
 /**
  * TODO: Send me the friendUID and drinkId in the req.body!
+ * We are adding drinks to groups by having the user go to a drink on a friend's
+ *   profile and then adding the drink card to the group from there
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.addToGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -66,7 +100,7 @@ exports.addToGroup = (req, res) => {
     const drinkId = req.body.friendDrinkId
     groupDB.addToGroup(groupId, uid, friendUID, drinkId)
 
-    res.redirect('/homepage/home.html')
+    res.end() // Should not redirect, just stay where they were (on friend profile)
   } else {
     res.redirect('/')
   }
@@ -75,7 +109,7 @@ exports.addToGroup = (req, res) => {
 /**
  * Removes a group for a user
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.removeGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -93,7 +127,7 @@ exports.removeGroup = (req, res) => {
  * Removes a user-drink pair from a group
  * drinkId is found in the body!
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.removeFromGroup = (req, res) => {
   if (req.session.loggedin) {
