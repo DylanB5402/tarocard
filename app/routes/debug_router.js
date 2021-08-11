@@ -22,6 +22,8 @@ router.get('/users', debugController.users)
 
 router.get('/users/json', debugController.usersJSON)
 
+router.get('/profile', debugController.currentProfileData)
+
 router.get('/profile/:uid', debugController.profile)
 
 router.get('/friends', debugController.allFriends)
@@ -30,7 +32,7 @@ router.post('/addFriend', debugController.addFriend)
 
 router.post('/adduser', debugController.addUser)
 
-// router.get('/populateUsers', debugController.populateUsers)
+router.get('/loggedin', debugController.loggedIn)
 
 /// UPLOAD DEBUG ///
 

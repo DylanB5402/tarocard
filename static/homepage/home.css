@@ -55,6 +55,7 @@ li:last-child{
 
 
 .form-container{
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,8 +68,8 @@ li:last-child{
     background-color: #E5E5E5;
     height: 100%;
     top: 0;
-    
 }
+
 
 .small-input{
     border-radius: 10px;
@@ -85,6 +86,14 @@ li:last-child{
     top: 10vh;
     margin: 2.5vh ;
 
+}
+
+.option-btn {
+    position: absolute;
+    left: 92%;
+    z-index: 0;
+    height: 30px;
+    top: 10px;
 }
 
 
@@ -148,7 +157,6 @@ li:last-child{
     overflow: hidden;
     outline:none;
     position: relative;
-    left: 70vw;
     top: 1vh;
     background-color: #9879C5;
     color: white;
@@ -161,19 +169,21 @@ li:last-child{
     font-family: 'Robot',sans-serif;
     margin: 10px 10px 0px 10px;
     word-wrap: break-word;
+    font-size: 3vh;
 }
 
 .card-template{
-    width: auto;
-    background-color: white;
+    width: 87vw;
+    max-width: 1000px;
+    background-color: white ;
     padding: 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     position: relative;
     margin-top: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cardContainer{
@@ -181,13 +191,13 @@ li:last-child{
 }
 
 .tag-pf-container{
-    margin: 10px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
     display: flex;
     flex-direction: row;
 }
 .tag-container {
     word-wrap: break-word;
-    max-width: 90%;
+    max-width: 80%;
     display: flex;
     flex-direction: row;
 }
@@ -197,14 +207,110 @@ li:last-child{
     font-family: 'Roboto',sans-serif;
 }
 
+.card-template h2{
+    width: 75%;
+
+}
 
 .pfp-pic{
-    width: 50px;
-    height: 50px;
+    width: 3vw;
+    height: 3vw;
+    min-height: 30px;
+    min-width: 30px;
     border-radius: 75px;
     position: absolute;
-    left: 90%;
+    left: 85%;
     bottom: 5%;
+}
+
+/* Modal Box/ Content CSS */
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+    bottom: -10px;
+    box-shadow: 0 0 0 10000px #000000b0;
+    left: 0px;
+}
+
+.modal-content{
+    width: 100%;
+    left: 25vw;
+    align-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: auto;
+    margin: auto;
+}
+
+.stuff {
+    position: relative;
+    height: 10vh;
+    font-size: 3vh;
+    width: 100%;
+    height: 0.01%;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    text-align: left;
+    align-content: center;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+    border-bottom: 2px solid black;
+
+}
+
+.modal-content button:last-child{
+    border-bottom: 2px solid black;
+}
+
+.modal-content button p{
+    padding: 0%;
+    margin-top: 1vh;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+.stuff {
+    margin-top: 25px;
+    margin-left: 10px;
+    text-decoration: none !important;
+    color: black;
+}
+
+.modal-content button img,.stuff img{
+    height: 100%;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+/* Group Order Page  */
+
+.group-card {
+    width: 50vw;
+    display: block;
+    max-width: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    border: 4px solid black;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
+
 }
 
 
@@ -237,4 +343,41 @@ li:last-child{
   @keyframes animatezoomout {
     from {transform: scale(1)} 
     to {transform: scale(0)}
+  }
+
+  /* Animation Slide in */
+
+  .slide-in {
+    -webkit-animation: slide-in 0.3s;
+    animation: slide-in 0.3s;
+  }
+
+  @keyframes slide-in {
+      0% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+
+      100% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+      
+  }
+  .slide-out {
+    -webkit-animation: slide-out 0.3s;
+    animation: slide-out 0.3s;
+  }
+
+  @keyframes slide-out {
+      0% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+
+      100% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+      
   }

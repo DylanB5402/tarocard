@@ -8,27 +8,30 @@ const tempEngine = new templateEngine.TemplateEngine()
  * @param {!import('express').Response} res
  */
 exports.signup = (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
-  const repeatPassword = req.body.repeatPassword
-  const username = req.body.username
-  if (password !== repeatPassword) {
-    res.redirect('/signup.html')
-  } else {
-    const result = userDB.insertNewUser(email, password, username)
-    if (result !== -1) {
-      userDB.logInUser(req, email, password)
-    }
+  if (req.session.loggedin) {
+    // res.append({'already-logged-in' : true})
     res.redirect('/profile/')
+  } else {
+    const email = req.body.email
+    const password = req.body.password
+    const repeatPassword = req.body.repeatPassword
+    const username = req.body.username
+    if (password !== repeatPassword) {
+      res.redirect('/signup.html')
+    } else {
+      const result = userDB.insertNewUser(email, password, username)
+      if (result !== -1) {
+        userDB.logInUser(req, email, password)
+      }
+      res.redirect('/profile/')
+    }
   }
 }
 
 exports.login = (req, res) => {
-  // console.log(req)
   const email = req.body.email
   const password = req.body.password
   if (userDB.logInUser(req, email, password)) {
-    // res.redirect('/debug/home')
     res.redirect('/profile/')
   } else {
     res.send('invalid email and/or password')
@@ -39,7 +42,7 @@ exports.signout = (req, res) => {
   req.session.email = undefined
   req.session.loggedin = false
   req.session.uid = -1
-  res.redirect('/debug/home')
+  res.redirect('/index.html')
 }
 
 /**
@@ -54,11 +57,10 @@ exports.profile = (req, res) => {
       const bio = profileData.bio
       const username = profileData.username
       const displayName = profileData.display_name
-      // res.( JSON.stringify({ 'profileAccess': 'successful' }))
       res.append('profileaccess', 'successful')
       res.send(tempEngine.getUserProfile(username, displayName, bio))
     } else {
-      res.redirect('/404')
+      res.redirect('/')
     }
   } else {
     res.redirect('/')
@@ -76,11 +78,24 @@ exports.profileById = (req, res) => {
     const bio = profileData.bio
     const username = profileData.username
     const displayName = profileData.display_name
-    // res.( JSON.stringify({ 'profileAccess': 'successful' }))
     res.append('profileaccess', 'successful')
     res.send(tempEngine.getUserProfile(username, displayName, bio))
   } else {
-    // res.redirect('/404')
     res.send('no user with id ' + uid + 'found')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.updateProfile = (req, res) => {
+  const username = req.body.username
+  const displayName = req.body.display_name
+  const bio = req.body.bio
+  if (req.session.loggedin && userDB.insertProfileData(req.session.uid, displayName, username, bio)) {
+    res.send('success')
+  } else {
+    res.send('failure')
   }
 }

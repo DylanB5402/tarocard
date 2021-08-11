@@ -17,7 +17,6 @@ const establishmentsDB = new establishmentsDatabase.EstablishmentsDatabase()
 const config = require('../config.json')
 
 exports.home = (req, res) => {
-  // console.log(req)
   if (req.session.loggedin !== true) {
     res.send('please log in')
   } else {
@@ -115,6 +114,31 @@ exports.addUser = (req, res) => {
     userDB.insertNewUser(username, 'password', username)
   }
   res.redirect('/debug/users')
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.loggedIn = (req, res) => {
+  if (req.session.loggedin) {
+    res.json({ 'user-logged-in': true, uid: req.session.uid })
+  } else {
+    res.json({ 'user-logged-in': false, uid: -1 })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.currentProfileData = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    res.json(userDB.getAllProfileData(uid))
+  } else {
+    res.json({ uid: -1 })
+  }
 }
 
 /// DEBUG - UPLOAD IMAGES ///

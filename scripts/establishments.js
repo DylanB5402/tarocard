@@ -36,7 +36,7 @@ let search = (categories, idx, location, offset, rate, added) => {
     offset: offset,
     sort_by: 'best_match'
   }).then(response => {
-    console.log(`Looking at: [${categories[idx]}]`)
+    console.log(`Looking at: [${categories[idx]}]`) 
 
     response.jsonBody.businesses.forEach((business) => {
       let establishment = {

@@ -10,7 +10,8 @@ html {
 
 body {
     background: #ffffff;
-    width: 120%
+    width: 100%;
+    position:relative;
 }
 
 #banner {
@@ -19,10 +20,11 @@ body {
     min-width: 100%;
     object-fit: cover;
     object-position: center;
+    /*
     border: 0px;
     margin: 0px;
     padding: 0px;
-    z-index:-1;
+    z-index:-1;*/
 }
 
 #profilePic {
@@ -34,8 +36,22 @@ body {
     object-position: center top;
     position: relative;
     bottom: 130px;
-    left: 80px;
+    left: 100px;
     z-index: 2;
+}
+
+#profileTop {
+    width:100%;
+    height: 500px;
+    position: relative;
+    bottom: 0px;
+    top: -20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    z-index: 1;
+    border-style: hidden;
+    /*background-color: white;*/
+    background-color:rgb(255, 255, 255);
 }
 
 #editButton {
@@ -55,41 +71,14 @@ body {
     right: 100px;
 }
 
-#profileTop {
-    min-width: 100%;
-    max-width: 100%;
-    height: 500px;
-    position: relative;
-    bottom: 0px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    z-index: 1;
-    border-style: hidden;
-    background-color: white;
-}
-#profileTabs{
-    align-items: center;
-    width: max-content;
-    margin-left:100px;
- 
-}
 
-.profileTabs ul{
-    display: inline-block;
-    text-align: left;
-   
-    
-}
-.profileTabs span{
-    font-size: 50px;
-    text-align: center;
-}
 #profileText {
     width: 800px;
     height: 120px;
     text-align: left;
     left: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+ 
 }
 
 #displayName {
@@ -120,10 +109,12 @@ body {
     height: 200px;
     min-width: none;
     max-width: 1000px;
-    font-size: 36px;
+    font-size: 28px;
     position: absolute;
     top: 240px;
     left: 100px;
+    right:200px;
+    
 }
  
 #userStats{
@@ -131,11 +122,14 @@ body {
     width: max-content;
 
 }
+
 .userStats ul {
     display: inline;
     text-align: left;
     width:fit-content;
+    height:fit-content;
     margin-left: 100px;
+   
 }
 
 .userStats strong {
@@ -148,8 +142,33 @@ body {
     font-weight: lighter;
     font-size: 40px;
     color: #C1C1C1;
+   background-color: rgb(255, 255, 255);
 }
 
+.profileTabs{
+    
+    height:80px;
+    display:inline-flex;
+    justify-content:center;
+    width:100%;
+    bottom:-20px;
+}
+
+.profileTabs a{
+    width:50%;
+}
+
+.profileTabs img {
+    width: auto;
+    height: 80%;
+    margin-top:5px;
+    margin-bottom: auto;
+    margin-left:45%;
+}
+
+.profileTabs a:hover{
+    background-color: #D4D4D4;
+}
 #profileCards {
     background-color: #EFEFEF;
 }
@@ -162,12 +181,14 @@ body {
 #favorites {
     color:#9879C5;
     font-size: 42px;
+    display: inline;
  }
 
  #favoritesStar{
      height: 38px;
      margin-inline: 10px;
      margin-top: 20px;
+     display: inline;
  }
  #favoritesLine{
     color: #9879C5;
@@ -184,7 +205,7 @@ body {
     bottom: 0;
     width: 100%;
     display: flex; 
-    justify-content:center
+    justify-content: center;
   }
 
   .navbar img {
@@ -193,9 +214,11 @@ body {
       margin-top: 40px;
       margin-bottom: 40px;
   }
-  #navProfileIcon{
+
+  #navProfileIcon {
     margin-bottom: 10px;
 }
+
   /* Style the links inside the navigation bar */
   .navbar a {
     float: left;
@@ -225,3 +248,24 @@ body {
   .navbar .icon {
     display: none;
   }
+
+
+#navProfileIcon {
+  margin-bottom: 10px;
+}
+
+#edit-profile {
+    font-size: 32px;
+    font-weight: medium;
+    border: solid 3px #9879C5;
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+button #edit-profile {
+    right: 100px;
+}
