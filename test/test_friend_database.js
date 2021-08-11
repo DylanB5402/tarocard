@@ -64,8 +64,17 @@ describe('Testing Friend Database', function () {
     friendDb.insertFriend(11, 14, friendDatabase.FriendStatus.FRIENDS)
     friendDb.insertFriend(11, 15, friendDatabase.FriendStatus.FRIENDS)
     friendDb.insertFriend(11, 16, friendDatabase.FriendStatus.FRIENDS)
-    // const friends = friendDb.getCurrentFriends(11)
 
     expect(friendDb.getAllCurrentFriends(11)).to.be.containingAllOf([12, 13, 14, 15, 16])
+  })
+
+  it('Test get numFriends', function() {
+    friendDb.insertFriend(17, 12, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(17, 13, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(17, 14, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(17, 15, friendDatabase.FriendStatus.FRIENDS)
+    friendDb.insertFriend(17, 16, friendDatabase.FriendStatus.FRIENDS)
+    assert.equal(friendDb.getNumFriends(17), 5)
+
   })
 })

@@ -182,7 +182,7 @@ class UserDatabase {
    * @returns {Array}
    */
   searchDatabase (username) {
-    return this.db.prepare('SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE ?%\';').all(username)
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
   }
 
   updateEmail (uid, email) {
