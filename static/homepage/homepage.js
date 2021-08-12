@@ -85,7 +85,7 @@ request.onload = function () {
     const drinkName = cards[drinkCard]['name']
     const drinkDesc = cards[drinkCard]['desc']
     const drinkId = cards[drinkCard]['id']
-    createCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
+    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
   }
 }
 
@@ -94,7 +94,7 @@ request.onload = function () {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createCard(establishment, drink, description, image, drinkId){
+function createUserCard(establishment, drink, description, image, drinkId){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -256,4 +256,4 @@ function createCard(establishment, drink, description, image, drinkId){
   }
 
   createGroupCard();
-  createCard("My Card","My Drink","my description",4,5)
+  createUserCard("My Card","My Drink","my description",4,5)
