@@ -207,6 +207,36 @@ function createUserCard(establishment, drink, description, image, drinkId){
     }
   addToGroupbtn.innerHTML = "+";
 
+  /* Favorite Option */
+  let favOption = document.createElement("img");
+  let fav = false;
+  favOption.src= "../assets/gray-star.png";
+  favOption.classList.add("option-btn");
+  favOption.style.left = "75%";
+
+
+  favOption.onclick = function (){
+    if( fav ){
+      fav = false;
+      favOption.src= "../assets/gray-star.png";
+      fetch( "/drinks/unstarDrink/"+ drinkId ,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({id: drinkId}) //sending drinkID 
+    }); 
+    }else {
+      fav = true;
+      favOption.src="../assets/star.png";
+      fetch( "/drinks/starDrink/"+ drinkId ,{
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({id: drinkId}) //sending drinkID 
+      }); 
+    }
+  }
+
+
+
   tagContainer.appendChild(pfp);
 
   container.appendChild(estab);
@@ -217,7 +247,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
   container.appendChild(addToGroupbtn);
   container.appendChild(closeMenu);
   container.appendChild(options);
-  container.appendChild(deleteBtn)
+  container.appendChild(deleteBtn);
+  container.appendChild(favOption);
   document.getElementById('cardContainer').appendChild(container);
 }
 
@@ -256,6 +287,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
       document.getElementById("groupView").style.display = "block";
     }
   }
+
+  /* Make/Delete Favorite Card */
 
   createGroupCard();
   createUserCard("My Card","My Drink","my description",4,5)

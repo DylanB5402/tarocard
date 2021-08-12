@@ -9,7 +9,7 @@ friends.send();
 friends.onload = function () {
   const friendCards = friends.response;
   console.log(friendCards)
-  for(let i = 0; i < friendCards.length;i++){
+  for(let i = 0; i < 2;i++){
     let a,b,c,d;
     a = friendCards[i]["Name of Establishment"];
     b = friendCards[i]["Name of Order"];
