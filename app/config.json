@@ -1,6 +1,6 @@
 {
-  "db" : "databases/test/testTaroCard.db",
-  "prod_db" : "databases/taroCard.db",
+  "db" : "databases/taroCard.db",
+  "prod_db" : "databases/test/testTaroCard.db",
   "allowed-ext-image" : "jpeg|jpg|png",
   "allowed-ext-text" : "txt",
 
