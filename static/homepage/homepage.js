@@ -60,7 +60,6 @@ function openCardCreate( formID ){
   }
   
   
-
   
 /* GENERATES USER'S CARDS */
 /* 
@@ -146,7 +145,7 @@ function createCard(establishment, drink, description, image, drinkId){
       let drinkID = document.getElementById("drinkId"); //delete these two
       drinkID.value = drinkId;
 
-      form.action = "/drinks/editDrinkCard"; //change this to "/drinks/editDrinkCard/" + drinkId;
+      form.action = "/drinks/editDrinkCard" + drinkId;
   }
 
   let options = document.createElement("img");
