@@ -21,6 +21,10 @@ exports.newDrinkCard = (req, res) => {
     const drinkDesc = req.body.drinkDesc
     const uid = req.session.uid // get uid from current logged in state
 
+    console.log(`The establishment id is : ${establishment}`) //debug stmt
+
+    estabDB.toString()
+
     // Save return value to variable after adding drink to drink database
     const drinkUid = drinksDB.addDrink(nameOfDrink, drinkDesc, establishment)
     let resultFavDrink = false // variable out of scope
@@ -31,7 +35,7 @@ exports.newDrinkCard = (req, res) => {
     }
     if (resultFavDrink) {
       // Exit pop up or print "Drink Added!"
-      drinksDB.toString()
+      // drinksDB.toString()
     } else {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
@@ -43,14 +47,12 @@ exports.newDrinkCard = (req, res) => {
 /**
  * Edits an existing drink card data
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.editDrinkCard = (req, res) => {
   if (req.session.loggedin) {
     // Get drink id of drink being edited: Do this through use of req.params
-    const drinkId = req.body.drinkId
-
-    console.log(drinkId)
+    const drinkId = req.params.drinkId
 
     // Get name and desc and estasblishment of drink from new form request
     const nameOfDrink = req.body.nameOfDrink
@@ -70,7 +72,7 @@ exports.editDrinkCard = (req, res) => {
 /**
  * Gets all favorited drinks for a user and returns the data as a json
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
@@ -81,12 +83,12 @@ exports.getAllDrinks = (req, res) => {
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
     // Iterate through the array of drinks and make objects out of their properties
     allDrinks.forEach((drink) => {
+      // TODO: REDO Establishments so that it gets the name:
       // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
         name: drink.drink_name,
         desc: drink.drink_desc,
         establishment: drink.establishment_id,
-        //establishment: establishmentName
         'image url': drink.drink_img,
         id: drink.drink_id
       })
@@ -102,12 +104,12 @@ exports.getAllDrinks = (req, res) => {
 /**
  * Stars a drink
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.starDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     const success = favDrinksDB.starDrink(uid, drinkId)
 
     if (success) {
@@ -123,12 +125,12 @@ exports.starDrink = (req, res) => {
 /**
  * Unstars a drink
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.unstarDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     const success = favDrinksDB.unstarDrink(uid, drinkId)
 
     if (success) {
@@ -144,12 +146,12 @@ exports.unstarDrink = (req, res) => {
 /**
  * Removes a drink card
  * @param {!import('express').Request} req
- * @param {!import('express').Request} res
+ * @param {!import('express').Response} res
  */
 exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const drinkId = req.body.drinkId
+    const drinkId = req.params.drinkId
     favDrinksDB.removeFavDrink(uid, drinkId)
 
     res.redirect('/homepage/home.html') // refreshes

@@ -2,7 +2,6 @@
 document.addEventListener('click',function(event){
   let OptionsBtn = document.getElementById("add-card-btn");
   let sheet = document.getElementById("modal-sheet");
-  console.log("Hello");
   if( OptionsBtn.contains(event.target)){
       openModalSheet();
   } else {
@@ -61,7 +60,6 @@ function openCardCreate( formID ){
   }
   
   
-
   
 /* GENERATES USER'S CARDS */
 /* 
@@ -147,7 +145,7 @@ function createCard(establishment, drink, description, image, drinkId){
       let drinkID = document.getElementById("drinkId"); //delete these two
       drinkID.value = drinkId;
 
-      form.action = "/drinks/editDrinkCard"; //change this to "/drinks/editDrinkCard/" + drinkId;
+      form.action = "/drinks/editDrinkCard" + drinkId;
   }
 
   let options = document.createElement("img");
@@ -156,6 +154,7 @@ function createCard(establishment, drink, description, image, drinkId){
   options.onclick = function () {
     edit.style.display = 'block';
     addToGroupbtn.style.display = "block";
+    deleteBtn.style.display = "block";
     options.style.display = "none"
     closeMenu.style.display = "block"
   }
@@ -166,12 +165,32 @@ function createCard(establishment, drink, description, image, drinkId){
   closeMenu.src = "../assets/denyX.png";
   closeMenu.classList.add("option-btn");
   closeMenu.style.display = "none"
-  closeMenu.style.left = "80%"
+  closeMenu.style.left = "70%"
+  closeMenu.style.width = "20px"
+  closeMenu.style.height = "20px";
   closeMenu.onclick = function () {
     options.style.display = "block";
     edit.style.display = 'none';
     addToGroupbtn.style.display = "none";
+    deleteBtn.style.display = "none";
     closeMenu.style.display = "none"
+  }
+  /* Delete Card for User */
+  let deleteBtn = document.createElement("img");
+  deleteBtn.src="../assets/trash-icon.png";
+  deleteBtn.classList.add("trash-card");
+  deleteBtn.style.display = "none";
+  deleteBtn.style.left = "78%";
+  deleteBtn.style.marginTop = "10px";
+
+  deleteBtn.onclick = function(){
+      container.style.display = "none";
+      /* Sending a delete request with this button */
+      fetch( "/drinks/ "+ drinkId ,{
+          method: 'delete',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({id: drinkId}) //sending drinkID 
+      }); 
   }
 
   /*Add to a group Button */
@@ -196,17 +215,14 @@ function createCard(establishment, drink, description, image, drinkId){
   container.appendChild(addToGroupbtn);
   container.appendChild(closeMenu);
   container.appendChild(options);
+  container.appendChild(deleteBtn)
   document.getElementById('cardContainer').appendChild(container);
 }
 
   /* Function to Create a Group Card Div */ 
   /* add parameters so that it goes to a different page depending on group order */
   function createGroupCard(){
-    const link = document.createElement('a'); // creates a link 
-    link.style.textDecoration = 'none'
-    link.href="groupOrderView.html"; //this should change based on the Group Order
     const container = document.createElement('div') // creates div element
-    link.appendChild(container); //this will put the div into the link
   
     container.classList.add('group-card');
     container.style.alignItems = "center";
@@ -233,12 +249,9 @@ function createCard(establishment, drink, description, image, drinkId){
     container.appendChild(groupImage);
     container.appendChild(groupName);
     //container.appendChild(optionLink);
-    document.getElementById('cardContainer').appendChild(link);
-  
-    container.onclick = function(event){
-        if(event.target.classList.contains("option-btn")){
-            window.location.replace("http://www.w3schools.com")
-        }
+    document.getElementById('cardContainer').appendChild(container);
+    container.onclick = function (){
+      document.getElementById("groupView").style.display = "block";
     }
   }
 
