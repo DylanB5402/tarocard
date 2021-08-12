@@ -88,23 +88,23 @@ class DrinksDatabase {
    * @returns {boolean} true if successful, false if not
    */
   editDrink (id, name, desc, establishment) {
-    let parameters = []
+    const parameters = []
     let stmtString = 'UPDATE drinks SET '
 
     if (name !== undefined) {
-      stmtString += `drink_name = ?,`
+      stmtString += 'drink_name = ?,'
       parameters.push(name)
     }
 
     if (desc !== undefined) {
-      stmtString += `drink_desc = ?,`
+      stmtString += 'drink_desc = ?,'
       parameters.push(desc)
     }
 
     if (establishment !== undefined) {
       const establishmentsDb = new establishmentsDatabase.EstablishmentsDatabase(this.db)
       if (establishmentsDb.isExist(establishment)) {
-        stmtString += `establishment_id = ?,`
+        stmtString += 'establishment_id = ?,'
         parameters.push(establishment)
       }
     }

@@ -92,13 +92,27 @@ exports.profileById = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.updateProfile = (req, res) => {
+exports.editProfile = (req, res) => {
   const username = req.body.username
-  const displayName = req.body.display_name
+  const displayName = req.body['display-name']
   const bio = req.body.bio
   if (req.session.loggedin && userDB.insertProfileData(req.session.uid, displayName, username, bio)) {
-    res.send('success')
+    res.redirect('/profile')
   } else {
     res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.editPage = (req, res) => {
+  if (req.session.loggedin) {
+    // res.redirect('/editProfilePage/edit.html')
+    const userData = userDB.getUserDataByID(req.session.uid)
+    res.send(tempEngine.getEditProfilePage(userData.username, userData.display_name, userData.bio))
+  } else {
+    res.redirect('/index.html')
   }
 }
