@@ -44,4 +44,8 @@ router.get('/edit', userController.editPage)
 
 router.post('/edit/profile', userController.editProfile)
 
+router.get('/search', userController.searchPage)
+
+router.post('/search/users', userController.searchAllUsers)
+
 module.exports = router

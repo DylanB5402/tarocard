@@ -86,6 +86,7 @@ exports.getAllDrinks = (req, res) => {
         name: drink.drink_name,
         desc: drink.drink_desc,
         establishment: drink.establishment_id,
+        //establishment: establishmentName
         'image url': drink.drink_img,
         id: drink.drink_id
       })

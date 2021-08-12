@@ -177,13 +177,14 @@ class UserDatabase {
   }
 
   /**
-   *
    * @param {*} username
+   * @param {*} uid
    * @returns {Array}
    */
-  searchDatabase (username) {
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
+   searchDatabase (username, uid) {
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
   }
+
 
   updateEmail (uid, email) {
     const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)

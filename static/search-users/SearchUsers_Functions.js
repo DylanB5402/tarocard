@@ -17,8 +17,10 @@ request.onload = function() {
 // function is used to fill page with list of friends from a json file.
 function populateUsers(obj) {
     let template, divAll, div, divCopy;
-    divAll = document.createElement("div");
-    divAll.id = "UsersAll";
+    divAll = document.getElementById('UsersAll')
+    // divAll = document.createElement("div");
+    // divAll.id = "UsersAll";
+    $("#UsersAll").empty();
     template = document.getElementById('UsersTemp');
     div = template.content.querySelector(".UserElement");
     const users = obj.users;

@@ -116,3 +116,34 @@ exports.editPage = (req, res) => {
     res.redirect('/index.html')
   }
 }
+
+exports.searchPage = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect('/search-users/SearchUsers.html')
+  } else {
+    res.redirect('/index.html')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.searchAllUsers = (req, res) => {
+  const search = req.body.string
+  if (req.session.loggedin) {
+    const userArray = []
+    const users = userDB.searchDatabase(search, req.session.uid)
+    users.forEach((user) => {
+      userArray.push({
+        'display name': user.display_name,
+        username: user.username,
+        'image url': '',
+        id: user.uid
+      })
+    })
+    res.json({ users: userArray, success: true })
+  } else {
+    res.json({ users: [], success: false })
+  }
+}
