@@ -120,7 +120,7 @@ exports.searchAllUsers = (req, res) => {
   const search = req.body.string
   if (req.session.loggedin) {
     const userArray = []
-    const users = userDB.searchDatabase(search)
+    const users = userDB.searchDatabase(search, req.session.uid)
     users.forEach((user) => {
       userArray.push({
         'display name': user.display_name,
