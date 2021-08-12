@@ -12,15 +12,6 @@ groupRequest.onload = function () {
       userGroup.value = gName;
       userGroup.innerHTML = gName;
 
-      /*Testing Datalist */
-      let eName = groups[i]["Name of Establishment"];
-      let userGroup2 = document.createElement("option");
-      userGroup2.innerHTML = eName;
-
-
-      document.getElementById("estabList").appendChild(userGroup2);
-      /* End of Test */
-
       document.getElementById("groupOrders").appendChild(userGroup);
   }
 }
