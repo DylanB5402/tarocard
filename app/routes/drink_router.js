@@ -14,16 +14,13 @@ router.post('/editDrinkCard/:drinkId', drinkController.editDrinkCard)
 // GET request to view all drinks corresponding to one user
 router.get('/', drinkController.getAllDrinks)
 
-// PUT request for starring a drink
+// POST request for starring a drink
 router.post('/starDrink/:drinkId', drinkController.starDrink)
 
-// PUT request for unstarring a drink
+// POST request for unstarring a drink
 router.post('/unstarDrink/:drinkId', drinkController.unstarDrink)
 
-// DELETE request for removing a favorited drink
+// POST request for removing a favorited drink
 router.post('/removeDrink/:drinkId', drinkController.removeFavDrink)
-
-// TESTING ROUTE
-// router.post('/editDrinkCard', drinkController.testConnection)
 
 module.exports = router

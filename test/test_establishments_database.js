@@ -10,103 +10,178 @@ establishmentsDb.resetDb()
 
 describe('Testing Establishments Database', function () {
   it('Test: Add New Establishment', function () {
-    assert.isAtLeast(establishmentsDb.addEstablishment('starbucks'), 0)
+    const establishment = {
+      id: 'bbbBBBbb',
+      name: 'mcdonalds',
+      alias: 'borgar'
+    }
+
+    assert.equal(establishmentsDb.addEstablishment(establishment), true)
+  })
+
+  it('Test: Add New Establishment, FAIL', function () {
+    const establishment = {
+      name: 'mcdonalds',
+      alias: 'borgar'
+    }
+
+    assert.equal(establishmentsDb.addEstablishment(establishment), false)
   })
 
   it('Test: Is Establishment Exist', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
-    assert.equal(establishmentsDb.isExist(id), true)
+    const establishment = {
+      id: 'zZzZzkkk',
+      name: 'mcdonalds',
+      alias: 'borgar'
+    }
+
+    establishmentsDb.addEstablishment(establishment)
+    assert.equal(establishmentsDb.isExist(establishment.id), true)
   })
 
   it('Test: Get Establishment', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-
-    const id = establishmentsDb.addEstablishment(name, desc)
-    const testEstablishment = {
-      establishment_id: id,
-      establishment_name: name,
-      establishment_desc: desc,
-      establishment_img: ''
-    }
-    assert.deepEqual(establishmentsDb.getEstablishment(id), testEstablishment)
-  })
-
-  it('Test: Edit Establishment, Both Name And Desc', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
-
-    const newname = 'burger king'
-    const newdesc = 'times have changed'
-    const testEstablishment = {
-      establishment_id: id,
-      establishment_name: newname,
-      establishment_desc: newdesc,
-      establishment_img: ''
+    const establishment = {
+      id: 'brbNewId',
+      name: 'mcdonalds',
+      alias: 'borgar',
+      phone: '+11923139831923',
+      display_phone: '(858) 129-19921455',
+      review_count: 0,
+      rating: 5,
+      address1: 'cool st.',
+      address2: '',
+      address3: '',
+      city: 'san diego',
+      zip_code: '911111111',
+      country: 'US',
+      state: 'CA',
+      price: '$',
+      img: 'http://www.wikipedia.com'
     }
 
-    establishmentsDb.editEstablishment(id, newname, newdesc)
-    assert.deepEqual(establishmentsDb.getEstablishment(id), testEstablishment)
+    establishmentsDb.addEstablishment(establishment)
+    assert.deepEqual(establishmentsDb.getEstablishment(establishment.id), establishment)
   })
 
-  it('Test: Edit Establishment, Name Only', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
-
-    const newname = 'burger king'
-    // const newdesc = 'times have changed'
-    const testEstablishment = {
-      establishment_id: id,
-      establishment_name: newname,
-      establishment_desc: desc,
-      establishment_img: ''
+  it('Test: Edit Establishment', function () {
+    const establishment = {
+      id: 'aAbBcC',
+      name: 'mcdonalds',
+      alias: 'borgar',
+      phone: '+11923139831923',
+      display_phone: '(858) 129-19921455',
+      review_count: 0,
+      rating: 5,
+      address1: 'cool st.',
+      address2: '',
+      address3: '',
+      city: 'san diego',
+      zip_code: '911111111',
+      country: 'US',
+      state: 'CA',
+      price: '$',
+      img: 'http://www.wikipedia.com'
     }
 
-    establishmentsDb.editEstablishment(id, newname, undefined)
-    assert.deepEqual(establishmentsDb.getEstablishment(id), testEstablishment)
-  })
+    establishmentsDb.addEstablishment(establishment)
 
-  it('Test: Edit Establishment, Desc Only', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
-
-    // const newname = 'burger king'
-    const newdesc = 'times have changed'
-    const testEstablishment = {
-      establishment_id: id,
-      establishment_name: name,
-      establishment_desc: newdesc,
-      establishment_img: ''
+    const newEstablishment = {
+      id: 'aAbBcC',
+      name: 'clownronalds',
+      alias: 'china',
+      phone: '+192383',
+      display_phone: '(232) 129-19921455',
+      review_count: 1400000,
+      rating: 0.5,
+      address1: 'not so cool st.',
+      address2: '2',
+      address3: '3',
+      city: 'san francisco',
+      zip_code: '911 what is the emergency',
+      country: 'SA',
+      state: 'EN',
+      price: '$$$$$$$$$$',
+      img: 'http://www.wikimedia.com'
     }
 
-    establishmentsDb.editEstablishment(id, undefined, newdesc)
-    assert.deepEqual(establishmentsDb.getEstablishment(id), testEstablishment)
+    establishmentsDb.editEstablishment(establishment.id, newEstablishment)
+    assert.deepEqual(establishmentsDb.getEstablishment(establishment.id), newEstablishment)
   })
 
-  it('Test: Edit Establishment, None', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
+  it('Test: Wildcard Search Establishment', function () {
+    establishmentsDb.purgeDb()
+    
+    const establishment = {
+      id: 'kakk',
+      name: 'mcdonalds',
+      alias: 'borgar',
+      phone: '+11923139831923',
+      display_phone: '(858) 129-19921455',
+      review_count: 0,
+      rating: 5,
+      address1: 'cool st.',
+      address2: '',
+      address3: '',
+      city: 'san diego',
+      zip_code: '911111111',
+      country: 'US',
+      state: 'CA',
+      price: '$',
+      img: 'http://www.wikipedia.com'
+    }
 
-    assert.equal(establishmentsDb.editEstablishment(id), false)
-  })
+    establishmentsDb.addEstablishment(establishment)
 
-  it('Test: Edit Establishment, Does Not Exist', function () {
-    assert.equal(establishmentsDb.editEstablishment(-1), false)
-  })
+    const establishment2 = {
+      id: 'kakk2',
+      name: 'mcdonalds1',
+      alias: 'borgar2',
+      phone: '+11923139831923',
+      display_phone: '(858) 129-19921455',
+      review_count: 0,
+      rating: 5,
+      address1: 'cool st.',
+      address2: '',
+      address3: '',
+      city: 'san diego',
+      zip_code: '911111111',
+      country: 'US',
+      state: 'CA',
+      price: '$',
+      img: 'http://www.wikipedia.com'
+    }
 
-  it('Test: Add Image To Establishment Successfully', function () {
-    const name = 'mcdonalds'
-    const desc = 'borgar'
-    const id = establishmentsDb.addEstablishment(name, desc)
+    establishmentsDb.addEstablishment(establishment2)
 
-    const img = '/uploads/image/avatar/4CE68898-123A-4FD9-ACD4-C96342D67AC9.jpg'
-    establishmentsDb.addImage(id, img)
-    assert.equal(establishmentsDb.getEstablishment(id).establishment_img, img)
+    const establishment3 = {
+      id: 'kakk3',
+      name: 'mcdon',
+      alias: 'borgar',
+      phone: '+11923139831923',
+      display_phone: '(858) 129-19921455',
+      review_count: 0,
+      rating: 5,
+      address1: 'cool st.',
+      address2: '',
+      address3: '',
+      city: 'san diego',
+      zip_code: '911111111',
+      country: 'US',
+      state: 'CA',
+      price: '$',
+      img: 'http://www.wikipedia.com'
+    }
+
+    establishmentsDb.addEstablishment(establishment3)
+
+    let result = [establishment3, establishment, establishment2]
+    let result2 = [establishment, establishment2]
+    let result3 = [establishment2]
+
+    assert.deepEqual(establishmentsDb.searchEstablishment('mc'), result)
+    assert.deepEqual(establishmentsDb.searchEstablishment('mcdon'), result)
+    assert.deepEqual(establishmentsDb.searchEstablishment('mcdonal'), result2)
+    assert.deepEqual(establishmentsDb.searchEstablishment('mcdonalds'), result2)
+    assert.deepEqual(establishmentsDb.searchEstablishment('mcdonalds1'), result3)
   })
 })

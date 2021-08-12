@@ -18,17 +18,23 @@ describe('Testing Drinks Database', function () {
   })
 
   it('Test: Add New Drink, Correct Establishment', function () {
-    const establishmentId = establishmentsDb.addEstablishment('mcdonalds')
-    const id = drinksDb.addDrink('drink1', undefined, establishmentId, undefined)
+    const establishment = {
+      id: 'zZzZzkkk',
+      name: 'mcdonalds',
+      alias: 'borgar'
+    }
+    establishmentsDb.addEstablishment(establishment)
 
-    assert.equal(drinksDb.getDrink(id).establishment_id, establishmentId)
+    const id = drinksDb.addDrink('drink1', undefined, establishment.id, undefined)
+
+    assert.equal(drinksDb.getDrink(id).establishment_id, establishment.id)
   })
 
   it('Test: Add New Drink, Incorrect Establishment', function () {
     const id = drinksDb.addDrink('drink1', undefined, -100, undefined)
 
-    // Default to -1
-    assert.equal(drinksDb.getDrink(id).establishment_id, -1)
+    // Default to null
+    assert.equal(drinksDb.getDrink(id).establishment_id, null)
   })
 
   it('Test: Is Drink Exist', function () {
@@ -48,7 +54,7 @@ describe('Testing Drinks Database', function () {
       drink_name: name,
       drink_desc: desc,
       drink_img: '',
-      establishment_id: -1
+      establishment_id: null
     }
     assert.deepEqual(drinksDb.getDrink(id), testDrink)
   })
@@ -65,7 +71,7 @@ describe('Testing Drinks Database', function () {
       drink_name: newname,
       drink_desc: newdesc,
       drink_img: '',
-      establishment_id: -1
+      establishment_id: null
     }
 
     drinksDb.editDrink(id, newname, newdesc)
@@ -84,7 +90,7 @@ describe('Testing Drinks Database', function () {
       drink_name: newname,
       drink_desc: desc,
       drink_img: '',
-      establishment_id: -1
+      establishment_id: null
     }
 
     drinksDb.editDrink(id, newname, undefined)
@@ -103,7 +109,7 @@ describe('Testing Drinks Database', function () {
       drink_name: name,
       drink_desc: newdesc,
       drink_img: '',
-      establishment_id: -1
+      establishment_id: null
     }
 
     drinksDb.editDrink(id, undefined, newdesc)
@@ -114,11 +120,18 @@ describe('Testing Drinks Database', function () {
     const name = 'lemonade'
     const desc = 'a sour drink for summer'
     const id = drinksDb.addDrink(name, desc)
-    const establishmentId = establishmentsDb.addEstablishment('china')
 
-    drinksDb.editDrink(id, undefined, undefined, establishmentId)
+    const establishment = {
+      id: 'bingBong',
+      name: 'china',
+      alias: 'borgar'
+    }
 
-    assert.equal(drinksDb.getDrink(id).establishment_id, establishmentId)
+    establishmentsDb.addEstablishment(establishment)
+
+    drinksDb.editDrink(id, undefined, undefined, establishment.id)
+
+    assert.equal(drinksDb.getDrink(id).establishment_id, establishment.id)
   })
 
   it('Test: Edit Drink, Incorrect Establishment', function () {
@@ -128,7 +141,7 @@ describe('Testing Drinks Database', function () {
 
     drinksDb.editDrink(id, undefined, undefined, -100)
 
-    assert.equal(drinksDb.getDrink(id).establishment_id, -1)
+    assert.equal(drinksDb.getDrink(id).establishment_id, null)
   })
 
   it('Test: Edit Drink, Does Not Exist', function () {

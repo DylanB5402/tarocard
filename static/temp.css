@@ -287,9 +287,9 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 94%;
+    left: 93%;
     z-index: 0;
-    height: 40px;
+    height: 30px;
     top: 10px;
 }
 
@@ -494,7 +494,7 @@ li:last-child{
     font-size: 40px;
     border: 4px rgba(151, 121, 197, 0.863) solid;
     text-align: center;
-    left: 90%;
+    left: 85%;
     top: 5px;
     border-radius: 10px;
   }
@@ -550,12 +550,12 @@ li:last-child{
     z-index: 2;
     margin: auto;
     height: fit-content;
-    box-shadow: 0 0 0 10000px #000000b0;
-    background-color: #000000b0;
+    box-shadow: 0 0 0 100000px #000000b0;
+    background-color:#000000b0 ;
     align-items: center;
     text-align: center;
     width: 100%;
-    border: none;
+    border: transparent;
 }
 
 .modal-content{
@@ -591,8 +591,8 @@ li:last-child{
 
 .gO-modal {
     background-color: white;
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    position: relative;
     border: none;
   }
 
@@ -1250,7 +1250,7 @@ button #edit-profile {
 }
 
 .UserElement {
-    width: 97%;
+    width: 100%;
     height: 225px;
     background-color: white;
     text-align: left;
@@ -1295,45 +1295,129 @@ button #edit-profile {
 /* SEARCH END */
 
 /* NOTIFS START */
-.requests {
-    background-color: teal;
-    height: 175px;
+
+.userFriendRequestElement {
     width: 100%;
-    vertical-align: center;
-}
-
-#pfp-request {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    position: relative;
-}
-
-.request-text {
-    position: relative;
-    object-position: left;
-
-}
-
-
-.request-text h6 {
-    font-size: 40px;
+    height: 175px;
+    background-color: white;
     text-align: left;
-    /*background-color: tomato;/**/
-    width: fit-content;/**/
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#request-arrow {
-    width: 32px;
+.userFriendRequestElement img {
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    object-position: center;
+    object-fit: cover;
     position: relative;
-    top: 0;
-    right: 0;
+    top: 25px;
+    left: 70px;
 }
 
+.userFriendRequestElement h2 {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+    left: 255px;
+    bottom: 90px;
+}
 
+.userFriendRequestElement h3 {
+    height: fit-content;
+    width: fit-content;
+    font-size: 35px;
+    font-weight: normal;
+    position: relative;
+    left: 255px;
+    bottom: 85px;
+}
 
+.userFriendRequestElement p {
+    height: 38px;
+    width: 60px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 30px;
+    position: relative;
+    bottom: 315px;
+    left: 150px;
+    background-color: rgb(152, 121, 197);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
 
+.userFriendRequestElement button {
+    height: fit-content;
+    width: fit-content;
+    background-color: transparent;/**/
+    border: none;
+    outline: none;
+    position: relative;
+    bottom: 205px;
+    left: 85%;
+}
 
+#FriendRequest-arrow {
+    height: 99px;
+    width: 58px;
+}
+
+.FriendNotifs {
+    width: 100%;
+    height: 175px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FriendNotifs img {
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.FriendNotifs p {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: normal;
+    position: relative;
+    left: 255px;
+    bottom: 70px;
+}
+
+.ActivityLinks {
+    color: black;
+    text-decoration: none;
+}
+
+#ActivityHeader {
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    color: rgb(152, 121, 197);
+    margin-left: 40px;
+    position: relative;
+    bottom: 100px;
+}
+
+#containAllRecent {
+    margin-top: 200px;
+}
 
 .requestElement {
     width: 100%;
@@ -1498,7 +1582,7 @@ button #edit-profile {
     color: black;
     text-decoration: none;
     cursor: auto;
-    }
+}
 
 /* SETTINGS END */
 
@@ -1600,3 +1684,13 @@ button #edit-profile {
 }
 
 /* PASSWORD END */
+
+/* Group Order View Page */
+
+.trash-card{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    left: 85%;
+    top: 5%;
+}

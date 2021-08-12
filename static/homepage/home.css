@@ -88,6 +88,14 @@ li:last-child{
 
 }
 
+.option-btn {
+    position: absolute;
+    left: 92%;
+    z-index: 0;
+    height: 30px;
+    top: 10px;
+}
+
 
 .userInput{
     text-align: center;
