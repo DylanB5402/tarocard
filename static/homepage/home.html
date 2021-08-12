@@ -55,14 +55,14 @@
         <div id="groupOrder-add" class="modal-GO">
             <div class="gO-modal">
                 <h1> Add to.... </h1> 
-                    <form action="/groups/addToGroup">
+                    <form action="/groups/addToGroup" id="groupOrder-form" method="POST" >
                         <button type=button style="float:left" class="del-button" onclick="closeGroupAdd()" >&times;</button>
                         <select id="groupOrders" name="groupOrders">
                             <!-- Group names-->
                         </select>
                         <input type="text" style="display: block" id="gO-drinkID"name="drinkID">
                         <input type="text" style="display:block" id="gO-userID" name="userID">
-                        <input type="button" value="submit"> 
+                        <input type="button" value="submit" onclick="sendInfoToAlex()"> 
                     </form>
                     
              </div>

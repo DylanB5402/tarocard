@@ -1,3 +1,4 @@
+
 /* Home Page Events */
 document.addEventListener('click',function(event){
   let OptionsBtn = document.getElementById("add-card-btn");
@@ -202,7 +203,6 @@ function createUserCard(establishment, drink, description, image, drinkId){
   addToGroupbtn.onclick = function ( drinkID, userID ){
       document.getElementById("groupOrder-add").style.display = 'block';
       document.getElementById("gO-drinkID").value = drinkId;
-      //document.getElementById("gO-userID").value = userID; unsure how to get USERID
     }
   addToGroupbtn.innerHTML = "+";
 
@@ -290,4 +290,9 @@ function createUserCard(establishment, drink, description, image, drinkId){
   /* Make/Delete Favorite Card */
 
   createGroupCard();
-  createUserCard("My Card","My Drink","my description",4,5)
+  createUserCard("My Card","My Drink","my description",4,5);
+
+function sendInfoToAlex(){
+  let groupInfo = document.getElementById("groupOrders").value;
+  document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
+}
