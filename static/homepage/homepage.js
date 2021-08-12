@@ -154,8 +154,9 @@ function createUserCard(establishment, drink, description, image, drinkId){
     edit.style.display = 'block';
     addToGroupbtn.style.display = "block";
     deleteBtn.style.display = "block";
-    options.style.display = "none"
-    closeMenu.style.display = "block"
+    options.style.display = "none";
+    closeMenu.style.display = "block";
+    closeMenu.style.display = "block";
   }
 
   /* Make the other buttons appear  */
@@ -172,7 +173,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
     edit.style.display = 'none';
     addToGroupbtn.style.display = "none";
     deleteBtn.style.display = "none";
-    closeMenu.style.display = "none"
+    closeMenu.style.display = "none";
+    favOption.style.display = "none";
   }
   /* Delete Card for User */
   let deleteBtn = document.createElement("img");
