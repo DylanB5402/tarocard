@@ -129,7 +129,7 @@ class EstablishmentsDatabase {
       * @param {String} search the search term to look for (autocomplete)
       * @returns {Array} establishments object information array
       */
-   searchEstablishment (search) {
+  searchEstablishment (search) {
     const stmt = this.db.prepare('SELECT * FROM establishments WHERE name LIKE ? ORDER BY name ASC')
     const query = stmt.all(`${search}%`)
     return query
@@ -163,77 +163,77 @@ class EstablishmentsDatabase {
    */
   editEstablishment (id, establishment) {
     let stmtString = 'UPDATE establishments SET '
-    let parameters = []
+    const parameters = []
 
     if (establishment.name !== undefined) {
-      stmtString += `name = ?,`
-      parameters.push(establishment.name) 
+      stmtString += 'name = ?,'
+      parameters.push(establishment.name)
     }
     if (establishment.alias !== undefined) {
-      stmtString += `alias = ?,`
-      parameters.push(establishment.alias) 
+      stmtString += 'alias = ?,'
+      parameters.push(establishment.alias)
     }
 
     if (establishment.phone !== undefined) {
-      stmtString += `phone = ?,`
-      parameters.push(establishment.phone) 
+      stmtString += 'phone = ?,'
+      parameters.push(establishment.phone)
     }
     if (establishment.display_phone !== undefined) {
-      stmtString += `display_phone = ?,`
-      parameters.push(establishment.display_phone) 
+      stmtString += 'display_phone = ?,'
+      parameters.push(establishment.display_phone)
     }
 
     if (establishment.review_count !== undefined) {
-      stmtString += `review_count = ?,`
-      parameters.push(establishment.review_count) 
+      stmtString += 'review_count = ?,'
+      parameters.push(establishment.review_count)
     }
     if (establishment.rating !== undefined) {
-      stmtString += `rating = ?,`
-      parameters.push(establishment.rating) 
+      stmtString += 'rating = ?,'
+      parameters.push(establishment.rating)
     }
 
     if (establishment.address1 !== undefined) {
-      stmtString += `address1 = ?,`
-      parameters.push(establishment.address1) 
+      stmtString += 'address1 = ?,'
+      parameters.push(establishment.address1)
     }
     if (establishment.address2 !== undefined) {
-      stmtString += `address2 = ?,`
-      parameters.push(establishment.address2) 
+      stmtString += 'address2 = ?,'
+      parameters.push(establishment.address2)
     }
     if (establishment.address3 !== undefined) {
-      stmtString += `address3 = ?,`
-      parameters.push(establishment.address3) 
+      stmtString += 'address3 = ?,'
+      parameters.push(establishment.address3)
     }
     if (establishment.city !== undefined) {
-      stmtString += `city = ?,`
-      parameters.push(establishment.city) 
+      stmtString += 'city = ?,'
+      parameters.push(establishment.city)
     }
     if (establishment.zip_code !== undefined) {
-      stmtString += `zip_code = ?,`
-      parameters.push(establishment.zip_code) 
+      stmtString += 'zip_code = ?,'
+      parameters.push(establishment.zip_code)
     }
     if (establishment.country !== undefined) {
-      stmtString += `country = ?,`
-      parameters.push(establishment.country) 
+      stmtString += 'country = ?,'
+      parameters.push(establishment.country)
     }
     if (establishment.state !== undefined) {
-      stmtString += `state = ?,`
-      parameters.push(establishment.state) 
+      stmtString += 'state = ?,'
+      parameters.push(establishment.state)
     }
 
     if (establishment.price !== undefined) {
-      stmtString += `price = ?,`
-      parameters.push(establishment.price) 
+      stmtString += 'price = ?,'
+      parameters.push(establishment.price)
     }
     if (establishment.img !== undefined) {
-      stmtString += `img = ?,`
-      parameters.push(establishment.img) 
+      stmtString += 'img = ?,'
+      parameters.push(establishment.img)
     }
 
     // Remove last comma
     stmtString = stmtString.substring(0, stmtString.length - 1)
     stmtString += ' WHERE id = ?'
-    parameters.push(id) 
+    parameters.push(id)
 
     if (parameters.length === 1) {
       return false
