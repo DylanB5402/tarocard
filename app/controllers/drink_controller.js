@@ -81,7 +81,6 @@ exports.getAllDrinks = (req, res) => {
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
     // Iterate through the array of drinks and make objects out of their properties
     allDrinks.forEach((drink) => {
-      // TODO: REDO Establishments so that it gets the name:
       // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
         name: drink.drink_name,
