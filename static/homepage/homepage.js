@@ -78,7 +78,6 @@ request.send();
 
 request.onload = function () {
   const cards = request.response.drinks
-  console.log(cards)
   for (const drinkCard in cards) {
     const drinkEst = cards[drinkCard]['establishment']
     const drinkName = cards[drinkCard]['name']

@@ -55,16 +55,16 @@
         <div id="groupOrder-add" class="modal-GO">
             <div class="gO-modal">
                 <h1> Add to.... </h1> 
-                    <button type=button style="float:left" class="del-button" onclick="closeGroupAdd()" >&times;</button>
-                    <select id="groupOrders" name="groupOrders">
-                        <option value="Group Order1"> Group Order 1</option>
-                        <option value="Group Order2"> Group Order 2</option>
-                        <option value="Group Order3"> Group Order 3</option>
-                        <option value="Group Order4"> Group Order 4</option>
-                    </select>
-                    <input type="text" style="display: block" id="gO-drinkID"name="drinkID">
-                    <input type="text" style="display:block" id="gO-userID" name="userID">
-                    <input type="button" value="submit">
+                    <form action="/groups/addToGroup">
+                        <button type=button style="float:left" class="del-button" onclick="closeGroupAdd()" >&times;</button>
+                        <select id="groupOrders" name="groupOrders">
+                            <!-- Group names-->
+                        </select>
+                        <input type="text" style="display: block" id="gO-drinkID"name="drinkID">
+                        <input type="text" style="display:block" id="gO-userID" name="userID">
+                        <input type="button" value="submit"> 
+                    </form>
+                    
              </div>
         </div>
         
