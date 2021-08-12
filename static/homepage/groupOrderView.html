@@ -36,28 +36,6 @@
         pfp.setAttribute("src", image);
 
         /* Options Button */
-        let options = document.createElement("img");
-        options.src = "../assets/menu-button.png";
-        options.classList.add("option-btn");
-        options.onclick = function(event){
-        openCardCreate("updateCard");
-        let form = document.getElementById('updateCard');
-        /* 
-        form.setAttribute("action", "/{id}/edit_drink_card");
-        */
-        let estabInput = document.getElementById("estabInput");
-        estabInput.value = establishment;
-        let orderInput = document.getElementById("orderInput");
-        orderInput.value = drink;
-        let descInput = document.getElementById("descInput");
-        descInput.value = description;
-  
-        let drinkID = document.getElementById("drinkId");
-        drinkID.value = drinkId;
-  
-        form.action = "/drinks/editDrinkCard";
-  
-    }
 
         /* Delete Button */
         let deleteBtn = document.createElement("img");
@@ -72,7 +50,6 @@
     
         container.appendChild(estab);
         container.appendChild(d);
-        container.appendChild(options);
         container.appendChild(desc);
         container.appendChild(tagContainer);
         container.appendChild(deleteBtn);
@@ -97,15 +74,32 @@
             console.log("Hi there");
         </script>
     </head>
+
+    <!-- Actual Body of HTML Page -->
     <body></body>
         <div class="card-bar" style="display:flex; width: 100vw; top: 0.01vh; left: 0vw; position: fixed; z-index: 4;">
             <p style="font-size: 2.6vh; margin-right: 0px; top: 0vh; width: auto;" class="fonts" >
                  Group Order 
             </p>
+
+            <a href="./home.html" 
+            style="background-color: purple; color: white; text-decoration: none;
+             border-radius: 10px; font-size: 20px;
+             position: relative; left: 40%;
+             width: 100px;
+             text-align: center;
+             vertical-align: auto;" 
+            class="fonts"> 
+            Home </a>
         </div>
 
         <div id="cardContainer">
 
+        </div>
+
+        <div>
+            <form action="/cards" method="DELETE">
+            </form>
         </div>
 
     </body>

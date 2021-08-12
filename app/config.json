@@ -17,5 +17,12 @@
       "drinksImage" : "drinks",
       "tagsImage" : "tags"
     }
+  },
+
+  "yelp" : {
+    "location" : "san diego, ca",
+    "tags" : ["tea","juice","coffee","cocktail"],
+    "parent" : "food",
+    "rate" : 1000
   }
 }
