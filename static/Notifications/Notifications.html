@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../temp.css">
+    <script src="jquery-3.6.0.min.js"></script>
 </head>
 
 <div class="page-header">
@@ -18,20 +19,33 @@
 </div>
 
 <body class="notifs" style="z-index: -2;">
-    <a href="../Notifications/friend-requests.html">
-        <div class="requests">
-            <img src="../assets/pfp-placeholder.png" id="pfp-request">
-            <div class="request-text">
-                <h6>Friend Requests</h6>
-                <p>Approve or ignore requests</p>
-            </div>
-        <!--<img src="../assets/arrow.png" id="request-arrow" >-->
+    
+    <template id="userFriendRequestTemp">
+        <div class="userFriendRequestElement">
+        <a href=".\friend-requests.html" class="ActivityLinks"><img>
+            <h2>Friend Requests</h2>
+            <h3>Approve or ignore requests</h3>
+            <button><img src="../assets/arrow.png" id="FriendRequest-arrow"></button>
+            <p></p>
+            </a>
         </div>
-            
-            
+    </template>
 
-    </a>
+    <script>
+        $(document).ready(function(){
+            $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
+                const friendRequests = data;
+                let requestTemp = document.querySelector("#userFriendRequestTemp");
+                let requestClone = requestTemp.content.cloneNode(true);
+                let element = requestClone.querySelector("div");
 
+                element.querySelector("img").src = friendRequests[0]['image url'];
+                element.querySelector("p").textContent = friendRequests.length;
+                const body = document.querySelector("body");
+                body.appendChild(element);
+            })
+        })
+    </script>
 
 </body>
 
