@@ -21,10 +21,6 @@ exports.newDrinkCard = (req, res) => {
     const drinkDesc = req.body.drinkDesc
     const uid = req.session.uid // get uid from current logged in state
 
-    console.log(`The establishment id is : ${establishment}`) //debug stmt
-
-    estabDB.toString()
-
     // Save return value to variable after adding drink to drink database
     const drinkUid = drinksDB.addDrink(nameOfDrink, drinkDesc, establishment)
     let resultFavDrink = false // variable out of scope
@@ -152,6 +148,9 @@ exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
     const drinkId = req.params.drinkId
+
+    console.log(`inside exports.removeFavDrink`) // debug
+    
     favDrinksDB.removeFavDrink(uid, drinkId)
 
     res.redirect('/homepage/home.html') // refreshes
