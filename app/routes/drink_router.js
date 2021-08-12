@@ -21,6 +21,6 @@ router.post('/starDrink/:drinkId', drinkController.starDrink)
 router.post('/unstarDrink/:drinkId', drinkController.unstarDrink)
 
 // POST request for removing a favorited drink
-router.post('/removeDrink/:drinkId', drinkController.removeFavDrink)
+router.post('deleteDrink/:drinkId', drinkController.removeFavDrink)
 
 module.exports = router
