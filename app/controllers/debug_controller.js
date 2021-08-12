@@ -199,8 +199,8 @@ exports.drinksReset = (req, res) => {
 
 exports.establishments = (req, res) => {
   // get everything
-  let establishments = establishmentsDB.searchEstablishment('') 
-  let style = 'style="height: 100%; width: 100%; object-fit: cover"'
+  const establishments = establishmentsDB.searchEstablishment('')
+  const style = 'style="height: 100%; width: 100%; object-fit: cover"'
   let htmlBuilder = `
     <p style="font-size:100px">${establishments.length} establishments found</p>
   `

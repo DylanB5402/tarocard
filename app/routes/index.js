@@ -42,4 +42,8 @@ router.get('/debug_display_drinks', drinkController.getAllDrinks)
 
 router.post('/updateProfile', userController.updateProfile)
 
+router.get('/search', userController.searchPage)
+
+router.post('/search/users', userController.searchAllUsers)
+
 module.exports = router
