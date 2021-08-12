@@ -1123,6 +1123,60 @@ h3 a{
     margin-inline: 10px;
 }
 
+/* TABS */
+.mytabs {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.mytabs input[type="radio"] {
+    display: none;
+}
+.mytabs label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 50%;
+    text-align: center;
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background: #EFEFEF;
+    order: 1;
+    display: none;
+}
+.mytabs .tab h2 {
+    font-size: 3em;
+}
+
+.mytabs .tab p {
+    font-size: 30px;
+}
+
+.mytabs .tab-icon {
+    width: 100px;
+    filter:grayscale(100%)
+}
+
+.mytabs input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked + label {
+    color: purple;
+    font-weight: bold;
+    background: white;
+}
+
+.mytabs input[type="radio"]:checked + label img {
+    filter: none;
+}
+
 
 
 /* Place the navbar at the bottom of the page, and make it stick */
