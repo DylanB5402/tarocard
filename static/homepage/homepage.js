@@ -1,13 +1,12 @@
 
 
-function openCardCreate( formID){
-    document.getElementById(formID).style.display='block';
+function openCardCreate( formID ){
     document.getElementById('add-card-btn').style.display='none';
     if( document.getElementById(formID).classList.contains('dezoom')){
         document.getElementById(formID).classList.remove('dezoom');
     }
-    document.getElementById("modal-sheet").style.display="none";
     document.getElementById(formID).classList.add('animate');
+    document.getElementById(formID).style.display='block';
   }
   
   function closeCardCreate( formID ){
@@ -102,10 +101,10 @@ function openCardCreate( formID){
         let descInput = document.getElementById("descInput");
         descInput.value = description;
   
-        let drinkID = document.getElementById("drinkId");
+        let drinkID = document.getElementById("drinkId"); //delete these two
         drinkID.value = drinkId;
   
-        form.action = "/drinks/editDrinkCard";
+        form.action = "/drinks/editDrinkCard"; //change this to "/drinks/editDrinkCard/" + drinkId;
   
     }
   
@@ -160,6 +159,14 @@ function openCardCreate( formID){
   
   createGroupCard()
   
+  /* Open Group Add Form  */
+  function openGroupAdd(){
+    document.getElementById("groupOrder-add").style.display = 'block';
+  }
+  
+  function closeGroupAdd(){
+    document.getElementById("groupOrder-add").style.display = 'none';
+  }
   
   
   /* Open Modal Sheet */
