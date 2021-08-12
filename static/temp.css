@@ -1368,11 +1368,56 @@ button #edit-profile {
     width: 58px;
 }
 
+.FriendNotifs {
+    width: 100%;
+    height: 175px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FriendNotifs img {
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.FriendNotifs p {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: normal;
+    position: relative;
+    left: 255px;
+    bottom: 70px;
+}
+
 .ActivityLinks {
     color: black;
     text-decoration: none;
 }
 
+#ActivityHeader {
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    color: rgb(152, 121, 197);
+    margin-left: 40px;
+    position: relative;
+    bottom: 100px;
+}
+
+#containAllRecent {
+    margin-top: 200px;
+}
 
 .requestElement {
     width: 100%;
