@@ -186,8 +186,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
   deleteBtn.onclick = function(){
       container.style.display = "none";
       /* Sending a delete request with this button */
-      fetch( "/drinks/ "+ drinkId ,{
-          method: 'delete',
+      fetch( "/drinks/deleteDrink/"+ drinkId ,{
+          method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({id: drinkId}) //sending drinkID 
       }); 
