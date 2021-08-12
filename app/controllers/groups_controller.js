@@ -79,8 +79,7 @@ exports.createGroup = (req, res) => {
 
     const groupId = groupDB.createNewGroup(uid, groupName, friendUID, friendsgroupID)
 
-    res.end()
-    // res.redirect(`/editGroup/${groupId}`)
+    res.redirect(`/homepage/home.html`)
     // redirect to edit group stage for a specific group
   }
 }

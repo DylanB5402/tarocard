@@ -80,7 +80,6 @@ request.onload = function () {
   const cards = request.response.drinks
   console.log(cards)
   for (const drinkCard in cards) {
-    console.log(drinkCard)
     const drinkEst = cards[drinkCard]['establishment']
     const drinkName = cards[drinkCard]['name']
     const drinkDesc = cards[drinkCard]['desc']
@@ -145,7 +144,7 @@ function createUserCard(establishment, drink, description, image, drinkId){
       let drinkID = document.getElementById("drinkId"); //delete these two
       drinkID.value = drinkId;
 
-      form.action = "/drinks/editDrinkCard" + drinkId;
+      form.action = "/drinks/editDrinkCard/" + drinkId;
   }
 
   let options = document.createElement("img");
@@ -186,6 +185,9 @@ function createUserCard(establishment, drink, description, image, drinkId){
   deleteBtn.onclick = function(){
       container.style.display = "none";
       /* Sending a delete request with this button */
+
+      console.log(drinkId) //debug
+
       fetch( "/drinks/deleteDrink/"+ drinkId ,{
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
