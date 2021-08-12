@@ -7,9 +7,9 @@ groupRequest.onload = function () {
   const groups = groupRequest.response.groups;
   for(const group in groups){
       let gName = groups[group]['name'];
-      let gId = groups[group]['id']
+      let gID = groups[group]['id']
       let userGroup = document.createElement("option");
-      userGroup.value = gName;
+      userGroup.value = gID;
       userGroup.innerHTML = gName;
 
       /* End of Test */
