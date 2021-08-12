@@ -32,8 +32,9 @@
     
             <script>
                 $(document).ready(function(){
-                    $("#search-icon").click(function(){        
-                        $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                    $("#search-icon").click(function(){       
+                        // $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                        $.post("/search/users", 
                         {
                             "string": $("#user-search").val()
                         }

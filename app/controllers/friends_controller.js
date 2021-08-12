@@ -90,7 +90,6 @@ exports.friendsPage = (req, res) => {
  */
 exports.searchFriends = (req, res) => {
   const search = req.body.string
-  // res.send('687')
   if (req.session.loggedin) {
     const uid = req.session.uid
     const friendArray = []
