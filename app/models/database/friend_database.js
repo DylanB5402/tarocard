@@ -138,8 +138,6 @@ class FriendDatabase {
    */
   addCurrentFriend (uid, friendUid) {
     if (uid !== friendUid) {
-      // this.db.prepare(`INSERT INTO friends VALUES ('${uid}', '${friendUid}', '${FriendStatus.FRIENDS}');`).run()
-      // this.db.prepare(`INSERT INTO friends VALUES ('${friendUid}', '${uid}', '${FriendStatus.FRIENDS}');`).run()
       this.insertFriend(uid, friendUid, FriendStatus.FRIENDS)
       this.insertFriend(friendUid, uid, FriendStatus.FRIENDS)
     }
@@ -161,6 +159,15 @@ class FriendDatabase {
    */
   searchFriends (uid, username) {
     return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = 'friends' AND users2.username LIKE '${username}%' ORDER BY LOWER(users2.display_name);`).all(uid)
+  }
+
+  getNumFriends (uid) {
+    const rows = this.db.prepare('SELECT * FROM friends WHERE uid = ?;').all(uid)
+    if (rows !== undefined) {
+      return rows.length
+    } else {
+      return 0
+    }
   }
 }
 

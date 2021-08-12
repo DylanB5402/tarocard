@@ -16,7 +16,7 @@
             <!-- banner will pull from user DB -->
             <img src="coolWallpaper.png" id="banner">
             <button class="settings-menu">
-                <a href="../Settings Page/Settings_HTML.html">
+                <a href="/settings">
                     <img src="../assets/menu-white.png" id="settings-menu">
                 </a>
             </button>
@@ -24,16 +24,17 @@
         
         <section id="profileTop">
             <!-- pfp will pull from user DB -->
-            <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
+            <img src="../assets/WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
         
-            <button type="button" id="edit-profile"><a href="..\editProfilePage\edit.html">Edit Profile</a></button>
+            <button type="button" id="edit-profile"><a href="../editProfilePage/edit.html">Edit Profile</a></button>
             
             
             <section id="profileText">
-                <h2 id="displayName">Jonathan</h2>
+                <h2 id="displayName"> display </h2>
+                <!-- <h2 id="displayName"> #{displayName} </h2> -->
 
                 <aside id="user-handle">
-                    <h3 id="user-at">@bobaLover49</h3>
+                    <h3 id="user-at">@#{username}</h3>
                 </aside>
 
                 
@@ -41,16 +42,18 @@
                 <!-- should pull real value from DB in final version -->
                 <p id="profileDescription">
                     <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
-                    MAX CHAR LENGTH: 150. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                    ligula
-                    eget dolor. Aenean massa. Cum sociis natoque pen
+                    #{bio}
                 </p>
             </section>
 
             <div class="user-stats">
                 <div class="stat">
-                    <p>1000
-                    <span> Friends</span></p>
+                    <button class="to-friends">
+                        <a href="../friendsPage/Friends_Page.html">
+                            <p>#{numFriends}
+                            <span> Friends</span></p>
+                        </a>
+                    </button>
                 </div>
                 <div class="stat">
                     <p>1000
@@ -94,7 +97,7 @@
 
         <section id="profileCards">
             <div id="favoritesSection">
-                <img id="favoritesStar" src="..\assets\star-Purple.png" />
+                <img id="favoritesStar" src="../assets/star-purple.png" />
                 <p id="favorites">Favorites</p>
                 <hr style="width: 100%; height: 0.1px;">
 
@@ -138,8 +141,76 @@
                 <p>75% less ice and 75% sugar</p>
             </div>
             -->
-        
         </section>
+
+        <!-- Following code is copied from home.html -->
+        <!-- Modal Sheet for button -->
+        <div id="modal-sheet" class="modal">
+            <div class="modal-content">
+                <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
+                <button onclick="openCardCreate('id01')" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
+                <button onclick="openCardCreate('createGroupOrder')" class="stuff"> <img src="../assets/group-order.png"> <p> Group Order </p></button>
+            </div>
+        </div>
+         <!-- Hidden Modal For Group Card -->
+        <!-- <div id="groupOrder-add" class="modal-GO">
+            <div class="gO-modal">
+                <h1> Add to.... </h1> 
+                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate('groupOrder-add')" >&times;</button>
+                    <select id="groupOrders" name="groupOrders">
+                        <option value="Group Order1"> Group Order 1</option>
+                        <option value="Group Order2"> Group Order 2</option>
+                        <option value="Group Order3"> Group Order 3</option>
+                        <option value="Group Order4"> Group Order 4</option>
+                    </select>
+                    <input type="button" value="submit">
+             </div>
+        </div> -->
+        
+
+
+        <!-- Hidden form for card creation -->
+        <form action="/drinks/newDrinkCard" class="form-container" id="id01" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
+                <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Establishment" name="establishment" class="small-input">
+                <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" >
+                <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
+        <!-- Hidden form for card update -->
+        <form action="/drinks/editDrinkCard" class="form-container" id="updateCard" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
+                <button class="post-button" style="left: 70vw;"value="submit"> UPDATE  </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Establishment" id="estabInput" name="=establishment" class="small-input">
+                <input type="text" placeholder="Name of Order" id="orderInput" name="nameOfDrink" class="small-input" >
+                <input type="hidden" name="drinkId" id="drinkId" class="small-input">
+                <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
+
+        <!-- This is the nav bar area is psuedo code so idrk what to do with it lol-->
+        <!-- Card Creation Form (Pop up? )-->
+        <!-- The Button that starts it all :00 -->
+        <!-- <img id="add-card-btn" src="../assets/Add Card Button.png" alt="add card button" onclick="document.getElementById('id01').style.display='block'"> -->
+        <form class="form-container" id="createGroupOrder" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('createGroupOrder')" >&times;</button>
+                <button class="post-button" style="left: 60vw; width: 300px;"value="submit" onclick="closeCardCreate('createGroupOrder')" > CREATE  </button>
+            </div>
+            <h1 style="position: relative; font-size: 90px; margin: auto; text-align: center; top: 200px;" class="fonts"> Group Order Name </h1>
+            <input type="text" placeholder="Group Name" id="groupName" name="groupName" class="small-input">
+            
+        </form>
+        <!-- <div id="cardContainer">
+        </div> -->
+        <!-- end of code copied from home.html -->
     </body>
 
     <div class="navbar" id="myNavbar">
