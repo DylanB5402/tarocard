@@ -37,7 +37,12 @@ router.post('/new_drink_card', drinkController.newDrinkCard)
 router.post('/:drinkId/edit_drink_card', drinkController.editDrinkCard)
 
 // DEBUG
-router.post('/updateProfile', userController.updateProfile)
+// GET request to view all drinks corresponding to one user
+router.get('/debug_display_drinks', drinkController.getAllDrinks)
+
+router.get('/edit', userController.editPage)
+
+router.post('/edit/profile', userController.editProfile)
 
 router.get('/search', userController.searchPage)
 

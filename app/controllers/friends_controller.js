@@ -1,5 +1,4 @@
 const friendDatabase = require('../models/database/friend_database')
-const userDatabase = require('../models/database/user_database')
 
 const friendDb = new friendDatabase.FriendDatabase()
 

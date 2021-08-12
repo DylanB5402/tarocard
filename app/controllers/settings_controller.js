@@ -39,12 +39,12 @@ exports.updateEmail = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.currentEmail = (req, res) => {
-  const email_data = userDB.getEmailByUID(req.session.uid)
-  if (email_data == undefined) {
+  const emailData = userDB.getEmailByUID(req.session.uid)
+  if (emailData === undefined) {
     res.json({ 'email-address': 'EMAIL NOT FOUND' })
   } else {
     if (req.session.loggedin) {
-      res.json({ 'email-address': email_data.email })
+      res.json({ 'email-address': emailData.email })
     } else {
       res.json({ 'email-address': 'EMAIL NOT FOUND' })
     }
