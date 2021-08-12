@@ -156,7 +156,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
     deleteBtn.style.display = "block";
     options.style.display = "none";
     closeMenu.style.display = "block";
-    closeMenu.style.display = "block";
+    favOption.style.display = "none";
+
   }
 
   /* Make the other buttons appear  */
