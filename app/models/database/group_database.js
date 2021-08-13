@@ -122,10 +122,22 @@ class GroupDatabase {
     if (!userDB.getUserByUID(uid)) {
       return null
     } else {
-      const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
-              'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
-      const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
 
+      const emptyData = this.db.prepare('select count(*) count from (select 1) where exists (select * from groups);')
+      const emptyQuery = emptyData.get()
+      const empty = emptyQuery.count
+
+      let query
+      // Check for empty table
+      if (empty === 0) {
+        const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
+                'VALUES (?, ?, ?, ?, ?)')
+        query = stmt.run(0, uid, groupName, friendUID, friendsDrinkID)
+      } else {
+        const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
+                'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
+        query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
+      }
       if (query.changes === 1) {
         return query.lastInsertRowid
       } else {

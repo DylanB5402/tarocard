@@ -17,9 +17,9 @@ router.post('/createGroup', groupsController.createGroup)
 router.post('/addToGroup/:groupId', groupsController.addToGroup)
 
 // DELETE request to remove a group for a user
-router.post('removeGroup/:groupId', groupsController.removeGroup)
+router.post('/removeGroup/:groupId', groupsController.removeGroup)
 
 // PUT request to remove a user-drink pair from a group for a user
-router.post('removeFromGroup/:groupId', groupsController.removeFromGroup)
+router.post('/removeFromGroup/:groupId', groupsController.removeFromGroup)
 
 module.exports = router
