@@ -214,7 +214,9 @@ function createUserCard(establishment, drink, description, image, drinkId){
   let fav = false;
   favOption.src= "../assets/gray-star.png";
   favOption.classList.add("option-btn");
-  favOption.style.left = "75%";
+  favOption.style.left = "90%";
+  favOption.style.top = "75%";
+  favOption.style.position = "absolute";
 
 
   favOption.onclick = function (){
@@ -238,8 +240,6 @@ function createUserCard(establishment, drink, description, image, drinkId){
   }
 
 
-
-  tagContainer.appendChild(pfp);
 
   container.appendChild(estab);
   container.appendChild(edit);
@@ -284,7 +284,7 @@ function createUserCard(establishment, drink, description, image, drinkId){
     container.appendChild(groupImage);
     container.appendChild(groupName);
     //container.appendChild(optionLink);
-    document.getElementById('cardContainer').appendChild(container);
+    document.getElementById('groupCardContainer').appendChild(container);
     container.onclick = function (){
       document.getElementById("groupView").style.display = "block";
     }

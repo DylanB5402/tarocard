@@ -463,6 +463,8 @@ li:last-child{
 
 .cardContainer{
     padding-top: 10vh;
+    height: 10%;
+    overflow-y: scroll;
 }
 
 .tag-pf-container{
@@ -754,7 +756,10 @@ li:last-child{
     width:  250px;
 }
 
-
+#cardContainer{
+    max-height: 80vh;
+    overflow-y: scroll;
+}
 
 #userEmail, #userPassword, #confirmPass {
     border-radius: 10px;
@@ -1771,7 +1776,8 @@ button #edit-profile {
     width: 30px;
     position: absolute;
     left: 85%;
-    top: 5%;
+    top: 2%;
+    margin-top: 0px;
 }
 
 
