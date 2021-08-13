@@ -51,7 +51,7 @@ class FavDrinksDatabase {
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
     const stmt = this.db.prepare("SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
-            "ORDER BY drink_name COLLATE NOCASE ASC")
+            "ORDER BY fav DESC, drink_name COLLATE NOCASE ASC")
     const query = stmt.all(uid) // an array of row (drink) objects
 
     // Iterate through the array of objects
