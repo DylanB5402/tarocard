@@ -50,7 +50,12 @@
                 let element = requestClone.querySelector("div");
 
                 element.querySelector("img").src = friendRequests[0]['image url'];
-                element.querySelector("p").textContent = friendRequests.length;
+                if(friendRequests.length > 99) {
+                    element.querySelector("p").textContent = "99+";
+                }
+                else {
+                    element.querySelector("p").textContent = friendRequests.length;
+                }
                 const body = document.querySelector("body");
                 const h6 = document.createElement("h6");
                 h6.id = "ActivityHeader";
