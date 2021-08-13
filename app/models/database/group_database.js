@@ -170,18 +170,24 @@ class GroupDatabase {
       const groupName = nameStmt.get(groupId).group_name
 
       // Cover case of brand new group (friend id and drink id = -1)
-      const numEntries = this.isExist(groupId)
+      const checkNewGroupStmt = this.db.prepare('SELECT COUNT(*) count from ' +
+              'groups WHERE group_id = ? AND friend_uid = -1')
+      const numEntries = checkNewGroupStmt.get(groupId).count
+
+      let query // declare query outside of if-else blocks
       if (numEntries === 1) {
+
         // update first and only entry where ids = -1
         const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
                   'friends_drink_id = ? WHERE group_id = ?')
-        const firstQuery = firstStmt.run(friendUID, drinkId, groupId)
+        query = firstStmt.run(friendUID, drinkId, groupId)
       } else {
         // insert user-drink pair into table
+
         const stmt = this.db.prepare('INSERT INTO groups ' +
                   '(group_id, uid, group_name, friend_uid, friends_drink_id)' +
                   'VALUES (?, ?, ?, ?, ?)')
-        const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
+        query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
       }
 
       // Check to make sure table was changed
