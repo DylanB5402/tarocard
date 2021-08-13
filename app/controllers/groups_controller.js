@@ -58,7 +58,8 @@ exports.getGroup = (req, res) => {
       })
     })
 
-    res.json({ groupContents: groupContent, success: true }) // send as json
+    res.send(group)
+    // res.json({ groupContents: groupContent, success: true }) // send as json
   } else {
     res.json({ groupContents: [], success: false })
   }
@@ -96,8 +97,9 @@ exports.addToGroup = (req, res) => {
     const uid = req.session.uid
     const groupId = req.params.groupId
     const friendUID = req.body.friendUID
-    const drinkId = req.body.friendDrinkId
-    groupDB.addToGroup(groupId, uid, friendUID, drinkId)
+    const drinkId = req.body.drinkId
+
+    const addBool = groupDB.addToGroup(groupId, uid, friendUID, drinkId)
 
     res.end() // Should not redirect, just stay where they were (on friend profile)
   } else {
