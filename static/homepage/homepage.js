@@ -154,8 +154,10 @@ function createUserCard(establishment, drink, description, image, drinkId){
     edit.style.display = 'block';
     addToGroupbtn.style.display = "block";
     deleteBtn.style.display = "block";
-    options.style.display = "none"
-    closeMenu.style.display = "block"
+    options.style.display = "none";
+    closeMenu.style.display = "block";
+    favOption.style.display = "none";
+
   }
 
   /* Make the other buttons appear  */
@@ -172,7 +174,8 @@ function createUserCard(establishment, drink, description, image, drinkId){
     edit.style.display = 'none';
     addToGroupbtn.style.display = "none";
     deleteBtn.style.display = "none";
-    closeMenu.style.display = "none"
+    closeMenu.style.display = "none";
+    favOption.style.display = "none";
   }
   /* Delete Card for User */
   let deleteBtn = document.createElement("img");
@@ -211,7 +214,9 @@ function createUserCard(establishment, drink, description, image, drinkId){
   let fav = false;
   favOption.src= "../assets/gray-star.png";
   favOption.classList.add("option-btn");
-  favOption.style.left = "75%";
+  favOption.style.left = "90%";
+  favOption.style.top = "75%";
+  favOption.style.position = "absolute";
 
 
   favOption.onclick = function (){
@@ -235,8 +240,6 @@ function createUserCard(establishment, drink, description, image, drinkId){
   }
 
 
-
-  tagContainer.appendChild(pfp);
 
   container.appendChild(estab);
   container.appendChild(edit);
@@ -281,7 +284,7 @@ function createUserCard(establishment, drink, description, image, drinkId){
     container.appendChild(groupImage);
     container.appendChild(groupName);
     //container.appendChild(optionLink);
-    document.getElementById('cardContainer').appendChild(container);
+    document.getElementById('groupCardContainer').appendChild(container);
     container.onclick = function (){
       document.getElementById("groupView").style.display = "block";
     }

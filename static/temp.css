@@ -68,6 +68,16 @@ html {
     width: 60px;
 }
 
+#logout {
+    text-decoration: none;
+    color: black
+}
+
+#logout:visited {
+    text-decoration: none;
+    color: black;
+}
+
 .edit {
     /*margin-top: -5%;/**/
     background-color: white;
@@ -463,6 +473,8 @@ li:last-child{
 
 .cardContainer{
     padding-top: 10vh;
+    height: 10%;
+    overflow-y: scroll;
 }
 
 .tag-pf-container{
@@ -754,7 +766,10 @@ li:last-child{
     width:  250px;
 }
 
-
+#cardContainer{
+    max-height: 80vh;
+    overflow-y: scroll;
+}
 
 #userEmail, #userPassword, #confirmPass {
     border-radius: 10px;
@@ -997,6 +1012,28 @@ h3 a{
     
 }
 
+.friend-button {
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    bottom: 16%;
+    left: 10%;
+}
+
+.friend-button a {
+    font-size: 32px;
+    color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.friend-button a:visited {
+   
+    text-decoration: none;
+}
+
 .user-stats {
     /*background-color: mediumaquamarine;/**/
     display: flex;
@@ -1121,6 +1158,60 @@ h3 a{
  #favoritesLine{
     color: #9879C5;
     margin-inline: 10px;
+}
+
+/* TABS */
+.mytabs {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.mytabs input[type="radio"] {
+    display: none;
+}
+.mytabs label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 50%;
+    text-align: center;
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background: #EFEFEF;
+    order: 1;
+    display: none;
+}
+.mytabs .tab h2 {
+    font-size: 3em;
+}
+
+.mytabs .tab p {
+    font-size: 30px;
+}
+
+.mytabs .tab-icon {
+    width: 100px;
+    filter:grayscale(100%)
+}
+
+.mytabs input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked + label {
+    color: purple;
+    font-weight: bold;
+    background: white;
+}
+
+.mytabs input[type="radio"]:checked + label img {
+    filter: none;
 }
 
 
@@ -1695,7 +1786,8 @@ button #edit-profile {
     width: 30px;
     position: absolute;
     left: 85%;
-    top: 5%;
+    top: 2%;
+    margin-top: 0px;
 }
 
 
