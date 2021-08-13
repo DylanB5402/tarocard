@@ -50,7 +50,7 @@ class FavDrinksDatabase {
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare("SELECT d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
+    const stmt = this.db.prepare("SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
             "ORDER BY drink_name COLLATE NOCASE ASC")
     const query = stmt.all(uid) // an array of row (drink) objects
 
@@ -86,7 +86,7 @@ class FavDrinksDatabase {
    */
   isStar (uid, drinkId) {
     const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE drink_id = '${drinkId}' ` +
-            `AND uid = '${uid}' AND fav = 1`)
+            `AND uid = '${uid}' AND fav = TRUE`)
     const query = stmt.get() // get runs the statement
     const numStar = query.count
     return numStar > 0
@@ -173,7 +173,7 @@ class FavDrinksDatabase {
     // Check if not starred yet
     if (!this.isStar(uid, drinkId)) {
       // Updates the DB
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 1 WHERE uid = '${uid}' ` +
+      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = '${uid}' ` +
             `AND drink_id = '${drinkId}'`)
       const query = stmt.run() // run the statement; returns 'info' object
 
@@ -195,7 +195,7 @@ class FavDrinksDatabase {
   unstarDrink (uid, drinkId) {
     // Check if starred
     if (this.isStar(uid, drinkId)) {
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = 0 WHERE uid = '${uid}' ` +
+      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = FALSE WHERE uid = '${uid}' ` +
               `AND drink_id = '${drinkId}'`)
       const query = stmt.run()
 
