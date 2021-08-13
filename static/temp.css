@@ -997,6 +997,28 @@ h3 a{
     
 }
 
+.friend-button {
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    bottom: 8%;
+    left: 15%;
+}
+
+.friend-button a {
+    font-size: 32px;
+    color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.friend-button a:visited {
+   
+    text-decoration: none;
+}
+
 .user-stats {
     /*background-color: mediumaquamarine;/**/
     display: flex;
