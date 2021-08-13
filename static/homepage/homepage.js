@@ -80,11 +80,12 @@ request.send();
 request.onload = function () {
   const cards = request.response.drinks
   for (const drinkCard in cards) {
-    const drinkEst = cards[drinkCard]['establishment']
-    const drinkName = cards[drinkCard]['name']
-    const drinkDesc = cards[drinkCard]['desc']
-    const drinkId = cards[drinkCard]['id']
-    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
+    const drinkEst = cards[drinkCard]['establishment'];
+    const drinkName = cards[drinkCard]['name'];
+    const drinkDesc = cards[drinkCard]['desc'];
+    const drinkId = cards[drinkCard]['id'];
+    const ifFav = cards[drinkCard]['fav'];
+    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav);
   }
 }
 
@@ -93,7 +94,7 @@ request.onload = function () {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createUserCard(establishment, drink, description, image, drinkId){
+function createUserCard(establishment, drink, description, image, drinkId,ifFav){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -211,8 +212,12 @@ function createUserCard(establishment, drink, description, image, drinkId){
 
   /* Favorite Option */
   let favOption = document.createElement("img");
-  let fav = false;
-  favOption.src= "../assets/gray-star.png";
+  let fav = ifFav;
+  if( fav ){
+    favOption.src= "../assets/star.png";
+  }else{
+    favOption.src= "../assets/gray-star.png"
+  }
   favOption.classList.add("option-btn");
   favOption.style.left = "90%";
   favOption.style.top = "75%";
