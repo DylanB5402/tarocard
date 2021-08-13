@@ -1003,8 +1003,8 @@ h3 a{
     border: none;
     outline: none;
     position: absolute;
-    bottom: 8%;
-    left: 15%;
+    bottom: 16%;
+    left: 10%;
 }
 
 .friend-button a {
