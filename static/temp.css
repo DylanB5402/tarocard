@@ -287,10 +287,11 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 93%;
+    left: 90%;
     z-index: 0;
     height: 30px;
     top: 10px;
+    margin: 10px;
 }
 
 li {
@@ -490,13 +491,14 @@ li:last-child{
 .add-gO-btn { 
     display: block;
     position: absolute;
-    width: 5%;
-    font-size: 40px;
+    width: 20px;
+    font-size: 20px;
     border: 4px rgba(151, 121, 197, 0.863) solid;
     text-align: center;
-    left: 85%;
+    left: 83%;
     top: 5px;
     border-radius: 10px;
+    margin: 10px;
   }
 
   .add-gO-btn:hover{ 
@@ -518,9 +520,10 @@ li:last-child{
 
 
 .pfp-pic{
-    width: 7vw;
-    height: 7vw;
+    width: 50px;
+    height: 50px;
     min-height: 30px;
+    max-height: 90px;
     min-width: 30px;
     border-radius: 50%;
     position: absolute;
@@ -1120,6 +1123,60 @@ h3 a{
     margin-inline: 10px;
 }
 
+/* TABS */
+.mytabs {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.mytabs input[type="radio"] {
+    display: none;
+}
+.mytabs label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 50%;
+    text-align: center;
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background: #EFEFEF;
+    order: 1;
+    display: none;
+}
+.mytabs .tab h2 {
+    font-size: 3em;
+}
+
+.mytabs .tab p {
+    font-size: 30px;
+}
+
+.mytabs .tab-icon {
+    width: 100px;
+    filter:grayscale(100%)
+}
+
+.mytabs input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked + label {
+    color: purple;
+    font-weight: bold;
+    background: white;
+}
+
+.mytabs input[type="radio"]:checked + label img {
+    filter: none;
+}
+
 
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -1694,3 +1751,6 @@ button #edit-profile {
     left: 85%;
     top: 5%;
 }
+
+
+/* Group Order View Form */

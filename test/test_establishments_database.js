@@ -110,7 +110,7 @@ describe('Testing Establishments Database', function () {
 
   it('Test: Wildcard Search Establishment', function () {
     establishmentsDb.purgeDb()
-    
+
     const establishment = {
       id: 'kakk',
       name: 'mcdonalds',
@@ -174,9 +174,9 @@ describe('Testing Establishments Database', function () {
 
     establishmentsDb.addEstablishment(establishment3)
 
-    let result = [establishment3, establishment, establishment2]
-    let result2 = [establishment, establishment2]
-    let result3 = [establishment2]
+    const result = [establishment3, establishment, establishment2]
+    const result2 = [establishment, establishment2]
+    const result3 = [establishment2]
 
     assert.deepEqual(establishmentsDb.searchEstablishment('mc'), result)
     assert.deepEqual(establishmentsDb.searchEstablishment('mcdon'), result)

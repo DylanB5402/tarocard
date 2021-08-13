@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Debug Groups</title>
+    </head>
+    <body>
+        <h1>Remove Drink</h1>
+        <!-- this form automatically send a post request to /users/create with the input data when submit is pressed -->
+        <form action = "/drinks/removeDrink" method="post" target="_blank">
+
+            <label for="uid">uid:</label><br>
+            <input type="number" id="uid" name="uid"><br>
+
+            <label for="drinkId">drink_id:</label><br>
+            <input type="number" id="drinkId" name="drinkId"><br>
+ 
+            <input type="radio" id="outgoing" name="status" value="outgoing">
+            <label for="outgoing"> outgoing </label><br>
+
+            <input type="radio" id="incoming" name="status" value="incoming">
+            <label for="incoming"> incoming </label><br>
+
+            <input type="radio" id="friends" name="status" value="friends">
+            <label for="friends"> friends </label><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>
+    </body>
+</html>

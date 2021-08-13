@@ -50,7 +50,8 @@ class FavDrinksDatabase {
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare('SELECT d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ?')
+    const stmt = this.db.prepare("SELECT d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
+            "ORDER BY drink_name COLLATE NOCASE ASC")
     const query = stmt.all(uid) // an array of row (drink) objects
 
     // Iterate through the array of objects
@@ -137,6 +138,9 @@ class FavDrinksDatabase {
     const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase()
 
+    console.log('User exists? ' + userDB.getUserByUID(uid))
+    console.log('Drink Exists? ' + drinksDB.isExist(drinkId))
+    
     // Check to make params are valid/exists
     if (userDB.getUserByUID(uid) && drinksDB.isExist(drinkId)) {
       if (this.isExist(uid, drinkId)) {
@@ -144,6 +148,8 @@ class FavDrinksDatabase {
         const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' +
                 `uid = '${uid}' AND drink_id = '${drinkId}'`)
         const query = stmt.run()
+
+        console.log(`deleted a drink`) // debug
 
         // Check to make sure changes are made to DB
         if (query.changes === 1) {

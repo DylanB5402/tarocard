@@ -1,24 +1,17 @@
 let groupRequest = new XMLHttpRequest();
-groupRequest.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/cards', true); 
+groupRequest.open('GET', '/groups', true); 
 groupRequest.responseType = 'json';
 groupRequest.send();
 
 groupRequest.onload = function () {
-  const groups = groupRequest.response;
-  console.log(groups);
-  for(let i = 0; i < groups.length; i++){
-      let gName = groups[i]["Name of Establishment"];
+  const groups = groupRequest.response.groups;
+  for(const group in groups){
+      let gName = groups[group]['name'];
+      let gID = groups[group]['id']
       let userGroup = document.createElement("option");
-      userGroup.value = gName;
+      userGroup.value = gID;
       userGroup.innerHTML = gName;
 
-      /*Testing Datalist */
-      let eName = groups[i]["Name of Establishment"];
-      let userGroup2 = document.createElement("option");
-      userGroup2.innerHTML = eName;
-
-
-      document.getElementById("estabList").appendChild(userGroup2);
       /* End of Test */
 
       document.getElementById("groupOrders").appendChild(userGroup);

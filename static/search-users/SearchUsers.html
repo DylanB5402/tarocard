@@ -32,8 +32,9 @@
     
             <script>
                 $(document).ready(function(){
-                    $("#search-icon").click(function(){        
-                        $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                    $("#search-icon").click(function(){       
+                        // $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                        $.post("/search/users", 
                         {
                             "string": $("#user-search").val()
                         }
@@ -74,10 +75,11 @@
                 <img id="navNotifsIcon" src="..\assets\notifs.png" />
             </a>
         
-            <a href="..\Profile page\Profile_Page_TaroCards.html"></i>
+            <a href="../profile-page/Profile_Page_TaroCards.html"></i>
                 <img id="navProfileIcon" src="..\assets\profile.png" />
             </a>
         </div>
+        <div id="UsersAll"></div>
     </body>
     
 
