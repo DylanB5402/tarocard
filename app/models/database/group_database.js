@@ -127,37 +127,22 @@ class GroupDatabase {
       const emptyQuery = emptyData.get()
       const empty = emptyQuery.count
 
-      console.log("This is empty: " + empty)
-
+      let query
       // Check for empty table
       if (empty === 0) {
         const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
                 'VALUES (?, ?, ?, ?, ?)')
-        const query = stmt.run(0, uid, groupName, friendUID, friendsDrinkID)
-
-        if (query.changes === 1) {
-          return query.lastInsertRowid
-        } else {
-          return null
-        }
+        query = stmt.run(0, uid, groupName, friendUID, friendsDrinkID)
       } else {
-
-        const maxGroupIdStmt = this.db.prepare('SELECT (max(group_id) + 1) max FROM groups')
-        const maxGroupIdQuery = maxGroupIdStmt.get()
-        const maxGroupId = maxGroupIdQuery.max
-        console.log('This is the max group id: ' + maxGroupId)
-
         const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
                 'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
-        const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
-
-        if (query.changes === 1) {
-          return query.lastInsertRowid
-        } else {
-          return null
-        }
+        query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
       }
-     
+      if (query.changes === 1) {
+        return query.lastInsertRowid
+      } else {
+        return null
+      }
     }
   }
 
