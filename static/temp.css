@@ -68,6 +68,16 @@ html {
     width: 60px;
 }
 
+#logout {
+    text-decoration: none;
+    color: black
+}
+
+#logout:visited {
+    text-decoration: none;
+    color: black;
+}
+
 .edit {
     /*margin-top: -5%;/**/
     background-color: white;
