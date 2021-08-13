@@ -99,6 +99,12 @@
             var tmppath = URL.createObjectURL(event.target.files[0]);
             currentProfilePic.src = tmppath;
         })
+
+        $('#bio').keypress(function(event) {
+            if (event.keyCode == 13) {
+            event.preventDefault();
+            }
+        });
     </script>
     
 </body>
