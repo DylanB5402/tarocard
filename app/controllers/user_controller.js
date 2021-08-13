@@ -17,15 +17,15 @@ exports.signup = (req, res) => {
     const email = req.body.email
     const password = req.body.password
     const repeatPassword = req.body.repeatPassword
-    const username = req.body.username
+    const username = email
     if (password !== repeatPassword) {
-      res.redirect('/signup.html')
+      res.redirect('/sign-up.html')
     } else {
       const result = userDB.insertNewUser(email, password, username)
       if (result !== -1) {
         userDB.logInUser(req, email, password)
       }
-      res.redirect('/profile/')
+      res.redirect('/profile')
     }
   }
 }
