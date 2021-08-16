@@ -14,6 +14,9 @@ router.get('/', function (req, res) {
   }
 })
 
+router.get("/home", (req, res) => {
+  res.redirect('/')
+})
 // POST request for sign up.
 router.post('/signup', userController.signup)
 
