@@ -1,3 +1,4 @@
+/* Adds Group Elements To "Add Card to a Group Form" */
 let groupRequest = new XMLHttpRequest();
 groupRequest.open('GET', '/groups', true); 
 groupRequest.responseType = 'json';

@@ -1,4 +1,18 @@
-function createCard(establishment, drink, description, image, drinkID){
+let requestGroupOrders = new XMLHttpRequest();
+requestGroupOrders.open('GET', /*Group Card endpoint*/'poop', true); 
+requestGroupOrders.responseType = 'json';
+requestGroupOrders.send();
+
+requestGroupOrders.onload = function () {
+  const cards = requestGroupOrders.response.drinks
+  for (const groupCard in card) {
+      let name = "Hello World";
+      let img = "whatever";
+      createGroupCard(name,img);
+  }
+}
+
+function createGoCards(establishment, drink, description, image, drinkID){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -37,7 +51,7 @@ function createCard(establishment, drink, description, image, drinkID){
     deleteBtn.onclick = function(){
         container.style.display = "none";
         /* Sending a delete requestGroupContent with this button */
-        fetch( 'https://localhost:3000/drinks/' + drinkID ,{
+        fetch( 'https://localhost:3000/drinks/' + drinkID ,{ //mightinclude group ID as well 
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: drinkID}) //sending drinkID 
@@ -53,8 +67,46 @@ function createCard(establishment, drink, description, image, drinkID){
     document.getElementById('groupContainer').appendChild(container);
 }
 
+  function createGroupCard(){
+    const container = document.createElement('div') // creates div element
+  
+    container.classList.add('group-card');
+    container.style.alignItems = "center";
+  
+    let groupImage = document.createElement('img');
+    groupImage.src ="../assets/group-order.png"; //this should be replaced with variable
+    groupImage.style.width="50px"
+  
+    let groupName = document.createElement('h1');
+    groupName.classList.add('fonts');
+    groupName.style.color ='white';
+    groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
+    
+
+    /* Group Order Edit does not exist
+    let optionLink = document.createElement('a');
+    optionLink.href = "./groupOrder-edit.html";
+    let options = document.createElement("img");
+    options.src = "../assets/menu-button.png";
+    options.classList.add("option-btn");
+    optionLink.appendChild(options)
+
+    */
+    container.appendChild(groupImage);
+    container.appendChild(groupName);
+    //container.appendChild(optionLink);
+    document.getElementById('groupCardContainer').appendChild(container);
+    container.onclick = function (){
+      document.getElementById("groupView").style.display = "block";
+      getGroupDrinkCards(); //added id, when given the id
+    }
+  }
+
+  createGroupCard();
+
+function getGroupDrinkCards(){
     let requestGroupContent = new XMLHttpRequest();
-    requestGroupContent.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true);
+    requestGroupContent.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true); //endpoint should have 
     requestGroupContent.responseType = 'json';
     requestGroupContent.send();
 
@@ -72,12 +124,15 @@ function createCard(establishment, drink, description, image, drinkID){
             const drinkDesc = cards[drinkCard]['desc']
             const drinkId = cards[drinkCard]['id']
             createCard2(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
+            Include the group ID, this will allow us to delete from the groupID
             */
-        createCard(x,y,z,"../assets/pfp-placeholder.png",drinkId);
+        createGoCards(x,y,z,"../assets/pfp-placeholder.png",drinkId);
         console.log(i);
         }
     }
+}
 
 document.getElementById("closeGroupView").onclick = function (){
     document.getElementById("groupView").style.display="none";
+    document.getElementById("groupContainer").innerHTML = ""; //this will delete all the cards in the group View
 }

@@ -1,4 +1,3 @@
-
 /* Home Page Events */
 document.addEventListener('click',function(event){
   let OptionsBtn = document.getElementById("add-card-btn");
@@ -89,7 +88,8 @@ request.onload = function () {
   }
 }
 
-/* Function created to help with creating cards for other pages
+/* CREATE CARD FUNCTION FOR THE SPECIFIC USER
+*  Function created to help with creating cards for other pages
 *  Styling needed for each one, thus the class added to them so everyone might
 *  need to add the stylesheet for cards if they plan to have cards
 */
@@ -258,49 +258,10 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
   container.appendChild(favOption);
   document.getElementById('cardContainer').appendChild(container);
 }
-
-  /* Function to Create a Group Card Div */ 
-  /* add parameters so that it goes to a different page depending on group order */
-  function createGroupCard(){
-    const container = document.createElement('div') // creates div element
-  
-    container.classList.add('group-card');
-    container.style.alignItems = "center";
-  
-    let groupImage = document.createElement('img');
-    groupImage.src ="../assets/group-order.png"; //this should be replaced with variable
-    groupImage.style.width="50px"
-  
-    let groupName = document.createElement('h1');
-    groupName.classList.add('fonts');
-    groupName.style.color ='white';
-    groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
-    
-
-    /* Group Order Edit does not exist
-    let optionLink = document.createElement('a');
-    optionLink.href = "./groupOrder-edit.html";
-    let options = document.createElement("img");
-    options.src = "../assets/menu-button.png";
-    options.classList.add("option-btn");
-    optionLink.appendChild(options)
-
-    */
-    container.appendChild(groupImage);
-    container.appendChild(groupName);
-    //container.appendChild(optionLink);
-    document.getElementById('groupCardContainer').appendChild(container);
-    container.onclick = function (){
-      document.getElementById("groupView").style.display = "block";
-    }
-  }
-
-  /* Make/Delete Favorite Card */
-
-  createGroupCard();
   createUserCard("My Card","My Drink","my description",4,5);
 
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
   document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
 }
+
