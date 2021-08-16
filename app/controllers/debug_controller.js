@@ -244,7 +244,7 @@ exports.numCards = (req, res) => {
 exports.displayCardsHomePage = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const allDrinksHP = favDrinksDB.displayDrinksToHomePage(uid) // temp, will format better in future
+    const allDrinksHP = favDrinkDB.displayDrinksToHomePage(uid) // temp, will format better in future
     const drinkArray = []
 
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}

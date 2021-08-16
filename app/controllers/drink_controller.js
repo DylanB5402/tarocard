@@ -162,11 +162,10 @@ exports.removeFavDrink = (req, res) => {
   }
 }
 
-exports.displayDrinksHomePage = (req, res) => {
+exports.displayCardsHomePage = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-
-    const allDrinksHP = favDrinksDB.displayDrinksToHomePage(uid) // temp, will format better in future
+    const allDrinksHP = favDrinkDB.displayDrinksToHomePage(uid) // temp, will format better in future
     const drinkArray = []
 
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
@@ -175,12 +174,13 @@ exports.displayDrinksHomePage = (req, res) => {
       // TODO: REDO Establishments so that it gets the name:
       // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
-        name: drink.drink_name,
-        desc: drink.drink_desc,
+        'friend uid': drink.friend_uid,
+        'drink name': drink.drink_name,
+        'drink desc': drink.drink_desc,
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
-        id: drink.drink_id,
-        fav: drink.fav
+        'drink id': drink.drink_id,
+        date: drink.date
       })
     })
 
