@@ -144,9 +144,15 @@ class UserDatabase {
   }
 
   insertProfileData (uid, displayName, username, bio) {
-    const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
-    const info = stmt.run(displayName, username, bio, uid)
-    return info.changes > 0
+    if (bio === "" || bio === undefined) {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, uid)
+      return info.changes > 0
+    } else {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, bio, uid)
+      return info.changes > 0
+    }
   }
 
   selectProfileData (email) {
