@@ -5,6 +5,7 @@ requestGroupOrders.send();
 
 requestGroupOrders.onload = function () {
   const groups = requestGroupOrders.response.groups;
+  // Receives name and id
   console.log(groups);
   for (const group in groups) {
     let gName = groups[group]["name"];
