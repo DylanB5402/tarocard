@@ -12,11 +12,11 @@ requestGroupOrders.onload = function () {
     console.log(groups[group]["name"]);
     let gID = groups[group]['id'];
     console.log(gID);
-    createGroupCard( gName);
+    createGroupCard( gName, gID);
   }
 }
   /* Creates Drink Cards that are in the Group Order */
-function createGoCards(establishment, drink, description, image, drinkID, groupID){
+function createGoCards(establishment, drink, description, image, drinkID, ifav, groupID){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -55,8 +55,8 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     deleteBtn.onclick = function(){
         container.style.display = "none";
         /* Sending a delete requestGroupContent with this button */
-        fetch( '/groups/removeFromGroup/' + groupID ,{ 
-            method: 'delete',
+        fetch( "/groups/removeFromGroup/" + groupID ,{ 
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: drinkID}) //sending drinkID 
         }); 
@@ -71,7 +71,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     document.getElementById('groupContainer').appendChild(container);
 }
   /* Creates group Orders cards */
-  function createGroupCard( gName ){
+  function createGroupCard( gName, groupID ){
     const container = document.createElement('div') // creates div element
   
     container.classList.add('group-card');
@@ -124,7 +124,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
       }); 
       }else{
         document.getElementById("groupView").style.display = "block";
-        getGroupDrinkCards(id); //added id, when given the id
+        getGroupDrinkCards(groupID); //added id, when given the id
       }
     }
   }
@@ -132,12 +132,12 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
 
 function getGroupDrinkCards(groupID){
     let requestGroupContent = new XMLHttpRequest();
-    requestGroupContent.open('GET', '/groups' + groupID, true); //endpoint should have id
+    requestGroupContent.open('GET', '/groups/' + groupID, true); //endpoint should have id
     requestGroupContent.responseType = 'json';
     requestGroupContent.send();
 
     requestGroupContent.onload = function() {
-        const cards = requestGroupContent.response.cards;
+        const cards = requestGroupContent.response;
         for (const drinkCard in cards) {
           const drinkEst = cards[drinkCard]['establishment'];
           const drinkName = cards[drinkCard]['name'];
