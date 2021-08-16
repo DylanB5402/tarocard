@@ -21,13 +21,13 @@ exports.getAllGroups = (req, res) => {
     // group object: {group_id, group_name}
     // Iterate through the array of groups and make objects out of their properties
     if (allGroups != null) {
-    allGroups.forEach((group) => {
-      groupArray.push({
-        name: group.group_name,
-        id: group.group_id
+      allGroups.forEach((group) => {
+        groupArray.push({
+          name: group.group_name,
+          id: group.group_id
+        })
       })
-    })
-  }
+    }
     res.json({ groups: groupArray, success: true }) // send as json
   } else {
     res.json({ groups: [], success: false })
@@ -35,9 +35,9 @@ exports.getAllGroups = (req, res) => {
 }
 
 /**
- * 
- * @param {!import('express').Request} req 
- * @param {!import('express').Response} res 
+ *
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
  */
 exports.getGroup = (req, res) => {
   if (req.session.loggedin) {
@@ -81,7 +81,7 @@ exports.createGroup = (req, res) => {
 
     const groupId = groupDB.createNewGroup(uid, groupName, friendUID, friendsgroupID)
 
-    res.redirect(`/homepage/home.html`)
+    res.redirect('/homepage/home.html')
     // redirect to edit group stage for a specific group
   }
 }
@@ -137,7 +137,7 @@ exports.removeFromGroup = (req, res) => {
     const groupId = req.params.groupId
     const drinkId = req.body.drinkId
     groupDB.removeFromGroup(uid, groupId, drinkId)
-    
+
     res.redirect('homepage/home.html')
   } else {
     res.redirect('/')

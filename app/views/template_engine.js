@@ -13,7 +13,7 @@ class TemplateEngine {
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
-      numCards : 0
+      numCards: 0
     })
   }
 

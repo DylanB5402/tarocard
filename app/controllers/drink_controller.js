@@ -150,7 +150,7 @@ exports.removeFavDrink = (req, res) => {
     const uid = req.session.uid
     const drinkId = req.params.drinkId
 
-    console.log(`inside exports.removeFavDrink`) // debug
+    console.log('inside exports.removeFavDrink') // debug
 
     const debugBool = favDrinksDB.removeFavDrink(uid, drinkId)
 

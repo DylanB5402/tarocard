@@ -154,7 +154,6 @@ exports.searchAllUsers = (req, res) => {
  */
 exports.getBanner = (req, res) => {
   if (req.session.loggedin) {
-    // var banner = userDB.getBannerPathByUID(req.session.uid)
     res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
   } else {
     res.redirect('/assets/coolWallpaper.png')
@@ -163,7 +162,6 @@ exports.getBanner = (req, res) => {
 
 exports.getProfilePicture = (req, res) => {
   if (req.session.loggedin) {
-    // var banner = userDB.getBannerPathByUID(req.session.uid)
     res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
   } else {
     res.redirect('/assets/pfp-placeholder.png')

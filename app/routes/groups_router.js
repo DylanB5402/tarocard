@@ -5,21 +5,21 @@ const router = express.Router()
 const groupsController = require('../controllers/groups_controller')
 
 // GET request to get all groups for a user
-router.get('/', groupsController.getAllGroups);
+router.get('/', groupsController.getAllGroups)
 
 // GET request to get a group for a user
-router.get('/:groupId', groupsController.getGroup);
+router.get('/:groupId', groupsController.getGroup)
 
 // POST request to create a fresh group for a user
-router.post('/createGroup', groupsController.createGroup); //this works
+router.post('/createGroup', groupsController.createGroup) // this works
 
 // POST request to add to an existing group for a user
-router.post('/addToGroup/:groupId', groupsController.addToGroup); 
+router.post('/addToGroup/:groupId', groupsController.addToGroup)
 
 // DELETE request to remove a group for a user
-router.post('/removeGroup/:groupId', groupsController.removeGroup);
+router.post('/removeGroup/:groupId', groupsController.removeGroup)
 
 // PUT request to remove a user-drink pair from a group for a user
-router.post('/removeFromGroup/:groupId', groupsController.removeFromGroup);
+router.post('/removeFromGroup/:groupId', groupsController.removeFromGroup)
 
 module.exports = router

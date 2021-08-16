@@ -146,7 +146,7 @@ class UserDatabase {
   }
 
   insertProfileData (uid, displayName, username, bio) {
-    if (bio === "" || bio === undefined) {
+    if (bio === '' || bio === undefined) {
       const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ? WHERE uid = ?;')
       const info = stmt.run(displayName, username, uid)
       return info.changes > 0
@@ -189,10 +189,9 @@ class UserDatabase {
    * @param {*} uid
    * @returns {Array}
    */
-   searchDatabase (username, uid) {
+  searchDatabase (username, uid) {
     return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
   }
-
 
   updateEmail (uid, email) {
     const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
@@ -215,12 +214,12 @@ class UserDatabase {
     return stmt.get(uid)
   }
 
-  getBannerPathByUID(uid) {
+  getBannerPathByUID (uid) {
     const stmt = this.db.prepare('SELECT banner FROM users WHERE uid = ?;')
     return stmt.get(uid)
   }
 
-  getProfilePicturePathByUID(uid) {
+  getProfilePicturePathByUID (uid) {
     const stmt = this.db.prepare('SELECT profile_picture FROM users WHERE uid = ?;')
     return stmt.get(uid)
   }
