@@ -30,15 +30,12 @@
                 <script>
                     $(document).ready(function(){
                         $("#searchBarButton").click(function(){        
-                            // $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
                             $.post('/friends/search', 
                             {
                                 "string": $("#searchBar").val()
                             }
                             ,function(data, status, xhr) {
-                                // console.log(data)
                                 searchFriends(data);
-                                // populateFriends(data)
                             })
                         });
                     });

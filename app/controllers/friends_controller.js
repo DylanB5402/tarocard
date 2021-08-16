@@ -43,7 +43,7 @@ exports.currentFriends = (req, res) => {
       friendArray.push({
         'display name': friend.display_name,
         username: friend.username,
-        'image url': '',
+        'image url': friend.profile_picture,
         id: friend.uid
       })
     })
@@ -94,10 +94,11 @@ exports.searchFriends = (req, res) => {
     const friendArray = []
     const currentFriends = friendDb.searchFriends(uid, search)
     currentFriends.forEach((friend) => {
+      console.log(friend.profile_picture)
       friendArray.push({
         'display name': friend.display_name,
         username: friend.username,
-        'image url': '',
+        'image url': friend.profile_picture,
         id: friend.uid
       })
     })
