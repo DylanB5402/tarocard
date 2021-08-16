@@ -72,9 +72,6 @@ class FavDrinksDatabase {
    * @returns {Array[Object]} an array of drink objects
    */
   getAllDrinks (uid) {
-    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    // const drinkArray = new Array() // array to be filled with drink objects
-
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
@@ -82,14 +79,6 @@ class FavDrinksDatabase {
             "INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
             "ORDER BY fav DESC, drink_name COLLATE NOCASE ASC")
     const query = stmt.all(uid) // an array of row (drink) objects
-
-    // Iterate through the array of objects
-    // `value` = drink object
-    // query.forEach((value) => {
-    //   // Function to be called on each element (object) in the array
-
-    //   drinkArray.push(value) // Push the drink object into the array
-    // })
     return query // return the filled array of drink objects
   }
 
@@ -208,18 +197,23 @@ class FavDrinksDatabase {
     return false // false if failed both if statements
   }
 
+  /**
+   * Sends a JSON of drinks that are related by friends of a user
+   * @param {Integer} uid 
+   * @returns {Array[Object]} an array of drink objects
+   */
   displayDrinksToHomePage(uid) {
-    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
     // SQL Statement:
     //   selects all fields of drinks, the drink_id and date from fav_drinks,
     //     and mainly status from friends joined by uids between fav_drinks and
     //     friends and drink_id between fav_drinks and drinks to return a query
     //     for outputting a table of all recent drinks made by friends of a user
-    const stmt = this.db.prepare("SELECT fd.drink_id, fd.date, f.*, d.* " + 
+    const stmt = this.db.prepare("SELECT fd.drink_id, fd.date, f.friend_uid, d.* " + 
             "FROM ((fav_drinks fd " + 
-            "INNER JOIN friends f USING(uid) WHERE uid = ? AND status = friends) " + 
-            "INNER JOIN drinks d USING(drink_id)" +
-            "ORDER BY fav DESC, drink_name COLLATE NOCASE ASC")
+            "INNER JOIN friends f ON fd.uid = f.friend_uid " + 
+            "WHERE f.uid = ? AND status = friends) " + 
+            "INNER JOIN drinks d USING(drink_id) " +
+            "ORDER BY date COLLATE NOCASE ASC")
     const query = stmt.all(uid) // an array of row (drink) objects
 
     return query // return the filled array of drink objects
