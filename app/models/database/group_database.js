@@ -122,7 +122,6 @@ class GroupDatabase {
     if (!userDB.getUserByUID(uid)) {
       return null
     } else {
-
       const emptyData = this.db.prepare('select count(*) count from (select 1) where exists (select * from groups);')
       const emptyQuery = emptyData.get()
       const empty = emptyQuery.count
