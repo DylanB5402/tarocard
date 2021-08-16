@@ -190,7 +190,7 @@ class UserDatabase {
    * @returns {Array}
    */
    searchDatabase (username, uid) {
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
   }
 
 

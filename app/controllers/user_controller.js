@@ -138,7 +138,7 @@ exports.searchAllUsers = (req, res) => {
       userArray.push({
         'display name': user.display_name,
         username: user.username,
-        'image url': '',
+        'image url': user.profile_picture,
         id: user.uid
       })
     })
