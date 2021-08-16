@@ -263,6 +263,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
 
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
+  console.log(groupInfo);
   document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
 }
 
