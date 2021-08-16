@@ -147,3 +147,25 @@ exports.searchAllUsers = (req, res) => {
     res.json({ users: [], success: false })
   }
 }
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.getBanner = (req, res) => {
+  if (req.session.loggedin) {
+    // var banner = userDB.getBannerPathByUID(req.session.uid)
+    res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
+  } else {
+    res.redirect('/assets/coolWallpaper.png')
+  }
+}
+
+exports.getProfilePicture = (req, res) => {
+  if (req.session.loggedin) {
+    // var banner = userDB.getBannerPathByUID(req.session.uid)
+    res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
+  } else {
+    res.redirect('/assets/pfp-placeholder.png')
+  }
+}

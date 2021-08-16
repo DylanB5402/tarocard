@@ -38,4 +38,8 @@ router.get('/search', userController.searchPage)
 
 router.post('/search/users', userController.searchAllUsers)
 
+router.get('/banner', userController.getBanner)
+
+router.get('/pfp', userController.getProfilePicture)
+
 module.exports = router

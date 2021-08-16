@@ -17,7 +17,7 @@ class UserDatabase {
   }
 
   createUserTable () {
-    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);').run()
+    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture TEXT, banner TEXT);').run()
   }
 
   getSchema () {
@@ -37,7 +37,9 @@ class UserDatabase {
     } else {
       const hash = this.encryptPassword(password)
       const stmt = this.db.prepare('INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);')
-      const info = stmt.run(email, hash, username, username, '', 0, 0)
+      const defaultBanner = '/assets/coolWallpaper.png'
+      const defaultProfilePicture = '/assets/pfp-placeholder.png'
+      const info = stmt.run(email, hash, username, username, '', defaultProfilePicture, defaultBanner)
       if (info.changes > 0) {
         return info.lastInsertRowid
       } else {
@@ -210,6 +212,16 @@ class UserDatabase {
 
   getEmailByUID (uid) {
     const stmt = this.db.prepare('SELECT email FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getBannerPathByUID(uid) {
+    const stmt = this.db.prepare('SELECT banner FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getProfilePicturePathByUID(uid) {
+    const stmt = this.db.prepare('SELECT profile_picture FROM users WHERE uid = ?;')
     return stmt.get(uid)
   }
 }

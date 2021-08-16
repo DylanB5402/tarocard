@@ -16,13 +16,13 @@ html
     .edit
       form#edit(action='/edit/profile' method='POST')
         .banner
-          img#banner(src='coolWallpaper.png')
+          img#banner(src='/banner')
           label#imgInputBanner.upload-img-a(for='inputBanner')
             img.upload-img#upload-banner(src='../assets/upload-img-circle.png')
             // <i style="color: blue;" class="fa fa-camera fa-5x" aria-hidden="false"></i>
           input#inputBanner(type='file' name='Banner' accept='.jpg, .png, .gif')
         .pfp
-          img#profilePic(src='WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg')
+          img#profilePic(src='/pfp')
           label#imgInputProfilePic.upload-img-a(for='inputProfilePic')
             img.upload-img#upload-pfp(src='../assets/upload-img-circle.png')
             // <i style="color: red;" class="fa fa-camera fa-3x" aria-hidden="true"></i>
