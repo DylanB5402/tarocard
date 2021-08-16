@@ -9,6 +9,9 @@ const drinksDatabase = require('../models/database/drinks_database')
 const tagsDatabase = require('../models/database/tags_database')
 const establishmentsDatabase = require('../models/database/establishments_database')
 
+const favDrinksDatabase = require('../models/database/fav_drinks_database')
+const favDrinkDB = new favDrinksDatabase.FavDrinksDatabase()
+
 const upload = new uploadFile.UploadFile()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
@@ -228,4 +231,12 @@ exports.establishments = (req, res) => {
     </div>`
   })
   res.send(htmlBuilder)
+}
+
+exports.numCards = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const count = favDrinkDB.numCards(uid)
+    res.json({'count' : count})
+  }
 }
