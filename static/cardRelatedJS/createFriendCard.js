@@ -56,7 +56,7 @@ function createFriendCard(establishment, drink, description, image, drinkId){
 
 
   let addToGroupbtn = document.createElement('p');
-  addToGroupbtn.classList.add('add-gO-btn');
+  addToGroupbtn.classList.add('add-gO-btn-friend');
   addToGroupbtn.style.display = "block";
       /* Open Group Add Form  */
   addToGroupbtn.onclick = function ( drinkID, userID ){

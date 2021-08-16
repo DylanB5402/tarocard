@@ -220,7 +220,9 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
   }
   favOption.classList.add("option-btn");
   favOption.style.left = "90%";
-  favOption.style.top = "75%";
+  favOption.style.top = "65%";
+  favOption.style.width = "30px";
+  favOption.style.height = "30px";
   favOption.style.position = "absolute";
 
 
@@ -258,7 +260,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
   container.appendChild(favOption);
   document.getElementById('cardContainer').appendChild(container);
 }
-  createUserCard("My Card","My Drink","my description",4,5);
 
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;

@@ -519,6 +519,19 @@ li:last-child{
     margin: 10px;
   }
 
+.add-gO-btn-friend { 
+    display: block;
+    position: absolute;
+    width: 20px;
+    font-size: 20px;
+    border: 4px rgba(151, 121, 197, 0.863) solid;
+    text-align: center;
+    left: 90%;
+    top: 5px;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
   .add-gO-btn:hover{ 
     background-color: rgba(151, 121, 197, 0.863);
     transition: ease-in 0.15s;
