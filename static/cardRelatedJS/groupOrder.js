@@ -1,18 +1,21 @@
 let requestGroupOrders = new XMLHttpRequest();
-requestGroupOrders.open('GET', /*Group Card endpoint*/'poop', true); 
+requestGroupOrders.open('GET', '/groups', true); 
 requestGroupOrders.responseType = 'json';
 requestGroupOrders.send();
 
 requestGroupOrders.onload = function () {
-  const cards = requestGroupOrders.response.drinks
-  for (const groupCard in card) {
-      let name = "Hello World";
-      let img = "whatever";
-      createGroupCard(name,img);
+  const groups = requestGroupOrders.response.groups;
+  console.log(groups);
+  for (const group in groups) {
+    let gName = groups[group]["name"];
+    console.log(groups[group]["name"]);
+    let gID = groups[group]['id'];
+    console.log(gID);
+    createGroupCard( gName);
   }
 }
-
-function createGoCards(establishment, drink, description, image, drinkID){
+  /* Creates Drink Cards that are in the Group Order */
+function createGoCards(establishment, drink, description, image, drinkID, groupID){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -51,7 +54,7 @@ function createGoCards(establishment, drink, description, image, drinkID){
     deleteBtn.onclick = function(){
         container.style.display = "none";
         /* Sending a delete requestGroupContent with this button */
-        fetch( 'https://localhost:3000/drinks/' + drinkID ,{ //mightinclude group ID as well 
+        fetch( '/groups/removeFromGroup/' + groupID ,{ 
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id: drinkID}) //sending drinkID 
@@ -66,8 +69,8 @@ function createGoCards(establishment, drink, description, image, drinkID){
     container.appendChild(deleteBtn);
     document.getElementById('groupContainer').appendChild(container);
 }
-
-  function createGroupCard(){
+  /* Creates group Orders cards */
+  function createGroupCard( gName ){
     const container = document.createElement('div') // creates div element
   
     container.classList.add('group-card');
@@ -80,54 +83,67 @@ function createGoCards(establishment, drink, description, image, drinkID){
     let groupName = document.createElement('h1');
     groupName.classList.add('fonts');
     groupName.style.color ='white';
-    groupName.innerHTML = 'Hello World 2' //This should also be replaced with variable
+    groupName.innerHTML = gName //This should also be replaced with variable
+
+
+    /* Deleting a Group  */
+    let deleteBtn = document.createElement("img");
+    deleteBtn.src="../assets/trash-icon.png";
+    deleteBtn.classList.add("trash-card");
+    deleteBtn.style.width = "60px";
+    deleteBtn.style.height = "60px";
+    deleteBtn.setAttribute('name','deleteBtn');
+
+    deleteBtn.onclick = function(){
+        container.style.display = "none";
+        document.getElementById
+        console.log("Hello There");
+        /* Sending a delete requestGroupContent with this button 
+        fetch( '/groups/removeFromGroup/' + groupID ,{ 
+            method: 'delete',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: drinkID}) //sending drinkID 
+        }); 
+        */
+    }
     
-
-    /* Group Order Edit does not exist
-    let optionLink = document.createElement('a');
-    optionLink.href = "./groupOrder-edit.html";
-    let options = document.createElement("img");
-    options.src = "../assets/menu-button.png";
-    options.classList.add("option-btn");
-    optionLink.appendChild(options)
-
-    */
+    container.appendChild(deleteBtn);
     container.appendChild(groupImage);
     container.appendChild(groupName);
     //container.appendChild(optionLink);
     document.getElementById('groupCardContainer').appendChild(container);
-    container.onclick = function (){
-      document.getElementById("groupView").style.display = "block";
-      getGroupDrinkCards(); //added id, when given the id
+    container.onclick = function (e ){
+      if( e.target.name == "deleteBtn"){
+        console.log("Hello There");
+        container.style.display = "none";
+        fetch( '/groups/removeGroup/' + groupID ,{ 
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({id: groupID}) //sending groupID 
+      }); 
+      }else{
+        document.getElementById("groupView").style.display = "block";
+        getGroupDrinkCards(id); //added id, when given the id
+      }
     }
   }
 
-  createGroupCard();
 
-function getGroupDrinkCards(){
+function getGroupDrinkCards(groupID){
     let requestGroupContent = new XMLHttpRequest();
-    requestGroupContent.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/db', true); //endpoint should have 
+    requestGroupContent.open('GET', '/groups' + groupID, true); //endpoint should have id
     requestGroupContent.responseType = 'json';
     requestGroupContent.send();
 
     requestGroupContent.onload = function() {
         const cards = requestGroupContent.response.cards;
-        for(let i = 0; i < cards.length; i++) {
-            let x =  cards[i]["Name of Establishment"];
-            let y = cards[i]["Name of Order"];
-            let z =cards[i]["Description"];
-            let drinkId = cards[i]["id"]
-            /*
-            console.log(drinkCard)
-            const drinkEst = cards[drinkCard]['establishment']
-            const drinkName = cards[drinkCard]['name']
-            const drinkDesc = cards[drinkCard]['desc']
-            const drinkId = cards[drinkCard]['id']
-            createCard2(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId)
-            Include the group ID, this will allow us to delete from the groupID
-            */
-        createGoCards(x,y,z,"../assets/pfp-placeholder.png",drinkId);
-        console.log(i);
+        for (const drinkCard in cards) {
+          const drinkEst = cards[drinkCard]['establishment'];
+          const drinkName = cards[drinkCard]['name'];
+          const drinkDesc = cards[drinkCard]['desc'];
+          const drinkId = cards[drinkCard]['id'];
+          const ifFav = cards[drinkCard]['fav'];
+          createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav, groupID);
         }
     }
 }
