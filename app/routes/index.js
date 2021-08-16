@@ -8,7 +8,7 @@ const drinkController = require('../controllers/drink_controller')
 // GET home page.
 router.get('/', function (req, res) {
   if (req.session.loggedin) {
-    res.redirect('/profile')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/index.html')
   }
