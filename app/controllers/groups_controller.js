@@ -20,13 +20,14 @@ exports.getAllGroups = (req, res) => {
 
     // group object: {group_id, group_name}
     // Iterate through the array of groups and make objects out of their properties
+    if (allGroups != null) {
     allGroups.forEach((group) => {
       groupArray.push({
         name: group.group_name,
         id: group.group_id
       })
     })
-
+  }
     res.json({ groups: groupArray, success: true }) // send as json
   } else {
     res.json({ groups: [], success: false })

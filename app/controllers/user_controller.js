@@ -63,10 +63,10 @@ exports.profile = (req, res) => {
       res.append('profileaccess', 'successful')
       res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends))
     } else {
-      res.redirect('/')
+      res.redirect('/index.html')
     }
   } else {
-    res.redirect('/')
+    res.redirect('/index.html')
   }
 }
 
