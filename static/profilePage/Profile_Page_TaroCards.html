@@ -39,7 +39,7 @@
         <!-- banner will pull from user DB -->
         <img src="coolWallpaper.png" id="banner">
         <button class="settings-menu">
-            <a href="../settings-page/Settings_HTML.html">
+            <a href="/settings">
                 <img src="../assets/menu-white.png" id="settings-menu">
             </a>
         </button>
@@ -49,14 +49,14 @@
         <!-- pfp will pull from user DB -->
         <img src="../WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
 
-        <button type="button" id="edit-profile"><a href="..\editProfilePage\edit.html">Edit Profile</a></button>
+        <button type="button" id="edit-profile"><a href="/edit">Edit Profile</a></button>
 
 
         <section id="profileText">
-            <h2 id="displayName">Jonathan</h2>
+            <h2 id="displayName">#{displayName}</h2>
 
             <aside id="user-handle">
-                <h3 id="user-at">@bobaLover49</h3>
+                <h3 id="user-at">@#{username}</h3>
             </aside>
 
 
@@ -64,26 +64,23 @@
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
                 <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
-                MAX CHAR LENGTH: 150. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula
-                eget dolor. Aenean massa. Cum sociis natoque pen
+                #{bio}
             </p>
         </section>
 
         <button class="friend-button">
-            <a href="../friendsPage/Friends_Page.html">Friends </a>
+            <a href="/friends">Friends </a>
         </button>
         <div class="user-stats">
-            <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p>1000
+                <p>#{numFriends}
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p>1000
+                <p>#{numCards}
                     <span> Cards</span>
                 </p>
             </div>
@@ -118,7 +115,7 @@
             <img id="navHomeIcon" src="../assets/home.png" />
         </a>
     
-        <a href="../search-users/SearchUsers.html"></i>
+        <a href="/search"></i>
             <img id="navSearchIcon" src="../assets/search.png" />
         </a>
     
