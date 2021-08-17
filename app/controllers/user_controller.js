@@ -1,9 +1,11 @@
 const userDatabase = require('../models/database/user_database')
 const friendDatabase = require('../models/database/friend_database')
+const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const templateEngine = require('../views/template_engine')
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 const friendDb = new friendDatabase.FriendDatabase()
+const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
 
 /**
  * @param {!import('express').Request} req
@@ -60,8 +62,9 @@ exports.profile = (req, res) => {
       const username = profileData.username
       const displayName = profileData.display_name
       const numFriends = friendDb.getNumFriends(uid)
+      const numCards = favDrinksDb.numCards(uid)
       res.append('profileaccess', 'successful')
-      res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends))
+      res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
     } else {
       res.redirect('/index.html')
     }

@@ -253,15 +253,13 @@ class FavDrinksDatabase {
    * @returns {Integer} number of drink cards a user has
    */
   numCards(uid) {
-    const userDB = new userDatabase.UserDatabase()
-    
-    if(userDB.getUserByUID(uid)) {
       const stmt = this.db.prepare(`SELECT COUNT(*) AS count FROM fav_drinks WHERE uid = ?`)
       const query = stmt.get(uid)
-      const count = query.count
-      return count
-    }
-    return 0
+      if (query !== undefined)  {
+      return query.count
+      } else {
+        return 0
+      }
   }
 
   toString () {

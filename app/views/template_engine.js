@@ -6,14 +6,14 @@ class TemplateEngine {
     this.generateEditPage = pug.compileFile('templates/pug/edit.pug')
   }
 
-  getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends) {
+  getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards) {
     // console.log(profileBio)
     return this.generateProfile({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
-      numCards: 0
+      numCards: numberCards
     })
   }
 
