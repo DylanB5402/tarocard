@@ -200,7 +200,7 @@ class UserDatabase {
     } else {
       return false
     }
-    }
+  }
 
   getUserDataByID (uid) {
     // return this.db.prepare(`SELECT * FROM users WHERE uid = ${uid};`).get()
