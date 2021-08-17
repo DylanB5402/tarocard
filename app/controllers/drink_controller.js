@@ -171,8 +171,8 @@ exports.removeFavDrink = (req, res) => {
 
 exports.displayCardsHomePage = (req, res) => {
   if (req.session.loggedin) {
+    console.log("Hello i am here in drink controller")
     const uid = req.session.uid
-    console.log("Made it inside exports.displayCardsHomePage")
     const allDrinksHP = favDrinksDB.displayDrinksToHomePage(uid) // temp, will format better in future
     const drinkArray = []
 
