@@ -43,8 +43,9 @@
 
     <script>
         $(document).ready(function(){
-            $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
-                const friendRequests = data;
+            // $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
+            $.post("/friends/incoming", "" , function(data, status, xhr) {
+                const friendRequests = data.users;
                 let requestTemp = document.querySelector("#userFriendRequestTemp");
                 let requestClone = requestTemp.content.cloneNode(true);
                 let element = requestClone.querySelector("div");
@@ -63,8 +64,10 @@
                 element.appendChild(h6);
                 body.appendChild(element);
 
-                $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
-                    const recentFriends = data;
+                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
+                $.get("/friends/recent", "" , function(data, status, xhr) {
+                    const recentFriends = data.users;
+                    console.log(data)
                     const body = document.querySelector("body");
                     let recentTemp = document.querySelector("#FriendNotifsTemp");
                     let containAll = document.createElement("div");

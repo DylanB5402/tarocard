@@ -129,3 +129,20 @@ exports.listIncomingFriends = (req, res) => {
     res.json({ users: [], success: false })
   }
 }
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.recentFriends = (req, res) => {
+  // console.log(friendDb.getRecentFriends(req.session.uid))
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    res.json({ users: friendArray, success: false })
+  } else {
+    res.json({ users: [], success: false })
+  }
+  // res.send('687')
+}
+

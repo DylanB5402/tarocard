@@ -3,8 +3,8 @@ const axios = require('axios').default
 // names taken from https://www.ssa.gov/oact/babynames/
 const names = ['Olivia', 'Emma', 'Ava', 'Charlotte', 'Sophia', 'Liam', 'Noah', 'Oliver', 'Elijah', 'William']
 
-// var url = 'http://localhost:3000'
-var url = 'http://132.249.242.96'
+var url = 'http://localhost:3000'
+// var url = 'http://132.249.242.96'
 
 names.forEach((name) => {
   axios.post(url + '/signup',

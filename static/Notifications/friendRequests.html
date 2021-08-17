@@ -92,6 +92,7 @@
 
     request.onload = function () {
         const users = request.response;
+        console.log(users)
         populateFriendRequests(users);
     }
 
