@@ -65,6 +65,13 @@ exports.editDrinkCard = (req, res) => {
   }
 }
 
+exports.getDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const drinkId = req.params.drinkId
+    res.send(drinksDB.getDrink(drinkId))
+  }
+}
+
 /**
  * Gets all favorited drinks for a user and returns the data as a json
  * @param {!import('express').Request} req
