@@ -138,7 +138,7 @@ exports.removeFromGroup = (req, res) => {
     const drinkId = req.body.drinkId
     groupDB.removeFromGroup(uid, groupId, drinkId)
 
-    res.redirect('homepage/home.html')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/')
   }
