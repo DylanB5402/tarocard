@@ -53,4 +53,9 @@ router.get('/drinks/reset', debugController.drinksReset)
 // GET request to show establishments
 router.get('/BIG/FUNNY', debugController.establishments)
 
+// DRINKS DEBUG //
+router.get('/drinks/count', debugController.numCards)
+
+router.get('/drinks/displayHomePage', debugController.displayCardsHomePage)
+
 module.exports = router
