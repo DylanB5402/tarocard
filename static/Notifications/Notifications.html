@@ -45,6 +45,7 @@
         $(document).ready(function(){
             // $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
             $.post("/friends/incoming", "" , function(data, status, xhr) {
+                console.log(data)
                 const friendRequests = data.users;
                 let requestTemp = document.querySelector("#userFriendRequestTemp");
                 let requestClone = requestTemp.content.cloneNode(true);

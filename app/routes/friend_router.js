@@ -5,9 +5,13 @@ const friendController = require('../controllers/friends_controller')
 
 router.get('/', friendController.friendsPage)
 
-router.post('/test/request/:uid/:friendUid', friendController.request)
+router.post('/test/request/:uid/:friendUid', friendController.requestLegacy)
 
-router.post('/test/accept/:uid/:friendUid', friendController.accept)
+router.post('/test/accept/:uid/:friendUid', friendController.acceptLegacy)
+
+router.post('/request', friendController.request)
+
+router.post('/accept', friendController.accept)
 
 router.post('/deny', (req, res) => {res.send('taco')})
 

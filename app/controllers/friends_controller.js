@@ -6,7 +6,7 @@ const friendDb = new friendDatabase.FriendDatabase()
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.request = (req, res) => {
+exports.requestLegacy = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.params.friendUid
   if (friendDb.sendFriendRequest(uid, friendUid)) {
@@ -20,7 +20,7 @@ exports.request = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.accept = (req, res) => {
+exports.acceptLegacy = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.params.friendUid
   if (friendDb.acceptFriendRequest(uid, friendUid)) {
@@ -146,3 +146,38 @@ exports.recentFriends = (req, res) => {
   // res.send('687')
 }
 
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.request = (req, res) => {
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  if (friendDb.sendFriendRequest(uid, friendUid)) {
+    res.send('success')
+  } else {
+    res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.accept = (req, res) => {
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  if (friendDb.acceptFriendRequest(uid, friendUid)) {
+    res.send('success')
+  } else {
+    res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.deny = (req, res) => {
+  
+}

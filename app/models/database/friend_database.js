@@ -47,6 +47,10 @@ class FriendDatabase {
   deleteAllTableEntires () {
     return this.db.prepare('DELETE FROM friends;').run()
   }
+  
+  deleteFriendRequest(uid, friendUID) {
+    
+  }
 
   /**
    * Add a friend request between the requester and requested
