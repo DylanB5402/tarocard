@@ -71,7 +71,7 @@
         </section>
 
         <button class="friend-button">
-            <a href="..\friendsPage\friendsPage.html">Friends </a>
+            <a href="/friends">Friends </a>
         </button>
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
@@ -94,14 +94,13 @@
             <label for="tabfree"><img src="../assets/cards-purple.png" class="tab-icon"></label>
             <div class="tab">
                 <section id="profileCards">
-                    <div id="favoritesSection">
-                        <img id="favoritesStar" src="..\assets\star-Purple.png" />
-                        <p id="favorites">Favorites</p>
-                        <hr style="width: 100%; height: 0.1px;">
-
-                    </div>
                     <!-- This is where the cards go! -->
                     <div id="cardContainer" style="height: 600px;">
+                        <div id="favoritesSection">
+                            <img id="favoritesStar" src="..\assets\star-Purple.png" />
+                            <p id="favorites">Favorites</p>
+                            <hr style="width: 100%; height: 0.1px;">]
+                        </div> 
                     </div>
                 </section>
             </div>
@@ -110,11 +109,76 @@
             <label for="tabsilver"><img src="../assets/group-purple.png" class="tab-icon"></label>
             <div class="tab" id="groupCardContainer">
 
+        </div>
+<!-- MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION -->
+            <button id="add-card-btn" alt="add card button"> + </button> 
+            <div id="modal-sheet" class="modal">
+                <div class="modal-content">
+                    <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
+                    <button onclick="openCardCreate('id01')" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
+                    <button onclick="openCardCreate('createGroupOrder')" class="stuff"> <img src="../assets/group-order.png"> <p> Group Order </p></button>
+                </div>
             </div>
+            <!-- Form for card creation -->
+            <form action="/drinks/newDrinkCard" class="form-container" id="id01" method="POST">
+                <div class="card-bar">
+                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
+                    <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
+                </div>
+                <div class="userInput">
+                    <input type="text" placeholder="Name of Establishment" name="establishment" class="small-input">
+                    <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" >
+                    <textarea maxlength="100" class="large-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+                    <input list="estabList" id="estabListInput" name="estabs" class="small-input" style="overflow-y: auto !important;">
+                    <datalist id="estabList">
+                    </datalist>
+                </div>
+            </form>
+
+            <!-- Form for group creation -->
+            <form action="/groups/createGroup" class="form-container" id="createGroupOrder" method="POST">
+                <div class="card-bar">
+                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate('createGroupOrder')" >&times;</button>
+                    <button class="post-button" style="left: 60vw; width: 100px;"value="submit" onclick="closeCardCreate('createGroupOrder')" > CREATE  </button>
+                </div>
+                <div style="display: flex; flex-direction: column; text-align: center;">
+                    <h1 class="fonts" style="font-size: 30px; margin: 30px; "> Group Order Name </h1>
+                    <input type="text" placeholder="Group Name" id="groupName" name="groupName" style="width:99%;margin: auto; top: 50%; position: relative; height: 50px; font-size: 40px; border-radius: 10px;">
+                </div>
+            </form>
+            <!-- Hidden form for card update -->
+            <form action="/drinks/editDrinkCard" class="form-container" id="updateCard" method="POST">
+                <div class="card-bar">
+                    <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
+                    <button class="post-button" style="left: 70vw;"value="submit"> UPDATE  </button>
+                </div>
+                <div class="userInput">
+                    <input type="text" placeholder="Name of Establishment" id="estabInput" name="=establishment" class="small-input">
+                    <input type="text" placeholder="Name of Order" id="orderInput" name="nameOfDrink" class="small-input" >
+                    <input type="hidden" name="drinkId" id="drinkId" class="small-input">
+                    <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+                </div>
+            </form>
+            <!-- Form to add a card to a group order-->
+            <div id="groupOrder-add" class="modal-GO">
+                <div class="gO-modal">
+                    <h1> Add to.... </h1> 
+                        <form action="/groups/addToGroup" id="groupOrder-form" method="POST" >
+                            <button type=button style="float:left" class="del-button" onclick="closeGroupAdd()" >&times;</button>
+                            <select id="groupOrders" name="groupOrders" placeholder="Select a group">
+                                <!-- Group names-->
+                                <option value="" disabled selected> Select Group Order </option>
+                            </select>
+                            <input type="text" style="display: none" id="gO-drinkID"name="drinkId">
+                            <input type="text" style="display:none" id="gO-userID" name="friendUID" value="1">
+                            <button value="" style="width: 100%; height: 50px; font-size: 20px; background-color: #9879C5; font-family: Roboto,sans serif;" onclick="sendInfoToAlex()">  Submit </button>
+                        </form>
+                 </div>
+            </div>    
         </div>
     </section>
-    <div class="navbar" id="myNavbar" style="bottom: 0px;">
-        <a href="../homePage/home.html"></i>
+    <div class="navbar" id="myNavbar">
+        <a href="/home"></i>
             <img id="navHomeIcon" src="../assets/home.png" />
         </a>
     
@@ -134,5 +198,6 @@
 
 <script src="../homepage/homepage.js" type="text/javascript"></script>
 <script src="../cardRelatedJS/groupOrder.js" type="text/javascript"></script>
+<script src="../homepage/userGroupInfo.js" type="text/javascript"></script>
 
 </html>

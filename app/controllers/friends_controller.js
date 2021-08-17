@@ -43,7 +43,7 @@ exports.currentFriends = (req, res) => {
       friendArray.push({
         'display name': friend.display_name,
         username: friend.username,
-        'image url': '',
+        'image url': friend.profile_picture,
         id: friend.uid
       })
     })
@@ -77,7 +77,7 @@ exports.incomingFriends = (req, res) => {
  */
 exports.friendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/friends-page/Friends_Page.html')
+    res.redirect('/friendsPage/friendsPage.html')
   } else {
     res.redirect('/')
   }
@@ -97,7 +97,7 @@ exports.searchFriends = (req, res) => {
       friendArray.push({
         'display name': friend.display_name,
         username: friend.username,
-        'image url': '',
+        'image url': friend.profile_picture,
         id: friend.uid
       })
     })

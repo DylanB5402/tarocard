@@ -4,6 +4,9 @@ const router = express.Router()
 // Require controller modules.
 const drinkController = require('../controllers/drink_controller')
 
+// GET request for a drink
+router.get('/:drinkId', drinkController.getDrink)
+
 // POST request for new drink card.
 router.post('/newDrinkCard', drinkController.newDrinkCard)
 
@@ -22,5 +25,8 @@ router.post('/unstarDrink/:drinkId', drinkController.unstarDrink)
 
 // POST request for removing a favorited drink
 router.post('/deleteDrink/:drinkId', drinkController.removeFavDrink)
+
+// GET request to view all drinks on the home page
+router.get('/display', drinkController.displayCardsHomePage)
 
 module.exports = router

@@ -1,0 +1,111 @@
+doctype html
+html
+  head
+    title Profile | Taro Cards
+    link(rel='icon' href='../assets/TaroCardTransparent 1.png')
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
+    link(rel='stylesheet' href='../temp.css')
+  body.profile
+    //  Group View // being able to see all the cards in a group Order 
+    #groupView(style='background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;')
+      .card-bar(style='display:flex; width: 100vw; top: 0.01vh; left: 0vw; position: fixed; z-index: 4;')
+        p#groupView-name.fonts(style='font-size: 2.6vh; margin-right: 0px; top: 0vh; width: auto;').
+          
+          Group Order
+          
+        p#closeGroupView.fonts(style='background-color: purple; color: white; text-decoration: none; border-radius: 10px; font-size: 20px; position: fixed; right: 0px; width: 100px; height: 30px; text-align: center;').
+          
+          Home
+      #groupContainer.
+        
+        
+    div
+      //  banner will pull from user DB 
+      img#banner(src='/banner')
+      button.settings-menu
+        a(href='/settings')
+          img#settings-menu(src='../assets/menu-white.png')
+    section#profileTop
+      //  pfp will pull from user DB 
+      img#profilePic(src='/pfp')
+      button#edit-profile(type='button')
+        a(href='/edit') Edit Profile
+      section#profileText
+        h2#displayName #{displayName}
+        aside#user-handle
+          h3#user-at @#{username}
+        //  Max characters around 150 for description
+        //  should pull real value from DB in final version 
+        p#profileDescription
+          // Just a weeb who enjoy's the occasional dose of sugary drinks.
+          | #{bio}
+
+      button.friend-button
+        a(href='/friends') Friends 
+      .user-stats
+        .stat
+          p
+            | #{numFriends} 
+
+            span Friends
+        //  </a> 
+        .stat
+          p
+            | #{numCards} 
+
+            span Cards
+      .mytabs
+        input#tabfree(type='radio' name='mytabs' checked)
+        label(for='tabfree')
+          img.tab-icon(src='../assets/cards-purple.png')
+        .tab
+          section#profileCards
+            #cardContainer(style='height: 600px;')
+              #favoritesSection
+                img#favoritesStar(src='../assets/star-Purple.png') 
+                p#favorites Favorites
+                hr(style='width: 100%; height: 0.1px;')
+              
+              
+        input#tabsilver(type='radio' name='mytabs')
+        label(for='tabsilver')
+          img.tab-icon(src='../assets/group-purple.png')
+        .tab#groupCardContainer.
+
+  // MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION
+button#add-card-btn(alt='add card button' style='z-index:3')  + 
+#modal-sheet.modal
+  .modal-content
+    h1.fonts(style='font-style: normal; font-size: 3vh;')  Add 
+    button.stuff(onclick="openCardCreate('id01')")
+      img(src='../assets/add-card.png')
+      p  Card 
+    button.stuff(onclick="openCardCreate('createGroupOrder')")
+      img(src='../assets/group-order.png')
+      p  Group Order 
+// Form for card creation
+form#id01.form-container(action='/drinks/newDrinkCard' method='POST')
+  .card-bar
+    button.del-button(type='button' style='float:left' onclick="closeCardCreate('id01')") &times;
+    button.post-button(style='left: 70vw;' value='submit')  Post 
+  .userInput
+    input.small-input(type='text' placeholder='Name of Establishment' name='establishment')
+    input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
+    textarea.large-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+    input#estabListInput.small-input(list='estabList' name='estabs' style='overflow-y: auto !important;')
+    datalist#estabList
+
+          
+.navbar#myNavbar
+      a(href='/home')
+        img#navHomeIcon(src='../assets/home.png')
+      a(href='/search')
+        img#navSearchIcon(src='../assets/search.png')
+      a(href='../Notifications/Notifications.html')
+        img#navNotifsIcon(src='../assets/notifs.png')
+      a.active(href='#')
+        img#navProfileIcon(src='../assets/profile.png')
+script(src='../homepage/homepage.js' type='text/javascript')
+script(src='../cardRelatedJS/groupOrder.js' type='text/javascript')
