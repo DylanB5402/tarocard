@@ -16,7 +16,7 @@ requestGroupOrders.onload = function () {
   }
 }
   /* Creates Drink Cards that are in the Group Order */
-function createGoCards(establishment, drink, description, image, drinkID, ifav, groupID){
+function createGoCards(establishment, drink, description, image, drinkID, groupID){
     const container = document.createElement("div"); //This creates div element
     container.classList.add("card-template");
     /* Create establishment element */
@@ -129,8 +129,9 @@ function createGoCards(establishment, drink, description, image, drinkID, ifav, 
     }
   }
 
-
+// fill in the group view with all the cards in the group ID
 function getGroupDrinkCards(groupID){
+    console.log("Creating Drink Cards");
     let requestGroupContent = new XMLHttpRequest();
     requestGroupContent.open('GET', '/groups/' + groupID, true); //endpoint should have id
     requestGroupContent.responseType = 'json';
@@ -138,7 +139,7 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = function() {
         const cards = requestGroupContent.response;
-        for (const drinkCardID in cards) {
+        for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
           /*
           const drinkEst = cards[drinkCard]['establishment'];
@@ -147,21 +148,23 @@ function getGroupDrinkCards(groupID){
           const drinkId = cards[drinkCard]['id'];
           const ifFav = cards[drinkCard]['fav'];
           */
-         let drinkEst = "default";
-         let drinkName = "default";
-         let drinkDesc = "default";
-         let drinkId = "-1";
-         let ifFav = 'false';
+         let drinkCardID = cards[drinkCard]["friends_drink_id"]
 
-         fetch('/drinks/getDrink/' + drinkCardID)
-         .then(data => {
-           return data.json
-         }).then( cardInfo => {
-           console.log(cardInfo);
-           //add ways to acess the card information;
-         })
+         let requestGroupOrdersCard = new XMLHttpRequest();
+         requestGroupOrdersCard.open('GET', '/drinks/'+ drinkCardID, true); 
+         requestGroupOrdersCard.responseType = 'json';
+         requestGroupOrdersCard.send();
 
-          createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav, groupID);
+         requestGroupOrdersCard.onload = function () {
+           let content = requestGroupOrdersCard.response;
+           let drinkEst = content["drink_name"]; //will change to establishment id
+           let drinkName = content["drink_name"];
+           let drinkDesc = content["drink_desc"];
+           let drinkId = content["drink_id"];
+           createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, groupID);
+        }
+
+
         }
     }
 }
