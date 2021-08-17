@@ -58,7 +58,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
         fetch( "/groups/removeFromGroup/" + groupID ,{ 
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id: drinkID}) //sending drinkID 
+            body: JSON.stringify({drinkId: drinkID}) //sending drinkID 
         }); 
     }
     tagContainer.appendChild(pfp);
