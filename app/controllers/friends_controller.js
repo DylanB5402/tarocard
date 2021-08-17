@@ -77,7 +77,7 @@ exports.incomingFriends = (req, res) => {
  */
 exports.friendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/friends-page/Friends_Page.html')
+    res.redirect('/friendsPage/friendsPage.html')
   } else {
     res.redirect('/')
   }
@@ -94,7 +94,6 @@ exports.searchFriends = (req, res) => {
     const friendArray = []
     const currentFriends = friendDb.searchFriends(uid, search)
     currentFriends.forEach((friend) => {
-      console.log(friend.profile_picture)
       friendArray.push({
         'display name': friend.display_name,
         username: friend.username,

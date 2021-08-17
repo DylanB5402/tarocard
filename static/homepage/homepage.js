@@ -81,8 +81,10 @@ request.onload = function () {
   for (const drinkCard in cards) {
     const drinkEst = cards[drinkCard]['establishment'];
     const drinkName = cards[drinkCard]['name'];
+    console.log(drinkName);
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];
+    console.log(drinkId);
     const ifFav = cards[drinkCard]['fav'];
     createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav);
   }
@@ -263,6 +265,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
 
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
+  console.log(groupInfo);
   document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
 }
 

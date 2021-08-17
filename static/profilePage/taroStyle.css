@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto";
+}
+
+html {
+    background-color: #EFEFEF;
+}
+
+body {
+    background: #ffffff;
+    width: 100%;
+    position:relative;
+}
+
+#banner {
+    height: 300px;
+    max-width: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    /*
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    z-index:-1;*/
+}
+
+#profilePic {
+    height: 225px;
+    width: 225px;
+    border: 10px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    position: relative;
+    bottom: 130px;
+    left: 100px;
+    z-index: 2;
+}
+
+#profileTop {
+    width:100%;
+    height: 500px;
+    position: relative;
+    bottom: 0px;
+    top: -20px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    z-index: 1;
+    border-style: hidden;
+    /*background-color: white;*/
+    background-color:rgb(255, 255, 255);
+}
+
+#editButton {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 60px;
+    right: 100px;
+}
+
+
+#profileText {
+    width: 800px;
+    height: 120px;
+    text-align: left;
+    left: 50px;
+    margin-bottom: 0px;
+ 
+}
+
+#displayName {
+    width: 300px;
+    height: 50px;
+    font-size: 75px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    font-weight: medium;
+}
+
+#username {
+    width: 300px;
+    height: 30px;
+    font-size: 27px;
+    position: absolute;
+    margin-left: 100px;
+    font-weight: lighter;
+    top:180px;
+    color: #C1C1C1;
+}
+#userAt {
+    font-weight: lighter;
+}
+
+#profileDescription {
+    height: 200px;
+    min-width: none;
+    max-width: 1000px;
+    font-size: 28px;
+    position: absolute;
+    top: 240px;
+    left: 100px;
+    right:200px;
+    
+}
+ 
+#userStats{
+    align-items: center;
+    width: max-content;
+
+}
+
+.userStats ul {
+    display: inline;
+    text-align: left;
+    width:fit-content;
+    height:fit-content;
+    margin-left: 100px;
+   
+}
+
+.userStats strong {
+    font-weight: bolder;
+    font-size: 60px;
+}
+
+
+.userStats span {
+    font-weight: lighter;
+    font-size: 40px;
+    color: #C1C1C1;
+   background-color: rgb(255, 255, 255);
+}
+
+.profileTabs{
+    
+    height:80px;
+    display:inline-flex;
+    justify-content:center;
+    width:100%;
+    bottom:-20px;
+}
+
+.profileTabs a{
+    width:50%;
+}
+
+.profileTabs img {
+    width: auto;
+    height: 80%;
+    margin-top:5px;
+    margin-bottom: auto;
+    margin-left:45%;
+}
+
+.profileTabs a:hover{
+    background-color: #D4D4D4;
+}
+#profileCards {
+    background-color: #EFEFEF;
+}
+
+#favoritesSection{
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+#favorites {
+    color:#9879C5;
+    font-size: 42px;
+    display: inline;
+ }
+
+ #favoritesStar{
+     height: 38px;
+     margin-inline: 10px;
+     margin-top: 20px;
+     display: inline;
+ }
+ #favoritesLine{
+    color: #9879C5;
+    margin-inline: 10px;
+}
+
+
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+    background-color: #ffffff;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+  }
+
+  .navbar img {
+      width: auto;
+      height: 80px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+  }
+
+  #navProfileIcon {
+    margin-bottom: 10px;
+}
+
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    width: 25%;
+    height:160px;
+    
+  }
+  
+  /* Change the color of links on hover */
+  .navbar a:hover {
+    background-color: #D4D4D4;
+    /*border: solid #9879C5;*/
+    color: #9879C5;
+  }
+  
+  /* Add a background color to the active link */
+  .navbar a.active {
+    background-color: #9879C5;
+    color: black;
+  }
+  
+  /* Hide the link that should open and close the navbar on small screens */
+  .navbar .icon {
+    display: none;
+  }
+
+
+#navProfileIcon {
+  margin-bottom: 10px;
+}
+
+#edit-profile {
+    font-size: 32px;
+    font-weight: medium;
+    border: solid 3px #9879C5;
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+button #edit-profile {
+    right: 100px;
+}

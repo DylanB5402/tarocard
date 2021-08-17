@@ -65,6 +65,13 @@ exports.editDrinkCard = (req, res) => {
   }
 }
 
+exports.getDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const drinkId = req.params.drinkId
+    res.send(drinksDB.getDrink(drinkId))
+  }
+}
+
 /**
  * Gets all favorited drinks for a user and returns the data as a json
  * @param {!import('express').Request} req
@@ -159,5 +166,34 @@ exports.removeFavDrink = (req, res) => {
     res.redirect('/homepage/home.html') // refreshes
   } else {
     res.redirect('/')
+  }
+}
+
+exports.displayCardsHomePage = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const allDrinksHP = favDrinkDB.displayDrinksToHomePage(uid) // temp, will format better in future
+    const drinkArray = []
+
+    // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
+    // Iterate through the array of drinks and make objects out of their properties
+    allDrinksHP.forEach((drink) => {
+      // TODO: REDO Establishments so that it gets the name:
+      // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
+      drinkArray.push({
+        'friend uid': drink.friend_uid,
+        'drink name': drink.drink_name,
+        'drink desc': drink.drink_desc,
+        establishment: drink.establishment_id,
+        'image url': drink.drink_img,
+        'drink id': drink.drink_id,
+        date: drink.date
+      })
+    })
+
+    // send the custom drink array as a json
+    res.json({ drinks: drinkArray, success: true })
+  } else {
+    res.json({ drinks: [], success: false })
   }
 }

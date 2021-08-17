@@ -14,13 +14,13 @@
         
         <script>
             $(document).ready(function() {
-                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", "" ,function(data, status, xhr) {
+                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/email", "" ,function(data, status, xhr) {
                 $.get("/settings/current/email", "" ,function(data, status, xhr) {
                     const currentEmail = data;
                     const div = document.querySelector(".margin-update");
                     const header = div.querySelector("h2");
                     let p = document.createElement("p");
-                    // p.textContent = "Your current email is " + currentEmail["email"][0]["email address"];
+                    // p.textContent = "Your current email is " + currentEmail[0]["email address"];
                     p.textContent = "Your current email is " + currentEmail["email-address"];
                     header.appendChild(p);
 
@@ -33,19 +33,18 @@
     </head>
 
     <div class="page-header">
-        <a href="Settings_HTML.html"><img src="../assets/Back.png" id="back"></a>
+        <a href="/settings"><img src="../assets/Back.png" id="back"></a>
         <span>Email</span>
     </div>
 
-    <body>
+    <body style="margin-top: 150px;">
         <div class="update">
             <div class="margin-update">
                 <h2>Update your email address</h2>
-                <h2 id="SuccessText">Email changed successfully</h2>
             </div>
         </div>
 
-        <form action="/settings/update/email" method="POST" class="changeTemplate" autocomplete="on" onsubmit="return validate(this)" style="margin-top: 15px;">
+        <form action="/settings/update/email" method="POST" class="changeTemplate" autocomplete="on" onsubmit="return validate(this)">
             <div class="change-info">
                 <div class="margin-update">
                     <label for="new-email">New email</label>
