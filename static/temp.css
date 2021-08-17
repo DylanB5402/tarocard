@@ -22,9 +22,11 @@ html {
     /*opacity: 0.5;/**/	
     height: 150px;	
     max-width: 100%;	
-    min-width: 90%;	
+    min-width: 100%;	
     padding-left: 80px;	
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);	
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
+    position: fixed;
+    top: 0px;
     /*position: fixed;/**/	
     z-index: 2;	
     /*border: dotted blue;/**/	
@@ -1300,7 +1302,7 @@ button #edit-profile {
     background-color: white;
 }
 
-#user-search {
+#user-search, #friend-search {
     border-radius: 40px;
     outline: none;
     padding-left: 110px;
