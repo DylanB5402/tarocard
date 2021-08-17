@@ -119,7 +119,7 @@ exports.removeGroup = (req, res) => {
     const groupId = req.params.groupId
     groupDB.removeGroup(uid, groupId)
 
-    res.redirect('homepage/home.html')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/')
   }
