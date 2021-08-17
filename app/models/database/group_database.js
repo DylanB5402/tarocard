@@ -250,7 +250,7 @@ class GroupDatabase {
       // Delete from group in DB
       const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
               'uid = ? AND group_id = ? AND friends_drink_id = ?')
-      const query = stmt.run(uid, friendUID, drinkId)
+      const query = stmt.run(uid, groupId, drinkId)
 
       // Check to make sure changes are made to DB
       if (query.changes === 1) {
