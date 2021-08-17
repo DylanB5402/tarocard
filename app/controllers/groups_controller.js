@@ -101,7 +101,7 @@ exports.addToGroup = (req, res) => {
 
     const addBool = groupDB.addToGroup(groupId, uid, friendUID, drinkId)
 
-    res.redirect('homepage/home.html') // Should not redirect, just stay where they were (on friend profile)
+    res.redirect('/homepage/home.html') // Should not redirect, just stay where they were (on friend profile)
   } else {
     res.redirect('/')
   }
