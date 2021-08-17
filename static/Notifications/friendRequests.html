@@ -35,15 +35,17 @@
     <script>
         $(".notifs").on("click", ".accept", function (event) {
             let buttonElement = event.target;
-            buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
             let denyButton = event.target.parentElement.querySelector(".deny")
             denyButton.style.display = "none";
             let parentDiv = event.target.parentElement;
-            /*
-            $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
-
+            $.post("/friends/accept", 
+                    {
+                        "id": parentDiv.querySelector("h3").id 
+                    }, 
+                    function() {
+                    buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
             })
-            */
+
         })
 
         $(".notifs").on("click", ".deny", function (event) {
@@ -51,13 +53,9 @@
             let acceptButton = parentDiv.querySelector(".accept");
             acceptButton.style.opacity = "0";
             acceptButton.disabled = "true";
-            setTimeout(function () { parentDiv.style.display = "none"; }, 1000);
-
-            /*
-            $.post("#", buttonElement.nodeValue + ": " + parentDiv.querySelector("h3").textContent, function() {
-
+            $.post("/friends/deny", { "id": parentDiv.querySelector("h3").id }, function() {
+                parentDiv.style.display = "none"; 
             })
-            */
         })
     </script>
 
@@ -109,6 +107,7 @@
             divCopy.querySelector("img", true).src = users[i]["image url"];
             divCopy.querySelector("h2", true).textContent = users[i]["display name"];
             divCopy.querySelector("h3", true).textContent = users[i]["username"];
+            divCopy.querySelector("h3", true).id = users[i]["id"];
             divAll.appendChild(divCopy);
             body.appendChild(divAll);
         }
