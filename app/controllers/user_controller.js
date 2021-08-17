@@ -63,10 +63,10 @@ exports.profile = (req, res) => {
       res.append('profileaccess', 'successful')
       res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends))
     } else {
-      res.redirect('/')
+      res.redirect('/index.html')
     }
   } else {
-    res.redirect('/')
+    res.redirect('/index.html')
   }
 }
 
@@ -119,7 +119,7 @@ exports.editPage = (req, res) => {
 
 exports.searchPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/search-users/SearchUsers.html')
+    res.redirect('/searchUsers/searchUsers.html')
   } else {
     res.redirect('/index.html')
   }
@@ -138,12 +138,32 @@ exports.searchAllUsers = (req, res) => {
       userArray.push({
         'display name': user.display_name,
         username: user.username,
-        'image url': '',
+        'image url': user.profile_picture,
         id: user.uid
       })
     })
     res.json({ users: userArray, success: true })
   } else {
     res.json({ users: [], success: false })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.getBanner = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
+  } else {
+    res.redirect('/assets/coolWallpaper.png')
+  }
+}
+
+exports.getProfilePicture = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
+  } else {
+    res.redirect('/assets/pfp-placeholder.png')
   }
 }

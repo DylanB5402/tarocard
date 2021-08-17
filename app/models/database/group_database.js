@@ -175,7 +175,6 @@ class GroupDatabase {
 
       let query // declare query outside of if-else blocks
       if (numEntries === 1) {
-
         // update first and only entry where ids = -1
         const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
                   'friends_drink_id = ? WHERE group_id = ?')
