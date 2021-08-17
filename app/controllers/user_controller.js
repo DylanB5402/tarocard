@@ -119,7 +119,7 @@ exports.editPage = (req, res) => {
 
 exports.searchPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/search-users/SearchUsers.html')
+    res.redirect('/searchUsers/searchUsers.html')
   } else {
     res.redirect('/index.html')
   }
