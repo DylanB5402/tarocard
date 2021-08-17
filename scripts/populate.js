@@ -3,8 +3,11 @@ const axios = require('axios').default
 // names taken from https://www.ssa.gov/oact/babynames/
 const names = ['Olivia', 'Emma', 'Ava', 'Charlotte', 'Sophia', 'Liam', 'Noah', 'Oliver', 'Elijah', 'William']
 
+// var url = 'http://localhost:3000'
+var url = 'http://132.249.242.96'
+
 names.forEach((name) => {
-  axios.post('http://localhost:3000/signup',
+  axios.post(url + '/signup',
     {
       email: name,
       username: name,
@@ -20,13 +23,13 @@ names.forEach((name) => {
 })
 
 let userIdJSON
-axios.get('http://localhost:3000/debug/users/json').then((res) => {
+axios.get(url + '/debug/users/json').then((res) => {
   userIdJSON = res.data
   // console.log(res)
 }).then((res) => {
   // console.log(userIdJSON.Olivia)
   names.forEach((name) => {
-    axios.post('http://localhost:3000/debug/addFriend',
+    axios.post(url + '/debug/addFriend',
       {
         uid: userIdJSON.Olivia,
         friend_uid: userIdJSON[name],
@@ -38,7 +41,7 @@ axios.get('http://localhost:3000/debug/users/json').then((res) => {
   })
   for (let i = 1; i < names.length; i++) {
     console.log(names[i])
-    axios.post('http://localhost:3000/debug/addFriend',
+    axios.post(url + '/debug/addFriend',
       {
         uid: userIdJSON.Emma,
         friend_uid: userIdJSON[names[i]],
