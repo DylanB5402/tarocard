@@ -81,7 +81,7 @@ class GroupDatabase {
     if (userDB.getUserByUID(uid)) {
       // SQL Statement:
       //   selects all groups with the same uid from the table, sorted by alphabetical order
-      const stmt = this.db.prepare('SELECT group_id, group_name FROM groups WHERE uid = ? ' +
+      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name FROM groups WHERE uid = ? ' +
               'ORDER BY group_name')
       const query = stmt.all(uid) // an array of row objects containing group id and group name
 
