@@ -4,6 +4,9 @@ const router = express.Router()
 // Require controller modules.
 const drinkController = require('../controllers/drink_controller')
 
+// GET request for a drink
+router.get('/:drinkId', drinkController.getDrink)
+
 // POST request for new drink card.
 router.post('/newDrinkCard', drinkController.newDrinkCard)
 
