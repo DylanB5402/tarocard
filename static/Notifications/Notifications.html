@@ -79,6 +79,7 @@
 
                         recentElement.querySelector("img").src = recentFriends[i]['image url'];
                         recentElement.querySelector("p").querySelector("strong").textContent = recentFriends[i]['display name'];
+                        recentElement.querySelector("a").href = "/profile/" + recentFriends[i]["id"];
                         containAll.appendChild(recentElement);
                     }
 

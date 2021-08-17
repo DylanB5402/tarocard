@@ -62,19 +62,41 @@ html
           img.tab-icon(src='../assets/cards-purple.png')
         .tab
           section#profileCards
-            #favoritesSection
-              img#favoritesStar(src='../assets/star-purple.png')
-              p#favorites Favorites
-              hr(style='width: 100%; height: 0.1px;')
-            //  This is where the cards go! 
-            #cardContainer(style='height: 600px;').
+            #cardContainer(style='height: 600px;')
+              #favoritesSection
+                img#favoritesStar(src='../assets/star-Purple.png') 
+                p#favorites Favorites
+                hr(style='width: 100%; height: 0.1px;')
               
               
         input#tabsilver(type='radio' name='mytabs')
         label(for='tabsilver')
           img.tab-icon(src='../assets/group-purple.png')
         .tab#groupCardContainer.
-          
+
+  // MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION
+button#add-card-btn(alt='add card button' style='z-index:3')  + 
+#modal-sheet.modal
+  .modal-content
+    h1.fonts(style='font-style: normal; font-size: 3vh;')  Add 
+    button.stuff(onclick="openCardCreate('id01')")
+      img(src='../assets/add-card.png')
+      p  Card 
+    button.stuff(onclick="openCardCreate('createGroupOrder')")
+      img(src='../assets/group-order.png')
+      p  Group Order 
+// Form for card creation
+form#id01.form-container(action='/drinks/newDrinkCard' method='POST')
+  .card-bar
+    button.del-button(type='button' style='float:left' onclick="closeCardCreate('id01')") &times;
+    button.post-button(style='left: 70vw;' value='submit')  Post 
+  .userInput
+    input.small-input(type='text' placeholder='Name of Establishment' name='establishment')
+    input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
+    textarea.large-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+    input#estabListInput.small-input(list='estabList' name='estabs' style='overflow-y: auto !important;')
+    datalist#estabList
+
           
 .navbar#myNavbar
       a(href='/home')

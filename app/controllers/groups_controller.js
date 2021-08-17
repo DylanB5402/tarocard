@@ -102,7 +102,7 @@ exports.addToGroup = (req, res) => {
 
     const addBool = groupDB.addToGroup(groupId, uid, friendUID, drinkId)
 
-    res.redirect('homepage/home.html') // Should not redirect, just stay where they were (on friend profile)
+    res.redirect('/homepage/home.html') // Should not redirect, just stay where they were (on friend profile)
   } else {
     res.redirect('/')
   }
@@ -119,7 +119,7 @@ exports.removeGroup = (req, res) => {
     const groupId = req.params.groupId
     groupDB.removeGroup(uid, groupId)
 
-    res.redirect('homepage/home.html')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/')
   }
@@ -136,9 +136,10 @@ exports.removeFromGroup = (req, res) => {
     const uid = req.session.uid
     const groupId = req.params.groupId
     const drinkId = req.body.drinkId
+    console.log(`This is the drink id in exports.removeFrom Group: ${drinkId}`) // debug statement
     groupDB.removeFromGroup(uid, groupId, drinkId)
 
-    res.redirect('homepage/home.html')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/')
   }
