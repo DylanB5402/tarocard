@@ -13,6 +13,6 @@ router.post('/update/email/success', (req, res) => { res.send('687') })
 
 router.post('/update/password', settingsController.updatePassword)
 
-router.get('/update/password/success', settingsController.updatePasswordSuccess)
+// router.get('/update/password/success', settingsController.updatePasswordSuccess)
 
 module.exports = router

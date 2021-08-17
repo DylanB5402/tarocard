@@ -14,13 +14,11 @@
         
         <script>
             $(document).ready(function() {
-                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", "" ,function(data, status, xhr) {
                 $.get("/settings/current/email", "" ,function(data, status, xhr) {
                     const currentEmail = data;
                     const div = document.querySelector(".margin-update");
                     const header = div.querySelector("h2");
                     let p = document.createElement("p");
-                    // p.textContent = "Your current email is " + currentEmail["email"][0]["email address"];
                     p.textContent = "Your current email is " + currentEmail["email-address"];
                     header.appendChild(p);
 
@@ -33,7 +31,7 @@
     </head>
 
     <div class="page-header">
-        <a href="/settings"><img src="../assets/Back.png" id="back"></a>
+        <a href="settingsMain.html"><img src="../assets/Back.png" id="back"></a>
         <span>Email</span>
     </div>
 
@@ -41,7 +39,7 @@
         <div class="update">
             <div class="margin-update">
                 <h2>Update your email address</h2>
-                <h2 id="SuccessText">Email changed successfully</h2>
+                <h2 id="FailureText"> Email change failed, Please try again </h2>
             </div>
         </div>
 
