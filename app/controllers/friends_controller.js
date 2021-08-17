@@ -179,5 +179,8 @@ exports.request = (req, res) => {
  * @param {!import('express').Response} res
  */
  exports.deny = (req, res) => {
-  
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  friendDb.deleteFriendRequest(uid, friendUid)
+  res.send('success')
 }

@@ -48,8 +48,9 @@ class FriendDatabase {
     return this.db.prepare('DELETE FROM friends;').run()
   }
   
-  deleteFriendRequest(uid, friendUID) {
-    
+  deleteFriendRequest(uid, friendUid) {
+    this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(uid, friendUid)
+    this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(friendUid, uid)
   }
 
   /**

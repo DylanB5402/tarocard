@@ -13,7 +13,7 @@ router.post('/request', friendController.request)
 
 router.post('/accept', friendController.accept)
 
-router.post('/deny', (req, res) => {res.send('taco')})
+router.post('/deny', friendController.deny)
 
 router.get('/current', friendController.currentFriends)
 
