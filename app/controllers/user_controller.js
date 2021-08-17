@@ -170,3 +170,12 @@ exports.getProfilePicture = (req, res) => {
     res.redirect('/assets/pfp-placeholder.png')
   }
 }
+
+exports.getProfilePictureFriend = (req, res) => {
+  if (req.session.loggedin) {
+    const friendUID = req.params.friendUID
+    res.redirect(userDB.getProfilePicturePathByUID(friendUID).profile_picture)
+  } else {
+    res.redirect('/assets/pfp-placeholder.png')
+  }
+}

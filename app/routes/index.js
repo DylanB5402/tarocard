@@ -45,4 +45,6 @@ router.get('/banner', userController.getBanner)
 
 router.get('/pfp', userController.getProfilePicture)
 
+router.get('/pfp/:friendUID', userController.getProfilePictureFriend)
+
 module.exports = router
