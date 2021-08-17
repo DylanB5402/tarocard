@@ -23,4 +23,7 @@ router.post('/unstarDrink/:drinkId', drinkController.unstarDrink)
 // POST request for removing a favorited drink
 router.post('/deleteDrink/:drinkId', drinkController.removeFavDrink)
 
+// GET request to view all drinks on the home page
+router.get('/displayHomepage', drinkController.displayCardsHomePage)
+
 module.exports = router
