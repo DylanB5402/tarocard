@@ -138,12 +138,29 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = function() {
         const cards = requestGroupContent.response;
-        for (const drinkCard in cards) {
+        for (const drinkCardID in cards) {
+          //drinkCardID is the id of the cards
+          /*
           const drinkEst = cards[drinkCard]['establishment'];
           const drinkName = cards[drinkCard]['name'];
           const drinkDesc = cards[drinkCard]['desc'];
           const drinkId = cards[drinkCard]['id'];
           const ifFav = cards[drinkCard]['fav'];
+          */
+         let drinkEst = "default";
+         let drinkName = "default";
+         let drinkDesc = "default";
+         let drinkId = "-1";
+         let ifFav = 'false';
+
+         fetch('/drinks/getDrink/' + drinkCardID)
+         .then(data => {
+           return data.json
+         }).then( cardInfo => {
+           console.log(cardInfo);
+           //add ways to acess the card information;
+         })
+
           createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav, groupID);
         }
     }
