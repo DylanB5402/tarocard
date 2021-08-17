@@ -35,15 +35,13 @@
             <script>
                 $(document).ready(function(){
                     $("#search-icon").click(function(){        
-                        // $.get('https://my-json-server.typicode.com/VitalKilla/userData/db', 
                         $.post('/friends/search', 
                         {
-                            "string": $("#searchBar").val()
+                            "string": $("#friend-search").val()
+                            // uses input id
                         }
                         ,function(data, status, xhr) {
-                            // console.log(data)
                             searchFriends(data);
-                            // populateFriends(data)
                         })
                     });
                 });
@@ -75,11 +73,11 @@
         
     </div>
         <div class="navbar" id="myNavbar">
-            <a href="../homepage/home.html">
+            <a href="/home">
                 <img id="navHomeIcon" src="..\assets\home.png" />
             </a>
         
-            <a href="..\SearchUsers\SearchUsers.html">
+            <a href="/search">
                 <img id="navSearchIcon" src="..\assets\search.png" />
             </a>
         

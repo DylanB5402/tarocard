@@ -81,8 +81,10 @@ request.onload = function () {
   for (const drinkCard in cards) {
     const drinkEst = cards[drinkCard]['establishment'];
     const drinkName = cards[drinkCard]['name'];
+    console.log(drinkName);
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];
+    console.log(drinkId);
     const ifFav = cards[drinkCard]['fav'];
     createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav);
   }

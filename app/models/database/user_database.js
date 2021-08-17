@@ -17,7 +17,7 @@ class UserDatabase {
   }
 
   createUserTable () {
-    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);').run()
+    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture TEXT, banner TEXT);').run()
   }
 
   getSchema () {
@@ -37,7 +37,9 @@ class UserDatabase {
     } else {
       const hash = this.encryptPassword(password)
       const stmt = this.db.prepare('INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);')
-      const info = stmt.run(email, hash, username, username, '', 0, 0)
+      const defaultBanner = '/assets/coolWallpaper.png'
+      const defaultProfilePicture = '/assets/pfp-placeholder.png'
+      const info = stmt.run(email, hash, username, username, '', defaultProfilePicture, defaultBanner)
       if (info.changes > 0) {
         return info.lastInsertRowid
       } else {
@@ -144,9 +146,15 @@ class UserDatabase {
   }
 
   insertProfileData (uid, displayName, username, bio) {
-    const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
-    const info = stmt.run(displayName, username, bio, uid)
-    return info.changes > 0
+    if (bio === '' || bio === undefined) {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, uid)
+      return info.changes > 0
+    } else {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, bio, uid)
+      return info.changes > 0
+    }
   }
 
   selectProfileData (email) {
@@ -181,10 +189,9 @@ class UserDatabase {
    * @param {*} uid
    * @returns {Array}
    */
-   searchDatabase (username, uid) {
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
+  searchDatabase (username, uid) {
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
   }
-
 
   updateEmail (uid, email) {
     const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
@@ -204,6 +211,16 @@ class UserDatabase {
 
   getEmailByUID (uid) {
     const stmt = this.db.prepare('SELECT email FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getBannerPathByUID (uid) {
+    const stmt = this.db.prepare('SELECT banner FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getProfilePicturePathByUID (uid) {
+    const stmt = this.db.prepare('SELECT profile_picture FROM users WHERE uid = ?;')
     return stmt.get(uid)
   }
 }

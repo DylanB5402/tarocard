@@ -2,16 +2,18 @@ const pug = require('pug')
 
 class TemplateEngine {
   constructor () {
-    this.generateProfile = pug.compileFile('templates/pug/profile_page_taro_cards.pug')
+    this.generateProfile = pug.compileFile('templates/pug/profile.pug')
     this.generateEditPage = pug.compileFile('templates/pug/edit.pug')
   }
 
-  getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends) {
+  getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards) {
+    // console.log(profileBio)
     return this.generateProfile({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
-      numFriends: numberFriends
+      numFriends: numberFriends,
+      numCards: numberCards
     })
   }
 

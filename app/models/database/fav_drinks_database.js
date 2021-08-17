@@ -39,6 +39,32 @@ class FavDrinksDatabase {
   }
 
   /**
+   * get all favorited drinks
+   * @param {Integer} uid
+   * @returns {Array[Object]} an array of drink objects
+   */
+  getAllDrinks (uid) {
+    const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
+    // const drinkArray = new Array() // array to be filled with drink objects
+
+    // SQL Statement:
+    //   selects all fields of drinks from the joining of fav_drinks and drinks
+    //     tables to get all drinks that correspond to a user
+    const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
+            'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
+    const query = stmt.all(uid) // an array of row (drink) objects
+
+    // Iterate through the array of objects
+    // `value` = drink object
+    // query.forEach((value) => {
+    //   // Function to be called on each element (object) in the array
+
+    //   drinkArray.push(value) // Push the drink object into the array
+    // })
+    return query // return the filled array of drink objects
+  }
+
+  /**
    * Checks if a drink already favorited for a user
    * @param {Integer} uid user id
    * @param {Integer} drinkId id of drink
@@ -130,7 +156,7 @@ class FavDrinksDatabase {
 
     console.log('User exists? ' + userDB.getUserByUID(uid))
     console.log('Drink Exists? ' + drinksDB.isExist(drinkId))
-    
+
     // Check to make params are valid/exists
     if (userDB.getUserByUID(uid) && drinksDB.isExist(drinkId)) {
       if (this.isExist(uid, drinkId)) {
@@ -139,7 +165,7 @@ class FavDrinksDatabase {
                 `uid = ? AND drink_id = ?`)
         const query = stmt.run(uid, drinkId)
 
-        console.log(`deleted a drink`) // debug
+        console.log('deleted a drink') // debug
 
         // Check to make sure changes are made to DB
         if (query.changes === 1) {
@@ -227,15 +253,13 @@ class FavDrinksDatabase {
    * @returns {Integer} number of drink cards a user has
    */
   numCards(uid) {
-    const userDB = new userDatabase.UserDatabase()
-    
-    if(userDB.getUserByUID(uid)) {
       const stmt = this.db.prepare(`SELECT COUNT(*) AS count FROM fav_drinks WHERE uid = ?`)
       const query = stmt.get(uid)
-      const count = query.count
-      return count
-    }
-    return 0
+      if (query !== undefined)  {
+      return query.count
+      } else {
+        return 0
+      }
   }
 
   toString () {

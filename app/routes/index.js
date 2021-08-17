@@ -14,6 +14,9 @@ router.get('/', function (req, res) {
   }
 })
 
+router.get("/home", (req, res) => {
+  res.redirect('/')
+})
 // POST request for sign up.
 router.post('/signup', userController.signup)
 
@@ -37,5 +40,9 @@ router.post('/edit/profile', userController.editProfile)
 router.get('/search', userController.searchPage)
 
 router.post('/search/users', userController.searchAllUsers)
+
+router.get('/banner', userController.getBanner)
+
+router.get('/pfp', userController.getProfilePicture)
 
 module.exports = router

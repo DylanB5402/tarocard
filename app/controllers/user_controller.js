@@ -1,9 +1,11 @@
 const userDatabase = require('../models/database/user_database')
 const friendDatabase = require('../models/database/friend_database')
+const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const templateEngine = require('../views/template_engine')
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 const friendDb = new friendDatabase.FriendDatabase()
+const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
 
 /**
  * @param {!import('express').Request} req
@@ -60,13 +62,14 @@ exports.profile = (req, res) => {
       const username = profileData.username
       const displayName = profileData.display_name
       const numFriends = friendDb.getNumFriends(uid)
+      const numCards = favDrinksDb.numCards(uid)
       res.append('profileaccess', 'successful')
-      res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends))
+      res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
     } else {
-      res.redirect('/')
+      res.redirect('/index.html')
     }
   } else {
-    res.redirect('/')
+    res.redirect('/index.html')
   }
 }
 
@@ -119,7 +122,7 @@ exports.editPage = (req, res) => {
 
 exports.searchPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/search-users/SearchUsers.html')
+    res.redirect('/searchUsers/searchUsers.html')
   } else {
     res.redirect('/index.html')
   }
@@ -138,12 +141,32 @@ exports.searchAllUsers = (req, res) => {
       userArray.push({
         'display name': user.display_name,
         username: user.username,
-        'image url': '',
+        'image url': user.profile_picture,
         id: user.uid
       })
     })
     res.json({ users: userArray, success: true })
   } else {
     res.json({ users: [], success: false })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.getBanner = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
+  } else {
+    res.redirect('/assets/coolWallpaper.png')
+  }
+}
+
+exports.getProfilePicture = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
+  } else {
+    res.redirect('/assets/pfp-placeholder.png')
   }
 }
