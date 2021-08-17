@@ -208,11 +208,13 @@ class FavDrinksDatabase {
     //     and mainly status from friends joined by uids between fav_drinks and
     //     friends and drink_id between fav_drinks and drinks to return a query
     //     for outputting a table of all recent drinks made by friends of a user
+    //     within the last month
     const stmt = this.db.prepare("SELECT fd.drink_id, fd.date, f.friend_uid, d.* " + 
             "FROM ((fav_drinks fd " + 
             "INNER JOIN friends f ON fd.uid = f.friend_uid) " + 
             "INNER JOIN drinks d USING(drink_id)) " +
             "WHERE f.uid = ? AND status = 'friends' " + 
+            "AND date > DATE('now', '-30 days') " + 
             "ORDER BY date COLLATE NOCASE DESC")
     const query = stmt.all(uid) // an array of row (drink) objects
 
