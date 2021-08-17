@@ -136,6 +136,7 @@ exports.removeFromGroup = (req, res) => {
     const uid = req.session.uid
     const groupId = req.params.groupId
     const drinkId = req.body.drinkId
+    console.log(`This is the drink id in exports.removeFrom Group: ${drinkId}`) // debug statement
     groupDB.removeFromGroup(uid, groupId, drinkId)
 
     res.redirect('/homepage/home.html')
