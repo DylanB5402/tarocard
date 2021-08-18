@@ -140,10 +140,6 @@ class FavDrinksDatabase {
     }
   }
 
-  // Need an edit drink method in drinks_database.js
-  // Implementation is to modify the drink desc in database and to keep uid and
-  // drinkId pair the same in fav_drinks_database.js
-
   /**
    * unfavorites a drink for a user
    * @param {Integer} uid
@@ -186,11 +182,33 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   starDrink (uid, drinkId) {
-    // Check if not starred yet
+
+    // Get number of starred drinks for check > 3
+    const numStarStmt = this.db.prepare(`SELECT COUNT(*) AS count ` + 
+            `FROM fav_drinks WHERE uid = ? AND fav = 1`)
+    const numStarred = numStarStmt.get(uid).count
+    // Check if not starred yet   
     if (!this.isStar(uid, drinkId)) {
+
+      // Check if exceeding number of starred drinks
+      if (numStarred === 3) {
+        const dateCond = "(SELECT TOP 1 date FROM fav_drinks " + 
+                "WHERE uid = ? AND fav = TRUE ORDER BY date COLLATE ASC )"
+        // Sets the oldest starred drink to false
+        const stmt1 = this.db.prepare(`UPDATE fav_drinks SET fav = FALSE WHERE uid = ?` + 
+        `AND fav = TRUE AND date = ${dateCond}`)
+        const query1 = stmt1.run(uid)
+
+        if (query1.changes > 0) {
+          return true
+        } else {
+          return false
+        }
+      }
+
       // Updates the DB
       const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ` +
-            `AND drink_id = ?`)
+      `AND drink_id = ?`)
       const query = stmt.run(uid, drinkId) // run the statement; returns 'info' object
 
       // Checks if changes were made; changes are made upon successful boolean change
@@ -199,7 +217,7 @@ class FavDrinksDatabase {
       }
     }
     return false // return false since query.changes was not greater than 0 or
-    // drink is already starred
+                 //   drink is already starred
   }
 
   /**
