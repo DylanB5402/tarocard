@@ -102,7 +102,21 @@ exports.addToGroup = (req, res) => {
 
     const addBool = groupDB.addToGroup(groupId, uid, friendUID, drinkId)
 
-    res.redirect('/homepage/home.html') // Should not redirect, just stay where they were (on friend profile)
+    res.redirect('back') // Should not redirect, just stay where they were (on friend profile)
+  } else {
+    res.redirect('/')
+  }
+}
+
+exports.editGroupName = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const groupId = req.params.groupId
+    const groupName = req.body.groupName
+
+    groupDB.editGroupName(uid, groupdId, groupname)
+
+    res.redirect('back')
   } else {
     res.redirect('/')
   }
