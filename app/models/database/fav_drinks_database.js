@@ -16,7 +16,11 @@ const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
 const config = require('../../config.json')
 
+  // Constant Static Variables //
+  const NUM_STARRED_LIM = 3
+
 class FavDrinksDatabase {
+
   constructor (database) {
     if (database === undefined) {
       this.db = new Database(config.db)
@@ -187,24 +191,8 @@ class FavDrinksDatabase {
     const numStarStmt = this.db.prepare(`SELECT COUNT(*) AS count ` + 
             `FROM fav_drinks WHERE uid = ? AND fav = 1`)
     const numStarred = numStarStmt.get(uid).count
-    // Check if not starred yet   
-    if (!this.isStar(uid, drinkId)) {
-
-      // Check if exceeding number of starred drinks
-      if (numStarred === 3) {
-        const dateCond = "(SELECT TOP 1 date FROM fav_drinks " + 
-                "WHERE uid = ? AND fav = TRUE ORDER BY date COLLATE ASC )"
-        // Sets the oldest starred drink to false
-        const stmt1 = this.db.prepare(`UPDATE fav_drinks SET fav = FALSE WHERE uid = ?` + 
-        `AND fav = TRUE AND date = ${dateCond}`)
-        const query1 = stmt1.run(uid)
-
-        if (query1.changes > 0) {
-          return true
-        } else {
-          return false
-        }
-      }
+    // Check if not starred yet and limit not exceeded
+    if (!this.isStar(uid, drinkId) && numStarred < NUM_STARRED_LIM) {
 
       // Updates the DB
       const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ` +
