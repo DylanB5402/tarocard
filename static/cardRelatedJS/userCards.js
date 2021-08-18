@@ -4,7 +4,7 @@
   * Then add that information into the cards
   * After insertion of information, insert card into div "card-container"
   */
-  
+let numOfStarDrinks = 0;
 let cardDiv = document.getElementById("cardContainer");
   
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
@@ -26,6 +26,11 @@ request.onload = function () {
     const drinkId = cards[drinkCard]['id'];
     console.log(drinkId);
     const ifFav = cards[drinkCard]['fav'];
+    if( ifFav == true){
+      numOfStarDrinks++;
+      console.log("Bird is the word");
+      console.log(numOfStarDrinks)
+    }
 
     if( ifFav == false && cards[drinkCard]['name'].charAt(0).toLowerCase() !== currentLetter){
         currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();
@@ -205,6 +210,9 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
 
 
   favOption.onclick = function (){
+    if( numOfStarDrinks == 3 ){
+      console.log("HELP!")
+    }
     if( fav ){
       fav = false;
       favOption.src= "../assets/gray-star.png";
@@ -213,14 +221,23 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id: drinkId}) //sending drinkID 
     }); 
+    numOfStarDrinks--
+    console.log(numOfStarDrinks)
     }else {
-      fav = true;
-      favOption.src="../assets/star.png";
-      fetch( "/drinks/starDrink/"+ drinkId ,{
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({id: drinkId}) //sending drinkID 
-      }); 
+      if(numOfStarDrinks < 3 ){
+        fav = true;
+        favOption.src="../assets/star.png";
+        fetch( "/drinks/starDrink/"+ drinkId ,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: drinkId}) //sending drinkID 
+        })  
+        numOfStarDrinks++;
+        console.log(numOfStarDrinks)
+      }else{
+        document.getElementById('unableToFavorite').style.display = 'flex';
+        document.getElementById('unableToFavorite').focus();
+      }
     }
   }
 
