@@ -136,7 +136,7 @@ exports.searchAllUsers = (req, res) => {
   const search = req.body.string
   if (req.session.loggedin) {
     const users = userDB.searchDatabase(search, req.session.uid)
-    const userArray = friendDb.formatFriendData(users)
+    var userArray = friendDb.formatFriendData(users)
     userArray.splice(100)
     res.json({ users: userArray, success: true })
   } else {

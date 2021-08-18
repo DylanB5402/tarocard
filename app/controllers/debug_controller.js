@@ -51,6 +51,7 @@ exports.users = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.usersJSON = (req, res) => {
+  // res.json({ 'users' : userDB.getAllUsers()})
   const allUsers = userDB.getAllUsers()
   const userJSON = {}
   allUsers.forEach((user) => {
@@ -64,6 +65,7 @@ exports.usersJSON = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.debugHome = (req, res) => {
+  // res.send('taco')
   res.redirect('/debug/debug.html')
 }
 
@@ -101,6 +103,7 @@ exports.addFriend = (req, res) => {
   const friendUid = req.body.friend_uid
   const status = req.body.status
   friendDb.insertFriend(uid, friendUid, status)
+  // friendDb.addCurrentFriend(uid, friendUid)
   res.redirect('/debug/friends')
 }
 

@@ -111,10 +111,12 @@ exports.listIncomingFriends = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.recentFriends = (req, res) => {
+  // console.log(friendDb.getRecentFriends(req.session.uid))
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    var friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
     friendArray.splice(10)
+    // only display last 10 friend requests
     res.json({ users: friendArray, success: false })
   } else {
     res.json({ users: [], success: false })
@@ -139,7 +141,7 @@ exports.request = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.accept = (req, res) => {
+ exports.accept = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.body.id
   if (friendDb.acceptFriendRequest(uid, friendUid)) {
@@ -153,9 +155,10 @@ exports.accept = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.deny = (req, res) => {
+ exports.deny = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.body.id
   friendDb.deleteFriendRequest(uid, friendUid)
   res.send('success')
 }
+
