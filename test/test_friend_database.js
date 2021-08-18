@@ -16,7 +16,7 @@ friendDb.deleteAllTableEntires()
 
 describe('Testing Friend Database', function () {
   it('Test Database Schema', function () {
-    const schema = 'CREATE TABLE friends (uid INTEGER, friend_uid INTEGER, status INTEGER)'
+    const schema = 'CREATE TABLE friends (uid INTEGER, friend_uid INTEGER, status TEXT, timestamp TEXT)'
     assert.equal(friendDb.getSchema().sql, schema)
   })
 

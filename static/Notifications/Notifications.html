@@ -30,6 +30,14 @@
         </div>
     </template>
 
+    <template id="noRequestTemp">
+        <div class="userFriendRequestElement">
+            <a href="..\searchUsers\searchUsers.html" class="ActivityLinks"><img src="..\assets\friend-request.png"></a>
+            <a href="..\searchUsers\searchUsers.html" class="ActivityLinks"><h2>Friend Requests</h2></a>
+            <a href="..\searchUsers\searchUsers.html" class="ActivityLinks"><h3>Approve or ignore requests</h3></a>
+        </div>
+    </template>
+
     <template id="FriendNotifsTemp">
         <div class="FriendNotifs">
             <a href="" class="ActivityLinks">
@@ -43,18 +51,28 @@
 
     <script>
         $(document).ready(function(){
-            $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
-                const friendRequests = data;
+            // $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
+            $.post("/friends/incoming", "" , function(data, status, xhr) {
+                console.log(data)
+                const friendRequests = data.users;
                 let requestTemp = document.querySelector("#userFriendRequestTemp");
                 let requestClone = requestTemp.content.cloneNode(true);
-                let element = requestClone.querySelector("div");
+                let noFriendsTemp = document.querySelector("#FriendNotifsTemp");
+                let noRequestClone = noFriendsTemp.content.cloneNode(true);
+                let element;
 
-                element.querySelector("img").src = friendRequests[0]['image url'];
                 if(friendRequests.length > 99) {
+                    element = requestClone.querySelector("div");
                     element.querySelector("p").textContent = "99+";
+                    element.querySelector("img").src = friendRequests[0]['image url'];
+                }
+                else if(friendRequests.length > 0) {
+                    element = requestClone.querySelector("div");
+                    element.querySelector("p").textContent = friendRequests.length;
+                    element.querySelector("img").src = friendRequests[0]['image url'];
                 }
                 else {
-                    element.querySelector("p").textContent = friendRequests.length;
+                    element = noRequestClone.querySelector("div");
                 }
                 const body = document.querySelector("body");
                 const h6 = document.createElement("h6");
@@ -63,8 +81,10 @@
                 element.appendChild(h6);
                 body.appendChild(element);
 
-                $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
-                    const recentFriends = data;
+                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
+                $.get("/friends/recent", "" , function(data, status, xhr) {
+                    const recentFriends = data.users;
+                    console.log(data)
                     const body = document.querySelector("body");
                     let recentTemp = document.querySelector("#FriendNotifsTemp");
                     let containAll = document.createElement("div");

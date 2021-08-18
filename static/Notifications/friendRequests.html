@@ -83,12 +83,14 @@
     const body = document.querySelector('body');
 
     let request = new XMLHttpRequest();
-    request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+    // request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+    request.open('POST', '/friends/incoming', true);
     request.responseType = 'json';
     request.send();
 
     request.onload = function () {
         const users = request.response;
+        console.log(users)
         populateFriendRequests(users);
     }
 
