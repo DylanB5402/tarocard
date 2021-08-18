@@ -199,9 +199,9 @@ class GroupDatabase {
     }
   }
 
-  editGroupName(uid, groupId, groupName) {
+  editGroupName (uid, groupId, groupName) {
     const userDB = new userDatabase.UserDatabase()
-    
+
     // Check to make params are valid/exists
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
       // Update group name

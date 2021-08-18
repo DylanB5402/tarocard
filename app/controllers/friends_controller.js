@@ -37,16 +37,8 @@ exports.acceptLegacy = (req, res) => {
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.getFriendDataByUid(uid)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -91,16 +83,8 @@ exports.searchFriends = (req, res) => {
   const search = req.body.string
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.searchFriends(uid, search)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -114,16 +98,8 @@ exports.searchFriends = (req, res) => {
 exports.listIncomingFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const incomingFriends = friendDb.getIncomingFriendDataByUid(uid)
-    incomingFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(incomingFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -135,12 +111,10 @@ exports.listIncomingFriends = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.recentFriends = (req, res) => {
-  // console.log(friendDb.getRecentFriends(req.session.uid))
   if (req.session.loggedin) {
     const uid = req.session.uid
-    var friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    const friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
     friendArray.splice(10)
-    // only display last 10 friend requests
     res.json({ users: friendArray, success: false })
   } else {
     res.json({ users: [], success: false })
@@ -165,7 +139,7 @@ exports.request = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.accept = (req, res) => {
+exports.accept = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.body.id
   if (friendDb.acceptFriendRequest(uid, friendUid)) {
@@ -179,7 +153,7 @@ exports.request = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.deny = (req, res) => {
+exports.deny = (req, res) => {
   const uid = req.session.uid
   const friendUid = req.body.id
   friendDb.deleteFriendRequest(uid, friendUid)

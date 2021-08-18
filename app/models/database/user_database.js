@@ -4,8 +4,7 @@ const config = require('../../config.json')
 
 class UserDatabase {
   /**
-   *
-   * @param {!String} database
+   *    * @param {!String} database
    */
   constructor (database) {
     if (database === undefined) {
