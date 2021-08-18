@@ -996,6 +996,40 @@ h3 a{
     right: 100px;
 }
 
+#add-accept {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 60px;
+    right: 100px;
+}
+
+#deny {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 145px;
+    right: 100px;
+}
+
 #edit-profile a {
     text-decoration: none;
     color:#9879C5;
@@ -1008,18 +1042,18 @@ h3 a{
     text-align: left;
     left: 50px;
     margin-bottom: 0px;
- 
 }
 
 #displayName {
-    width: 300px;
+    width: 500px;
     height: 50px;
-    font-size: 60px;
+    font-size: 50px;
     position: absolute;
-    top: 100px;
+    top: 110px;
     left: 100px;
     font-weight: medium;
     flex-wrap: wrap;
+    /*background-color: red; /**/
 }
 
 #user-handle {
@@ -1029,7 +1063,7 @@ h3 a{
     position: absolute;
     margin-left: 100px;
     font-weight: lighter;
-    top:180px;
+    top: 170px;
     color: #C1C1C1;
 }
 
@@ -1043,7 +1077,7 @@ h3 a{
     max-width: 1000px;
     font-size: 28px;
     position: absolute;
-    top: 240px;
+    top: 235px;
     left: 100px;
     right:200px;
     
@@ -1275,7 +1309,7 @@ h3 a{
   margin-bottom: 10px;
 }
 
-#edit-profile {
+#edit-profile  {
     font-size: 32px;
     font-weight: medium;
     border: solid 3px #9879C5;
@@ -1287,7 +1321,32 @@ h3 a{
     width: 260px;
 }
 
-button #edit-profile {
+#add-accept {
+    font-size: 32px;
+    font-weight: medium;
+    /* border: solid 3px #9879C5; */
+    text-align: center;
+    color: white;
+    background-color: #9879C5;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+#deny {
+    font-size: 32px;
+    font-weight: medium;
+    border: solid 3px #9879C5;
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+button #edit-profile, 
+#add-accept, #deny {
     right: 100px;
 }
 
