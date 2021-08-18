@@ -37,16 +37,8 @@ exports.acceptLegacy = (req, res) => {
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.getFriendDataByUid(uid)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -91,16 +83,8 @@ exports.searchFriends = (req, res) => {
   const search = req.body.string
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.searchFriends(uid, search)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -114,16 +98,8 @@ exports.searchFriends = (req, res) => {
 exports.listIncomingFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const incomingFriends = friendDb.getIncomingFriendDataByUid(uid)
-    incomingFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': friend.profile_picture,
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(incomingFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -185,3 +161,4 @@ exports.request = (req, res) => {
   friendDb.deleteFriendRequest(uid, friendUid)
   res.send('success')
 }
+
