@@ -12,6 +12,9 @@ const establishmentsDatabase = require('../models/database/establishments_databa
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const favDrinksDB = new favDrinksDatabase.FavDrinksDatabase()
 
+const groupsDatabase = require('../models/database/group_database')
+const groupsDB = new groupsDatabase.GroupDatabase()
+
 const upload = new uploadFile.UploadFile()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
@@ -273,22 +276,16 @@ exports.displayCardsHomePage = (req, res) => {
  * @param {!import('express').Response} res
  */
  exports.allUsersDrinks = (req, res) => {
-    const allPairs = favDrinksDB.toString() // temp, will format better in future
-    const pairsArray = []
-
-    // drink object: {uid, drink_id, fav, date}
-    // Iterate through the array of pairs and make objects out of their properties
-    allPairs.forEach((entry) => {
-      // TODO: REDO Establishments so that it gets the name:
-      // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
-      pairsArray.push({
-        uid: entry.uid,
-        drink_id: entry.drink_id,
-        fav: entry.fav,
-        date: entry.date
-      })
-    })
-
     // send the custom drink array as a json
-    res.json({ pairs: pairsArray, success: true })
+    res.json({ pairs: favDrinksDB.toString(), success: true })
+}
+
+exports.editGroupName = (req, res) => {
+  const uid = req.body.uid
+  const groupId = req.body.groupId
+  const groupName = req.body.groupName
+
+  groupsDB.editGroupName(uid, groupId, groupName)
+
+  res.redirect('/groups/getGroup/' + groupId)
 }

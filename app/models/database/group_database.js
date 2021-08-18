@@ -216,8 +216,8 @@ class GroupDatabase {
       if (query.changes === 1) {
         return true
       }
-      return false
     }
+    return false
   }
 
   /**
