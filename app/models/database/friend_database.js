@@ -12,7 +12,7 @@ class FriendDatabase {
   }
 
   createFriendsTable () {
-    this.db.prepare('CREATE TABLE IF NOT EXISTS friends (uid INTEGER, friend_uid INTEGER, status TEXT);').run()
+    this.db.prepare('CREATE TABLE IF NOT EXISTS friends (uid INTEGER, friend_uid INTEGER, status TEXT, timestamp TEXT);').run()
   }
 
   getSchema () {
@@ -33,18 +33,23 @@ class FriendDatabase {
     }
     const friendStatus = this.getFriendStatus(uid, friendUid)
     if (friendStatus === undefined) {
-      return this.db.prepare('INSERT INTO friends VALUES (?, ?, ?);').run(uid, friendUid, status)
+      return this.db.prepare('INSERT INTO friends VALUES (?, ?, ?, datetime(\'now\'));').run(uid, friendUid, status)
     } else {
       return undefined
     }
   }
 
   updateFriendStatus (uid, friendUid, status) {
-    return this.db.prepare('UPDATE friends SET status = ? WHERE uid = ? AND friend_uid = ?;').run(status, uid, friendUid)
+    return this.db.prepare('UPDATE friends SET status = ?, timestamp = datetime(\'now\') WHERE uid = ? AND friend_uid = ?;').run(status, uid, friendUid)
   }
 
   deleteAllTableEntires () {
     return this.db.prepare('DELETE FROM friends;').run()
+  }
+
+  deleteFriendRequest (uid, friendUid) {
+    this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(uid, friendUid)
+    this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(friendUid, uid)
   }
 
   /**
@@ -162,12 +167,43 @@ class FriendDatabase {
   }
 
   getNumFriends (uid) {
-    const rows = this.db.prepare('SELECT * FROM friends WHERE uid = ?;').all(uid)
+    const rows = this.db.prepare('SELECT * FROM friends WHERE uid = ? AND status = ? ;').all(uid, FriendStatus.FRIENDS)
     if (rows !== undefined) {
       return rows.length
     } else {
       return 0
     }
+  }
+
+  /**
+   * Return the id, username, and display_name of all of a users's incoming friends
+   * @param {*} uid
+   * @returns {Array}
+   */
+  getIncomingFriendDataByUid (uid) {
+    return this.db.prepare('SELECT users2.uid, users2.username AS username, users2.display_name AS display_name, users2.profile_picture FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = \'incoming\' ORDER BY LOWER(users2.display_name);').all(uid)
+  }
+
+  getRecentFriends (uid) {
+    return this.db.prepare('SELECT users2.uid, users2.username AS username, users2.display_name AS display_name, users2.profile_picture FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = \'friends\' ORDER BY friends.timestamp DESC;').all(uid)
+  }
+
+  /**
+   * Format friend data (the result of an SQL query where each row contains a uid, username, display name, and profile picture) into json format
+   * @param {Array} userData
+   * @returns {JSON}
+   */
+  formatFriendData (userData) {
+    const userArray = []
+    userData.forEach((user) => {
+      userArray.push({
+        'display name': user.display_name,
+        username: user.username,
+        'image url': user.profile_picture,
+        id: user.uid
+      })
+    })
+    return userArray
   }
 }
 

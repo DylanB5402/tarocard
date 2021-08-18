@@ -7,7 +7,6 @@ class TemplateEngine {
   }
 
   getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards) {
-    // console.log(profileBio)
     return this.generateProfile({
       username: profileUsername,
       displayName: profileDisplayName,

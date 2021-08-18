@@ -4,8 +4,7 @@ const config = require('../../config.json')
 
 class UserDatabase {
   /**
-   *
-   * @param {!String} database
+   *    * @param {!String} database
    */
   constructor (database) {
     if (database === undefined) {
@@ -194,8 +193,12 @@ class UserDatabase {
   }
 
   updateEmail (uid, email) {
-    const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
-    return info.changes > 0
+    if (email.includes('@')) {
+      const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
+      return info.changes > 0
+    } else {
+      return false
+    }
   }
 
   getUserDataByID (uid) {

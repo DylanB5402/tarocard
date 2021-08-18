@@ -16,11 +16,10 @@ const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
 const config = require('../../config.json')
 
-  // Constant Static Variables //
-  const NUM_STARRED_LIM = 3
+// Constant Static Variables //
+const NUM_STARRED_LIM = 3
 
 class FavDrinksDatabase {
-
   constructor (database) {
     if (database === undefined) {
       this.db = new Database(config.db)
@@ -75,8 +74,8 @@ class FavDrinksDatabase {
    * @return {Boolean} false if DNE, true if it does
    */
   isExist (uid, drinkId) {
-    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE `+
-            `drink_id = ? AND uid = ?`)
+    const stmt = this.db.prepare('SELECT COUNT(*) count FROM fav_drinks WHERE ' +
+            'drink_id = ? AND uid = ?')
     const query = stmt.get(drinkId, uid) // get runs the statement
     const numEntries = query.count
     return numEntries > 0
@@ -89,13 +88,13 @@ class FavDrinksDatabase {
    * @return {Boolean} false if DNE, true if it does
    */
   isStar (uid, drinkId) {
-    const stmt = this.db.prepare(`SELECT COUNT(*) count FROM fav_drinks WHERE `+
-            `drink_id = ? AND uid = ? AND fav = TRUE`)
+    const stmt = this.db.prepare('SELECT COUNT(*) count FROM fav_drinks WHERE ' +
+            'drink_id = ? AND uid = ? AND fav = TRUE')
     const query = stmt.get(drinkId, uid) // get runs the statement
     const numStar = query.count
     return numStar > 0
   }
-  
+
   /**
    * get all favorited drinks
    * @param {Integer} uid
@@ -105,9 +104,9 @@ class FavDrinksDatabase {
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare("SELECT f.fav, f.date, d.* FROM fav_drinks f "+ 
-            "INNER JOIN drinks d USING(drink_id) WHERE uid = ? " + 
-            "ORDER BY fav DESC, drink_name COLLATE NOCASE ASC")
+    const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f ' +
+            'INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
+            'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
     const query = stmt.all(uid) // an array of row (drink) objects
     return query // return the filled array of drink objects
   }
@@ -133,7 +132,7 @@ class FavDrinksDatabase {
         return false
       }
       const stmt = this.db.prepare('INSERT INTO fav_drinks (uid, drink_id, fav, date)' +
-              `VALUES (?, ?, 0, date('now'))`)
+              'VALUES (?, ?, 0, date(\'now\'))')
       const query = stmt.run(uid, drinkId)
 
       if (query.changes === 1) {
@@ -162,7 +161,7 @@ class FavDrinksDatabase {
       if (this.isExist(uid, drinkId)) {
         // Delete uid-drinkId pair from DB
         const stmt = this.db.prepare('DELETE FROM fav_drinks WHERE ' +
-                `uid = ? AND drink_id = ?`)
+                'uid = ? AND drink_id = ?')
         const query = stmt.run(uid, drinkId)
 
         console.log('deleted a drink') // debug
@@ -186,17 +185,15 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   starDrink (uid, drinkId) {
-
     // Get number of starred drinks for check > 3
-    const numStarStmt = this.db.prepare(`SELECT COUNT(*) AS count ` + 
-            `FROM fav_drinks WHERE uid = ? AND fav = 1`)
+    const numStarStmt = this.db.prepare('SELECT COUNT(*) AS count ' +
+            'FROM fav_drinks WHERE uid = ? AND fav = 1')
     const numStarred = numStarStmt.get(uid).count
     // Check if not starred yet and limit not exceeded
     if (!this.isStar(uid, drinkId) && numStarred < NUM_STARRED_LIM) {
-
       // Updates the DB
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ` +
-      `AND drink_id = ?`)
+      const stmt = this.db.prepare('UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ' +
+      'AND drink_id = ?')
       const query = stmt.run(uid, drinkId) // run the statement; returns 'info' object
 
       // Checks if changes were made; changes are made upon successful boolean change
@@ -205,7 +202,7 @@ class FavDrinksDatabase {
       }
     }
     return false // return false since query.changes was not greater than 0 or
-                 //   drink is already starred
+    //   drink is already starred
   }
 
   /**
@@ -217,8 +214,8 @@ class FavDrinksDatabase {
   unstarDrink (uid, drinkId) {
     // Check if starred
     if (this.isStar(uid, drinkId)) {
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = FALSE WHERE uid = ? ` +
-              `AND drink_id = ?`)
+      const stmt = this.db.prepare('UPDATE fav_drinks SET fav = FALSE WHERE uid = ? ' +
+              'AND drink_id = ?')
       const query = stmt.run(uid, drinkId)
 
       // Checks if changes were made; changes are made upon successful boolean change
@@ -231,23 +228,23 @@ class FavDrinksDatabase {
 
   /**
    * Sends a JSON of drinks that are related by friends of a user
-   * @param {Integer} uid 
+   * @param {Integer} uid
    * @returns {Array[Object]} an array of drink objects
    */
-  displayDrinksToHomePage(uid) {
+  displayDrinksToHomePage (uid) {
     // SQL Statement:
     //   selects all fields of drinks, the drink_id and date from fav_drinks,
     //     and mainly status from friends joined by uids between fav_drinks and
     //     friends and drink_id between fav_drinks and drinks to return a query
     //     for outputting a table of all recent drinks made by friends of a user
     //     within the last month
-    const stmt = this.db.prepare("SELECT fd.drink_id, fd.date, f.friend_uid, d.* " + 
-            "FROM ((fav_drinks fd " + 
-            "INNER JOIN friends f ON fd.uid = f.friend_uid) " + 
-            "INNER JOIN drinks d USING(drink_id)) " +
-            "WHERE f.uid = ? AND status = 'friends' " + 
-            "AND date > DATE('now', '-30 days') " + 
-            "ORDER BY date COLLATE NOCASE DESC")
+    const stmt = this.db.prepare('SELECT fd.drink_id, fd.date, f.friend_uid, d.* ' +
+            'FROM ((fav_drinks fd ' +
+            'INNER JOIN friends f ON fd.uid = f.friend_uid) ' +
+            'INNER JOIN drinks d USING(drink_id)) ' +
+            "WHERE f.uid = ? AND status = 'friends' " +
+            "AND date > DATE('now', '-30 days') " +
+            'ORDER BY date COLLATE NOCASE DESC')
     const query = stmt.all(uid) // an array of row (drink) objects
 
     return query // return the filled array of drink objects
@@ -255,17 +252,17 @@ class FavDrinksDatabase {
 
   /**
    * Returns how many drinks cards a user has
-   * @param {Integer} uid 
+   * @param {Integer} uid
    * @returns {Integer} number of drink cards a user has
    */
-  numCards(uid) {
-      const stmt = this.db.prepare(`SELECT COUNT(*) AS count FROM fav_drinks WHERE uid = ?`)
-      const query = stmt.get(uid)
-      if (query !== undefined)  {
+  numCards (uid) {
+    const stmt = this.db.prepare('SELECT COUNT(*) AS count FROM fav_drinks WHERE uid = ?')
+    const query = stmt.get(uid)
+    if (query !== undefined) {
       return query.count
-      } else {
-        return 0
-      }
+    } else {
+      return 0
+    }
   }
 
   toString () {

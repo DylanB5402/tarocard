@@ -51,7 +51,6 @@ exports.users = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.usersJSON = (req, res) => {
-  // res.json({ 'users' : userDB.getAllUsers()})
   const allUsers = userDB.getAllUsers()
   const userJSON = {}
   allUsers.forEach((user) => {
@@ -65,7 +64,6 @@ exports.usersJSON = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.debugHome = (req, res) => {
-  // res.send('taco')
   res.redirect('/debug/debug.html')
 }
 
@@ -101,9 +99,8 @@ exports.allFriends = (req, res) => {
 exports.addFriend = (req, res) => {
   const uid = req.body.uid
   const friendUid = req.body.friend_uid
-  // const status = req.body.status
-  // friendDb.insertFriend(uid, friend_uid, status)
-  friendDb.addCurrentFriend(uid, friendUid)
+  const status = req.body.status
+  friendDb.insertFriend(uid, friendUid, status)
   res.redirect('/debug/friends')
 }
 
@@ -237,7 +234,7 @@ exports.numCards = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
     const count = favDrinkDB.numCards(uid)
-    res.json({'count' : count})
+    res.json({ count: count })
   }
 }
 
