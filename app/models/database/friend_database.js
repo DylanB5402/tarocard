@@ -13,7 +13,6 @@ class FriendDatabase {
 
   createFriendsTable () {
     this.db.prepare('CREATE TABLE IF NOT EXISTS friends (uid INTEGER, friend_uid INTEGER, status TEXT, timestamp TEXT);').run()
-    // this.db.prepare('CREATE TABLE IF NOT EXISTS friends (uid INTEGER, friend_uid INTEGER, status TEXT);').run()
   }
 
   getSchema () {

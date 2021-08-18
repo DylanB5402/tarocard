@@ -16,11 +16,10 @@ const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
 const config = require('../../config.json')
 
-  // Constant Static Variables //
-  const NUM_STARRED_LIM = 3
+// Constant Static Variables //
+const NUM_STARRED_LIM = 3
 
 class FavDrinksDatabase {
-
   constructor (database) {
     if (database === undefined) {
       this.db = new Database(config.db)
@@ -186,17 +185,15 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   starDrink (uid, drinkId) {
-
     // Get number of starred drinks for check > 3
-    const numStarStmt = this.db.prepare(`SELECT COUNT(*) AS count ` + 
-            `FROM fav_drinks WHERE uid = ? AND fav = 1`)
+    const numStarStmt = this.db.prepare('SELECT COUNT(*) AS count ' +
+            'FROM fav_drinks WHERE uid = ? AND fav = 1')
     const numStarred = numStarStmt.get(uid).count
     // Check if not starred yet and limit not exceeded
     if (!this.isStar(uid, drinkId) && numStarred < NUM_STARRED_LIM) {
-
       // Updates the DB
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ` +
-      `AND drink_id = ?`)
+      const stmt = this.db.prepare('UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ' +
+      'AND drink_id = ?')
       const query = stmt.run(uid, drinkId) // run the statement; returns 'info' object
 
       // Checks if changes were made; changes are made upon successful boolean change
@@ -205,7 +202,7 @@ class FavDrinksDatabase {
       }
     }
     return false // return false since query.changes was not greater than 0 or
-                 //   drink is already starred
+    //   drink is already starred
   }
 
   /**
