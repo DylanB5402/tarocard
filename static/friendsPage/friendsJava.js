@@ -37,7 +37,7 @@ function populateFriends (obj) {
     divCopy.querySelector('h2', true).textContent = users[i]['display name']
     divCopy.querySelector('h3', true).textContent = users[i].username;
     let links = divCopy.querySelectorAll(".userProLink");
-    links.array.forEach(element => {
+    links.forEach(element => {
         element.href = "/profile/" + users[i]["id"];
     });
     divAll.appendChild(divCopy)
@@ -74,7 +74,7 @@ function searchFriends (obj) {
     divCopy.querySelector('h2', true).textContent = users[i]['display name'];
     divCopy.querySelector('h3', true).textContent = users[i].username;
     let links = divCopy.querySelectorAll(".userProLink");
-    links.array.forEach(element => {
+    links.forEach(element => {
         element.href = "/profile/" + users[i]["id"];
     });
     divAll.appendChild(divCopy)
