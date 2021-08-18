@@ -116,6 +116,8 @@ input {
     height: 80px;
     display: block;
     object-position: center;
+    border: none;
+    outline: none;
 }
 
 input[type=text] {
