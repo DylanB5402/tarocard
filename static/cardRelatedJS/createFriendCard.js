@@ -2,20 +2,25 @@ let addFriends = document.getElementById("cardContainer");
   
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let friends = new XMLHttpRequest();
-friends.open('GET', 'https://my-json-server.typicode.com/shadydrako/cardData/cards', true); 
+friends.open('GET', '/drinks/displayHomepage', true); 
 friends.responseType = 'json';
 friends.send();
 
 friends.onload = function () {
-  const friendCards = friends.response;
+  const friendCards = friends.response.drinks;
   console.log(friendCards)
-  for(let i = 0; i < 2;i++){
-    let a,b,c,d;
-    a = friendCards[i]["Name of Establishment"];
-    b = friendCards[i]["Name of Order"];
-    c = friendCards[i]["Description"];
-    d = friendCards[i]["id"];
-    createFriendCard(a, b, c, '../assets/pfp-placeholder.png', d)
+  for (const drinkCard in friendCards) {
+    const drinkEst = friendCards[drinkCard]['establishment'];
+    const drinkName = friendCards[drinkCard]['drink name'];
+    console.log(drinkName);
+    const drinkDesc = friendCards[drinkCard]['drink desc'];
+    const drinkId = friendCards[drinkCard]['drink id'];
+    console.log(drinkId);
+    const friendUID = friendCards[drinkCard]['friend uid'];
+    const imageURL = friendCards[drinkCard]['image url'];
+    const cardDate = friendCards[drinkCard]['date'];
+    console.log(cardDate);
+    createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
 }
 
@@ -24,7 +29,8 @@ friends.onload = function () {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createFriendCard(establishment, drink, description, image, drinkId){
+function createFriendCard(establishment, drink, description, image, drinkId,friendUID,cardDate){
+  console.log("Creating Card of A friend wow");
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -62,16 +68,23 @@ function createFriendCard(establishment, drink, description, image, drinkId){
   addToGroupbtn.onclick = function ( drinkID, userID ){
       document.getElementById("groupOrder-add").style.display = 'block';
       document.getElementById("gO-drinkID").value = drinkId;
-      //document.getElementById("gO-userID").value = userID; unsure how to get USERID
+      document.getElementById("gO-userID").value = friendUID;
     }
   addToGroupbtn.innerHTML = "+";
 
-  tagContainer.appendChild(pfp);
+  let date = document.createElement('h2');
+  date.innerHTML = "created: " + cardDate;
+  date.classList.add('card-date');
+  date.style.color = "rgba(0, 0, 0,0.5)";
+  console.log("gimme my shit");
 
+  tagContainer.appendChild(pfp);
   container.appendChild(estab);
   container.appendChild(d);
   container.appendChild(desc);
   container.appendChild(tagContainer);
   container.appendChild(addToGroupbtn);
+  container.appendChild(date);
+
   document.getElementById('cardContainer').appendChild(container);
 }

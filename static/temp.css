@@ -116,6 +116,8 @@ input {
     height: 80px;
     display: block;
     object-position: center;
+    border: none;
+    outline: none;
 }
 
 input[type=text] {
@@ -370,21 +372,22 @@ li:last-child{
 }
 
 .small-input{
-    border-radius: 10px;
-    border: 2px solid rgb(255, 255, 255);
+    border-radius: 15px;
+    /* border: 2px solid rgb(255, 255, 255); */
     color: black;
     padding: 15px;
     width: 80vw;
     display: block;
     height: 4vw;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #F7F7F7;
     position: relative;
     margin: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: 2vh;
     top: 10vh;
     margin: 2.5vh ;
-
+    border: none;
+    outline: none;
 }
 
 
@@ -392,9 +395,11 @@ li:last-child{
     text-align: center;
 }
 
-.small-input::placeholder{
-    color: rgba(205, 93, 233, 0.5);
+.small-input::placeholder {
+    color: #CBBCE2;
 }
+
+
 
 .large-input{
     border-radius: 10px;
@@ -505,6 +510,13 @@ li:last-child{
     width: 75%;
     font-size: 3vh;
     margin-top: 0px;
+}
+
+.card-date {
+    position: absolute;
+    bottom: 0%;
+    font-size: 10px;
+    margin-bottom: 10px;
 }
 
 /* Stands for add to a groupOrder Button */
@@ -675,18 +687,20 @@ li:last-child{
 
 .group-card {
     width: 87vw;
+    height: 10vh;
     max-width: 800px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     position: relative;
-    border: 4px solid black;
+    /* border: 4px solid black; */
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
+    background-image: url('https://media.discordapp.net/attachments/860617896655716372/877341875445588008/unknown.png');
+    
 }
 
 
@@ -1000,11 +1014,12 @@ h3 a{
 #displayName {
     width: 300px;
     height: 50px;
-    font-size: 75px;
+    font-size: 60px;
     position: absolute;
     top: 100px;
     left: 100px;
     font-weight: medium;
+    flex-wrap: wrap;
 }
 
 #user-handle {
@@ -1017,6 +1032,7 @@ h3 a{
     top:180px;
     color: #C1C1C1;
 }
+
 #user-at {
     font-weight: lighter;
 }
@@ -1210,6 +1226,7 @@ h3 a{
     width: 100%;
     display: flex; 
     justify-content: center;
+    z-index: 2;
   }
 
   .navbar img {
@@ -1842,3 +1859,9 @@ button #edit-profile {
     width: 90%;	
 }	
 /* FRIEND LIST END */
+
+
+
+/* java -> camel case -> heyBestiesBestDrink
+python -> underscores -> hey_besties_best_drink
+HTML -> dashes -> hey-besties-best-drink */

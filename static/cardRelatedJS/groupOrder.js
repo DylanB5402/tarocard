@@ -68,6 +68,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     container.appendChild(desc);
     container.appendChild(tagContainer);
     container.appendChild(deleteBtn);
+    container.style.marginTop = "100px";
     document.getElementById('groupContainer').appendChild(container);
 }
   /* Creates group Orders cards */
@@ -133,7 +134,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
 function getGroupDrinkCards(groupID){
     console.log("Creating Drink Cards");
     let requestGroupContent = new XMLHttpRequest();
-    requestGroupContent.open('GET', '/groups/' + groupID, true); //endpoint should have id
+    requestGroupContent.open('GET', '/groups/getGroup/' + groupID, true); //endpoint should have id
     requestGroupContent.responseType = 'json';
     requestGroupContent.send();
 
@@ -151,7 +152,7 @@ function getGroupDrinkCards(groupID){
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
 
          let requestGroupOrdersCard = new XMLHttpRequest();
-         requestGroupOrdersCard.open('GET', '/drinks/'+ drinkCardID, true); 
+         requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
          requestGroupOrdersCard.send();
 

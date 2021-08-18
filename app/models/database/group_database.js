@@ -199,6 +199,24 @@ class GroupDatabase {
     }
   }
 
+  editGroupName(uid, groupId, groupName) {
+    const userDB = new userDatabase.UserDatabase()
+    
+    // Check to make params are valid/exists
+    if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
+      // Update group name
+      const stmt = this.db.prepare('UPDATE groups SET group_name = ? WHERE ' +
+              'uid = ? AND group_id = ?')
+      const query = stmt.run(groupName, uid, groupId)
+
+      // Check to make sure changes are made to DB
+      if (query.changes === 1) {
+        return true
+      }
+      return false
+    }
+  }
+
   // Need an edit group method
   // Implementation is to modify the drink desc in database and to keep uid and
   // drinkId pair the same in groups_database.js
