@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Establishments Test</title>
+        <script>
+          let getEstabishments = () => {
+            let searchValue = document.getElementById('search').value
+            console.log(searchValue)
+            fetch(`/establishments/${searchValue}`)
+              .then((response) => response.json())
+              .then((data) => {
+                let table = document.getElementById('establishments-list')
+                table.innerHTML = ''
+                data.forEach((shop) => {
+                  let row = table.insertRow(0)
+                  let cell1 = row.insertCell(0)
+                  let cell2 = row.insertCell(1)
+
+                  let icon = document.createElement('img')
+                  icon.src = shop.img
+                  icon.height = 50
+                  icon.width = 50
+                  cell1.appendChild(icon)
+
+                  let shopName = document.createElement('h1')
+                  shopName.innerHTML = shop.name
+
+                  let shopLoc = document.createElement('h2')
+                  shopLoc.innerHTML = shop.address1
+
+                  cell2.appendChild(shopName)
+                  cell2.appendChild(shopLoc)
+                })
+              });
+          }
+        </script>
+        <style>
+          .listWrapper {overflow:scroll; width:300px; height:300px; border: 1px solid black}
+
+          h1 {font-size: 15px}
+          h2 {font-size: 10px; opacity: 0.5}
+        </style>
+    </head>
+    <body>
+      <input type="text" id="search" name="search">
+      <button onclick="getEstabishments()">GET ESTABLISHMENTS</button>
+      <!-- this is where the establishments are -->
+      <div class="listWrapper">
+        <table id="establishments-list" />
+      </div>
+    </body>
+</html>
