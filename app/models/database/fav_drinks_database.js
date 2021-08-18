@@ -47,24 +47,20 @@ class FavDrinksDatabase {
    * @returns {Array[Object]} an array of drink objects
    */
   getAllDrinks (uid) {
+    const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    // const drinkArray = new Array() // array to be filled with drink objects
-
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
+    if (userDB.getUserByUID(uid)) {
+
     const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
             'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
     const query = stmt.all(uid) // an array of row (drink) objects
 
-    // Iterate through the array of objects
-    // `value` = drink object
-    // query.forEach((value) => {
-    //   // Function to be called on each element (object) in the array
-
-    //   drinkArray.push(value) // Push the drink object into the array
-    // })
     return query // return the filled array of drink objects
+    }
+    return null
   }
 
   /**
