@@ -68,6 +68,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     container.appendChild(desc);
     container.appendChild(tagContainer);
     container.appendChild(deleteBtn);
+    container.style.marginTop = "100px";
     document.getElementById('groupContainer').appendChild(container);
 }
   /* Creates group Orders cards */

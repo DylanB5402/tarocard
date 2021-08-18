@@ -15,7 +15,8 @@ request.send();
 
 request.onload = function () {
   const cards = request.response.drinks;
-  let currentLetter;
+  let currentLetter = "-2"; //idk lmao
+  let favsExist = false;
   for (const drinkCard in cards) {
     console.log(drinkCard)
     const drinkEst = cards[drinkCard]['establishment'];
@@ -25,10 +26,42 @@ request.onload = function () {
     const drinkId = cards[drinkCard]['id'];
     console.log(drinkId);
     const ifFav = cards[drinkCard]['fav'];
-    if( ifFav == false){
-        currentLetter = cards[drinkCard]['name'].charAt(0);
-        console.log(currentLetter);
+
+    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toLowerCase() !== currentLetter){
+        currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();
+        console.log(currentLetter);        
+        let letterBar = document.createElement('div');
+        letterBar.id = "headerElement";
+        let letterHeading = document.createElement('h1');
+        letterHeading.id="letterHeading";
+        letterHeading.innerHTML = currentLetter;
+        let headingLine = document.createElement('hr');
+        headingLine.id = "headingLine";
+
+        letterBar.appendChild(letterHeading);
+        letterBar.appendChild(headingLine);
+        cardDiv.appendChild(letterBar);
     }
+
+    if( favsExist == false &&  ifFav == true ){
+        favsExist = true;
+        let favSection = document.createElement('div');
+        favSection.id = 'favoritesSection';
+        let favoriteStar = document.createElement('img');
+        favoriteStar.id = "favoritesStar";
+        favoriteStar.src ="../assets/star-purple.png";
+        let favText = document.createElement('p');
+        favSection.appendChild(favoriteStar);
+        favText.id="favorites";
+        favText.innerHTML = "Favorites"
+        favSection.appendChild(favText);
+        let bar = document.createElement('hr');
+        bar.style.width = "100%";
+        bar.style.height = "0.1px";
+        favSection.appendChild(bar);
+        document.getElementById('cardContainer').appendChild(favSection);
+    }
+
     createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav);
   }
 }

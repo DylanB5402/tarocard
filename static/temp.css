@@ -507,6 +507,13 @@ li:last-child{
     margin-top: 0px;
 }
 
+.card-date {
+    position: absolute;
+    bottom: 0%;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
 /* Stands for add to a groupOrder Button */
 .add-gO-btn { 
     display: block;
@@ -687,7 +694,7 @@ li:last-child{
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
+    background-image: url('https://media.discordapp.net/attachments/860617896655716372/877341875445588008/unknown.png');
     
 }
 

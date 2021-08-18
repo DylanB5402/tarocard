@@ -72,18 +72,19 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
     }
   addToGroupbtn.innerHTML = "+";
 
+  let date = document.createElement('h2');
+  date.innerHTML = "created: " + cardDate;
+  date.classList.add('card-date');
+  date.style.color = "rgba(0, 0, 0,0.5)";
+  console.log("gimme my shit");
+
   tagContainer.appendChild(pfp);
   container.appendChild(estab);
   container.appendChild(d);
   container.appendChild(desc);
   container.appendChild(tagContainer);
   container.appendChild(addToGroupbtn);
+  container.appendChild(date);
+
   document.getElementById('cardContainer').appendChild(container);
-  let date = document.createElement('h2');
-  date.innerHTML = "created: " + cardDate;
-  date.style.marginLeft = "80px";
-  date.style.marginTop = "20px";
-  date.style.color = "rgba(0, 0, 0,0.5)";
-  document.getElementById('cardContainer').appendChild(date);
-  console.log("gimme my shit");
 }
