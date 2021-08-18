@@ -145,6 +145,7 @@ exports.searchAllUsers = (req, res) => {
         id: user.uid
       })
     })
+    userArray.splice(100)
     res.json({ users: userArray, success: true })
   } else {
     res.json({ users: [], success: false })

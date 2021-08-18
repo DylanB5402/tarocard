@@ -27,7 +27,7 @@ describe('Test Server', function () {
   })
 
   it('test send friend request success', function (done) {
-    taroSession.post('/friends/request/1/2').end((err, res) => {
+    taroSession.post('/friends/test/request/1/2').end((err, res) => {
       if (err) { console.log(err) }
       assert.equal(res.text, 'success')
     })
@@ -35,7 +35,7 @@ describe('Test Server', function () {
   })
 
   it('test send friend request failure', function (done) {
-    taroSession.post('/friends/request/1/2').end((err, res) => {
+    taroSession.post('/friends/test/request/1/2').end((err, res) => {
       if (err) { console.log(err) }
       assert.equal(res.text, 'failure')
     })
@@ -43,9 +43,9 @@ describe('Test Server', function () {
   })
 
   it('test accept friend request', function (done) {
-    taroSession.post('/friends/request/2/3').end((err, res) => {
+    taroSession.post('/friends/test/request/2/3').end((err, res) => {
       if (err) { console.log(err) }
-      taroSession.post('/friends/accept/3/2').end((err, res) => {
+      taroSession.post('/friends/test/accept/3/2').end((err, res) => {
         if (err) { console.log(err) }
         assert.equal(res.text, 'success')
         return done()
@@ -54,13 +54,13 @@ describe('Test Server', function () {
   })
 
   it('test outgoing friends', function (done) {
-    taroSession.post('/friends/request/6/7').end((err, res) => {
+    taroSession.post('/friends/test/request/6/7').end((err, res) => {
       if (err) { console.log(err) }
-      taroSession.post('/friends/request/6/8').end((err, res) => {
+      taroSession.post('/friends/test/request/6/8').end((err, res) => {
         if (err) { console.log(err) }
-        taroSession.post('/friends/request/6/9').end((err, res) => {
+        taroSession.post('/friends/test/request/6/9').end((err, res) => {
           if (err) { console.log(err) }
-          taroSession.post('/friends/request/6/10').end((err, res) => {
+          taroSession.post('/friends/test/request/6/10').end((err, res) => {
             if (err) { console.log(err) }
             taroSession.post('/friends/outgoing/6').end((err, res) => {
               if (err) { console.log(err) }
@@ -75,13 +75,13 @@ describe('Test Server', function () {
   })
 
   it('test incoming friends', function (done) {
-    taroSession.post('/friends/request/7/11').end((err, res) => {
+    taroSession.post('/friends/test/request/7/11').end((err, res) => {
       if (err) { console.log(err) }
-      taroSession.post('/friends/request/8/11').end((err, res) => {
+      taroSession.post('/friends/test/request/8/11').end((err, res) => {
         if (err) { console.log(err) }
-        taroSession.post('/friends/request/9/11').end((err, res) => {
+        taroSession.post('/friends/test/request/9/11').end((err, res) => {
           if (err) { console.log(err) }
-          taroSession.post('/friends/request/10/11').end((err, res) => {
+          taroSession.post('/friends/test/request/10/11').end((err, res) => {
             if (err) { console.log(err) }
             taroSession.post('/friends/incoming/11').end((err, res) => {
               if (err) { console.log(err) }
