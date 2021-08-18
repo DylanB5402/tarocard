@@ -237,7 +237,7 @@ exports.numCards = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
     const count = favDrinkDB.numCards(uid)
-    res.json({'count' : count})
+    res.json({ count: count })
   }
 }
 

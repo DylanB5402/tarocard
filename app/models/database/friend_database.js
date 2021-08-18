@@ -47,8 +47,8 @@ class FriendDatabase {
   deleteAllTableEntires () {
     return this.db.prepare('DELETE FROM friends;').run()
   }
-  
-  deleteFriendRequest(uid, friendUid) {
+
+  deleteFriendRequest (uid, friendUid) {
     this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(uid, friendUid)
     this.db.prepare('DELETE FROM friends WHERE uid = ? AND friend_uid = ?;').run(friendUid, uid)
   }
@@ -181,20 +181,20 @@ class FriendDatabase {
    * @param {*} uid
    * @returns {Array}
    */
-   getIncomingFriendDataByUid (uid) {
+  getIncomingFriendDataByUid (uid) {
     return this.db.prepare('SELECT users2.uid, users2.username AS username, users2.display_name AS display_name, users2.profile_picture FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = \'incoming\' ORDER BY LOWER(users2.display_name);').all(uid)
   }
 
-  getRecentFriends(uid) {
+  getRecentFriends (uid) {
     return this.db.prepare('SELECT users2.uid, users2.username AS username, users2.display_name AS display_name, users2.profile_picture FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = \'friends\' ORDER BY friends.timestamp DESC;').all(uid)
   }
 
   /**
    * Format friend data (the result of an SQL query where each row contains a uid, username, display name, and profile picture) into json format
-   * @param {Array} userData 
+   * @param {Array} userData
    * @returns {JSON}
    */
-  formatFriendData(userData) {
+  formatFriendData (userData) {
     const userArray = []
     userData.forEach((user) => {
       userArray.push({

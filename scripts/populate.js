@@ -3,7 +3,7 @@ const axios = require('axios').default
 // names taken from https://www.ssa.gov/oact/babynames/
 const names = ['Olivia', 'Emma', 'Ava', 'Charlotte', 'Sophia', 'Liam', 'Noah', 'Oliver', 'Elijah', 'William']
 
-var url = 'http://localhost:3000'
+const url = 'http://localhost:3000'
 // var url = 'http://132.249.242.96'
 
 names.forEach((name) => {
@@ -45,7 +45,7 @@ axios.get(url + '/debug/users/json').then((res) => {
       {
         uid: userIdJSON.Emma,
         friend_uid: userIdJSON[names[i]],
-      status: 'friends'
+        status: 'friends'
       }).then((res) => {
     }).catch((err) => {
       console.log(err)

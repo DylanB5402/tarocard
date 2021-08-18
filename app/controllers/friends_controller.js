@@ -138,12 +138,13 @@ exports.recentFriends = (req, res) => {
   // console.log(friendDb.getRecentFriends(req.session.uid))
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    var friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    friendArray.splice(10)
+    // only display last 10 friend requests
     res.json({ users: friendArray, success: false })
   } else {
     res.json({ users: [], success: false })
   }
-  // res.send('687')
 }
 
 /**
