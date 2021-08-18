@@ -44,7 +44,6 @@ class GroupDatabase {
   }
 
   /**
-   * TODO:
    * Gets a group of a user by group id. The group is a collection (array) of
    * rows from the table
    * @param {Integer} uid
@@ -52,7 +51,7 @@ class GroupDatabase {
    * @returns {Array[Object]} an array of friend-drink objects (the group)
    */
   getGroup (uid, groupId) {
-    const userDB = new userDatabase.UserDatabase() // Using methods from user_database
+    const userDB = new userDatabase.UserDatabase()
 
     // Safety check
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
@@ -68,7 +67,6 @@ class GroupDatabase {
   }
 
   /**
-   * TODO:
    * Get all Groups associated with a specific user
    * Want to return group card info i.e. just id and name to display as preview
    * @param {Integer} uid
@@ -80,9 +78,9 @@ class GroupDatabase {
     // Safety Check
     if (userDB.getUserByUID(uid)) {
       // SQL Statement:
-      //   selects all groups with the same uid from the table, sorted by alphabetical order
-      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name FROM groups WHERE uid = ? ' +
-              'ORDER BY group_name')
+      //   selects all distinct groups with the same uid from the table, sorted by alphabetical order
+      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name ' + 
+              'FROM groups WHERE uid = ? ORDER BY group_name')
       const query = stmt.all(uid) // an array of row objects containing group id and group name
 
       return query
@@ -119,10 +117,9 @@ class GroupDatabase {
     const userDB = new userDatabase.UserDatabase()
 
     // Check if user id exists in other DBs in the first place
-    if (!userDB.getUserByUID(uid)) {
-      return null
-    } else {
-      const emptyData = this.db.prepare('select count(*) count from (select 1) where exists (select * from groups);')
+    if (userDB.getUserByUID(uid)) {
+      // Set up to check if the table is empty
+      const emptyData = this.db.prepare('SELECT COUNT(*) count FROM (SELECT 1) WHERE EXISTS (SELECT * FROM groups);')
       const emptyQuery = emptyData.get()
       const empty = emptyQuery.count
 
@@ -139,10 +136,9 @@ class GroupDatabase {
       }
       if (query.changes === 1) {
         return query.lastInsertRowid
-      } else {
-        return null
-      }
+      } 
     }
+    return null
   }
 
   /**
@@ -199,6 +195,13 @@ class GroupDatabase {
     }
   }
 
+  /**
+   * 
+   * @param {Integer} uid 
+   * @param {Integer} groupId 
+   * @param {String} groupName 
+   * @returns 
+   */
   editGroupName(uid, groupId, groupName) {
     const userDB = new userDatabase.UserDatabase()
     
@@ -216,10 +219,6 @@ class GroupDatabase {
       return false
     }
   }
-
-  // Need an edit group method
-  // Implementation is to modify the drink desc in database and to keep uid and
-  // drinkId pair the same in groups_database.js
 
   /**
   * Removes an entire group for a user

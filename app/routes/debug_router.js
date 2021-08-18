@@ -58,4 +58,6 @@ router.get('/drinks/count', debugController.numCards)
 
 router.get('/drinks/displayHomePage', debugController.displayCardsHomePage)
 
+router.get('/usersDrinks', debugController.allUsersDrinks)
+
 module.exports = router

@@ -272,7 +272,7 @@ class FavDrinksDatabase {
     const stmt = this.db.prepare('SELECT * FROM fav_drinks')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return query
   }
 
   purgeDb () {

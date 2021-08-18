@@ -269,3 +269,29 @@ exports.displayCardsHomePage = (req, res) => {
     res.json({ drinks: [], success: false })
   }
 }
+
+/**
+ * Outputs fav_drinks table
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.allUsersDrinks = (req, res) => {
+    const allPairs = favDrinksDB.toString() // temp, will format better in future
+    const pairsArray = []
+
+    // drink object: {uid, drink_id, fav, date}
+    // Iterate through the array of pairs and make objects out of their properties
+    allPairs.forEach((entry) => {
+      // TODO: REDO Establishments so that it gets the name:
+      // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
+      pairsArray.push({
+        uid: entry.uid,
+        drink_id: entry.drink_id,
+        fav: entry.fav,
+        date: entry.date
+      })
+    })
+
+    // send the custom drink array as a json
+    res.json({ pairs: pairsArray, success: true })
+}
