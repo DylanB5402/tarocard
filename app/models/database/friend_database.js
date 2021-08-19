@@ -35,7 +35,8 @@ class FriendDatabase {
     if (friendStatus === undefined) {
       return this.db.prepare('INSERT INTO friends VALUES (?, ?, ?, datetime(\'now\'));').run(uid, friendUid, status)
     } else {
-      return FriendStatus.NONE
+      // return FriendStatus.NONE
+      return undefined
     }
   }
 
@@ -87,7 +88,7 @@ class FriendDatabase {
     if (row !== undefined) {
       return row.status
     } else {
-      return FriendStatus.NONE
+      return undefined
     }
   }
 

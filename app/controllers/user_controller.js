@@ -20,7 +20,7 @@ exports.signup = (req, res) => {
     const email = req.body.email
     const password = req.body.password
     const repeatPassword = req.body.repeatPassword
-    const username = email
+    const username = req.body.username
     if (password !== repeatPassword) {
       res.redirect('/sign-up.html')
     } else {
@@ -94,7 +94,10 @@ exports.profileById = (req, res) => {
         res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
       } else {
         res.append('profileaccess', 'successful')
-        const friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
+        var friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
+        if (friendStatus == undefined) {
+          friendStatus = friendDatabase.FriendStatus.NONE
+        }
         console.log(friendStatus)
         // currently friends
         if (friendStatus === friendDatabase.FriendStatus.FRIENDS) {

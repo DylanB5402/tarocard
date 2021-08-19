@@ -20,6 +20,7 @@ function populateFriends (obj) {
   div = template.content.querySelector('.friendElement')
   divHeader = template.content.querySelector('#headerElement')
   const users = obj.users
+  console.log(obj)
   currentLetter = users[0]['display name'].charAt(0).toUpperCase()
   divHeaderCopy = document.importNode(divHeader, true)
   divHeaderCopy.querySelector('h1').textContent = currentLetter
