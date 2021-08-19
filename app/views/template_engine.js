@@ -26,28 +26,27 @@ class TemplateEngine {
     })
   }
 
-  getFriendProfile(profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
+  getFriendProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
     return this.generateFriendProfile({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
       numCards: numberCards,
-      frienduid : friendUserID
+      frienduid: friendUserID
     })
   }
 
-  getFriendProfileRequest(profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
+  getFriendProfileRequest (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
     return this.generateFriendProfileRequest({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
       numCards: numberCards,
-      frienduid : friendUserID
+      frienduid: friendUserID
     })
   }
-
 }
 
 module.exports = { TemplateEngine }

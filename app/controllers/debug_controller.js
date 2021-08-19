@@ -102,8 +102,15 @@ exports.allFriends = (req, res) => {
 exports.addFriend = (req, res) => {
   const uid = req.body.uid
   const friendUid = req.body.friend_uid
-  const status = req.body.status
+  var status = req.body.status
+  console.log(friendUid)
   friendDb.insertFriend(uid, friendUid, status)
+  if (status === friendDatabase.FriendStatus.INCOMING) {
+    status = friendDatabase.FriendStatus.OUTGOING
+  } else if (status === friendDatabase.FriendStatus.OUTGOING) {
+    status = friendDatabase.FriendStatus.INCOMING
+  }
+  friendDb.insertFriend(friendUid, uid, status)
   res.redirect('/debug/friends')
 }
 
@@ -275,9 +282,9 @@ exports.displayCardsHomePage = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.allUsersDrinks = (req, res) => {
-    // send the custom drink array as a json
-    res.json({ pairs: favDrinksDB.toString(), success: true })
+exports.allUsersDrinks = (req, res) => {
+  // send the custom drink array as a json
+  res.json({ pairs: favDrinksDB.toString(), success: true })
 }
 
 exports.editGroupName = (req, res) => {
