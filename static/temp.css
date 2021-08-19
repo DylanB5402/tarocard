@@ -391,9 +391,9 @@ li:last-child{
 }
 
 
-.userInput{
+/* .userInput{
     text-align: center;
-}
+} */
 
 .small-input::placeholder {
     color: #CBBCE2;
@@ -806,7 +806,7 @@ li:last-child{
     overflow-y: scroll;
 }
 
-#userEmail, #userPassword, #confirmPass {
+#userEmail, #userPassword, #confirmPass, #username {
     border-radius: 10px;
     border: 1px solid white;
     color:white;
@@ -851,7 +851,8 @@ li:last-child{
 #userEmail::placeholder,
 #userPassword::placeholder,
 #confirmPass::placeholder,
-#accRecovery::placeholder {
+#accRecovery::placeholder,
+#username::placeholder {
     color: white;
     text-align: left;
 }
