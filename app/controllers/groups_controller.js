@@ -114,7 +114,7 @@ exports.editGroupName = (req, res) => {
     const groupId = req.params.groupId
     const groupName = req.body.groupName
 
-    groupDB.editGroupName(uid, groupdId, groupname)
+    groupDB.editGroupName(uid, groupId, groupName)
 
     res.redirect('back')
   } else {
