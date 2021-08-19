@@ -2,10 +2,12 @@ const userDatabase = require('../models/database/user_database')
 const friendDatabase = require('../models/database/friend_database')
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const templateEngine = require('../views/template_engine')
+const config = require('../config.json') 
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 const friendDb = new friendDatabase.FriendDatabase()
 const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
+
 
 /**
  * @param {!import('express').Request} req
@@ -112,7 +114,6 @@ exports.editProfile = (req, res) => {
  */
 exports.editPage = (req, res) => {
   if (req.session.loggedin) {
-    // res.redirect('/editProfilePage/edit.html')
     const userData = userDB.getUserDataByID(req.session.uid)
     res.send(tempEngine.getEditProfilePage(userData.username, userData.display_name, userData.bio))
   } else {
@@ -152,7 +153,19 @@ exports.getBanner = (req, res) => {
   if (req.session.loggedin) {
     res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
   } else {
-    res.redirect('/assets/coolWallpaper.png')
+    res.redirect(config.defaults.defaultBanner)
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.getFriendBanner = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getBannerPathByUID(req.params.friendUID).banner)
+  } else {
+    res.redirect(config.defaults.defaultBanner)
   }
 }
 
@@ -160,15 +173,15 @@ exports.getProfilePicture = (req, res) => {
   if (req.session.loggedin) {
     res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
   } else {
-    res.redirect('/assets/pfp-placeholder.png')
+    res.redirect(config.defaults.defaultPfp)
   }
 }
 
-exports.getProfilePictureFriend = (req, res) => {
+exports.getFriendProfilePicture = (req, res) => {
   if (req.session.loggedin) {
     const friendUID = req.params.friendUID
     res.redirect(userDB.getProfilePicturePathByUID(friendUID).profile_picture)
   } else {
-    res.redirect('/assets/pfp-placeholder.png')
+    res.redirect(config.defaults.defaultPfp)
   }
 }

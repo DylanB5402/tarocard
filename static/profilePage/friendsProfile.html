@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>${display-name} | Taro Cards</title>
+    <title>${displayName} | Taro Cards</title>
 
     <link rel="icon" href="../assets/TaroCardTransparent 1.png">
 
@@ -37,7 +37,7 @@
     </div>
     <div>
         <!-- banner will pull from user DB -->
-        <img src="../assets/banner-default.png" id="banner">
+        <img src="/banner/" + friendUID id="banner">
         <!-- <button class="settings-menu">
             <a href="..\settingPages\settingsMain.html">
                 <img src="../assets/menu-white.png" id="settings-menu">
@@ -47,7 +47,7 @@
 
     <section id="profileTop">
         <!-- pfp will pull from user DB -->
-        <img src="../assets/pfp-default.png" id="profilePic">
+        <img src="/pfp/" + friendUID id="profilePic">
 
         <div class="accept-deny">
             <button type="button" id="add-accept">Accept</button>
@@ -60,20 +60,17 @@
 
 
         <section id="profileText">
-            <h2 id="displayName">Someone's friend</h2>
+            <h2 id="displayName"> #{displayName} </h2>
 
             <aside id="user-handle">
-                <h3 id="user-at">@thefriendlyfriend</h3>
+                <h3 id="user-at">@#{username}</h3>
             </aside>
 
 
             <!-- Max characters around 150 for description-->
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
-                <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
-                MAX CHAR LENGTH: 150. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula
-                eget dolor. Aenean massa. Cum sociis natoque pen
+                #{bio}                
             </p>
         </section>
 
@@ -83,14 +80,14 @@
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p>1000
+                <p>#{numFriends} 
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p>1000
+                <p>#{numCards} 
                     <span> Cards</span>
                 </p>
             </div>
