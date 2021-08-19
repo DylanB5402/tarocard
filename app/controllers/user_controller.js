@@ -85,8 +85,8 @@ exports.profileById = (req, res) => {
     const bio = profileData.bio
     const username = profileData.username
     const displayName = profileData.display_name
-    const numCards = 0
-    const numFriends = 0
+    const numCards = favDrinksDb.numCards(uid)
+    const numFriends = friendDb.getNumFriends(uid)
     if (req.session.loggedin) {
       if (req.session.uid.toString() === uid) {
         // res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
