@@ -80,7 +80,6 @@ exports.profile = (req, res) => {
  */
 exports.profileById = (req, res) => {
   const uid = req.params.id
-  // console.log(uid)
   const profileData = userDB.getUserByUID(uid)
   if (profileData !== undefined) {
     const bio = profileData.bio
@@ -89,9 +88,9 @@ exports.profileById = (req, res) => {
     const numCards = 0
     const numFriends = 0
     if (req.session.loggedin) {
-      // console.log(req.session.uid)
       if (req.session.uid.toString() === uid) {
-        res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
+        // res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
+        res.redirect('/profile')
       } else {
         res.append('profileaccess', 'successful')
         var friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
@@ -102,16 +101,12 @@ exports.profileById = (req, res) => {
         // currently friends
         if (friendStatus === friendDatabase.FriendStatus.FRIENDS) {
           // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
-          res.send('987')
-          // incoming request, accept or deny
+          res.send('987') //current friend
         } else if (friendStatus === friendDatabase.FriendStatus.INCOMING) {
-          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
-          res.send('1678')
-          // pending
+          res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
         } else if (friendStatus === friendDatabase.FriendStatus.OUTGOING) {
           // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
           res.send('1323')
-          // not currently friends
         } else if (friendStatus === friendDatabase.FriendStatus.NONE) {
           res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, numFriends, numCards, uid))
         }
