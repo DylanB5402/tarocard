@@ -1,34 +1,48 @@
-<!DOCTYPE html>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-<html>
-    <head>
-        <title> Taro Cards </title>
-        <link rel="stylesheet" href="./index.css">
-    </head>
-    <body> 
-            <div class="appName">
-                <h1> Taro Cards </h1>
-                <img src="./assets/TaroCardTransparent 2.png">
-            </div>
-            <div class="userInfo">
-                <form action="/login" method="post">
-                <input type="text" class="userInput" id="userEmail" placeholder="Email" name="email">
-                <input type="password" class="userInput" id="userPassword" placeholder="Password" name="password">
-                <input id='login-button' type="submit" value="Login"> 
-                </form>
-                <!-- After form submits, server checks and will redirect them toward the homepage! -->
-                <p id="noAcc"> <a href="sign-up.html"> Don't have an account? <strong> Sign Up.</strong> </a> </p>
-                <div class="container">
-                    <hr style="width: 50%; height: 0.1px;">
-                    <p style="color:white" id="or"> or </p>
-                    <hr style="width: 50%; height: 0.1px;">
-                </div>
-                <h3> <a href="./forgot-password/forgot-pass.html"> Forgot Password? </a> </h3>
-        </div>
-
-
-
-            <script  type="text/javascript" src="app.js"></script>
-    </body>
+<!DOCTYPE html>	
+<html>	
+    <head>	
+        <title>Login | Taro Cards</title>	
+        <link rel="icon" href="assets\TaroCardTransparent 1.png">	
+        <!--<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">-->	
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">	
+        <link rel="preconnect" href="https://fonts.googleapis.com">	
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>	
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">	
+        <!--<link rel="stylesheet" href="./index.css">-->	
+        <link rel="stylesheet" href="./temp.css"><!---->	
+    </head>	
+    <body class="landing"> 	
+            <div class="appName">	
+                <h1 id="title-landing"> Taro Cards </h1>	
+                <img src="./assets/TaroCardTransparent 2.png" id="landing-logo">	
+            </div>	
+            <div class="userInfo">	
+                <form action="/login" method="post" id="login">	
+                    <input	
+                        type="email"	
+                        class="userInput"	
+                        id="userEmail"	
+                        placeholder="Email"	
+                        name="email">	
+                    <input	
+                        type="password"	
+                        class="userInput"	
+                        id="userPassword"	
+                        placeholder="Password"	
+                        name="password">	
+                    <input	
+                        id='landing-button'	
+                        type="submit"	
+                        value="Login"> 	
+                </form>	
+                <!-- After form submits, server checks and will redirect them toward the homepage! -->	
+                <p id="noAcc"> <a href="sign-up.html"> Don't have an account? <strong> Sign Up.</strong> </a> </p>	
+                <div class="container">	
+                    <hr style="width: 50%; height: 0.1px;">	
+                    <p style="color:white" id="or"> or </p>	
+                    <hr style="width: 50%; height: 0.1px;">	
+                </div>	
+                <h3 id="forgot-pass"> <a href=".\forgotPassword\forgotPassword.html"> Forgot Password? </a> </h3>	
+        </div>	
+    </body>	
 </html>

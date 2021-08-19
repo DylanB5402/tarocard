@@ -10,7 +10,7 @@ userDb.deleteAllTableEntries()
 
 describe('Testing UserDatabase', function () {
   it('Test Database Schema', function () {
-    const tableSchema = 'CREATE TABLE users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB)'
+    const tableSchema = 'CREATE TABLE users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture TEXT, banner TEXT)'
     assert.equal(userDb.getSchema().sql, tableSchema)
   })
 
@@ -80,17 +80,17 @@ describe('Testing UserDatabase', function () {
   })
 
   it('Test searchDatabase', function () {
-    userDb.insertNewUser('search_user1@email.com', 'password', 'search_user1')
+    const uid = userDb.insertNewUser('search_user1@email.com', 'password', 'search_user1')
     userDb.insertNewUser('search_user2@email.com', 'password', 'search_user2')
     userDb.insertNewUser('search_user3@email.com', 'password', 'search_user3')
     userDb.insertNewUser('search_user4@email.com', 'password', 'search_user4')
     // console.log(userDb.searchDatabase('search'))
-    const users = userDb.searchDatabase('search')
+    const users = userDb.searchDatabase('search', uid)
     const usersArr = []
     users.forEach((user) => {
       usersArr.push(user.username)
     })
-    expect(usersArr).to.be.containingAllOf(['search_user1', 'search_user2', 'search_user3', 'search_user4'])
+    expect(usersArr).to.be.containingAllOf(['search_user2', 'search_user3', 'search_user4'])
   })
 }
 )

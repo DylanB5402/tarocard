@@ -4,23 +4,32 @@
 
 html {
     min-height: 100%;
+    margin: 0;
     background-color: #EFEFEF;
 } 
 
-
 /* EDIT START */
+.body, .notifs {	
+    /* position: relative;	 */
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    /*top: 150px;	/**/
+}
 
-
-.page-header {
-    background-color: white;
-    /*opacity: 0.5;/**/
-    height: 150px;
-    max-width: 100%;
-    padding-left: 80px;
+.page-header {	
+    background-color: white;	
+    /*opacity: 0.5;/**/	
+    height: 150px;	
+    max-width: 100%;	
+    min-width: 100%;	
+    padding-left: 80px;	
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.199);
-    /*position: fixed;/**/
-    z-index: 2;
-    /*border: dotted blue;/**/
+    position: fixed;
+    top: 0px;
+    /*position: fixed;/**/	
+    z-index: 2;	
+    /*border: dotted blue;/**/	
 }
 
 .page-header span {
@@ -60,12 +69,21 @@ html {
     position: absolute;
     right: 4%;
     top: 1%;
-
 }
 
 #settings-menu {
     height: 60px;
     width: 60px;
+}
+
+#logout {
+    text-decoration: none;
+    color: black
+}
+
+#logout:visited {
+    text-decoration: none;
+    color: black;
 }
 
 .edit {
@@ -98,6 +116,8 @@ input {
     height: 80px;
     display: block;
     object-position: center;
+    border: none;
+    outline: none;
 }
 
 input[type=text] {
@@ -287,10 +307,11 @@ ul {
 
 .option-btn {
     position: absolute;
-    left: 93%;
+    left: 90%;
     z-index: 0;
     height: 30px;
     top: 10px;
+    margin: 10px;
 }
 
 li {
@@ -320,7 +341,7 @@ li:last-child{
 #add-card-btn{
     position: fixed;
     left: 84vw;
-    top: 80vh;
+    top: 70vh;
     width: 8vh;
     height: 8vh;
     font-size: 5vh;
@@ -351,31 +372,34 @@ li:last-child{
 }
 
 .small-input{
-    border-radius: 10px;
-    border: 2px solid rgb(255, 255, 255);
+    border-radius: 15px;
+    /* border: 2px solid rgb(255, 255, 255); */
     color: black;
     padding: 15px;
     width: 80vw;
     display: block;
     height: 4vw;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #F7F7F7;
     position: relative;
     margin: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: 2vh;
     top: 10vh;
     margin: 2.5vh ;
-
+    border: none;
+    outline: none;
 }
 
 
-.userInput{
+/* .userInput{
     text-align: center;
+} */
+
+.small-input::placeholder {
+    color: #CBBCE2;
 }
 
-.small-input::placeholder{
-    color: rgba(205, 93, 233, 0.5);
-}
+
 
 .large-input{
     border-radius: 10px;
@@ -462,6 +486,8 @@ li:last-child{
 
 .cardContainer{
     padding-top: 10vh;
+    height: 10%;
+    overflow-y: scroll;
 }
 
 .tag-pf-container{
@@ -486,17 +512,38 @@ li:last-child{
     margin-top: 0px;
 }
 
+.card-date {
+    position: absolute;
+    bottom: 0%;
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
 /* Stands for add to a groupOrder Button */
 .add-gO-btn { 
     display: block;
     position: absolute;
-    width: 5%;
-    font-size: 40px;
+    width: 20px;
+    font-size: 20px;
+    border: 4px rgba(151, 121, 197, 0.863) solid;
+    text-align: center;
+    left: 83%;
+    top: 5px;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+.add-gO-btn-friend { 
+    display: block;
+    position: absolute;
+    width: 20px;
+    font-size: 20px;
     border: 4px rgba(151, 121, 197, 0.863) solid;
     text-align: center;
     left: 90%;
     top: 5px;
     border-radius: 10px;
+    margin: 10px;
   }
 
   .add-gO-btn:hover{ 
@@ -518,9 +565,10 @@ li:last-child{
 
 
 .pfp-pic{
-    width: 7vw;
-    height: 7vw;
+    width: 50px;
+    height: 50px;
     min-height: 30px;
+    max-height: 90px;
     min-width: 30px;
     border-radius: 50%;
     position: absolute;
@@ -534,7 +582,7 @@ li:last-child{
 .modal{
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     margin: auto;
     background-color: white;
@@ -545,7 +593,7 @@ li:last-child{
 }
 
 .modal-GO{
-    display: block;
+    display: none;
     position: fixed;
     z-index: 2;
     margin: auto;
@@ -639,18 +687,20 @@ li:last-child{
 
 .group-card {
     width: 87vw;
+    height: 10vh;
     max-width: 800px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     position: relative;
-    border: 4px solid black;
+    /* border: 4px solid black; */
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
+    background-image: url('https://media.discordapp.net/attachments/860617896655716372/877341875445588008/unknown.png');
+    
 }
 
 
@@ -751,9 +801,12 @@ li:last-child{
     width:  250px;
 }
 
+#cardContainer{
+    max-height: 80vh;
+    overflow-y: scroll;
+}
 
-
-#userEmail, #userPassword, #confirmPass {
+#userEmail, #userPassword, #confirmPass, #username {
     border-radius: 10px;
     border: 1px solid white;
     color:white;
@@ -798,7 +851,8 @@ li:last-child{
 #userEmail::placeholder,
 #userPassword::placeholder,
 #confirmPass::placeholder,
-#accRecovery::placeholder {
+#accRecovery::placeholder,
+#username::placeholder {
     color: white;
     text-align: left;
 }
@@ -943,6 +997,40 @@ h3 a{
     right: 100px;
 }
 
+#add-accept {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 60px;
+    right: 100px;
+}
+
+#deny {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 145px;
+    right: 100px;
+}
+
 #edit-profile a {
     text-decoration: none;
     color:#9879C5;
@@ -955,17 +1043,18 @@ h3 a{
     text-align: left;
     left: 50px;
     margin-bottom: 0px;
- 
 }
 
 #displayName {
-    width: 300px;
+    width: 500px;
     height: 50px;
-    font-size: 75px;
+    font-size: 50px;
     position: absolute;
-    top: 100px;
+    top: 110px;
     left: 100px;
     font-weight: medium;
+    flex-wrap: wrap;
+    /*background-color: red; /**/
 }
 
 #user-handle {
@@ -975,9 +1064,10 @@ h3 a{
     position: absolute;
     margin-left: 100px;
     font-weight: lighter;
-    top:180px;
+    top: 170px;
     color: #C1C1C1;
 }
+
 #user-at {
     font-weight: lighter;
 }
@@ -988,10 +1078,32 @@ h3 a{
     max-width: 1000px;
     font-size: 28px;
     position: absolute;
-    top: 240px;
+    top: 235px;
     left: 100px;
     right:200px;
     
+}
+
+.friend-button {
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    bottom: 16%;
+    left: 10%;
+}
+
+.friend-button a {
+    font-size: 32px;
+    color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.friend-button a:visited {
+   
+    text-decoration: none;
 }
 
 .user-stats {
@@ -1023,6 +1135,19 @@ h3 a{
     display: flex;
 }
 
+.to-friends {	
+    background-color: transparent;	
+}	
+.to-friends a{	
+   	
+    text-decoration: none;	
+}	
+.to-friends a:visited {	
+    text-decoration: none;	
+    color: black;	
+}	
+
+
 .my-tab {
     /*background-color: cadetblue;/**/
     width: 50%;
@@ -1040,60 +1165,11 @@ h3 a{
     
 }
 
-
-/* #userStats{
-    align-items: center;
-    width: max-content;
+#friend-link {	
+    width: 200px;	
+    background-color: red;	
 }
 
-#stats {
-    display: inline;
-    text-align: left;
-    width:fit-content;
-    height:fit-content;
-    margin-left: 100px;
-   
-}
-
-.userStats strong {
-    font-weight: bolder;
-    font-size: 60px;
-    background-color: blue;
-}
-
-
-.userStats span {
-    font-weight: 400;
-    font-size: 40px;
-    color: #C1C1C1;
-    background-color: red;
-} */
-
-/* .profileTabs{
-    
-    height:80px;
-    display:inline-flex;
-    justify-content: center;
-    width: 100%;
-    bottom:-20px;
-    background-color: white;
-}
-
-.profileTabs a{
-    width:50%;
-}
-
-.profileTabs img {
-    width: auto;
-    height: 80%;
-    margin-top:5px;
-    margin-bottom: auto;
-    margin-left:45%;
-}
-
-.profileTabs a:hover{
-    background-color: red;
-}*/
 #profileCards {
     background-color: #EFEFEF;
 } 
@@ -1120,6 +1196,60 @@ h3 a{
     margin-inline: 10px;
 }
 
+/* TABS */
+.mytabs {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.mytabs input[type="radio"] {
+    display: none;
+}
+.mytabs label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 50%;
+    text-align: center;
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background: #EFEFEF;
+    order: 1;
+    display: none;
+}
+.mytabs .tab h2 {
+    font-size: 3em;
+}
+
+.mytabs .tab p {
+    font-size: 30px;
+}
+
+.mytabs .tab-icon {
+    width: 100px;
+    filter:grayscale(100%)
+}
+
+.mytabs input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked + label {
+    color: purple;
+    font-weight: bold;
+    background: white;
+}
+
+.mytabs input[type="radio"]:checked + label img {
+    filter: none;
+}
+
 
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -1131,6 +1261,7 @@ h3 a{
     width: 100%;
     display: flex; 
     justify-content: center;
+    z-index: 2;
   }
 
   .navbar img {
@@ -1179,7 +1310,7 @@ h3 a{
   margin-bottom: 10px;
 }
 
-#edit-profile {
+#edit-profile  {
     font-size: 32px;
     font-weight: medium;
     border: solid 3px #9879C5;
@@ -1191,7 +1322,32 @@ h3 a{
     width: 260px;
 }
 
-button #edit-profile {
+#add-accept {
+    font-size: 32px;
+    font-weight: medium;
+    /* border: solid 3px #9879C5; */
+    text-align: center;
+    color: white;
+    background-color: #9879C5;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+#deny {
+    font-size: 32px;
+    font-weight: medium;
+    border: solid 3px #9879C5;
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+button #edit-profile, 
+#add-accept, #deny {
     right: 100px;
 }
 
@@ -1223,7 +1379,7 @@ button #edit-profile {
     background-color: white;
 }
 
-#user-search {
+#user-search, #friend-search {
     border-radius: 40px;
     outline: none;
     padding-left: 110px;
@@ -1363,9 +1519,43 @@ button #edit-profile {
     left: 85%;
 }
 
+
+
 #FriendRequest-arrow {
     height: 99px;
     width: 58px;
+}
+
+.FriendNotifs {
+    width: 100%;
+    height: 175px;
+    background-color: white;
+    text-align: left;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);
+    margin-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FriendNotifs img {
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    object-position: center;
+    object-fit: cover;
+    position: relative;
+    top: 25px;
+    left: 70px;
+}
+
+.FriendNotifs p {
+    width: fit-content;
+    height: fit-content;
+    font-size: 40px;
+    font-weight: normal;
+    position: relative;
+    left: 255px;
+    bottom: 70px;
 }
 
 .ActivityLinks {
@@ -1373,6 +1563,19 @@ button #edit-profile {
     text-decoration: none;
 }
 
+#ActivityHeader {
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 25px;
+    color: rgb(152, 121, 197);
+    margin-left: 40px;
+    position: relative;
+    bottom: 100px;
+}
+
+#containAllRecent {
+    margin-top: 200px;
+}
 
 .requestElement {
     width: 100%;
@@ -1520,15 +1723,6 @@ button #edit-profile {
     right: 0;
 }
 
-#logout {
-    text-decoration: none;
-}
-
-#logout:visited {
-    text-decoration: none;
-    color: black;
-}
-
 #settings-arrow {
     width: 32px;
 }
@@ -1647,5 +1841,87 @@ button #edit-profile {
     width: 30px;
     position: absolute;
     left: 85%;
-    top: 5%;
+    top: 2%;
+    margin-top: 0px;
 }
+
+
+/* Group Order View Form */
+
+	
+/* FRIEND LIST START */	
+#friendsAll {	
+    margin-bottom: 150px;	
+}	
+.friends {	
+    margin-top: 5%;	
+    overflow: hidden;	
+}	
+.friendElement {	
+    width: 97%;	
+    height: 225px;	
+    background-color: white;	
+    text-align: left;	
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.096), 0 1px 1px 0 rgba(0, 0, 0, 0.096);	
+    margin-top: 1px;	
+    margin-left: auto;	
+    margin-right: auto;	
+}	
+.friendElement img {	
+    border-radius: 50%;	
+    height: 175px;	
+    width: 175px;	
+    object-position: center;	
+    object-fit: cover;	
+    position: relative;	
+    top: 25px;	
+    left: 70px;	
+}	
+.friendElement h2 {	
+    width: fit-content;	
+    height: fit-content;	
+    font-size: 40px;	
+    font-weight: bold;	
+    position: relative;	
+    left: 260px;	
+    bottom: 115px;	
+}	
+.friendElement h3 {	
+    height: fit-content;	
+    width: fit-content;	
+    font-size: 30px;	
+    font-weight: lighter;	
+    color: rgba(187, 185, 185, 0.795);	
+    position: relative;	
+    left: 255px;	
+    bottom: 110px;	
+}	
+#letterHeading {	
+    color: rgb(146, 106, 255);	
+    height: fit-content;	
+    width: fit-content;	
+    font-weight: lighter;	
+    font-size: 50px;	
+    position: relative;	
+    margin-top: 80px;	
+    left: 30px;	
+    bottom: 10px;	
+}	
+#headingLine {	
+    display: block;	
+    height: 3px;	
+    border: 0;	
+    border-top: 3px solid rgb(146, 106, 255);;	
+    padding: 0;	
+    position: relative;	
+    bottom: 40px;	
+    left: 80px;	
+    width: 90%;	
+}	
+/* FRIEND LIST END */
+
+
+
+/* java -> camel case -> heyBestiesBestDrink
+python -> underscores -> hey_besties_best_drink
+HTML -> dashes -> hey-besties-best-drink */

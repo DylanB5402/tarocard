@@ -8,22 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="jquery-3.6.0.min.js"></script>
+    <script src="../jquery-3.6.0.min.js"></script>
 
     <link rel="stylesheet" href="../temp.css">
 </head>
 
 <div class="page-header">
-    <a href="../Profile Page/Profile_Page_TaroCards.html"><img src="../assets/Back.png" id="back"></a>
+    <a href="/profile"><img src="../assets/Back.png" id="back"></a>
     <span>Edit Profile</span>
 </div>
 
-<body class="edit-page">
+<body class="edit-page" style="margin-top: 150px;">
     <div class="edit"> 
-        <form action="edit.html" method="POST" id="edit" >
+        <form action="/edit/profile" method="POST" id="edit" >
             <div class="banner">
-                <img src="coolWallpaper.png" id="banner">
-
+                <img src="/banner" id="banner">
                 <label id="imgInputBanner" for="inputBanner" class="upload-img-a">
                     <img src="../assets/upload-img-circle.png" class="upload-img" id="upload-banner">
                     <!--<i style="color: blue;" class="fa fa-camera fa-5x" aria-hidden="false"></i>-->
@@ -36,7 +35,7 @@
             </div>
 
             <div class="pfp">
-                <img src="WhatsApp Image 2020-09-11 at 11.06.06 AM.jpeg" id="profilePic">
+                <img src="/pfp" id="profilePic">
 
                 <label id="imgInputProfilePic" for="inputProfilePic" class="upload-img-a">
                     <img src="../assets/upload-img-circle.png" class="upload-img" id="upload-pfp">
@@ -58,7 +57,7 @@
                     name="display-name"
                     id="display-name"
                     class="edit-input"
-                    value="[placeholder]">
+                    value= #{displayName}>
                 <br>
 
                 <label for="username" class="label">Username</label><br>
@@ -67,7 +66,7 @@
                     name="username"
                     id="username"
                     class="edit-input"
-                    value="[@username]">
+                    value=#{username}>
                 <br>
         
                 <label for="bio" class="label">Bio</label><br>
@@ -76,7 +75,8 @@
                     name="bio"
                     maxlength="150"
                     class="edit-input"
-                    value="this is a bio">
+                    value=#{bio}
+                    placeholder=#{bio}>
                 </textarea>
                 <br>
         
@@ -99,6 +99,12 @@
             var tmppath = URL.createObjectURL(event.target.files[0]);
             currentProfilePic.src = tmppath;
         })
+
+        $('#bio').keypress(function(event) {
+            if (event.keyCode == 13) {
+            event.preventDefault();
+            }
+        });
     </script>
     
 </body>

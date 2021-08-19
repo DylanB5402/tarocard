@@ -1,5 +1,4 @@
 const friendDatabase = require('../models/database/friend_database')
-const userDatabase = require('../models/database/user_database')
 
 const friendDb = new friendDatabase.FriendDatabase()
 
@@ -7,8 +6,8 @@ const friendDb = new friendDatabase.FriendDatabase()
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.request = (req, res) => {
-  const uid = req.params.uid
+exports.requestLegacy = (req, res) => {
+  const uid = req.session.uid
   const friendUid = req.params.friendUid
   if (friendDb.sendFriendRequest(uid, friendUid)) {
     res.send('success')
@@ -21,8 +20,8 @@ exports.request = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.accept = (req, res) => {
-  const uid = req.params.uid
+exports.acceptLegacy = (req, res) => {
+  const uid = req.session.uid
   const friendUid = req.params.friendUid
   if (friendDb.acceptFriendRequest(uid, friendUid)) {
     res.send('success')
@@ -38,16 +37,8 @@ exports.accept = (req, res) => {
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.getFriendDataByUid(uid)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': '',
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
@@ -78,7 +69,7 @@ exports.incomingFriends = (req, res) => {
  */
 exports.friendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/friends-page/Friends_Page.html')
+    res.redirect('/friendsPage/friendsPage.html')
   } else {
     res.redirect('/')
   }
@@ -90,21 +81,81 @@ exports.friendsPage = (req, res) => {
  */
 exports.searchFriends = (req, res) => {
   const search = req.body.string
-  // res.send('687')
   if (req.session.loggedin) {
     const uid = req.session.uid
-    const friendArray = []
     const currentFriends = friendDb.searchFriends(uid, search)
-    currentFriends.forEach((friend) => {
-      friendArray.push({
-        'display name': friend.display_name,
-        username: friend.username,
-        'image url': '',
-        id: friend.uid
-      })
-    })
+    const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
   } else {
     res.json({ users: [], success: false })
   }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.listIncomingFriends = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const incomingFriends = friendDb.getIncomingFriendDataByUid(uid)
+    const friendArray = friendDb.formatFriendData(incomingFriends)
+    res.json({ users: friendArray, success: true })
+  } else {
+    res.json({ users: [], success: false })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.recentFriends = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const friendArray = friendDb.formatFriendData(friendDb.getRecentFriends(uid))
+    friendArray.splice(10)
+    res.json({ users: friendArray, success: false })
+  } else {
+    res.json({ users: [], success: false })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.request = (req, res) => {
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  if (friendDb.sendFriendRequest(uid, friendUid)) {
+    res.send('success')
+  } else {
+    res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.accept = (req, res) => {
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  if (friendDb.acceptFriendRequest(uid, friendUid)) {
+    res.send('success')
+  } else {
+    res.send('failure')
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.deny = (req, res) => {
+  const uid = req.session.uid
+  const friendUid = req.body.id
+  friendDb.deleteFriendRequest(uid, friendUid)
+  res.send('success')
 }

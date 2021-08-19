@@ -9,6 +9,12 @@ const drinksDatabase = require('../models/database/drinks_database')
 const tagsDatabase = require('../models/database/tags_database')
 const establishmentsDatabase = require('../models/database/establishments_database')
 
+const favDrinksDatabase = require('../models/database/fav_drinks_database')
+const favDrinksDB = new favDrinksDatabase.FavDrinksDatabase()
+
+const groupsDatabase = require('../models/database/group_database')
+const groupsDB = new groupsDatabase.GroupDatabase()
+
 const upload = new uploadFile.UploadFile()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
@@ -48,7 +54,6 @@ exports.users = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.usersJSON = (req, res) => {
-  // res.json({ 'users' : userDB.getAllUsers()})
   const allUsers = userDB.getAllUsers()
   const userJSON = {}
   allUsers.forEach((user) => {
@@ -62,7 +67,6 @@ exports.usersJSON = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.debugHome = (req, res) => {
-  // res.send('taco')
   res.redirect('/debug/debug.html')
 }
 
@@ -98,9 +102,8 @@ exports.allFriends = (req, res) => {
 exports.addFriend = (req, res) => {
   const uid = req.body.uid
   const friendUid = req.body.friend_uid
-  // const status = req.body.status
-  // friendDb.insertFriend(uid, friend_uid, status)
-  friendDb.addCurrentFriend(uid, friendUid)
+  const status = req.body.status
+  friendDb.insertFriend(uid, friendUid, status)
   res.redirect('/debug/friends')
 }
 
@@ -199,8 +202,8 @@ exports.drinksReset = (req, res) => {
 
 exports.establishments = (req, res) => {
   // get everything
-  let establishments = establishmentsDB.searchEstablishment('') 
-  let style = 'style="height: 100%; width: 100%; object-fit: cover"'
+  const establishments = establishmentsDB.searchEstablishment('')
+  const style = 'style="height: 100%; width: 100%; object-fit: cover"'
   let htmlBuilder = `
     <p style="font-size:100px">${establishments.length} establishments found</p>
   `
@@ -228,4 +231,61 @@ exports.establishments = (req, res) => {
     </div>`
   })
   res.send(htmlBuilder)
+}
+
+exports.numCards = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const count = favDrinkDB.numCards(uid)
+    res.json({ count: count })
+  }
+}
+
+exports.displayCardsHomePage = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.session.uid
+    const allDrinksHP = favDrinksDB.displayDrinksToHomePage(uid) // temp, will format better in future
+    const drinkArray = []
+
+    // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
+    // Iterate through the array of drinks and make objects out of their properties
+    allDrinksHP.forEach((drink) => {
+      // TODO: REDO Establishments so that it gets the name:
+      // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
+      drinkArray.push({
+        'friend uid': drink.friend_uid,
+        'drink name': drink.drink_name,
+        'drink desc': drink.drink_desc,
+        establishment: drink.establishment_id,
+        'image url': drink.drink_img,
+        'drink id': drink.drink_id,
+        date: drink.date
+      })
+    })
+
+    // send the custom drink array as a json
+    res.json({ drinks: drinkArray, success: true })
+  } else {
+    res.json({ drinks: [], success: false })
+  }
+}
+
+/**
+ * Outputs fav_drinks table
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.allUsersDrinks = (req, res) => {
+    // send the custom drink array as a json
+    res.json({ pairs: favDrinksDB.toString(), success: true })
+}
+
+exports.editGroupName = (req, res) => {
+  const uid = req.body.uid
+  const groupId = req.body.groupId
+  const groupName = req.body.groupName
+
+  groupsDB.editGroupName(uid, groupId, groupName)
+
+  res.redirect('/groups/getGroup/' + groupId)
 }

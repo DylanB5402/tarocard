@@ -15,12 +15,12 @@ friendDb.deleteAllTableEntires()
 
 describe('Testing UserDatabase and FriendDatabase', function () {
   it('Test User Database Schema', function () {
-    const tableSchema = 'CREATE TABLE users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB)'
+    const tableSchema = 'CREATE TABLE users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture TEXT, banner TEXT)'
     assert.equal(userDb.getSchema().sql, tableSchema)
   })
 
   it('Test Friend Database Schema', function () {
-    const schema = 'CREATE TABLE friends (uid INTEGER, friend_uid INTEGER, status INTEGER)'
+    const schema = 'CREATE TABLE friends (uid INTEGER, friend_uid INTEGER, status TEXT, timestamp TEXT)'
     assert.equal(friendDb.getSchema().sql, schema)
   })
 

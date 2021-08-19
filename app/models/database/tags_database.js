@@ -76,22 +76,22 @@ class TagsDatabase {
    */
   editTag (id, name, desc) {
     let stmtString = 'UPDATE tags SET '
-    let parameters = []
+    const parameters = []
 
     if (name !== undefined) {
-      stmtString += `tag_name = ?,`
-      parameters.push(name) 
+      stmtString += 'tag_name = ?,'
+      parameters.push(name)
     }
 
     if (desc !== undefined) {
-      stmtString += `tag_desc = ?,`
-      parameters.push(desc) 
+      stmtString += 'tag_desc = ?,'
+      parameters.push(desc)
     }
 
     // Remove last comma
     stmtString = stmtString.substring(0, stmtString.length - 1)
     stmtString += ' WHERE tag_id = ?'
-    parameters.push(id) 
+    parameters.push(id)
 
     if (parameters.length === 1) {
       return false

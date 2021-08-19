@@ -8,10 +8,14 @@ const drinkController = require('../controllers/drink_controller')
 // GET home page.
 router.get('/', function (req, res) {
   if (req.session.loggedin) {
-    res.redirect('/profile')
+    res.redirect('/homepage/home.html')
   } else {
     res.redirect('/index.html')
   }
+})
+
+router.get('/home', (req, res) => {
+  res.redirect('/')
 })
 
 // POST request for sign up.
@@ -28,18 +32,22 @@ router.get('/profile/:id', userController.profileById)
 // GET request to view user profile
 router.get('/profile/', userController.profile)
 
-/// DRINK ROUTES ///
+/// USER ROUTES //
 
-// POST request for new drink card.
-router.post('/new_drink_card', drinkController.newDrinkCard)
+router.get('/edit', userController.editPage)
 
-// POST request for edit drink card.
-router.post('/:drinkId/edit_drink_card', drinkController.editDrinkCard)
+router.post('/edit/profile', userController.editProfile)
 
-// DEBUG
-// GET request to view all drinks corresponding to one user
-router.get('/debug_display_drinks', drinkController.getAllDrinks)
+router.get('/search', userController.searchPage)
 
-router.post('/updateProfile', userController.updateProfile)
+router.post('/search/users', userController.searchAllUsers)
+
+router.get('/pfp', userController.getProfilePicture)
+
+router.get('/pfp/:friendUID', userController.getFriendProfilePicture)
+
+router.get('/banner', userController.getBanner)
+
+router.get('/banner/:friendUID', userController.getFriendBanner)
 
 module.exports = router

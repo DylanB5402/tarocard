@@ -44,7 +44,6 @@ class GroupDatabase {
   }
 
   /**
-   * TODO:
    * Gets a group of a user by group id. The group is a collection (array) of
    * rows from the table
    * @param {Integer} uid
@@ -52,7 +51,7 @@ class GroupDatabase {
    * @returns {Array[Object]} an array of friend-drink objects (the group)
    */
   getGroup (uid, groupId) {
-    const userDB = new userDatabase.UserDatabase() // Using methods from user_database
+    const userDB = new userDatabase.UserDatabase()
 
     // Safety check
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
@@ -68,7 +67,6 @@ class GroupDatabase {
   }
 
   /**
-   * TODO:
    * Get all Groups associated with a specific user
    * Want to return group card info i.e. just id and name to display as preview
    * @param {Integer} uid
@@ -80,9 +78,9 @@ class GroupDatabase {
     // Safety Check
     if (userDB.getUserByUID(uid)) {
       // SQL Statement:
-      //   selects all groups with the same uid from the table, sorted by alphabetical order
-      const stmt = this.db.prepare('SELECT group_id, group_name FROM groups WHERE uid = ? ' +
-              'ORDER BY group_name')
+      //   selects all distinct groups with the same uid from the table, sorted by alphabetical order
+      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name ' + 
+              'FROM groups WHERE uid = ? ORDER BY group_name')
       const query = stmt.all(uid) // an array of row objects containing group id and group name
 
       return query
@@ -119,19 +117,28 @@ class GroupDatabase {
     const userDB = new userDatabase.UserDatabase()
 
     // Check if user id exists in other DBs in the first place
-    if (!userDB.getUserByUID(uid)) {
-      return null
-    } else {
-      const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
-              'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
-      const query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
+    if (userDB.getUserByUID(uid)) {
+      // Set up to check if the table is empty
+      const emptyData = this.db.prepare('SELECT COUNT(*) count FROM (SELECT 1) WHERE EXISTS (SELECT * FROM groups);')
+      const emptyQuery = emptyData.get()
+      const empty = emptyQuery.count
 
+      let query
+      // Check for empty table
+      if (empty === 0) {
+        const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
+                'VALUES (?, ?, ?, ?, ?)')
+        query = stmt.run(0, uid, groupName, friendUID, friendsDrinkID)
+      } else {
+        const stmt = this.db.prepare('INSERT INTO groups (group_id, uid, group_name, friend_uid, friends_drink_id)' +
+                'VALUES ((SELECT max(group_id) + 1 FROM groups), ?, ?, ?, ?)')
+        query = stmt.run(uid, groupName, friendUID, friendsDrinkID)
+      }
       if (query.changes === 1) {
         return query.lastInsertRowid
-      } else {
-        return null
-      }
+      } 
     }
+    return null
   }
 
   /**
@@ -158,18 +165,23 @@ class GroupDatabase {
       const groupName = nameStmt.get(groupId).group_name
 
       // Cover case of brand new group (friend id and drink id = -1)
-      const numEntries = this.isExist(groupId)
+      const checkNewGroupStmt = this.db.prepare('SELECT COUNT(*) count from ' +
+              'groups WHERE group_id = ? AND friend_uid = -1')
+      const numEntries = checkNewGroupStmt.get(groupId).count
+
+      let query // declare query outside of if-else blocks
       if (numEntries === 1) {
         // update first and only entry where ids = -1
         const firstStmt = this.db.prepare('UPDATE groups SET friend_uid = ?, ' +
                   'friends_drink_id = ? WHERE group_id = ?')
-        const firstQuery = firstStmt.run(friendUID, drinkId, groupId)
+        query = firstStmt.run(friendUID, drinkId, groupId)
       } else {
         // insert user-drink pair into table
+
         const stmt = this.db.prepare('INSERT INTO groups ' +
                   '(group_id, uid, group_name, friend_uid, friends_drink_id)' +
                   'VALUES (?, ?, ?, ?, ?)')
-        const query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
+        query = stmt.run(groupId, uid, groupName, friendUID, drinkId)
       }
 
       // Check to make sure table was changed
@@ -183,9 +195,30 @@ class GroupDatabase {
     }
   }
 
-  // Need an edit group method
-  // Implementation is to modify the drink desc in database and to keep uid and
-  // drinkId pair the same in groups_database.js
+  /**
+   * 
+   * @param {Integer} uid 
+   * @param {Integer} groupId 
+   * @param {String} groupName 
+   * @returns 
+   */
+  editGroupName(uid, groupId, groupName) {
+    const userDB = new userDatabase.UserDatabase()
+
+    // Check to make params are valid/exists
+    if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
+      // Update group name
+      const stmt = this.db.prepare('UPDATE groups SET group_name = ? WHERE ' +
+              'uid = ? AND group_id = ?')
+      const query = stmt.run(groupName, uid, groupId)
+
+      // Check to make sure changes are made to DB
+      if (query.changes === 1) {
+        return true
+      }
+    }
+    return false
+  }
 
   /**
   * Removes an entire group for a user
@@ -234,7 +267,7 @@ class GroupDatabase {
       // Delete from group in DB
       const stmt = this.db.prepare('DELETE FROM groups WHERE ' +
               'uid = ? AND group_id = ? AND friends_drink_id = ?')
-      const query = stmt.run(uid, friendUID, drinkId)
+      const query = stmt.run(uid, groupId, drinkId)
 
       // Check to make sure changes are made to DB
       if (query.changes === 1) {

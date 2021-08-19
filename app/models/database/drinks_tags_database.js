@@ -106,13 +106,13 @@ class DrinksTagsDatabase {
             'GROUP BY drinks_tags.drink_id ' +
             'HAVING '
 
-    let parameters = []
+    const parameters = []
     for (let i = 0; i < ids.length; i++) {
       if (i !== ids.length - 1) {
-        stmtString += `SUM(tags.tag_id = ?)` + ' AND '
+        stmtString += 'SUM(tags.tag_id = ?)' + ' AND '
         parameters.push(ids[i])
       } else {
-        stmtString += `SUM(tags.tag_id = ?)`
+        stmtString += 'SUM(tags.tag_id = ?)'
         parameters.push(ids[i])
       }
     }

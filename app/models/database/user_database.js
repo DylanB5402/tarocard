@@ -4,8 +4,7 @@ const config = require('../../config.json')
 
 class UserDatabase {
   /**
-   *
-   * @param {!String} database
+   *    * @param {!String} database
    */
   constructor (database) {
     if (database === undefined) {
@@ -17,7 +16,7 @@ class UserDatabase {
   }
 
   createUserTable () {
-    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture BLOB, banner BLOB);').run()
+    this.db.prepare('CREATE TABLE IF NOT EXISTS users (uid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, username TEXT, display_name TEXT, bio TEXT, profile_picture TEXT, banner TEXT);').run()
   }
 
   getSchema () {
@@ -36,10 +35,10 @@ class UserDatabase {
       return -1
     } else {
       const hash = this.encryptPassword(password)
-     
-      // const info = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES ('${email}', '${hash}', '${username}', '${username}', '',  0, 0);`).run()
-      const stmt = this.db.prepare(`INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);`)
-      const info = stmt.run(email, hash, username, username, '', 0, 0)
+      const stmt = this.db.prepare('INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);')
+      // const defaultBanner = '/assets/coolWallpaper.png'
+      // const defaultProfilePicture = '/assets/pfp-placeholder.png'
+      const info = stmt.run(email, hash, username, username, '', config.defaults.defaultPfp, config.defaults.defaultBanner)
       if (info.changes > 0) {
         return info.lastInsertRowid
       } else {
@@ -54,7 +53,6 @@ class UserDatabase {
      * @returns {boolean} true if in the database, false if not
      */
   isEmailInDatabase (email) {
-    // const rows = this.db.prepare(`SELECT * FROM users WHERE email = '${email}'`).all()
     const stmt = this.db.prepare('SELECT * FROM users WHERE email = ?;')
     const rows = stmt.all(email)
     return (rows.length > 0)
@@ -78,9 +76,8 @@ class UserDatabase {
   }
 
   selectHashedPassword (email) {
-    // const row = this.db.prepare(`SELECT password FROM users WHERE email = '${email}';`).get()
     const stmt = this.db.prepare('SELECT password FROM users WHERE email = ?;')
-    var row = stmt.get(email)
+    const row = stmt.get(email)
     if (row === undefined) {
       return undefined
     } else {
@@ -134,9 +131,8 @@ class UserDatabase {
   }
 
   selectUserId (email) {
-    // return this.db.prepare(`SELECT uid FROM users WHERE email = '${email}';`).get().uid
-    var row = this.db.prepare('SELECT uid FROM users WHERE email = ?;').get(email)
-    if (row != undefined) {
+    const row = this.db.prepare('SELECT uid FROM users WHERE email = ?;').get(email)
+    if (row !== undefined) {
       return row.uid
     } else {
       return undefined
@@ -144,16 +140,20 @@ class UserDatabase {
   }
 
   selectUserSessionData (email) {
-    // return this.db.prepare(`SELECT uid, username, display_name FROM users WHERE email = '${email}';`).get()
-    var stmt = this.db.prepare('SELECT uid, username, display_name FROM users WHERE email = ?;')
+    const stmt = this.db.prepare('SELECT uid, username, display_name FROM users WHERE email = ?;')
     return stmt.get(email)
   }
 
   insertProfileData (uid, displayName, username, bio) {
-    // const info = this.db.prepare(`UPDATE users SET display_name = '${displayName}', username = '${username}', bio = '${bio}' WHERE uid = '${uid}';`).run()
-    const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
-    var info = stmt.run(displayName, username, bio, uid)
-    return info.changes > 0
+    if (bio === '' || bio === undefined) {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, uid)
+      return info.changes > 0
+    } else {
+      const stmt = this.db.prepare('UPDATE users SET display_name = ?, username = ?, bio = ? WHERE uid = ?;')
+      const info = stmt.run(displayName, username, bio, uid)
+      return info.changes > 0
+    }
   }
 
   selectProfileData (email) {
@@ -184,19 +184,21 @@ class UserDatabase {
   }
 
   /**
-   *
    * @param {*} username
+   * @param {*} uid
    * @returns {Array}
    */
-  searchDatabase (username) {
-    // return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE '${username}%';`).all()
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture FROM users WHERE username LIKE ?%';`).all(username)
+  searchDatabase (username, uid) {
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
   }
 
   updateEmail (uid, email) {
-    // const info = this.db.prepare(`UPDATE users SET email = '${email}' WHERE uid = ${uid};`).run()
-    const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
-    return info.changes > 0
+    if (email.includes('@')) {
+      const info = this.db.prepare('UPDATE users SET email = ? WHERE uid = ?;').run(email, uid)
+      return info.changes > 0
+    } else {
+      return false
+    }
   }
 
   getUserDataByID (uid) {
@@ -206,13 +208,22 @@ class UserDatabase {
 
   updatePassword (uid, password) {
     const hashedPassword = this.encryptPassword(password)
-    // const info = this.db.prepare(`UPDATE users SET password = '${hashedPassword}' WHERE uid = ${uid};`).run()
-    const info = this.db.prepare(`UPDATE users SET password = ? WHERE uid = ?;`).run(hashedPassword, uid)
+    const info = this.db.prepare('UPDATE users SET password = ? WHERE uid = ?;').run(hashedPassword, uid)
     return info.changes > 0
   }
 
-  getEmailByUID(uid) {
+  getEmailByUID (uid) {
     const stmt = this.db.prepare('SELECT email FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getBannerPathByUID (uid) {
+    const stmt = this.db.prepare('SELECT banner FROM users WHERE uid = ?;')
+    return stmt.get(uid)
+  }
+
+  getProfilePicturePathByUID (uid) {
+    const stmt = this.db.prepare('SELECT profile_picture FROM users WHERE uid = ?;')
     return stmt.get(uid)
   }
 }
@@ -227,4 +238,3 @@ const InsertNewUserResult = {
 }
 
 module.exports = { UserDatabase, InsertNewUserResult }
- 

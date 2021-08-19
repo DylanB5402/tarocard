@@ -1,0 +1,61 @@
+doctype html
+html
+  head
+    title Edit Profile | Taro Cards
+    link(rel='icon' href='../assets/TaroCardTransparent 1.png')
+    link(rel='preconnect' href='https://fonts.googleapis.com')
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
+    script(src='jquery-3.6.0.min.js')
+    link(rel='stylesheet' href='../temp.css')
+  body.edit-page
+    .page-header
+      a(href='/profile')
+        img#back(src='../assets/Back.png')
+      span Edit Profile
+    .edit
+      form#edit(action='/edit/profile' method='POST')
+        .banner
+          img#banner(src='/banner')
+          label#imgInputBanner.upload-img-a(for='inputBanner')
+            img.upload-img#upload-banner(src='../assets/upload-img-circle.png')
+            // <i style="color: blue;" class="fa fa-camera fa-5x" aria-hidden="false"></i>
+          input#inputBanner(type='file' name='Banner' accept='.jpg, .png, .gif')
+        .pfp
+          img#profilePic(src='/pfp')
+          label#imgInputProfilePic.upload-img-a(for='inputProfilePic')
+            img.upload-img#upload-pfp(src='../assets/upload-img-circle.png')
+            // <i style="color: red;" class="fa fa-camera fa-3x" aria-hidden="true"></i>
+          input#inputProfilePic(type='file' name='Profile-Pic' accept='.jpg, .png, .gif')
+        // Values will be whatever the user's current username/bio/etc is
+        .text-input
+          label.label(for='display-name') Display Name
+          br
+          input#display-name.edit-input(type='text' name='display-name' value='' + displayName)
+          br
+          label.label(for='username') Username
+          br
+          input#username.edit-input(type='text' name='username' value='' + username)
+          br
+          label.label(for='bio') Bio
+          br
+          //- textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
+          textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
+          br
+          input#save(type='submit' value='Save changes')
+    script.
+      
+      $("#inputBanner").change(function(event) {
+                  alert("You choose: " + event.target.value + " as your Banner.");
+                  let currentBanner = document.getElementById("banner");
+                  var tmppath = URL.createObjectURL(event.target.files[0]);
+                  currentBanner.src = tmppath;
+              })
+      
+              $("#inputProfilePic").change(function(event) {
+                  alert("You choose: " + event.target.value + " as your Profile Picture.");
+                  let currentProfilePic = document.getElementById("profilePic");
+                  var tmppath = URL.createObjectURL(event.target.files[0]);
+                  currentProfilePic.src = tmppath;
+              })
+      

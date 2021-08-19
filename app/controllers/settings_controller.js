@@ -7,7 +7,7 @@ const userDB = new userDatabase.UserDatabase()
  */
 exports.settingsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/settings-page/Settings_HTML.html')
+    res.redirect('/settingPages/settingsMain.html')
   } else {
     res.redirect('/')
   }
@@ -24,13 +24,12 @@ exports.updateEmail = (req, res) => {
     const uid = req.session.uid
     if (userDB.updateEmail(uid, email)) {
       req.session.email = email
-      // res.send('success')
-      res.redirect('/settings-page/ChangeEmailSuccess.html')
+      res.redirect('/settingPages/changeEmailSuccess.html')
     } else {
-      res.send('failure')
+      res.redirect('/settingPages/changeEmailFailure.html')
     }
   } else {
-    res.send('failure')
+    res.redirect('/settingPages/changeEmailFailure.html')
   }
 }
 
@@ -39,14 +38,14 @@ exports.updateEmail = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.currentEmail = (req, res) => {
-  var email_data = userDB.getEmailByUID(req.session.uid)
-  if (email_data == undefined) {
-    res.json({ 'email-address': 'EMAIL NOT FOUND'})
+  const emailData = userDB.getEmailByUID(req.session.uid)
+  if (emailData === undefined) {
+    res.json({ 'email-address': 'EMAIL NOT FOUND' })
   } else {
     if (req.session.loggedin) {
-      res.json({ 'email-address': email_data.email})
+      res.json({ 'email-address': emailData.email })
     } else {
-      res.json({ 'email-address': 'EMAIL NOT FOUND'})
+      res.json({ 'email-address': 'EMAIL NOT FOUND' })
     }
   }
 }
@@ -61,12 +60,12 @@ exports.updatePassword = (req, res) => {
   if (req.session.loggedin && userDB.checkPasswordByUid(req.session.uid, currentPassword)) {
     const uid = req.session.uid
     if (userDB.updatePassword(uid, newPassword)) {
-      res.redirect('/settings-page/ChangePasswordSuccess.html')
+      res.redirect('/settingPages/changePasswordSuccess.html')
     } else {
       res.status(500).send('Internal Server Error, please try again')
     }
   } else {
-    res.redirect('/settings-page/ChangePasswordFailure.html')
+    res.redirect('/settingPages/changePasswordFailure.html')
   }
 }
 
@@ -76,7 +75,7 @@ exports.updatePassword = (req, res) => {
  */
 exports.updatePasswordSuccess = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect('/settings-page/ChangePasswordSuccess.html')
+    res.redirect('/settingPages/changePasswordSuccess.html')
   } else {
     res.status(500).redirect('/index.html')
   }

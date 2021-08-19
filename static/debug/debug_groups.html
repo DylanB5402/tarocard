@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Debug Groups</title>
+    </head>
+    <body>
+        <h1>Edit Group Name</h1>
+        <!-- this form automatically send a post request to /users/create with the input data when submit is pressed -->
+        <form action = "/debug/groups/editGroupName" method="post" target="_blank">
+
+            <label for="uid">uid:</label><br>
+            <input type="number" id="uid" name="uid"><br>
+
+            <label for="groupId">group_id:</label><br>
+            <input type="number" id="groupId" name="groupId"><br>
+ 
+            <input type="text" id="groupName" name="groupName">
+            <label for="groupName"> group_name </label><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>
+    </body>
+</html>

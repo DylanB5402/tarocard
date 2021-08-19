@@ -1,6 +1,10 @@
 {
   "db" : "databases/taroCard.db",
+<<<<<<< HEAD
   "prod_db" : "databases/taroCard.db",
+=======
+  "prod_db" : "databases/test/testTaroCard.db",
+>>>>>>> refactor-backend
   "allowed-ext-image" : "jpeg|jpg|png",
   "allowed-ext-text" : "txt",
 
@@ -26,5 +30,9 @@
     "useParent" : true,
     "parent" : "food",
     "rate" : 1000
+  }, 
+  "defaults" : {
+    "defaultBanner" : "/assets/banner-default.png",
+    "defaultPfp" : "/assets/pfp-default.png"
   }
 }

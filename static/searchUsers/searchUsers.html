@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search | Taro Cards</title>
+
+        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+        <script src="../jquery-3.6.0.min.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="../temp.css">
+    </head>
+
+    <div class="page-header">
+        <span>Discover Users</span>
+    </div>
+    <body style="margin-top: 150px;">
+        <div class="search">
+            <div class="search-container">
+                <input
+                    type="text"
+                    class="search-bar" 
+                    id="user-search"
+                    placeholder="Search users..."
+                    name="search-bar-users">
+                <button type="submit" class="search-button" id="search-button"><img src="../assets/search-bar.png" id="search-icon"></button>  
+            </div>   
+        </div>
+    
+    
+            <script>
+                $(document).ready(function(){
+                    $("#search-icon").click(function(){       
+                        //$.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                        $.post("/search/users", 
+                        {
+                            "string": $("#user-search").val()
+                        }
+                        ,function(data, status, xhr) {
+                            populateUsers(data);
+                        })
+                    });
+                });
+
+               let div = document.querySelector(".search-container");
+               let input = div.querySelector("input");
+
+               input.addEventListener("keyup", function(event) {
+                   if(event.keyCode == "13") {
+                       document.getElementById("search-icon").click();
+                   }
+               })
+            </script>
+    
+            <template id="UsersTemp">
+                <div class="UserElement">
+                    <a class="ActivityLinks"><img></a>
+                    <a class="ActivityLinks"><h2></h2></a>
+                    <a class="ActivityLinks"><h3></h3></a>
+                </div>
+            </template>        
+    
+        <div class="navbar" id="myNavbar">
+            <a href="/home"></i>
+                <img id="navHomeIcon" src="..\assets\home.png" />
+            </a>
+        
+            <a class="active" href="#"></i>
+                <img id="navSearchIcon" src="..\assets\search.png" />
+            </a>
+        
+            <a href="..\Notifications\Notifications.html"></i>
+                <img id="navNotifsIcon" src="..\assets\notifs.png" />
+            </a>
+        
+            <a href="/profile"></i>
+                <img id="navProfileIcon" src="..\assets\profile.png" />
+            </a>
+        </div>
+        <div id="UsersAll"></div>
+    </body>
+    
+
+    <script type="text/javascript" src="searchUsersFunctions.js"></script>
+</html>
