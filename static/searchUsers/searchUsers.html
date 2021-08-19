@@ -33,7 +33,7 @@
             <script>
                 $(document).ready(function(){
                     $("#search-icon").click(function(){       
-                        // $.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
+                        //$.get("https://my-json-server.typicode.com/VitalKilla/userData/db", 
                         $.post("/search/users", 
                         {
                             "string": $("#user-search").val()
@@ -56,9 +56,9 @@
     
             <template id="UsersTemp">
                 <div class="UserElement">
-                    <a class="userProLink"><img></a>
-                    <a class="userProLink"><h2></h2></a>
-                    <a class="userProLink"><h3></h3></a>
+                    <a class="ActivityLinks"><img></a>
+                    <a class="ActivityLinks"><h2></h2></a>
+                    <a class="ActivityLinks"><h3></h3></a>
                 </div>
             </template>        
     
