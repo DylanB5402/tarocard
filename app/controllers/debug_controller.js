@@ -275,9 +275,9 @@ exports.displayCardsHomePage = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.allUsersDrinks = (req, res) => {
-    // send the custom drink array as a json
-    res.json({ pairs: favDrinksDB.toString(), success: true })
+exports.allUsersDrinks = (req, res) => {
+  // send the custom drink array as a json
+  res.json({ pairs: favDrinksDB.toString(), success: true })
 }
 
 exports.editGroupName = (req, res) => {

@@ -2,12 +2,11 @@ const userDatabase = require('../models/database/user_database')
 const friendDatabase = require('../models/database/friend_database')
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const templateEngine = require('../views/template_engine')
-const config = require('../config.json') 
+const config = require('../config.json')
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 const friendDb = new friendDatabase.FriendDatabase()
 const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
-
 
 /**
  * @param {!import('express').Request} req
@@ -81,16 +80,42 @@ exports.profile = (req, res) => {
  */
 exports.profileById = (req, res) => {
   const uid = req.params.id
+  // console.log(uid)
   const profileData = userDB.getUserByUID(uid)
   if (profileData !== undefined) {
     const bio = profileData.bio
     const username = profileData.username
     const displayName = profileData.display_name
-
-    res.append('profileaccess', 'successful')
-    // res.send(tempEngine.getUserProfile(username, displayName, bio))
-    res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, 0, 0, uid))
-    // res.send(tempEngine.getFriendProfile(username, displayName, bio, 0, 0, uid))
+    const numCards = 0
+    const numFriends = 0
+    if (req.session.loggedin) {
+      // console.log(req.session.uid)
+      if (req.session.uid.toString() === uid) {
+        res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
+      } else {
+        res.append('profileaccess', 'successful')
+        const friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
+        console.log(friendStatus)
+        // currently friends
+        if (friendStatus === friendDatabase.FriendStatus.FRIENDS) {
+          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
+          res.send('987')
+          // incoming request, accept or deny
+        } else if (friendStatus === friendDatabase.FriendStatus.INCOMING) {
+          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
+          res.send('1678')
+          // pending
+        } else if (friendStatus === friendDatabase.FriendStatus.OUTGOING) {
+          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
+          res.send('1323')
+          // not currently friends
+        } else if (friendStatus === friendDatabase.FriendStatus.NONE) {
+          res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, numFriends, numCards, uid))
+        }
+      }
+    } else {
+      res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, numFriends, numCards, uid))
+    }
   } else {
     res.send('no user with id ' + uid + 'found')
   }
@@ -164,7 +189,7 @@ exports.getBanner = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.getFriendBanner = (req, res) => {
+exports.getFriendBanner = (req, res) => {
   if (req.session.loggedin) {
     res.redirect(userDB.getBannerPathByUID(req.params.friendUID).banner)
   } else {
