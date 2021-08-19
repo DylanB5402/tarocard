@@ -25,7 +25,6 @@ function openCardCreate( formID ){
     document.getElementById(formID).classList.remove('animate');
     document.getElementById(formID).classList.add('dezoom');
     setTimeout(function(){
-        console.log("We did it bitches");
         document.getElementById(formID).style.display='none';
   
     },500);
@@ -61,7 +60,6 @@ function openCardCreate( formID ){
   
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
-  console.log(groupInfo);
   document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
 }
 

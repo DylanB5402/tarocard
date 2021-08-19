@@ -6,12 +6,9 @@ requestGroupOrders.send();
 requestGroupOrders.onload = function () {
   const groups = requestGroupOrders.response.groups;
   // Receives name and id
-  console.log(groups);
   for (const group in groups) {
     let gName = groups[group]["name"];
-    console.log(groups[group]["name"]);
     let gID = groups[group]['id'];
-    console.log(gID);
     createGroupCard( gName, gID);
   }
 }
@@ -101,7 +98,6 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     deleteBtn.onclick = function(){
         container.style.display = "none";
         document.getElementById
-        console.log("Hello There");
         /* Sending a delete requestGroupContent with this button 
         fetch( '/groups/removeFromGroup/' + groupID ,{ 
             method: 'delete',
@@ -127,7 +123,6 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     document.getElementById('groupCardContainer').appendChild(container);
     container.onclick = function (e ){
       if( e.target.name == "deleteBtn"){
-        console.log("Hello There");
         container.style.display = "none";
         fetch( '/groups/removeGroup/' + groupID ,{ 
           method: 'POST',
@@ -140,13 +135,13 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
       }else {
         document.getElementById('editGroup').style.display = "flex";
         document.getElementById('group-order-edit').setAttribute('value', gName);
+        document.getElementById('editGroupForm').setAttribute('action', '/groups/editGroupName/' + groupID)
       }
     }
   }
 
 // fill in the group view with all the cards in the group ID
 function getGroupDrinkCards(groupID){
-    console.log("Creating Drink Cards");
     let requestGroupContent = new XMLHttpRequest();
     requestGroupContent.open('GET', '/groups/getGroup/' + groupID, true); //endpoint should have id
     requestGroupContent.responseType = 'json';
@@ -154,8 +149,6 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = function() {
         const cards = requestGroupContent.response;
-        console.log("----------------------------------")
-        console.log(cards)
         for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
           /*
@@ -166,17 +159,14 @@ function getGroupDrinkCards(groupID){
           const ifFav = cards[drinkCard]['fav'];
           */
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
-         console.log(drinkCardID)
 
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
          requestGroupOrdersCard.send();
-         console.log("This is the id" + drinkCardID);
 
          requestGroupOrdersCard.onload = function () {
            let content = requestGroupOrdersCard.response;
-           console.log(content);
            let drinkEst = content["drink_name"]; //will change to establishment id
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
