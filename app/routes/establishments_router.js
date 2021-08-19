@@ -8,6 +8,9 @@ const establishmentsController = require('../controllers/establishments_controll
 router.get('/', establishmentsController.getAllEstablishments)
 
 // GET request for search establishments
-router.get('/:search', establishmentsController.searchEstablishments)
+router.get('/search/:search', establishmentsController.searchEstablishments)
+
+// GET request for search establishments
+router.get('/unique', establishmentsController.uniqueEstablishments)
 
 module.exports = router

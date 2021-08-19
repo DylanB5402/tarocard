@@ -131,8 +131,18 @@ class EstablishmentsDatabase {
       */
    searchEstablishment (search) {
     const stmt = this.db.prepare('SELECT * FROM establishments WHERE name LIKE ? ORDER BY name ASC')
-    const query = stmt.all(`${search}%`)
+    const query = stmt.all(`%${search}%`)
     return query
+  }
+
+  /**
+      * Gets an establishment
+      * @returns {Array} string array unique names
+      */
+   getUniqueNames () {
+    const stmt = this.db.prepare('SELECT DISTINCT name FROM establishments')
+    const query = stmt.all()
+    return query.map((obj) => obj.name)
   }
 
   /**

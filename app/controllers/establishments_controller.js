@@ -9,3 +9,7 @@ exports.getAllEstablishments = (req, res) => {
 exports.searchEstablishments = (req, res) => {
   res.json(establishmentsDB.searchEstablishment(req.params.search))
 }
+
+exports.uniqueEstablishments = (req, res) => {
+  res.json(establishmentsDB.getUniqueNames())
+}
