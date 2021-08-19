@@ -35,6 +35,7 @@ class FriendDatabase {
     if (friendStatus === undefined) {
       return this.db.prepare('INSERT INTO friends VALUES (?, ?, ?, datetime(\'now\'));').run(uid, friendUid, status)
     } else {
+      // return FriendStatus.NONE
       return undefined
     }
   }
@@ -210,7 +211,8 @@ class FriendDatabase {
 const FriendStatus = {
   OUTGOING: 'outgoing',
   INCOMING: 'incoming',
-  FRIENDS: 'friends'
+  FRIENDS: 'friends',
+  NONE: 'none'
 }
 
 module.exports = { FriendDatabase, FriendStatus }

@@ -79,7 +79,7 @@ class GroupDatabase {
     if (userDB.getUserByUID(uid)) {
       // SQL Statement:
       //   selects all distinct groups with the same uid from the table, sorted by alphabetical order
-      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name ' + 
+      const stmt = this.db.prepare('SELECT DISTINCT group_id, group_name ' +
               'FROM groups WHERE uid = ? ORDER BY group_name')
       const query = stmt.all(uid) // an array of row objects containing group id and group name
 
@@ -136,7 +136,7 @@ class GroupDatabase {
       }
       if (query.changes === 1) {
         return query.lastInsertRowid
-      } 
+      }
     }
     return null
   }
@@ -196,13 +196,13 @@ class GroupDatabase {
   }
 
   /**
-   * 
-   * @param {Integer} uid 
-   * @param {Integer} groupId 
-   * @param {String} groupName 
-   * @returns 
+   *
+   * @param {Integer} uid
+   * @param {Integer} groupId
+   * @param {String} groupName
+   * @returns
    */
-  editGroupName(uid, groupId, groupName) {
+  editGroupName (uid, groupId, groupName) {
     const userDB = new userDatabase.UserDatabase()
 
     // Check to make params are valid/exists

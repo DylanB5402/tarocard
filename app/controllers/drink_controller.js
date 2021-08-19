@@ -109,11 +109,11 @@ exports.getAllDrinks = (req, res) => {
 
 /**
  * Gets all favorited drinks for a friend and sends info as a json
- * friend ID is stored in the body as a <input type="hidden"> 
+ * friend ID is stored in the body as a <input type="hidden">
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.getFriendDrinks = (req, res) => {
+exports.getFriendDrinks = (req, res) => {
   if (userDB.getUserByUID(req.body.friendId)) {
     const friendId = req.body.friendId // Get uid from cookie session
     const allDrinks = favDrinksDB.getAllDrinks(friendId)
