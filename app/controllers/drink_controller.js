@@ -91,7 +91,6 @@ exports.getAllDrinks = (req, res) => {
       // TODO: REDO Establishments so that it gets the name:
       // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
-        uid: uid,
         name: drink.drink_name,
         desc: drink.drink_desc,
         establishment: drink.establishment_id,
