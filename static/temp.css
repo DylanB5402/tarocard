@@ -1250,6 +1250,30 @@ h3 a{
     filter: none;
 }
 
+.friend-tab {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.friend-tab input[type="radio"] {
+    display: none;
+}
+
+.friend-tab label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+}
+
+.friend-tab .tab-icon {
+    width: 100px;
+}
 
 
 /* Place the navbar at the bottom of the page, and make it stick */
