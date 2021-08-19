@@ -4,8 +4,8 @@ class TemplateEngine {
   constructor () {
     this.generateProfile = pug.compileFile('templates/pug/profile.pug')
     this.generateEditPage = pug.compileFile('templates/pug/edit.pug')
-    this.generateFriendProfile = pug.compileFile('templates/friendProfile.pug')
-    this.generateFriendProfileRequest = pug.compileFile('templates/friendProfileRequest.pug')
+    this.generateFriendProfile = pug.compileFile('templates/pug/friendsProfile.pug')
+    this.generateFriendProfileRequest = pug.compileFile('templates/pug/friendsProfileRequest.pug')
   }
 
   getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards) {
@@ -27,24 +27,24 @@ class TemplateEngine {
   }
 
   getFriendProfile(profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
-    return this.generateProfile({
+    return this.generateFriendProfile({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
       numCards: numberCards,
-      friendUID : friendUserID
+      frienduid : friendUserID
     })
   }
 
   getFriendProfileRequest(profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
-    return this.generateProfile({
+    return this.generateFriendProfileRequest({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
       numFriends: numberFriends,
       numCards: numberCards,
-      friendUID : friendUserID
+      frienduid : friendUserID
     })
   }
 

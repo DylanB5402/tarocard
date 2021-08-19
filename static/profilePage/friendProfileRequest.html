@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>${displayName} | Taro Cards</title>
+    <title>#{displayName} | Taro Cards</title>
 
     <link rel="icon" href="../assets/TaroCardTransparent 1.png">
 
@@ -20,16 +20,9 @@
                  Group Order 
             </p>
 
-            <p id="closeGroupView"
-            style="background-color: purple; color: white; text-decoration: none;
-             border-radius: 10px; font-size: 20px;
-             position: fixed; right: 0px;
-             width: 100px;
-             height: 30px;
-             text-align: center;
-             "
-            class="fonts"> 
-            Home </p>
+            <p id="closeGroupView" style="background-color: purple; color: white; text-decoration: none; border-radius: 10px; font-size: 20px; position: fixed; right: 0px; width: 100px; height: 30px; text-align: center;" class="fonts"> 
+                Home 
+            </p>
         </div>
 
         <div id="groupContainer">
@@ -59,17 +52,17 @@
 
 
         <section id="profileText">
-            <h2 id="displayName"> ${displayName} </h2>
+            <h2 id="displayName"> #{displayName} </h2>
 
             <aside id="user-handle">
-                <h3 id="user-at">@${username}</h3>
+                <h3 id="user-at">@#{username}</h3>
             </aside>
 
 
             <!-- Max characters around 150 for description-->
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
-                ${bio}
+                #{bio}
             </p>
         </section>
 
@@ -79,14 +72,14 @@
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p> ${numFriends} 
+                <p> #{numFriends} 
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p> ${numCards} 
+                <p> #{numCards} 
                     <span> Cards</span>
                 </p>
             </div>
@@ -100,7 +93,7 @@
                     <!-- This is where the cards go! -->
                     <div id="cardContainer" style="height: 600px;">
                         <div id="favoritesSection">
-                            <img id="favoritesStar" src="..\assets\star-purple.png" />
+                            <img id="favoritesStar" src="../assets/star-purple.png" />
                             <p id="favorites">Favorites</p>
                             <hr style="width: 100%; height: 0.1px;">]
                         </div> 

@@ -86,8 +86,11 @@ exports.profileById = (req, res) => {
     const bio = profileData.bio
     const username = profileData.username
     const displayName = profileData.display_name
+
     res.append('profileaccess', 'successful')
-    res.send(tempEngine.getUserProfile(username, displayName, bio))
+    // res.send(tempEngine.getUserProfile(username, displayName, bio))
+    res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, 0, 0, uid))
+    // res.send(tempEngine.getFriendProfile(username, displayName, bio, 0, 0, uid))
   } else {
     res.send('no user with id ' + uid + 'found')
   }
