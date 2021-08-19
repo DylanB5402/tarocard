@@ -4,8 +4,7 @@ const config = require('../../config.json')
 
 class UserDatabase {
   /**
-   *
-   * @param {!String} database
+   *    * @param {!String} database
    */
   constructor (database) {
     if (database === undefined) {
@@ -37,9 +36,9 @@ class UserDatabase {
     } else {
       const hash = this.encryptPassword(password)
       const stmt = this.db.prepare('INSERT INTO users (email, password, username, display_name, bio, profile_picture, banner) VALUES (?, ?, ?, ?, ?,  ?, ?);')
-      const defaultBanner = '/assets/coolWallpaper.png'
-      const defaultProfilePicture = '/assets/pfp-placeholder.png'
-      const info = stmt.run(email, hash, username, username, '', defaultProfilePicture, defaultBanner)
+      // const defaultBanner = '/assets/coolWallpaper.png'
+      // const defaultProfilePicture = '/assets/pfp-placeholder.png'
+      const info = stmt.run(email, hash, username, username, '', config.defaults.defaultPfp, config.defaults.defaultBanner)
       if (info.changes > 0) {
         return info.lastInsertRowid
       } else {

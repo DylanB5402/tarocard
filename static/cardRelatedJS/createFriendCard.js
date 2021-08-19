@@ -8,18 +8,14 @@ friends.send();
 
 friends.onload = function () {
   const friendCards = friends.response.drinks;
-  console.log(friendCards)
   for (const drinkCard in friendCards) {
     const drinkEst = friendCards[drinkCard]['establishment'];
     const drinkName = friendCards[drinkCard]['drink name'];
-    console.log(drinkName);
     const drinkDesc = friendCards[drinkCard]['drink desc'];
     const drinkId = friendCards[drinkCard]['drink id'];
-    console.log(drinkId);
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
     const cardDate = friendCards[drinkCard]['date'];
-    console.log(cardDate);
     createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
 }
@@ -30,7 +26,6 @@ friends.onload = function () {
 */
 
 function createFriendCard(establishment, drink, description, image, drinkId,friendUID,cardDate){
-  console.log("Creating Card of A friend wow");
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -76,7 +71,6 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   date.innerHTML = "created: " + cardDate;
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
-  console.log("gimme my shit");
 
   tagContainer.appendChild(pfp);
   container.appendChild(estab);

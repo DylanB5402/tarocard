@@ -12,6 +12,9 @@ const establishmentsDatabase = require('../models/database/establishments_databa
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const favDrinksDB = new favDrinksDatabase.FavDrinksDatabase()
 
+const groupsDatabase = require('../models/database/group_database')
+const groupsDB = new groupsDatabase.GroupDatabase()
+
 const upload = new uploadFile.UploadFile()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDB = new tagsDatabase.TagsDatabase()
@@ -51,7 +54,6 @@ exports.users = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.usersJSON = (req, res) => {
-  // res.json({ 'users' : userDB.getAllUsers()})
   const allUsers = userDB.getAllUsers()
   const userJSON = {}
   allUsers.forEach((user) => {
@@ -65,7 +67,6 @@ exports.usersJSON = (req, res) => {
  * @param {!import('express').Response} res
  */
 exports.debugHome = (req, res) => {
-  // res.send('taco')
   res.redirect('/debug/debug.html')
 }
 
@@ -103,7 +104,6 @@ exports.addFriend = (req, res) => {
   const friendUid = req.body.friend_uid
   const status = req.body.status
   friendDb.insertFriend(uid, friendUid, status)
-  // friendDb.addCurrentFriend(uid, friendUid)
   res.redirect('/debug/friends')
 }
 
@@ -268,4 +268,24 @@ exports.displayCardsHomePage = (req, res) => {
   } else {
     res.json({ drinks: [], success: false })
   }
+}
+
+/**
+ * Outputs fav_drinks table
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.allUsersDrinks = (req, res) => {
+    // send the custom drink array as a json
+    res.json({ pairs: favDrinksDB.toString(), success: true })
+}
+
+exports.editGroupName = (req, res) => {
+  const uid = req.body.uid
+  const groupId = req.body.groupId
+  const groupName = req.body.groupName
+
+  groupsDB.editGroupName(uid, groupId, groupName)
+
+  res.redirect('/groups/getGroup/' + groupId)
 }

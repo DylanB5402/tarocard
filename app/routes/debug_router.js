@@ -58,4 +58,9 @@ router.get('/drinks/count', debugController.numCards)
 
 router.get('/drinks/displayHomePage', debugController.displayCardsHomePage)
 
+router.get('/usersDrinks', debugController.allUsersDrinks)
+
+// GROUPS DEBUG // 
+router.post('/groups/editGroupName', debugController.editGroupName)
+
 module.exports = router

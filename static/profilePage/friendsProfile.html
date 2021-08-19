@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>${display-name} | Taro Cards</title>
+    <title>#{displayName} | Taro Cards</title>
 
     <link rel="icon" href="../assets/TaroCardTransparent 1.png">
 
@@ -20,16 +20,9 @@
                  Group Order 
             </p>
 
-            <p id="closeGroupView"
-            style="background-color: purple; color: white; text-decoration: none;
-             border-radius: 10px; font-size: 20px;
-             position: fixed; right: 0px;
-             width: 100px;
-             height: 30px;
-             text-align: center;
-             "
-            class="fonts"> 
-            Home </p>
+            <p id="closeGroupView" style="background-color: purple; color: white; text-decoration: none; border-radius: 10px; font-size: 20px; position: fixed; right: 0px; width: 100px; height: 30px; text-align: center;" class="fonts"> 
+                Home 
+            </p>
         </div>
 
         <div id="groupContainer">
@@ -37,7 +30,7 @@
     </div>
     <div>
         <!-- banner will pull from user DB -->
-        <img src="../assets/banner-default.png" id="banner">
+        <img src="/banner/" + friendUID id="banner">
         <!-- <button class="settings-menu">
             <a href="..\settingPages\settingsMain.html">
                 <img src="../assets/menu-white.png" id="settings-menu">
@@ -47,30 +40,30 @@
 
     <section id="profileTop">
         <!-- pfp will pull from user DB -->
-        <img src="../assets/pfp-default.png" id="profilePic">
+        <img src="/pfp/" + friendUID id="profilePic">
 
         <div class="accept-deny">
             <button type="button" id="add-accept">Accept</button>
             <button type="button" id="deny">Deny</button>
         </div>
         
+        <script>
+            
+        </script>
 
 
         <section id="profileText">
-            <h2 id="displayName">Someone's friend asdf</h2>
+            <h2 id="displayName"> #{displayName} </h2>
 
             <aside id="user-handle">
-                <h3 id="user-at">@thefriendlyfriend</h3>
+                <h3 id="user-at">@#{username}</h3>
             </aside>
 
 
             <!-- Max characters around 150 for description-->
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
-                <!--Just a weeb who enjoy's the occasional dose of sugary drinks.-->
-                MAX CHAR LENGTH: 150. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula
-                eget dolor. Aenean massa. Cum sociis natoque pen
+                #{bio}                
             </p>
         </section>
 
@@ -80,14 +73,14 @@
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p>1000
+                <p>#{numFriends} 
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p>1000
+                <p>#{numCards} 
                     <span> Cards</span>
                 </p>
             </div>
@@ -101,7 +94,7 @@
                     <!-- This is where the cards go! -->
                     <div id="cardContainer" style="height: 600px;">
                         <div id="favoritesSection">
-                            <img id="favoritesStar" src="..\assets\star-Purple.png" />
+                            <img id="favoritesStar" src="../assets/star-purple.png" />
                             <p id="favorites">Favorites</p>
                             <hr style="width: 100%; height: 0.1px;">]
                         </div> 

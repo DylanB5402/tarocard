@@ -582,7 +582,7 @@ li:last-child{
 .modal{
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     margin: auto;
     background-color: white;

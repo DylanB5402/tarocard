@@ -2,10 +2,12 @@ const userDatabase = require('../models/database/user_database')
 const friendDatabase = require('../models/database/friend_database')
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const templateEngine = require('../views/template_engine')
+const config = require('../config.json') 
 const userDB = new userDatabase.UserDatabase()
 const tempEngine = new templateEngine.TemplateEngine()
 const friendDb = new friendDatabase.FriendDatabase()
 const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
+
 
 /**
  * @param {!import('express').Request} req
@@ -84,8 +86,11 @@ exports.profileById = (req, res) => {
     const bio = profileData.bio
     const username = profileData.username
     const displayName = profileData.display_name
+
     res.append('profileaccess', 'successful')
-    res.send(tempEngine.getUserProfile(username, displayName, bio))
+    // res.send(tempEngine.getUserProfile(username, displayName, bio))
+    res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, 0, 0, uid))
+    // res.send(tempEngine.getFriendProfile(username, displayName, bio, 0, 0, uid))
   } else {
     res.send('no user with id ' + uid + 'found')
   }
@@ -112,7 +117,6 @@ exports.editProfile = (req, res) => {
  */
 exports.editPage = (req, res) => {
   if (req.session.loggedin) {
-    // res.redirect('/editProfilePage/edit.html')
     const userData = userDB.getUserDataByID(req.session.uid)
     res.send(tempEngine.getEditProfilePage(userData.username, userData.display_name, userData.bio))
   } else {
@@ -135,16 +139,8 @@ exports.searchPage = (req, res) => {
 exports.searchAllUsers = (req, res) => {
   const search = req.body.string
   if (req.session.loggedin) {
-    const userArray = []
     const users = userDB.searchDatabase(search, req.session.uid)
-    users.forEach((user) => {
-      userArray.push({
-        'display name': user.display_name,
-        username: user.username,
-        'image url': user.profile_picture,
-        id: user.uid
-      })
-    })
+    const userArray = friendDb.formatFriendData(users)
     userArray.splice(100)
     res.json({ users: userArray, success: true })
   } else {
@@ -160,7 +156,19 @@ exports.getBanner = (req, res) => {
   if (req.session.loggedin) {
     res.redirect(userDB.getBannerPathByUID(req.session.uid).banner)
   } else {
-    res.redirect('/assets/coolWallpaper.png')
+    res.redirect(config.defaults.defaultBanner)
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.getFriendBanner = (req, res) => {
+  if (req.session.loggedin) {
+    res.redirect(userDB.getBannerPathByUID(req.params.friendUID).banner)
+  } else {
+    res.redirect(config.defaults.defaultBanner)
   }
 }
 
@@ -168,15 +176,15 @@ exports.getProfilePicture = (req, res) => {
   if (req.session.loggedin) {
     res.redirect(userDB.getProfilePicturePathByUID(req.session.uid).profile_picture)
   } else {
-    res.redirect('/assets/pfp-placeholder.png')
+    res.redirect(config.defaults.defaultPfp)
   }
 }
 
-exports.getProfilePictureFriend = (req, res) => {
+exports.getFriendProfilePicture = (req, res) => {
   if (req.session.loggedin) {
     const friendUID = req.params.friendUID
     res.redirect(userDB.getProfilePicturePathByUID(friendUID).profile_picture)
   } else {
-    res.redirect('/assets/pfp-placeholder.png')
+    res.redirect(config.defaults.defaultPfp)
   }
 }

@@ -1,10 +1,12 @@
 const favDrinksDatabase = require('../models/database/fav_drinks_database')
 const drinksDatabase = require('../models/database/drinks_database')
 const estabDatabase = require('../models/database/establishments_database')
+const userDatabase = require('../models/database/user_database')
 
 const favDrinksDB = new favDrinksDatabase.FavDrinksDatabase()
 const drinksDB = new drinksDatabase.DrinksDatabase()
 const estabDB = new estabDatabase.EstablishmentsDatabase()
+const userDB = new userDatabase.UserDatabase()
 
 /**
  * Creates new drink entry
@@ -36,7 +38,7 @@ exports.newDrinkCard = (req, res) => {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
     }
-    res.redirect('/homepage/home.html') // redirect to homepage/home.html always for now
+    res.redirect('back') // redirect to homepage/home.html always for now
   }
 }
 
@@ -81,6 +83,40 @@ exports.getAllDrinks = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.session.uid // Get uid from cookie session
     const allDrinks = favDrinksDB.getAllDrinks(uid) // temp, will format better in future
+    const drinkArray = []
+
+    // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}
+    // Iterate through the array of drinks and make objects out of their properties
+    allDrinks.forEach((drink) => {
+      // TODO: REDO Establishments so that it gets the name:
+      // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
+      drinkArray.push({
+        name: drink.drink_name,
+        desc: drink.drink_desc,
+        establishment: drink.establishment_id,
+        'image url': drink.drink_img,
+        id: drink.drink_id,
+        fav: drink.fav
+      })
+    })
+
+    // send the custom drink array as a json
+    res.json({ drinks: drinkArray, success: true })
+  } else {
+    res.json({ drinks: [], success: false })
+  }
+}
+
+/**
+ * Gets all favorited drinks for a friend and sends info as a json
+ * friend ID is stored in the body as a <input type="hidden"> 
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.getFriendDrinks = (req, res) => {
+  if (userDB.getUserByUID(req.body.friendId)) {
+    const friendId = req.body.friendId // Get uid from cookie session
+    const allDrinks = favDrinksDB.getAllDrinks(friendId)
     const drinkArray = []
 
     // drink object: {drink_id, drink_name, drink_desc, establishment_id, drink_img}

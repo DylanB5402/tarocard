@@ -4,7 +4,7 @@
   * Then add that information into the cards
   * After insertion of information, insert card into div "card-container"
   */
-  
+let numOfStarDrinks = 0;
 let cardDiv = document.getElementById("cardContainer");
   
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
@@ -18,18 +18,18 @@ request.onload = function () {
   let currentLetter = "-2"; //idk lmao
   let favsExist = false;
   for (const drinkCard in cards) {
-    console.log(drinkCard)
     const drinkEst = cards[drinkCard]['establishment'];
     const drinkName = cards[drinkCard]['name'];
-    console.log(drinkName);
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];
-    console.log(drinkId);
     const ifFav = cards[drinkCard]['fav'];
+    if( ifFav == true){
+      numOfStarDrinks++;
+    }
+    const userID = cards[drinkCard]['uid'];
 
-    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toLowerCase() !== currentLetter){
-        currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();
-        console.log(currentLetter);        
+    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toUpperCase() !== currentLetter){
+        currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();    
         let letterBar = document.createElement('div');
         letterBar.id = "headerElement";
         let letterHeading = document.createElement('h1');
@@ -62,7 +62,7 @@ request.onload = function () {
         document.getElementById('cardContainer').appendChild(favSection);
     }
 
-    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav);
+    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav,userID);
   }
 }
 
@@ -72,7 +72,7 @@ request.onload = function () {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createUserCard(establishment, drink, description, image, drinkId,ifFav){
+function createUserCard(establishment, drink, description, image, drinkId,ifFav,userID){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -168,7 +168,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
       container.style.display = "none";
       /* Sending a delete request with this button */
 
-      console.log(drinkId) //debug
 
       fetch( "/drinks/deleteDrink/"+ drinkId ,{
           method: 'POST',
@@ -182,9 +181,10 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
   addToGroupbtn.classList.add('add-gO-btn');
   addToGroupbtn.style.display = "none";
       /* Open Group Add Form  */
-  addToGroupbtn.onclick = function ( drinkID, userID ){
+  addToGroupbtn.onclick = function (){
       document.getElementById("groupOrder-add").style.display = 'block';
       document.getElementById("gO-drinkID").value = drinkId;
+      document.getElementById("gO-userID").value = userID;
     }
   addToGroupbtn.innerHTML = "+";
 
@@ -213,14 +213,21 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav)
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({id: drinkId}) //sending drinkID 
     }); 
+    numOfStarDrinks--
     }else {
-      fav = true;
-      favOption.src="../assets/star.png";
-      fetch( "/drinks/starDrink/"+ drinkId ,{
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({id: drinkId}) //sending drinkID 
-      }); 
+      if(numOfStarDrinks < 3 ){
+        fav = true;
+        favOption.src="../assets/star.png";
+        fetch( "/drinks/starDrink/"+ drinkId ,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: drinkId}) //sending drinkID 
+        })  
+        numOfStarDrinks++;
+      }else{
+        document.getElementById('unableToFavorite').style.display = 'flex';
+        document.getElementById('unableToFavorite').focus();
+      }
     }
   }
 

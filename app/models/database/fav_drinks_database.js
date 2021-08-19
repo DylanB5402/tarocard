@@ -16,11 +16,10 @@ const drinksDatabase = require('./drinks_database')
 const userDatabase = require('./user_database')
 const config = require('../../config.json')
 
-  // Constant Static Variables //
-  const NUM_STARRED_LIM = 3
+// Constant Static Variables //
+const NUM_STARRED_LIM = 3
 
 class FavDrinksDatabase {
-
   constructor (database) {
     if (database === undefined) {
       this.db = new Database(config.db)
@@ -48,24 +47,20 @@ class FavDrinksDatabase {
    * @returns {Array[Object]} an array of drink objects
    */
   getAllDrinks (uid) {
+    const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase() // Using methods from drinks_database
-    // const drinkArray = new Array() // array to be filled with drink objects
-
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
+    if (userDB.getUserByUID(uid)) {
+
     const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
             'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
     const query = stmt.all(uid) // an array of row (drink) objects
 
-    // Iterate through the array of objects
-    // `value` = drink object
-    // query.forEach((value) => {
-    //   // Function to be called on each element (object) in the array
-
-    //   drinkArray.push(value) // Push the drink object into the array
-    // })
     return query // return the filled array of drink objects
+    }
+    return null
   }
 
   /**
@@ -186,17 +181,15 @@ class FavDrinksDatabase {
    * @returns {Boolean} true if successful, false otherwise
    */
   starDrink (uid, drinkId) {
-
     // Get number of starred drinks for check > 3
-    const numStarStmt = this.db.prepare(`SELECT COUNT(*) AS count ` + 
-            `FROM fav_drinks WHERE uid = ? AND fav = 1`)
+    const numStarStmt = this.db.prepare('SELECT COUNT(*) AS count ' +
+            'FROM fav_drinks WHERE uid = ? AND fav = 1')
     const numStarred = numStarStmt.get(uid).count
     // Check if not starred yet and limit not exceeded
     if (!this.isStar(uid, drinkId) && numStarred < NUM_STARRED_LIM) {
-
       // Updates the DB
-      const stmt = this.db.prepare(`UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ` +
-      `AND drink_id = ?`)
+      const stmt = this.db.prepare('UPDATE fav_drinks SET fav = TRUE WHERE uid = ? ' +
+      'AND drink_id = ?')
       const query = stmt.run(uid, drinkId) // run the statement; returns 'info' object
 
       // Checks if changes were made; changes are made upon successful boolean change
@@ -205,7 +198,7 @@ class FavDrinksDatabase {
       }
     }
     return false // return false since query.changes was not greater than 0 or
-                 //   drink is already starred
+    //   drink is already starred
   }
 
   /**
@@ -272,7 +265,7 @@ class FavDrinksDatabase {
     const stmt = this.db.prepare('SELECT * FROM fav_drinks')
     const query = stmt.all()
     console.log(query)
-    return query.toString()
+    return query
   }
 
   purgeDb () {
