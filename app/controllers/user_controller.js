@@ -21,7 +21,7 @@ exports.signup = (req, res) => {
     const email = req.body.email
     const password = req.body.password
     const repeatPassword = req.body.repeatPassword
-    const username = email
+    const username = req.body.username
     if (password !== repeatPassword) {
       res.redirect('/sign-up.html')
     } else {
