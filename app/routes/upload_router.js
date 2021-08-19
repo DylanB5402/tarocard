@@ -5,6 +5,6 @@ const router = express.Router()
 const uploadController = require('../controllers/upload_controller')
 
 // POST request for upload.
-// TBD
+router.post('/:uploadType/:uploadId', uploadController.upload)
 
 module.exports = router

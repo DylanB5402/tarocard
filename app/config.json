@@ -1,6 +1,6 @@
 {
   "db" : "databases/taroCard.db",
-  "prod_db" : "databases/test/testTaroCard.db",
+  "prod_db" : "databases/taroCard.db",
   "allowed-ext-image" : "jpeg|jpg|png",
   "allowed-ext-text" : "txt",
 
@@ -22,6 +22,8 @@
   "yelp" : {
     "location" : "san diego, ca",
     "tags" : ["tea","juice","coffee","cocktail"],
+    
+    "useParent" : true,
     "parent" : "food",
     "rate" : 1000
   }, 

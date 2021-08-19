@@ -38,7 +38,7 @@ exports.newDrinkCard = (req, res) => {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
     }
-    res.redirect('/homepage/home.html') // redirect to homepage/home.html always for now
+    res.redirect('back') // redirect to homepage/home.html always for now
   }
 }
 
@@ -91,7 +91,6 @@ exports.getAllDrinks = (req, res) => {
       // TODO: REDO Establishments so that it gets the name:
       // const establishmentName = estabDB.getEstablishment(drink.establishment_id).name
       drinkArray.push({
-        uid: uid,
         name: drink.drink_name,
         desc: drink.drink_desc,
         establishment: drink.establishment_id,
