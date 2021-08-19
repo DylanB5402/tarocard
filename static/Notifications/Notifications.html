@@ -78,8 +78,8 @@
                 const h6 = document.createElement("h6");
                 h6.id = "ActivityHeader";
                 h6.textContent = "Activity";
-                element.appendChild(h6);
                 body.appendChild(element);
+                body.appendChild(h6);
 
                 // $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
                 $.get("/friends/recent", "" , function(data, status, xhr) {

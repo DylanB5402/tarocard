@@ -42,10 +42,12 @@ router.get('/search', userController.searchPage)
 
 router.post('/search/users', userController.searchAllUsers)
 
-router.get('/banner', userController.getBanner)
-
 router.get('/pfp', userController.getProfilePicture)
 
-router.get('/pfp/:friendUID', userController.getProfilePictureFriend)
+router.get('/pfp/:friendUID', userController.getFriendProfilePicture)
+
+router.get('/banner', userController.getBanner)
+
+router.get('/banner/:friendUID', userController.getFriendBanner)
 
 module.exports = router
