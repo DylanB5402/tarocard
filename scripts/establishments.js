@@ -11,13 +11,6 @@ const categories = require('./categories.json')
 
 const establishmentsDatabase = require('../app/models/database/establishments_database')
 const establishmentsDb = new establishmentsDatabase.EstablishmentsDatabase()
-<<<<<<< HEAD
-=======
-establishmentsDb.resetDb()
-
-const tags = config.tags
-const obtainedCategories = []
->>>>>>> refactor-backend
 
 let categoryFilter = (useParent) => {
   let obtainedCategories = []
@@ -154,8 +147,5 @@ let run = () => {
     }
   })
 }
-<<<<<<< HEAD
 
 run()
-=======
->>>>>>> refactor-backend

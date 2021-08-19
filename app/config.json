@@ -1,10 +1,6 @@
 {
   "db" : "databases/taroCard.db",
-<<<<<<< HEAD
   "prod_db" : "databases/taroCard.db",
-=======
-  "prod_db" : "databases/test/testTaroCard.db",
->>>>>>> refactor-backend
   "allowed-ext-image" : "jpeg|jpg|png",
   "allowed-ext-text" : "txt",
 
