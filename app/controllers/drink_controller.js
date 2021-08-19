@@ -38,7 +38,7 @@ exports.newDrinkCard = (req, res) => {
       // Print "Could not add drink!"
       // Give detail later e.g. "drink already exists"
     }
-    res.redirect('/homepage/home.html') // redirect to homepage/home.html always for now
+    res.redirect('back') // redirect to homepage/home.html always for now
   }
 }
 

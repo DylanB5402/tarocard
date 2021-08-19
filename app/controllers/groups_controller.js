@@ -133,7 +133,7 @@ exports.removeGroup = (req, res) => {
     const groupId = req.params.groupId
     groupDB.removeGroup(uid, groupId)
 
-    res.redirect('/homepage/home.html')
+    res.redirect('back')
   } else {
     res.redirect('/')
   }
@@ -153,7 +153,7 @@ exports.removeFromGroup = (req, res) => {
     console.log(`This is the drink id in exports.removeFrom Group: ${drinkId}`) // debug statement
     groupDB.removeFromGroup(uid, groupId, drinkId)
 
-    res.redirect('/homepage/home.html')
+    res.redirect('back')
   } else {
     res.redirect('/')
   }
