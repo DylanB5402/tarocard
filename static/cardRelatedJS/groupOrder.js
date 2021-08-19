@@ -91,10 +91,12 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     /* Deleting a Group  */
     let deleteBtn = document.createElement("img");
     deleteBtn.src="../assets/trash-icon.png";
-    deleteBtn.classList.add("trash-card");
     deleteBtn.style.width = "60px";
     deleteBtn.style.height = "60px";
     deleteBtn.setAttribute('name','deleteBtn');
+    deleteBtn.style.position = "absolute";
+    deleteBtn.style.left = "80%"
+
 
     deleteBtn.onclick = function(){
         container.style.display = "none";
@@ -108,7 +110,16 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
         }); 
         */
     }
+
+    /* Edit Button To Change the name */
+    let options = document.createElement('img');
+    options.src = '../assets/menu-white.png';
+    options.style.position = "absolute";
+    options.style.left = "90%";
+    options.setAttribute('name','edit')
     
+    
+    container.appendChild(options);
     container.appendChild(deleteBtn);
     container.appendChild(groupImage);
     container.appendChild(groupName);
@@ -123,9 +134,12 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({id: groupID}) //sending groupID 
       }); 
-      }else{
+      }else if( e.target.name != "edit"){
         document.getElementById("groupView").style.display = "block";
         getGroupDrinkCards(groupID); //added id, when given the id
+      }else {
+        document.getElementById('editGroup').style.display = "flex";
+        document.getElementById('group-order-edit').setAttribute('value', gName);
       }
     }
   }
@@ -140,6 +154,8 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = function() {
         const cards = requestGroupContent.response;
+        console.log("----------------------------------")
+        console.log(cards)
         for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
           /*
@@ -150,14 +166,17 @@ function getGroupDrinkCards(groupID){
           const ifFav = cards[drinkCard]['fav'];
           */
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
+         console.log(drinkCardID)
 
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
          requestGroupOrdersCard.send();
+         console.log("This is the id" + drinkCardID);
 
          requestGroupOrdersCard.onload = function () {
            let content = requestGroupOrdersCard.response;
+           console.log(content);
            let drinkEst = content["drink_name"]; //will change to establishment id
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];

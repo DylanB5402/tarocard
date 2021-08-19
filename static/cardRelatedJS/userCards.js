@@ -32,9 +32,9 @@ request.onload = function () {
       console.log(numOfStarDrinks)
     }
 
-    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toLowerCase() !== currentLetter){
+    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toUpperCase() !== currentLetter){
         currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();
-        console.log(currentLetter);        
+        console.log(currentLetter);     
         let letterBar = document.createElement('div');
         letterBar.id = "headerElement";
         let letterHeading = document.createElement('h1');
