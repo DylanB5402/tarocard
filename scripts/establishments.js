@@ -1,6 +1,9 @@
 require('dotenv').config()
-const Database = require('better-sqlite3')
 const yelp = require('yelp-fusion')
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
 
 const client = yelp.client(process.env.YELP_API_KEY)
 const config = require('../app/config.json').yelp
@@ -8,24 +11,40 @@ const categories = require('./categories.json')
 
 const establishmentsDatabase = require('../app/models/database/establishments_database')
 const establishmentsDb = new establishmentsDatabase.EstablishmentsDatabase()
+<<<<<<< HEAD
+=======
 establishmentsDb.resetDb()
 
 const tags = config.tags
 const obtainedCategories = []
+>>>>>>> refactor-backend
 
-console.log(tags)
+let categoryFilter = (useParent) => {
+  let obtainedCategories = []
+  const tags = config.tags
 
-tags.forEach((tag) => {
-  console.log(`Searching Categories For Entries In ${config.parent} Containing The Value ${tag}`)
-  categories.forEach((category) => {
-    if (category.alias.includes(tag) && category.parents.includes(config.parent)) {
-      console.log(`Found Applicable Tag: ${category.alias}`)
-      if (!obtainedCategories.includes(category.alias)) obtainedCategories.push(category.alias)
-    }
-  })
-})
+  if (useParent) {
+    console.log(`Searching Categories For Entries In ${config.parent}`)
+    categories.forEach((category) => {
+      if (category.parents.includes(config.parent)) {
+        console.log(`Found Applicable Tag: ${category.alias}`)
+        if (!obtainedCategories.includes(category.alias)) obtainedCategories.push(category.alias)
+      }
+    })
+  } else {
+    tags.forEach((tag) => {
+      console.log(`Searching Categories For Entries In ${config.parent} Containing The Value ${tag}`)
+      categories.forEach((category) => {
+        if (category.alias.includes(tag) && category.parents.includes(config.parent)) {
+          console.log(`Found Applicable Tag: ${category.alias}`)
+          if (!obtainedCategories.includes(category.alias)) obtainedCategories.push(category.alias)
+        }
+      })
+    })
+  }
 
-console.log(`Performing Yelp Search On: [${obtainedCategories}]`)
+  return obtainedCategories
+}
 
 // Recursive search
 const search = (categories, idx, location, offset, rate, added) => {
@@ -83,6 +102,7 @@ const search = (categories, idx, location, offset, rate, added) => {
       } else {
         // Finished
         console.log(`Search Completed, ${added} Entries Added To Database`)
+        return process.exit()
       }
     }
   }).catch(e => {
@@ -90,7 +110,52 @@ const search = (categories, idx, location, offset, rate, added) => {
   })
 }
 
-// Run Recursive Function
-if (obtainedCategories.length > 0) {
-  search(obtainedCategories, 0, config.location, 0, config.rate, 0)
+let run = () => {
+  if(process.env.YELP_API_KEY === undefined) {
+    console.log("Error: Undefined YELP_API_KEY")
+    console.log("---PLEASE FOLLOW THESE STEPS---")
+    console.log("Create a .env file in the root directory")
+    console.log("Add this text into the .env file:")
+    console.log("YELP_API_KEY=(YOUR API KEY HERE)")
+    console.log("You can obtain an api key through yelp developer portal")
+    return process.exit()
+  }
+
+  console.log("---Resetting Esablishments DB---")
+  establishmentsDb.resetDb()
+
+  console.log("---Obtaining User Input---")
+  console.log("Please Choose A Search Method:")
+  console.log(`[1]: Search for establishments under specified tags ${config.tags} in config.json (under parent directory ${config.parent})`)
+  console.log(`[2]: Search for all establishments under tags in parent directory ${config.parent}`)
+  console.log(`[3]: Use Default Setting`)
+  readline.question('Would you like to search for? [1/2/3]: ', resp => {
+    let useParent = config.useParent
+    switch(parseInt(resp)) {
+      case 1:
+        console.log("Option 1 Selected...")
+        useParent = false
+        break
+      case 2:
+        console.log("Option 2 Selected...")
+        useParent = true
+        break
+      default:
+        console.log("Using Default Parameters...")
+        useParent = config.useParent
+        break
+    }
+
+    let obtainedCategories = categoryFilter(useParent)
+    // Run Recursive Function
+    if (obtainedCategories.length > 0) {
+      console.log(`---Performing Yelp Search On: [${obtainedCategories}]---`)
+      search(obtainedCategories, 0, config.location, 0, config.rate, 0)
+    }
+  })
 }
+<<<<<<< HEAD
+
+run()
+=======
+>>>>>>> refactor-backend
