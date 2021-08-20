@@ -6,7 +6,7 @@ class TemplateEngine {
     this.generateEditPage = pug.compileFile('templates/pug/edit.pug')
     this.generateFriendProfile = pug.compileFile('templates/pug/friendsProfile.pug')
     this.generateFriendProfileRequest = pug.compileFile('templates/pug/friendsProfileRequest.pug')
-    this.generateFriendProfilePending = pug.compileFile('templates/pug/friendProfilePending.pug')
+    this.generateFriendProfilePending = pug.compileFile('templates/pug/friendsProfilePending.pug')
     this.generateFriendProfileCurrent = pug.compileFile('templates/pug/friendsProfileCurrent.pug')
   }
 
