@@ -102,6 +102,22 @@ class GroupDatabase {
   }
 
   /**
+   * Helper method to check if a drink already exists in a group to prevent duplicates
+   * @param {Integer} uid 
+   * @param {Integer} drinkId 
+   * @param {Integer} groupId 
+   * @returns {Boolean} True if the drink already exists (should be no more than
+   *                      one), false if it doesn't exist
+   */
+  drinkExists(uid, drinkId, groupId) {
+    const stmt = this.db.prepare(`SELECT COUNT(*) count from groups ` + 
+            `WHERE uid = ? AND friends_drink_id = ? AND group_id = ?`)
+    const query = stmt.get(uid, drinkId, groupId)
+    const numDrinkExists = query.count
+    return numDrinkExists === 1
+  }
+
+  /**
   * Creates a new group
   * Duplicate group names are allowed
   * Upon creating a new group, all initial fields for friend id, drink id are null
@@ -154,11 +170,13 @@ class GroupDatabase {
     const userDB = new userDatabase.UserDatabase()
     const drinksDB = new drinksDatabase.DrinksDatabase()
 
-    // Check if ids exists in the first place
+    // Check if ids exists in the first place and makes sure we are only adding 
+    //   a new drink and not a duplicate
     if (userDB.getUserByUID(uid) &&
               userDB.getUserByUID(friendUID) &&
               drinksDB.isExist(drinkId) &&
-              this.isExist(groupId)) {
+              this.isExist(groupId) &&
+              !this.drinkExists(uid, drinkId, groupId) ) {
       // Get group name for data insertion
       const nameStmt = this.db.prepare('SELECT group_name FROM groups WHERE' +
         ' group_id = ?')
