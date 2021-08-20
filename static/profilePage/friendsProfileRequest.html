@@ -11,6 +11,7 @@
     <!--<link rel="stylesheet" href="TaroStyle.css">-->
     <link rel="stylesheet" href="../temp.css">
     <script src="..\jquery-3.6.0.min.js"></script>
+    
 </head>
 
 <body class="profile">
@@ -83,7 +84,7 @@
             <!-- Max characters around 150 for description-->
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
-                #{bio}
+                #{bio}                
             </p>
         </section>
 
@@ -93,20 +94,20 @@
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p> #{numFriends} 
+                <p>#{numFriends} 
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p> #{numCards} 
+                <p>#{numCards} 
                     <span> Cards</span>
                 </p>
             </div>
         </div>
 
-        <div class="mytabs">
+        <div class="friend-tab">
             <input type="radio" id="tabfree" name="mytabs" checked="checked">
             <label for="tabfree"><img src="../assets/cards-purple.png" class="tab-icon"></label>
             <div class="tab">
@@ -116,17 +117,17 @@
                         <div id="favoritesSection">
                             <img id="favoritesStar" src="../assets/star-purple.png" />
                             <p id="favorites">Favorites</p>
-                            <hr style="width: 100%; height: 0.1px;">]
+                            <hr style="width: 100%; height: 0.1px;">
                         </div> 
                     </div>
                 </section>
             </div>
 
-            <input type="radio" id="tabsilver" name="mytabs">
+            <!-- <input type="radio" id="tabsilver" name="mytabs">
             <label for="tabsilver"><img src="../assets/group-purple.png" class="tab-icon"></label>
             <div class="tab" id="groupCardContainer">
 
-        </div>
+        </div> -->
 <!-- MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION -->
             <button id="add-card-btn" alt="add card button"> + </button> 
             <div id="modal-sheet" class="modal">

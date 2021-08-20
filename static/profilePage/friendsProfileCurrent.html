@@ -11,6 +11,7 @@
     <!--<link rel="stylesheet" href="TaroStyle.css">-->
     <link rel="stylesheet" href="../temp.css">
     <script src="..\jquery-3.6.0.min.js"></script>
+    
 </head>
 
 <body class="profile">
@@ -44,12 +45,12 @@
         <img src="/pfp/" + friendUID id="profilePic">
 
         <div class="sendRequest">
-            <button type="button" id="sentRequest">Pending</button>
+            <button type="button" id="sentRequest">Friends</button>
         </div>
 
         <div id="accept-denyPopup">
-            <button type="button" id="add-accept" style="background-color: red; border-color: black;">Cancel Request?</button>
-            <button type="button" id="deny" style="color: white; background-color: lightgreen; border-color: black;">Keep Request</button>
+            <button type="button" id="add-accept" style="background-color: red; border-color: black;">Unfriend</button>
+            <button type="button" id="deny" style="color: white; background-color: lightgreen; border-color: black;">Keep Friend</button>
         </div>
         
         <script>
@@ -57,10 +58,36 @@
                 event.preventDefault;
                 document.querySelector("#accept-denyPopup").style = "visibility: visible;"
 
-                
-            })
-        </script>
+                $(".profile #profileTop #accept-denyPopup").on("click", "#add-accept", function (event) {
+                let buttonElement = event.target;
+                const currentURL = $(location).attr('href');
+                let userID = currentURL.charAt(currentURL.length - 1);
+                let currentChar;
+                let int = currentURL.length - 2;
+                while(currentURL.charAt(int) !== "/") {
+                    currentChar = currentURL.charAt(int);
+                    userID = currentChar + userID;
+                    int --;
+                }
+                event.target.parentElement.querySelector("#deny").style = "visibility: hidden;";
+                $.post("/friends/deny", 
+                        {
+                            "id": userID
+                        }, 
+                        function() {
+                        event.target.textContent = "unfriended";
+                })
 
+            })
+
+                $(".profile #profileTop #accept-denyPopup").on("click", "#deny", function (event) {
+                    let buttonElement = event.target;
+                    buttonElement.parentElement.style = "visibility: hidden;"
+
+            })
+                
+        })
+        </script>
 
         <section id="profileText">
             <h2 id="displayName"> #{displayName} </h2>
@@ -73,7 +100,7 @@
             <!-- Max characters around 150 for description-->
             <!-- should pull real value from DB in final version -->
             <p id="profileDescription">
-                #{bio}
+                #{bio}                
             </p>
         </section>
 
@@ -83,20 +110,20 @@
         <div class="user-stats">
             <!-- <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p> #{numFriends} 
+                <p>#{numFriends} 
                     <span> Friends</span>
                 </p>
             </div>
             <!-- </a> -->
 
             <div class="stat">
-                <p> #{numCards} 
+                <p>#{numCards} 
                     <span> Cards</span>
                 </p>
             </div>
         </div>
 
-        <div class="mytabs">
+        <div class="friend-tab">
             <input type="radio" id="tabfree" name="mytabs" checked="checked">
             <label for="tabfree"><img src="../assets/cards-purple.png" class="tab-icon"></label>
             <div class="tab">
@@ -106,17 +133,17 @@
                         <div id="favoritesSection">
                             <img id="favoritesStar" src="../assets/star-purple.png" />
                             <p id="favorites">Favorites</p>
-                            <hr style="width: 100%; height: 0.1px;">]
+                            <hr style="width: 100%; height: 0.1px;">
                         </div> 
                     </div>
                 </section>
             </div>
 
-            <input type="radio" id="tabsilver" name="mytabs">
+            <!-- <input type="radio" id="tabsilver" name="mytabs">
             <label for="tabsilver"><img src="../assets/group-purple.png" class="tab-icon"></label>
             <div class="tab" id="groupCardContainer">
 
-        </div>
+        </div> -->
 <!-- MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION -->
             <button id="add-card-btn" alt="add card button"> + </button> 
             <div id="modal-sheet" class="modal">
