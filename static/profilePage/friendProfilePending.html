@@ -44,31 +44,21 @@
         <img src="/pfp/" + friendUID id="profilePic">
 
         <div class="sendRequest">
-            <button type="button" id="add-accept">Add Friend</button>
+            <button type="button" id="sentRequest">Pending</button>
+        </div>
+
+        <div id="accept-denyPopup">
+            <button type="button" id="add-accept" style="background-color: red; border-color: black;">Cancel Request?</button>
+            <button type="button" id="deny" style="color: white; background-color: lightgreen; border-color: black;">Keep Request</button>
         </div>
         
         <script>
-            $(".profile #profileTop .sendRequest").on("click", "#add-accept", function (event) {
-            let buttonElement = event.target;
-            const currentURL = $(location).attr('href');
-            let userID = currentURL.charAt(currentURL.length - 1);
-            let currentChar;
-            let int = currentURL.length - 2;
-            while(currentURL.charAt(int) !== "/") {
-                currentChar = currentURL.charAt(int);
-                userID = currentChar + userID;
-                int --;
-            }
-            $.post("/friends/request", 
-                    {
-                        "id": userID
-                    }, 
-                    function() {
-                    event.target.id = "sentRequest";
-                    event.target.textContent = "Request Sent"
-            })
+            $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
+                event.preventDefault;
+                document.querySelector("#accept-denyPopup").style = "visibility: visible;"
 
-        })
+                
+            })
         </script>
 
 

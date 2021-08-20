@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!--<link rel="stylesheet" href="TaroStyle.css">-->
     <link rel="stylesheet" href="../temp.css">
+    <script src="..\jquery-3.6.0.min.js"></script>
+    
 </head>
 
 <body class="profile">
@@ -48,7 +50,47 @@
         </div>
         
         <script>
-            
+            $(".profile #profileTop .accept-deny").on("click", "#add-accept", function (event) {
+            let buttonElement = event.target;
+            let denyButton = event.target.parentElement.querySelector("#deny");
+            denyButton.style.display = "none";
+            const currentURL = $(location).attr('href');
+            let userID = currentURL.charAt(currentURL.length - 1);
+            let currentChar;
+            let int = currentURL.length - 2;
+            while(currentURL.charAt(int) !== "/") {
+                currentChar = currentURL.charAt(int);
+                userID = currentChar + userID;
+                int --;
+            }
+            $.post("/friends/accept", 
+                    {
+                        "id": userID
+                    }, 
+                    function() {
+                    buttonElement.textContent = "Accepted";
+            })
+
+        })
+
+            $(".profile #profileTop .accept-deny").on("click", "#deny", function (event) {
+                let parentDiv = event.target.parentElement;
+                let acceptButton = parentDiv.querySelector("#add-accept");
+                acceptButton.style.opacity = "0";
+                acceptButton.disabled = "true";
+                const currentURL = $(location).attr('href');
+                let userID = currentURL.charAt(currentURL.length - 1);
+                let currentChar;
+                let int = currentURL.length - 2;
+                while(currentURL.charAt(int) !== "/") {
+                    currentChar = currentURL.charAt(int);
+                    userID = currentChar + userID;
+                    int --;
+                }
+                $.post("/friends/deny", { "id": userID }, function() {
+                    event.target.textContent = "Denied"; 
+                })
+            })
         </script>
 
 

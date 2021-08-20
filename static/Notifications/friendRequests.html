@@ -24,9 +24,9 @@
 <body class="notifs" style="z-index: -2; margin-top: 150px;">
     <template id="friendsRequestTemp">
         <div class="requestElement">
-            <img>
-            <h2></h2>
-            <h3></h3>
+            <a class="ActivityLinks"><img></a>
+            <a class="ActivityLinks"><h2></h2></a>
+            <a class="ActivityLinks"><h3></h3></a>
             <button class="accept" type="button" value="accept"></button>
             <button class="deny" type="button" value="deny"></button>
         </div>
@@ -110,6 +110,10 @@
             divCopy.querySelector("h2", true).textContent = users[i]["display name"];
             divCopy.querySelector("h3", true).textContent = users[i]["username"];
             divCopy.querySelector("h3", true).id = users[i]["id"];
+            let links = divCopy.querySelectorAll(".ActivityLinks");
+            links.forEach(element => {
+                element.href = "/profile/" + users[i]["id"];
+            });
             divAll.appendChild(divCopy);
             body.appendChild(divAll);
         }

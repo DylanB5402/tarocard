@@ -1014,6 +1014,24 @@ h3 a{
     right: 100px;
 }
 
+
+#sentRequest {
+    text-align: center;
+    viewport-fit: 50px;
+    width: 300px;
+    height: 50px;
+    font-size: 40px;
+    color:#9879C5;
+    border: 3px solid #9879C5;
+    border-radius: 40px;
+    font-weight: normal;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 60px;
+    right: 100px;
+}
+
 #deny {
     text-align: center;
     viewport-fit: 50px;
@@ -1334,6 +1352,22 @@ h3 a{
     width: 260px;
 }
 
+#sentRequest {
+    font-size: 32px;
+    font-weight: medium;
+    /* border: solid 3px #9879C5; */
+    text-align: center;
+    color: #9879C5;
+    background-color: white;
+    border-radius: 75px;
+    height: 69px;
+    width: 260px;
+}
+
+#accept-denyPopup {
+    visibility: hidden;
+}
+
 #deny {
     font-size: 32px;
     font-weight: medium;
@@ -1566,7 +1600,6 @@ button #edit-profile,
 #ActivityHeader {
     font-size: 40px;
     font-weight: normal;
-    margin-bottom: 25px;
     color: rgb(152, 121, 197);
     margin-left: 40px;
     position: relative;
@@ -1574,7 +1607,8 @@ button #edit-profile,
 }
 
 #containAllRecent {
-    margin-top: 200px;
+    position: relative;
+    bottom: 70px;
 }
 
 .requestElement {
