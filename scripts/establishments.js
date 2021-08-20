@@ -74,14 +74,16 @@ const search = (categories, idx, location, offset, rate, added) => {
         img: business.image_url
       }
 
-      if (!establishmentsDb.isExist(business.id)) {
-        establishmentsDb.addEstablishment(establishment)
-        console.log(`Establishment: id(${establishment.id}) name(${establishment.name}) added to database`)
-        added++
-      } else {
+      if (establishmentsDb.isExist(business.id)) {
         establishmentsDb.editEstablishment(establishment.id, establishment)
         console.log(`Establishment: id(${establishment.id}) name(${establishment.name}) edited in database`)
       }
+
+      if (!establishmentsDb.nameExists(establishment.name)) {
+        establishmentsDb.addEstablishment(establishment)
+        console.log(`Establishment: id(${establishment.id}) name(${establishment.name}) added to database`)
+        added++
+      } 
     })
 
     // https://www.yelp.com/developers/documentation/v3/business_search

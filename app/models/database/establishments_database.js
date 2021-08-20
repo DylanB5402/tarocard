@@ -114,6 +114,17 @@ class EstablishmentsDatabase {
   }
 
   /**
+      * Checks if a establishment name already exists in the database
+      * @param {String} name the establishment name to search for
+      * @returns {String} true if in the database, false if not
+      */
+   nameExists (name) {
+    const stmt = this.db.prepare('SELECT * FROM establishments WHERE name = ?')
+    const query = stmt.all(name)
+    return query.length > 0
+  }
+
+  /**
       * Gets an establishment
       * @param {Integer} id the establishments id to search for
       * @returns {Object} establishments information
