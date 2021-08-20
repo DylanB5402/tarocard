@@ -34,7 +34,7 @@ axios.get(url + '/debug/users/json').then((res) => {
         friend_uid: userIdJSON[name.slice(0, -10)],
         status: 'friends'
       }).then((res) => {
-        // console.log(userIdJSON)
+      // console.log(userIdJSON)
     }).catch((err) => {
       console.log(err)
     })

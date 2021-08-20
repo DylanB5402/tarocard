@@ -139,7 +139,7 @@ class EstablishmentsDatabase {
       * Gets an establishment
       * @returns {Array} string array unique names
       */
-   getUniqueNames () {
+  getUniqueNames () {
     const stmt = this.db.prepare('SELECT DISTINCT name FROM establishments')
     const query = stmt.all()
     return query.map((obj) => obj.name)

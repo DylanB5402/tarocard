@@ -8,6 +8,7 @@ html
     link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
     // <link rel="stylesheet" href="TaroStyle.css">
     link(rel='stylesheet' href='../temp.css')
+    script(src='..\jquery-3.6.0.min.js')
   body.profile
     //  Group View // being able to see all the cards in a group Order 
     #groupView(style='background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;')
@@ -35,11 +36,19 @@ html
     section#profileTop
       //  pfp will pull from user DB 
       img#profilePic(src='/pfp/' + frienduid)
-      .accept-deny
-        button#add-accept(type='button') Accept
-        button#deny(type='button') Deny
+      .sendRequest
+        button#sentRequest(type='button') Pending
+      #accept-denyPopup
+        button#add-accept(type='button' style='background-color: red; border-color: black;') Cancel Request?
+        button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Request
       script.
         
+        $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
+                        event.preventDefault;
+                        document.querySelector("#accept-denyPopup").style = "visibility: visible;"
+        
+                        
+                    })
         
       section#profileText
         h2#displayName #{displayName}
@@ -57,13 +66,13 @@ html
         //  <a href="../friendsPage/Friends_Page.html" > 
         .stat
           p
-            | #{numFriends} 
+            | #{numFriends}
 
             span Friends
         //  </a> 
         .stat
           p
-            | #{numCards} 
+            | #{numCards}
 
             span Cards
       .mytabs
