@@ -159,7 +159,6 @@ function getGroupDrinkCards(groupID){
           const ifFav = cards[drinkCard]['fav'];
           */
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
-
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
@@ -167,7 +166,7 @@ function getGroupDrinkCards(groupID){
 
          requestGroupOrdersCard.onload = function () {
            let content = requestGroupOrdersCard.response;
-           let drinkEst = content["drink_name"]; //will change to establishment id
+           let drinkEst = content["establishment_id"]; //will change to establishment id
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
            let drinkId = content["drink_id"];

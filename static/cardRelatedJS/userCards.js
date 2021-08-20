@@ -13,12 +13,20 @@ request.open('GET', '/drinks', true);
 request.responseType = 'json';
 request.send();
 
-request.onload = function () {
+async function getEstabName(estabID){
+  let response = await fetch("establishments/get/"+estabID);
+  let data = await response.json()
+  return data.name;
+}
+
+
+request.onload = async function () {
   const cards = request.response.drinks;
   let currentLetter = "-2"; //idk lmao
   let favsExist = false;
   for (const drinkCard in cards) {
-    const drinkEst = cards[drinkCard]['establishment'];
+    let drinkEst = cards[drinkCard]['establishment'];
+    drinkEst = await getEstabName(drinkEst);
     console.log(drinkEst);
     const drinkName = cards[drinkCard]['name'];
     const drinkDesc = cards[drinkCard]['desc'];
@@ -29,8 +37,8 @@ request.onload = function () {
     }
     const userID = cards[drinkCard]['uid'];
 
-    if( ifFav == false && cards[drinkCard]['name'].charAt(0).toUpperCase() !== currentLetter){
-        currentLetter = cards[drinkCard]['name'].charAt(0).toUpperCase();    
+    if( ifFav == false && drinkEst.charAt(0).toUpperCase() !== currentLetter){
+        currentLetter = drinkEst.charAt(0).toUpperCase();    
         let letterBar = document.createElement('div');
         letterBar.id = "headerElement";
         let letterHeading = document.createElement('h1');
@@ -62,7 +70,7 @@ request.onload = function () {
         favSection.appendChild(bar);
         document.getElementById('cardContainer').appendChild(favSection);
     }
-
+    
     createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav,userID);
   }
 }

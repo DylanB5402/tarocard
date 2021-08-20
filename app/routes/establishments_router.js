@@ -13,4 +13,7 @@ router.get('/search/:search', establishmentsController.searchEstablishments)
 // GET request for search establishments
 router.get('/unique', establishmentsController.uniqueEstablishments)
 
+// GET request for search establishments
+router.get('/get/:id', establishmentsController.getEstablishment)
+
 module.exports = router

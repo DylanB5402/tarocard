@@ -14,7 +14,6 @@ const favDrinksDb = new favDrinksDatabase.FavDrinksDatabase()
  */
 exports.signup = (req, res) => {
   if (req.session.loggedin) {
-    // res.append({'already-logged-in' : true})
     res.redirect('/profile/')
   } else {
     const email = req.body.email
@@ -89,24 +88,21 @@ exports.profileById = (req, res) => {
     const numFriends = friendDb.getNumFriends(uid)
     if (req.session.loggedin) {
       if (req.session.uid.toString() === uid) {
-        // res.send(tempEngine.getUserProfile(username, displayName, bio, numFriends, numCards))
         res.redirect('/profile')
       } else {
         res.append('profileaccess', 'successful')
-        var friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
+        let friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
         if (friendStatus == undefined) {
           friendStatus = friendDatabase.FriendStatus.NONE
         }
-        console.log(friendStatus)
         // currently friends
         if (friendStatus === friendDatabase.FriendStatus.FRIENDS) {
           // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
-          res.send('987') //current friend
+          res.send('987') // current friend
         } else if (friendStatus === friendDatabase.FriendStatus.INCOMING) {
           res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
         } else if (friendStatus === friendDatabase.FriendStatus.OUTGOING) {
-          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
-          res.send('1323')
+          res.send(tempEngine.getFriendProfilePending(username, displayName, bio, numFriends, numCards, uid))
         } else if (friendStatus === friendDatabase.FriendStatus.NONE) {
           res.send(tempEngine.getFriendProfileRequest(username, displayName, bio, numFriends, numCards, uid))
         }
