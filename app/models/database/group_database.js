@@ -175,9 +175,8 @@ class GroupDatabase {
     if (userDB.getUserByUID(uid) &&
               userDB.getUserByUID(friendUID) &&
               drinksDB.isExist(drinkId) &&
-              this.isExist(groupId) //&&
-              //!this.drinkExists(uid, drinkId, groupId) 
-              ) {
+              this.isExist(groupId) &&
+              !this.drinkExists(uid, drinkId, groupId)) {
       // Get group name for data insertion
       const nameStmt = this.db.prepare('SELECT group_name FROM groups WHERE' +
         ' group_id = ?')
