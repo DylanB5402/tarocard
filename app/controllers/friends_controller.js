@@ -49,6 +49,21 @@ exports.currentFriends = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
+ exports.currentFriendsByID = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.body.id
+    const currentFriends = friendDb.getFriendDataByUid(uid)
+    const friendArray = friendDb.formatFriendData(currentFriends)
+    res.json({ users: friendArray, success: true })
+  } else {
+    res.json({ users: [], success: false })
+  }
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
 exports.outgoingFriends = (req, res) => {
   const uid = req.params.uid
   res.json({ friend_ids: friendDb.getAllOutgoingFriends(uid) })

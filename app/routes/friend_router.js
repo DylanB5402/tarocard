@@ -17,6 +17,8 @@ router.post('/deny', friendController.deny)
 
 router.get('/current', friendController.currentFriends)
 
+router.post('/current/id', friendController.currentFriendsByID)
+
 router.post('/incoming/:uid', friendController.incomingFriends)
 
 router.post('/outgoing/:uid', friendController.outgoingFriends)
