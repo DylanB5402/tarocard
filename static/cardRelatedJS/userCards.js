@@ -19,6 +19,7 @@ request.onload = function () {
   let favsExist = false;
   for (const drinkCard in cards) {
     const drinkEst = cards[drinkCard]['establishment'];
+    console.log(drinkEst);
     const drinkName = cards[drinkCard]['name'];
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];

@@ -368,6 +368,7 @@ li:last-child{
     height: 100%;
     top: 0;
     width: 100vw;
+    overflow-y: auto;
     
 }
 
@@ -1268,6 +1269,30 @@ h3 a{
     filter: none;
 }
 
+.friend-tab {
+    display: flex;/**/
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.friend-tab input[type="radio"] {
+    display: none;
+}
+
+.friend-tab label {
+    /*padding: 25px;/**/
+    background: white;
+    font-weight: normal;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+}
+
+.friend-tab .tab-icon {
+    width: 100px;
+}
 
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -1954,7 +1979,102 @@ button #edit-profile,
 }	
 /* FRIEND LIST END */
 
+/* Establishment Input */
+.listWrapper {
+    margin-top: 30px;
+    overflow-y: scroll; 
+    width: 80vw; 
+    height:300px; 
+    position: relative;
+    top: 5px;
+    border: 1px solid black;
+    margin-left: auto; 
+    margin-right: auto;}
 
+.shopSelector {
+  appearance: none;
+  display: none;
+}
+
+.shopLabel {
+  display: flex;
+  font-size: 20px;
+}
+
+.shopLabel img{
+    width: 50px;
+    height: 50px;
+}
+
+.shopLabel h1{
+    font-size: 40px;
+}
+
+.shopLabel p{
+    font-size: 30px;
+}
+
+.shopSelector:checked + .shopLabel {
+  background-color: rgba(0, 0, 0, 0.5)
+}
+
+
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+.userInput #search {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 40px;
+}
+
+
+.autocomplete-items {
+  position: relative;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 8.5vh;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 40px;
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+#estabBtn{
+    font-size: 40px;
+    position: relative;
+    width: 90vw;
+    margin: auto;
+}
+
+#estabStuff{
+    margin-top: 200px;
+}
 
 /* java -> camel case -> heyBestiesBestDrink
 python -> underscores -> hey_besties_best_drink
