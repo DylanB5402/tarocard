@@ -7,6 +7,7 @@ class TemplateEngine {
     this.generateFriendProfile = pug.compileFile('templates/pug/friendsProfile.pug')
     this.generateFriendProfileRequest = pug.compileFile('templates/pug/friendsProfileRequest.pug')
     this.generateFriendProfilePending = pug.compileFile('templates/pug/friendProfilePending.pug')
+    this.generateFriendProfileCurrent = pug.compileFile('templates/pug/friendsProfileCurrent.pug')
   }
 
   getUserProfile (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards) {
@@ -51,6 +52,17 @@ class TemplateEngine {
 
   getFriendProfilePending (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
     return this.generateFriendProfilePending({
+      username: profileUsername,
+      displayName: profileDisplayName,
+      bio: profileBio,
+      numFriends: numberFriends,
+      numCards: numberCards,
+      frienduid: friendUserID
+    })
+  }
+
+  getFriendProfileCurrent (profileUsername, profileDisplayName, profileBio, numberFriends, numberCards, friendUserID) {
+    return this.generateFriendProfileCurrent({
       username: profileUsername,
       displayName: profileDisplayName,
       bio: profileBio,
