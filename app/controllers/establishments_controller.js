@@ -13,3 +13,7 @@ exports.searchEstablishments = (req, res) => {
 exports.uniqueEstablishments = (req, res) => {
   res.json(establishmentsDB.getUniqueNames())
 }
+
+exports.getEstablishment = (req, res) => {
+  res.json(establishmentsDB.getEstablishment(req.params.id))
+}
