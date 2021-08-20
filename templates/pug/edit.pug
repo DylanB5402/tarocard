@@ -6,9 +6,9 @@ html
     link(rel='preconnect' href='https://fonts.googleapis.com')
     link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
     link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
-    script(src='jquery-3.6.0.min.js')
+    script(src='../jquery-3.6.0.min.js')
     link(rel='stylesheet' href='../temp.css')
-  body.edit-page
+  body.edit-page(style='margin-top: 150px;')
     .page-header
       a(href='/profile')
         img#back(src='../assets/Back.png')
@@ -31,16 +31,15 @@ html
         .text-input
           label.label(for='display-name') Display Name
           br
-          input#display-name.edit-input(type='text' name='display-name' value='' + displayName)
+          input#display-name.edit-input(type='text' name='display-name' value= '' + displayName)
           br
           label.label(for='username') Username
           br
-          input#username.edit-input(type='text' name='username' value='' + username)
+          input#usernameEdit.edit-input(type='text' name='username' value='' + username)
           br
           label.label(for='bio') Bio
           br
-          //- textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
-          textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
+          textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)                 
           br
           input#save(type='submit' value='Save changes')
     script.
@@ -58,4 +57,10 @@ html
                   var tmppath = URL.createObjectURL(event.target.files[0]);
                   currentProfilePic.src = tmppath;
               })
+      
+              $('#bio').keypress(function(event) {
+                  if (event.keyCode == 13) {
+                  event.preventDefault();
+                  }
+              });
       
