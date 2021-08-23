@@ -38,6 +38,7 @@ request.onload = async function () {
     const userID = cards[drinkCard]['uid'];
 
     if( ifFav == false && drinkEst.charAt(0).toUpperCase() !== currentLetter){
+        console.log(drinkEst);
         currentLetter = drinkEst.charAt(0).toUpperCase();    
         let letterBar = document.createElement('div');
         letterBar.id = "headerElement";
@@ -140,7 +141,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   options.classList.add("option-btn");
   options.onclick = function () {
     edit.style.display = 'block';
-    addToGroupbtn.style.display = "block";
     deleteBtn.style.display = "block";
     options.style.display = "none";
     closeMenu.style.display = "block";
@@ -160,7 +160,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   closeMenu.onclick = function () {
     options.style.display = "block";
     edit.style.display = 'none';
-    addToGroupbtn.style.display = "none";
     deleteBtn.style.display = "none";
     closeMenu.style.display = "none";
     favOption.style.display = "none";
@@ -185,17 +184,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
       }); 
   }
 
-  /*Add to a group Button */
-  let addToGroupbtn = document.createElement('p');
-  addToGroupbtn.classList.add('add-gO-btn');
-  addToGroupbtn.style.display = "none";
-      /* Open Group Add Form  */
-  addToGroupbtn.onclick = function (){
-      document.getElementById("groupOrder-add").style.display = 'block';
-      document.getElementById("gO-drinkID").value = drinkId;
-      document.getElementById("gO-userID").value = userID;
-    }
-  addToGroupbtn.innerHTML = "+";
 
   /* Favorite Option */
   let favOption = document.createElement("img");
@@ -247,7 +235,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   container.appendChild(d);
   container.appendChild(desc);
   container.appendChild(tagContainer);
-  container.appendChild(addToGroupbtn);
   container.appendChild(closeMenu);
   container.appendChild(options);
   container.appendChild(deleteBtn);

@@ -97,8 +97,8 @@ exports.profileById = (req, res) => {
         }
         // currently friends
         if (friendStatus === friendDatabase.FriendStatus.FRIENDS) {
-          // res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
-          res.send('987') // current friend
+          res.send(tempEngine.getFriendProfileCurrent(username, displayName, bio, numFriends, numCards, uid))
+          // res.send('987') // current friend
         } else if (friendStatus === friendDatabase.FriendStatus.INCOMING) {
           res.send(tempEngine.getFriendProfile(username, displayName, bio, numFriends, numCards, uid))
         } else if (friendStatus === friendDatabase.FriendStatus.OUTGOING) {

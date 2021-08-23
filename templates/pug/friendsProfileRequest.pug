@@ -8,6 +8,7 @@ html
     link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
     // <link rel="stylesheet" href="TaroStyle.css">
     link(rel='stylesheet' href='../temp.css')
+    script(src='../jquery-3.6.0.min.js')
   body.profile
     //  Group View // being able to see all the cards in a group Order 
     #groupView(style='background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;')
@@ -35,10 +36,30 @@ html
     section#profileTop
       //  pfp will pull from user DB 
       img#profilePic(src='/pfp/' + frienduid)
-      .accept-deny
-        button#add-accept(type='button' style='width: fit-content; padding-left: 20px; padding-right: 20px;') Send Friend Request
+      .sendRequest
+        button#add-accept(type='button') Add Friend
       script.
+        $(".profile #profileTop .sendRequest").on("click", "#add-accept", function (event) {
+                    let buttonElement = event.target;
+                    const currentURL = $(location).attr('href');
+                    let userID = currentURL.charAt(currentURL.length - 1);
+                    let currentChar;
+                    let int = currentURL.length - 2;
+                    while(currentURL.charAt(int) !== "/") {
+                        currentChar = currentURL.charAt(int);
+                        userID = currentChar + userID;
+                        int --;
+                    }
+                    $.post("/friends/request", 
+                            {
+                                "id": userID
+                            }, 
+                            function() {
+                            event.target.id = "sentRequest";
+                            event.target.textContent = "Request Sent"
+                    })
         
+                })
         
       section#profileText
         h2#displayName #{displayName}
@@ -56,16 +77,16 @@ html
         //  <a href="../friendsPage/Friends_Page.html" > 
         .stat
           p
-            | #{numFriends} 
+            | #{numFriends}
 
             span Friends
         //  </a> 
         .stat
           p
-            | #{numCards} 
+            | #{numCards}
 
             span Cards
-      .mytabs
+      .friend-tab
         input#tabfree(type='radio' name='mytabs' checked)
         label(for='tabfree')
           img.tab-icon(src='../assets/cards-purple.png')
@@ -77,14 +98,12 @@ html
                 img#favoritesStar(src='../assets/star-purple.png')
                 p#favorites Favorites
                 hr(style='width: 100%; height: 0.1px;')
-                | ]
-
-        input#tabsilver(type='radio' name='mytabs')
-        label(for='tabsilver')
-          img.tab-icon(src='../assets/group-purple.png')
-        .tab#groupCardContainer.
+        //
+           <input type="radio" id="tabsilver" name="mytabs">
+                      <label for="tabsilver"><img src="../assets/group-purple.png" class="tab-icon"></label>
+                      <div class="tab" id="groupCardContainer">
           
-          
+                  </div> 
         //  MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION 
         button#add-card-btn(alt='add card button') +
         #modal-sheet.modal

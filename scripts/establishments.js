@@ -83,7 +83,7 @@ const search = (categories, idx, location, offset, rate, added) => {
         establishmentsDb.addEstablishment(establishment)
         console.log(`Establishment: id(${establishment.id}) name(${establishment.name}) added to database`)
         added++
-      } 
+      }
     })
 
     // https://www.yelp.com/developers/documentation/v3/business_search

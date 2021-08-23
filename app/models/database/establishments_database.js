@@ -118,7 +118,7 @@ class EstablishmentsDatabase {
       * @param {String} name the establishment name to search for
       * @returns {String} true if in the database, false if not
       */
-   nameExists (name) {
+  nameExists (name) {
     const stmt = this.db.prepare('SELECT * FROM establishments WHERE name = ?')
     const query = stmt.all(name)
     return query.length > 0

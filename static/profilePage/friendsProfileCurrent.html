@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!--<link rel="stylesheet" href="TaroStyle.css">-->
     <link rel="stylesheet" href="../temp.css">
-    <script src="..\jquery-3.6.0.min.js"></script>
+    <script src="../jquery-3.6.0.min.js"></script>
     
 </head>
 
@@ -55,10 +55,11 @@
         
         <script>
             $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
+                console.log(687)
                 event.preventDefault;
                 document.querySelector("#accept-denyPopup").style = "visibility: visible;"
-
                 $(".profile #profileTop #accept-denyPopup").on("click", "#add-accept", function (event) {
+                console.log(687)
                 let buttonElement = event.target;
                 const currentURL = $(location).attr('href');
                 let userID = currentURL.charAt(currentURL.length - 1);
@@ -78,15 +79,16 @@
                         event.target.textContent = "unfriended";
                 })
 
-            })
+                })
 
                 $(".profile #profileTop #accept-denyPopup").on("click", "#deny", function (event) {
+                    console.log(687)
                     let buttonElement = event.target;
                     buttonElement.parentElement.style = "visibility: hidden;"
 
-            })
+                })
                 
-        })
+            })
         </script>
 
         <section id="profileText">
@@ -216,7 +218,7 @@
             <img id="navHomeIcon" src="../assets/home.png" />
         </a>
     
-        <a href="..\searchUsers\searchUsers.html"></i>
+        <a href="/search"></i>
             <img id="navSearchIcon" src="../assets/search.png" />
         </a>
     
@@ -224,7 +226,7 @@
             <img id="navNotifsIcon" src="../assets/notifs.png" />
         </a>
     
-        <a href="../profilePage/profilePageTaroCards.html"></i>
+        <a href="/profile"></i>
             <img id="navProfileIcon" src="../assets/profile.png" />
         </a>
     </div>

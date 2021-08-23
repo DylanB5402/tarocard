@@ -8,7 +8,7 @@ html
     link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel='stylesheet')
     // <link rel="stylesheet" href="TaroStyle.css">
     link(rel='stylesheet' href='../temp.css')
-    script(src='..\jquery-3.6.0.min.js')
+    script(src='../jquery-3.6.0.min.js')
   body.profile
     //  Group View // being able to see all the cards in a group Order 
     #groupView(style='background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;')
@@ -37,16 +37,44 @@ html
       //  pfp will pull from user DB 
       img#profilePic(src='/pfp/' + frienduid)
       .sendRequest
-        button#sentRequest(type='button') Pending
+        button#sentRequest(type='button') Friends
       #accept-denyPopup
-        button#add-accept(type='button' style='background-color: red; border-color: black;') Cancel Request?
-        button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Request
+        button#add-accept(type='button' style='background-color: red; border-color: black;') Unfriend
+        button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Friend
       script.
-        
         $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
+                        console.log(687)
                         event.preventDefault;
                         document.querySelector("#accept-denyPopup").style = "visibility: visible;"
+                        $(".profile #profileTop #accept-denyPopup").on("click", "#add-accept", function (event) {
+                        console.log(687)
+                        let buttonElement = event.target;
+                        const currentURL = $(location).attr('href');
+                        let userID = currentURL.charAt(currentURL.length - 1);
+                        let currentChar;
+                        let int = currentURL.length - 2;
+                        while(currentURL.charAt(int) !== "/") {
+                            currentChar = currentURL.charAt(int);
+                            userID = currentChar + userID;
+                            int --;
+                        }
+                        event.target.parentElement.querySelector("#deny").style = "visibility: hidden;";
+                        $.post("/friends/deny", 
+                                {
+                                    "id": userID
+                                }, 
+                                function() {
+                                event.target.textContent = "unfriended";
+                        })
         
+                        })
+        
+                        $(".profile #profileTop #accept-denyPopup").on("click", "#deny", function (event) {
+                            console.log(687)
+                            let buttonElement = event.target;
+                            buttonElement.parentElement.style = "visibility: hidden;"
+        
+                        })
                         
                     })
         
@@ -75,7 +103,7 @@ html
             | #{numCards}
 
             span Cards
-      .mytabs
+      .friend-tab
         input#tabfree(type='radio' name='mytabs' checked)
         label(for='tabfree')
           img.tab-icon(src='../assets/cards-purple.png')
@@ -87,14 +115,12 @@ html
                 img#favoritesStar(src='../assets/star-purple.png')
                 p#favorites Favorites
                 hr(style='width: 100%; height: 0.1px;')
-                | ]
-
-        input#tabsilver(type='radio' name='mytabs')
-        label(for='tabsilver')
-          img.tab-icon(src='../assets/group-purple.png')
-        .tab#groupCardContainer.
+        //
+           <input type="radio" id="tabsilver" name="mytabs">
+                      <label for="tabsilver"><img src="../assets/group-purple.png" class="tab-icon"></label>
+                      <div class="tab" id="groupCardContainer">
           
-          
+                  </div> 
         //  MODAL SHEET STUFF | FORMS FOR CARD CREATION AND GROUP CREATION 
         button#add-card-btn(alt='add card button') +
         #modal-sheet.modal

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node server.js",
+    "start": "mkdir databases; node server.js",
     "style": "standard --fix",
     "establishments": "node scripts/establishments.js",
     "clean": "rm databases/test/*; rm connect-session-knex.sqlite",

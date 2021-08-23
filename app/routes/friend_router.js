@@ -17,6 +17,10 @@ router.post('/deny', friendController.deny)
 
 router.get('/current', friendController.currentFriends)
 
+router.post('/current', friendController.currentFriends)
+
+// router.post('/current/id', friendController.currentFriendsByID)
+
 router.post('/incoming/:uid', friendController.incomingFriends)
 
 router.post('/outgoing/:uid', friendController.outgoingFriends)
@@ -26,5 +30,7 @@ router.post('/search', friendController.searchFriends)
 router.post('/incoming', friendController.listIncomingFriends)
 
 router.get('/recent', friendController.recentFriends)
+
+router.get('/:uid', friendController.friendsOfFriendsPage)
 
 module.exports = router
