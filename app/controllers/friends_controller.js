@@ -31,12 +31,19 @@ exports.acceptLegacy = (req, res) => {
 }
 
 /**
+ * Get the currently logged in user's friends
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
-    const uid = req.session.uid
+    // const uid = req.session.uid
+    var uid = undefined;
+    if (req.body.uid == undefined) {
+      uid = req.session.uid
+    } else {
+      uid = req.body.id
+    }
     const currentFriends = friendDb.getFriendDataByUid(uid)
     const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
@@ -45,20 +52,26 @@ exports.currentFriends = (req, res) => {
   }
 }
 
-/**
- * @param {!import('express').Request} req
- * @param {!import('express').Response} res
- */
- exports.currentFriendsByID = (req, res) => {
-  if (req.session.loggedin) {
-    const uid = req.body.id
-    const currentFriends = friendDb.getFriendDataByUid(uid)
-    const friendArray = friendDb.formatFriendData(currentFriends)
-    res.json({ users: friendArray, success: true })
-  } else {
-    res.json({ users: [], success: false })
-  }
-}
+// /**
+//  * Get the friends of any user based off their uid
+//  * @param {!import('express').Request} req
+//  * @param {!import('express').Response} res
+//  */
+//  exports.currentFriendsByID = (req, res) => {
+//   if (req.session.loggedin) {
+//     const uid = undefined;
+//     if (req.body.uid == undefined) {
+//       uid = req.session.uid
+//     } else {
+//       uid = req.body.id
+//     }
+//     const currentFriends = friendDb.getFriendDataByUid(uid)
+//     const friendArray = friendDb.formatFriendData(currentFriends)
+//     res.json({ users: friendArray, success: true })
+//   } else {
+//     res.json({ users: [], success: false })
+//   }
+// }
 
 /**
  * @param {!import('express').Request} req

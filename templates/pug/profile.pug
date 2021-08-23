@@ -28,13 +28,13 @@ html
       //  banner will pull from user DB 
       img#banner(src='/banner')
       button.settings-menu
-        a(href='..\settingPages\settingsMain.html')
+        a(href='/settings')
           img#settings-menu(src='../assets/menu-white.png')
     section#profileTop
       //  pfp will pull from user DB 
       img#profilePic(src='/pfp')
       button#edit-profile(type='button')
-        a(href='..\editProfilePage\edit.html') Edit Profile
+        a(href='/edit') Edit Profile
       section#profileText
         h2#displayName #{displayName}
         aside#user-handle
