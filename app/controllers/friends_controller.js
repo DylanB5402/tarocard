@@ -123,8 +123,14 @@ exports.friendsPage = (req, res) => {
  */
 exports.searchFriends = (req, res) => {
   const search = req.body.string
+  var uid = undefined
+  if (req.body.id === undefined) {
+    uid = req.session.uid
+  } else {
+    uid = req.body.id
+  }
   if (req.session.loggedin) {
-    const uid = req.session.uid
+    
     const currentFriends = friendDb.searchFriends(uid, search)
     const friendArray = friendDb.formatFriendData(currentFriends)
     res.json({ users: friendArray, success: true })
