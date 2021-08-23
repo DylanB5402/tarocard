@@ -40,9 +40,8 @@ exports.acceptLegacy = (req, res) => {
  */
 exports.currentFriends = (req, res) => {
   if (req.session.loggedin) {
-    // const uid = req.session.uid
     let uid
-    if (req.body.uid == undefined) {
+    if (req.body.id === undefined) {
       uid = req.session.uid
     } else {
       uid = req.body.id
@@ -209,7 +208,7 @@ exports.deny = (req, res) => {
  */
 exports.friendsOfFriendsPage = (req, res) => {
   if (req.session.loggedin) {
-    res.sendFile(path.join(__dirname, '../../static/friendsPage/friendsCopy.html'))
+    res.sendFile(path.join(__dirname, '../../static/friendsPage/friendsPageOther.html'))
   } else {
     res.redirect('/')
   }

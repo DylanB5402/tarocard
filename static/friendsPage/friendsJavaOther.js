@@ -1,31 +1,35 @@
-
 const body = document.querySelector('body')
-
 const request = new XMLHttpRequest()
-request.open('GET', '/friends/current', true)
-request.responseType = 'json'
-
-const currentURL = $(location).attr('href');
-let userID = currentURL.charAt(currentURL.length - 1);
-let currentChar;
-let int = currentURL.length - 2;
-while(currentURL.charAt(int) !== "/") {
-  currentChar = currentURL.charAt(int);
-  userID = currentChar + userID;
-  int --;
+// request.open('POST', '/friends/current', true)
+// request.responseType = 'json'
+const currentUrl = $(location).attr('href');
+let userId = currentUrl.charAt(currentUrl.length - 1);
+let currentCharacter;
+let intNum = currentUrl.length - 2;
+while(currentUrl.charAt(intNum) !== "/") {
+  currentCharacter = currentUrl.charAt(intNum);
+  userId = currentCharacter + userId;
+  intNum --;
 }
+console.log(userId)
+console.log({ "id": userId })
 
-request.send({ "id": userID })
+request.open('POST', '/friends/current', true)
+request.responseType = 'json'
+request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 request.onload = function () {
+  console.log(987)
   const users = request.response
   const currentUser = users.currentUser;
   document.querySelector("title").textContent = currentUser['display name'] + "'s Friends Page | Taro Cards";
   let pageHeader = document.querySelector(".page-header");
   pageHeader.querySelector("span").textContent = currentUser['display name'] + "'s Friends";
-  pageHeader.querySelector('a').href = "/profile/" + userID;
+  pageHeader.querySelector('a').href = "/profile/" + userId;
   populateFriends(users)
 }
+
+request.send('id=' + userId)
 
 // function is used to fill page with list of friends from a json file.
 function populateFriends (obj) {
@@ -61,6 +65,8 @@ function populateFriends (obj) {
     body.appendChild(divAll)
   }
 }
+
+
 
 function searchFriends (obj) {
   let template, divAll, div, divCopy, divHeader, divHeaderCopy, currentLetter, char
