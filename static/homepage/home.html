@@ -58,6 +58,7 @@
                             <option value="" disabled selected> Select Group Order </option>
 
                         </select>
+                        <h1 style="display:none;"id="success-message"> Card successfully added! </h1>
                         <input type="text" style="display: none" id="gO-drinkID"name="drinkId">
                         <input type="text" style="display:none" id="gO-userID" name="friendUID">
                         <button value="" style="width: 100%; height: 50px; font-size: 20px; background-color: #9879C5; font-family: Roboto,sans serif;" onclick="sendInfoToAlex()">  Submit </button>
@@ -116,7 +117,7 @@
             </div>
             
         </form>
-        <div id="cardContainer">
+        <div id="cardContainer" class="cardContainerHome">
         </div>
         <button id="add-card-btn" alt="add card button"> + </button> 
         <div class="navbar" id="myNavbar">

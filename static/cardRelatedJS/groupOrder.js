@@ -147,7 +147,13 @@ function getGroupDrinkCards(groupID){
     requestGroupContent.responseType = 'json';
     requestGroupContent.send();
 
-    requestGroupContent.onload = function() {
+    async function getEstabName(estabID){
+      let response = await fetch("establishments/get/"+estabID);
+      let data = await response.json()
+      return data.name;
+    }
+
+    requestGroupContent.onload = async function() {
         const cards = requestGroupContent.response;
         for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
@@ -164,9 +170,10 @@ function getGroupDrinkCards(groupID){
          requestGroupOrdersCard.responseType = 'json';
          requestGroupOrdersCard.send();
 
-         requestGroupOrdersCard.onload = function () {
+         requestGroupOrdersCard.onload = async function () {
            let content = requestGroupOrdersCard.response;
            let drinkEst = content["establishment_id"]; //will change to establishment id
+           drinkEst = await getEstabName(drinkEst);
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
            let drinkId = content["drink_id"];
