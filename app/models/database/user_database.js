@@ -222,9 +222,19 @@ class UserDatabase {
     return stmt.get(uid)
   }
 
+  addBannerPathByUID (banner, uid) {
+    const info = this.db.prepare('UPDATE users SET banner = ? WHERE uid = ?;').run(banner, uid)
+    return info.changes > 0
+  }
+
   getProfilePicturePathByUID (uid) {
     const stmt = this.db.prepare('SELECT profile_picture FROM users WHERE uid = ?;')
     return stmt.get(uid)
+  }
+
+  addProfilePicturePathByUID (profile, uid) {
+    const info = this.db.prepare('UPDATE users SET profile_picture = ? WHERE uid = ?;').run(profile, uid)
+    return info.changes > 0
   }
 }
 
