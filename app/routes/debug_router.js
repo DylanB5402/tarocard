@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+var path = require("path");
+
 
 // Require controller modules.
 const debugController = require('../controllers/debug_controller')
@@ -62,5 +64,9 @@ router.get('/usersDrinks', debugController.allUsersDrinks)
 
 // GROUPS DEBUG //
 router.post('/groups/editGroupName', debugController.editGroupName)
+
+router.get('/taco/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../static/friendsPage/friendsCopy.html'))
+})
 
 module.exports = router
