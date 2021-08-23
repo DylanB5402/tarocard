@@ -803,7 +803,7 @@ li:last-child{
 }
 
 #cardContainer{
-    max-height: 80vh;
+    max-height: 82vh;
     overflow-y: scroll;
 }
 
@@ -2076,6 +2076,22 @@ button #edit-profile,
     margin-top: 200px;
 }
 
+
+.cardContainerHome{
+    height: 96vh;
+    background-color: #e9e9e9;
+
+}
+.cardContainerProf{
+    height: 730px; 
+    /*when on phone view */
+}
+
+@media only screen and (min-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
 /* java -> camel case -> heyBestiesBestDrink
 python -> underscores -> hey_besties_best_drink
 HTML -> dashes -> hey-besties-best-drink */
