@@ -6,10 +6,17 @@ friends.open('GET', '/drinks/displayHomepage', true);
 friends.responseType = 'json';
 friends.send();
 
-friends.onload = function () {
+async function getEstabName(estabID){
+  let response = await fetch("/establishments/get/"+estabID);
+  let data = await response.json()
+  return data.name;
+}
+
+friends.onload = async function () {
   const friendCards = friends.response.drinks;
   for (const drinkCard in friendCards) {
-    const drinkEst = friendCards[drinkCard]['establishment'];
+    let drinkEst = friendCards[drinkCard]['establishment'];
+    drinkEst = await getEstabName(drinkEst);
     const drinkName = friendCards[drinkCard]['drink name'];
     const drinkDesc = friendCards[drinkCard]['drink desc'];
     const drinkId = friendCards[drinkCard]['drink id'];
