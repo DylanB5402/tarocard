@@ -2086,12 +2086,6 @@ button #edit-profile,
     height: 730px; 
     /*when on phone view */
 }
-
-@media only screen and (min-width: 600px) {
-    body {
-      background-color: lightblue;
-    }
-  }
 /* java -> camel case -> heyBestiesBestDrink
 python -> underscores -> hey_besties_best_drink
 HTML -> dashes -> hey-besties-best-drink */
