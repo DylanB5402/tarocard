@@ -31,4 +31,6 @@ router.post('/incoming', friendController.listIncomingFriends)
 
 router.get('/recent', friendController.recentFriends)
 
+router.get('/:uid', friendController.friendsOfFriendsPage)
+
 module.exports = router

@@ -1,3 +1,4 @@
+var path = require("path");
 const friendDatabase = require('../models/database/friend_database')
 
 const friendDb = new friendDatabase.FriendDatabase()
@@ -186,4 +187,16 @@ exports.deny = (req, res) => {
   const friendUid = req.body.id
   friendDb.deleteFriendRequest(uid, friendUid)
   res.send('success')
+}
+
+/**
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+exports.friendsOfFriendsPage = (req, res) => {
+  if (req.session.loggedin) {
+    res.sendFile(path.join(__dirname, '../../static/friendsPage/friendsCopy.html'))
+  } else {
+    res.redirect('/')
+  }
 }
