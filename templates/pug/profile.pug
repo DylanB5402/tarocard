@@ -93,7 +93,7 @@ html
             button.post-button(style='left: 70vw;' value='submit')  Post 
           .userInput
             input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
-            textarea.large-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+            textarea.small-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
             // This is where the Estabs is
             .autocomplete
               input#search.small-input(type='text' name='search' placeholder='Search..')
@@ -111,10 +111,10 @@ html
         form.form-container#createGroupOrder(action='/groups/createGroup' method='POST')
           .card-bar
             button.del-button(type='button' style='float:left' onclick='closeCardCreate(\'createGroupOrder\')') ×
-            button.post-button(style='left: 60vw; width: 100px;' value='submit' onclick='closeCardCreate(\'createGroupOrder\')') CREATE
+            button.create-button(value='submit' onclick='closeCardCreate(\'createGroupOrder\')') CREATE
           div(style='display: flex; flex-direction: column; text-align: center;')
-            h1.fonts(style='font-size: 30px; margin: 30px;') Group Order Name
-            input#groupName(type='text' placeholder='Group Name' name='groupName' style='width:99%;margin: auto; top: 50%; position: relative; height: 50px; font-size: 40px; border-radius: 10px;')
+            h1.fonts(style='font-size: 30px; margin: 30px; top: 10vh; position: relative;') Group Order Name
+            input#groupName(type='text' placeholder='Group Name' name='groupName' class="small-input")
         //  Hidden form for card update 
         form.form-container#updateCard(action='/drinks/editDrinkCard' method='POST')
           .card-bar
@@ -124,7 +124,7 @@ html
             input#estabInput.small-input(type='text' placeholder='Name of Establishment' name='=establishment')
             input#orderInput.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
             input#drinkId.small-input(type='hidden' name='drinkId')
-            textarea.large-input#descInput(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+            textarea.small-input#descInput(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
         //  Form to add a card to a group order
         #groupOrder-add.modal-GO
           .gO-modal
