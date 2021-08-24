@@ -1,17 +1,10 @@
-/* GENERATES USER'S CARDS */
-/* 
-  * Request from server the cards information 
-  * Then add that information into the cards
-  * After insertion of information, insert card into div "card-container"
-  */
-let numOfStarDrinks = 0;
-let cardDiv = document.getElementById("cardContainer");
+let addFriends = document.getElementById("cardContainer");
   
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
-let request = new XMLHttpRequest();
-request.open('GET', '/getFavDrinks', true); //change this to  
-request.responseType = 'json';
-request.send();
+let friends = new XMLHttpRequest();
+friends.open('GET', '/getFavDrinks', true); 
+friends.responseType = 'json';
+friends.send( JSON.stringify({id: friendUID}));
 
 async function getEstabName(estabID){
   let response = await fetch("/establishments/get/"+estabID);
@@ -19,70 +12,27 @@ async function getEstabName(estabID){
   return data.name;
 }
 
-
-request.onload = async function () {
-  const cards = request.response.drinks;
-  let currentLetter = "-2"; //idk lmao
-  let favsExist = false;
-  for (const drinkCard in cards) {
-    let drinkEst = cards[drinkCard]['establishment'];
+friends.onload = async function () {
+  const friendCards = friends.response.drinks;
+  for (const drinkCard in friendCards) {
+    let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
-    console.log(drinkEst);
-    const drinkName = cards[drinkCard]['name'];
-    const drinkDesc = cards[drinkCard]['desc'];
-    const drinkId = cards[drinkCard]['id'];
-    const ifFav = cards[drinkCard]['fav'];
-    if( ifFav == true){
-      numOfStarDrinks++;
-    }
-    const userID = cards[drinkCard]['uid'];
-
-    if( ifFav == false && drinkEst.charAt(0).toUpperCase() !== currentLetter){
-        console.log(drinkEst);
-        currentLetter = drinkEst.charAt(0).toUpperCase();    
-        let letterBar = document.createElement('div');
-        letterBar.id = "headerElement";
-        let letterHeading = document.createElement('h1');
-        letterHeading.id="letterHeading";
-        letterHeading.innerHTML = currentLetter;
-        let headingLine = document.createElement('hr');
-        headingLine.id = "headingLine";
-
-        letterBar.appendChild(letterHeading);
-        letterBar.appendChild(headingLine);
-        cardDiv.appendChild(letterBar);
-    }
-
-    if( favsExist == false &&  ifFav == true ){
-        favsExist = true;
-        let favSection = document.createElement('div');
-        favSection.id = 'favoritesSection';
-        let favoriteStar = document.createElement('img');
-        favoriteStar.id = "favoritesStar";
-        favoriteStar.src ="../assets/star-purple.png";
-        let favText = document.createElement('p');
-        favSection.appendChild(favoriteStar);
-        favText.id="favorites";
-        favText.innerHTML = "Favorites"
-        favSection.appendChild(favText);
-        let bar = document.createElement('hr');
-        bar.style.width = "100%";
-        bar.style.height = "0.1px";
-        favSection.appendChild(bar);
-        document.getElementById('cardContainer').appendChild(favSection);
-    }
-    
-    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav,userID);
+    const drinkName = friendCards[drinkCard]['drink name'];
+    const drinkDesc = friendCards[drinkCard]['drink desc'];
+    const drinkId = friendCards[drinkCard]['drink id'];
+    const friendUID = friendCards[drinkCard]['friend uid'];
+    const imageURL = friendCards[drinkCard]['image url'];
+    const cardDate = friendCards[drinkCard]['date'];
+    createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
 }
 
-/* CREATE CARD FUNCTION FOR THE SPECIFIC USER
-*  Function created to help with creating cards for other pages
+/* Function created to help with creating cards for other pages
 *  Styling needed for each one, thus the class added to them so everyone might
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createUserCard(establishment, drink, description, image, drinkId,ifFav,userID){
+function createFriendCard(establishment, drink, description, image, drinkId,friendUID,cardDate){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -112,132 +62,30 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   pfp.classList.add("pfp-pic");
   pfp.setAttribute("src", image);
 
-  /* Options Button */
-  let edit = document.createElement("img");
-  edit.src = "../assets/edit.png";
-  edit.classList.add("option-btn");
-  edit.style.display = "none"
-  edit.onclick = function(event){
-      openCardCreate("updateCard");
-      let form = document.getElementById('updateCard');
-      /* 
-      form.setAttribute("action", "/{id}/edit_drink_card");
-      */
-      let estabInput = document.getElementById("estabInput");
-      estabInput.value = establishment;
-      let orderInput = document.getElementById("orderInput");
-      orderInput.value = drink;
-      let descInput = document.getElementById("descInput");
-      descInput.value = description;
 
-      let drinkID = document.getElementById("drinkId"); //delete these two
-      drinkID.value = drinkId;
-
-      form.action = "/drinks/editDrinkCard/" + drinkId;
-  }
-
-  let options = document.createElement("img");
-  options.src = "../assets/menu-button.png";
-  options.classList.add("option-btn");
-  options.onclick = function () {
-    edit.style.display = 'block';
-    deleteBtn.style.display = "block";
-    options.style.display = "none";
-    closeMenu.style.display = "block";
-    favOption.style.display = "none";
-
-  }
-
-  /* Make the other buttons appear  */
-
-  let closeMenu = document.createElement("img");
-  closeMenu.src = "../assets/denyX.png";
-  closeMenu.classList.add("option-btn");
-  closeMenu.style.display = "none"
-  closeMenu.style.left = "70%"
-  closeMenu.style.width = "20px"
-  closeMenu.style.height = "20px";
-  closeMenu.onclick = function () {
-    options.style.display = "block";
-    edit.style.display = 'none';
-    deleteBtn.style.display = "none";
-    closeMenu.style.display = "none";
-    favOption.style.display = "none";
-  }
-  /* Delete Card for User */
-  let deleteBtn = document.createElement("img");
-  deleteBtn.src="../assets/trash-icon.png";
-  deleteBtn.classList.add("trash-card");
-  deleteBtn.style.display = "none";
-  deleteBtn.style.left = "78%";
-  deleteBtn.style.marginTop = "10px";
-
-  deleteBtn.onclick = function(){
-      container.style.display = "none";
-      /* Sending a delete request with this button */
-
-
-      fetch( "/drinks/deleteDrink/"+ drinkId ,{
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({id: drinkId}) //sending drinkID 
-      }); 
-  }
-
-
-  /* Favorite Option */
-  let favOption = document.createElement("img");
-  let fav = ifFav;
-  if( fav ){
-    favOption.src= "../assets/star.png";
-  }else{
-    favOption.src= "../assets/gray-star.png"
-  }
-  favOption.classList.add("option-btn");
-  favOption.style.left = "90%";
-  favOption.style.top = "65%";
-  favOption.style.width = "30px";
-  favOption.style.height = "30px";
-  favOption.style.position = "absolute";
-
-
-  favOption.onclick = function (){
-    if( fav ){
-      fav = false;
-      favOption.src= "../assets/gray-star.png";
-      fetch( "/drinks/unstarDrink/"+ drinkId ,{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({id: drinkId}) //sending drinkID 
-    }); 
-    numOfStarDrinks--
-    }else {
-      if(numOfStarDrinks < 3 ){
-        fav = true;
-        favOption.src="../assets/star.png";
-        fetch( "/drinks/starDrink/"+ drinkId ,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id: drinkId}) //sending drinkID 
-        })  
-        numOfStarDrinks++;
-      }else{
-        document.getElementById('unableToFavorite').style.display = 'flex';
-        document.getElementById('unableToFavorite').focus();
-      }
+  let addToGroupbtn = document.createElement('p');
+  addToGroupbtn.classList.add('add-gO-btn-friend');
+  addToGroupbtn.style.display = "block";
+      /* Open Group Add Form  */
+  addToGroupbtn.onclick = function ( drinkID, userID ){
+      document.getElementById("groupOrder-add").style.display = 'block';
+      document.getElementById("gO-drinkID").value = drinkId;
+      document.getElementById("gO-userID").value = friendUID;
     }
-  }
+  addToGroupbtn.innerHTML = "+";
 
+  let date = document.createElement('h2');
+  date.innerHTML = "created: " + cardDate;
+  date.classList.add('card-date');
+  date.style.color = "rgba(0, 0, 0,0.5)";
 
-
+  tagContainer.appendChild(pfp);
   container.appendChild(estab);
-  container.appendChild(edit);
   container.appendChild(d);
   container.appendChild(desc);
   container.appendChild(tagContainer);
-  container.appendChild(closeMenu);
-  container.appendChild(options);
-  container.appendChild(deleteBtn);
-  container.appendChild(favOption);
+  container.appendChild(addToGroupbtn);
+  container.appendChild(date);
+
   document.getElementById('cardContainer').appendChild(container);
 }
