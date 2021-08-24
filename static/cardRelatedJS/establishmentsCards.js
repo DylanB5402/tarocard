@@ -11,6 +11,7 @@ let getEstabishments = () => {
           radio.id = `shop_${shop.id}`
           radio.value = shop.id
           radio.name = 'establishment'
+          radio.required = true;
           radio.classList.add('shopSelector')
   
           let label = document.createElement('label')

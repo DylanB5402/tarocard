@@ -92,11 +92,11 @@ html
             button.del-button(type='button' style='float:left' onclick="closeCardCreate('id01')") &times;
             button.post-button(style='left: 70vw;' value='submit')  Post 
           .userInput
-            input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
-            textarea.small-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+            input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink' required)
+            textarea.small-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order' required)
             // This is where the Estabs is
             .autocomplete
-              input#search.small-input(type='text' name='search' placeholder='Search..')
+              input#search.small-input(type='text' name='search' placeholder='Search..' required)
             #estabStuff(style='display: flex; flex-direction: column;')
               input#estabBtn(type='button' onclick='getEstabishments()' value='Get Matching Establishments')
               // this is where the establishments are
