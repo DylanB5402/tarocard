@@ -1,5 +1,7 @@
 
-  
+console.log( document.currentScript);
+console.log(document.currentScript.getAttribute('friendUID'));
+let frienduid = document.currentScript.getAttribute('friendUID');
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let friends = new XMLHttpRequest();
 friends.open('GET', '/getFavDrinks', true); 
