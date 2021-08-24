@@ -14,7 +14,7 @@ request.responseType = 'json';
 request.send();
 
 async function getEstabName(estabID){
-  let response = await fetch("establishments/get/"+estabID);
+  let response = await fetch("/establishments/get/"+estabID);
   let data = await response.json()
   return data.name;
 }

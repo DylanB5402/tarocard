@@ -103,7 +103,7 @@ exports.addFriend = (req, res) => {
   const uid = req.body.uid
   const friendUid = req.body.friend_uid
   let status = req.body.status
-  console.log(friendUid)
+  // console.log(friendUid)
   friendDb.insertFriend(uid, friendUid, status)
   if (status === friendDatabase.FriendStatus.INCOMING) {
     status = friendDatabase.FriendStatus.OUTGOING

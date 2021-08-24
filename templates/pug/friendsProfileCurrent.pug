@@ -42,6 +42,7 @@ html
         button#add-accept(type='button' style='background-color: red; border-color: black;') Unfriend
         button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Friend
       script.
+        
         $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
                         console.log(687)
                         event.preventDefault;
@@ -89,7 +90,7 @@ html
           #{bio}
           
       button.friend-button
-        a(href='/friends') Friends 
+        a(href='/friends/' + frienduid) Friends 
       .user-stats
         //  <a href="../friendsPage/Friends_Page.html" > 
         .stat
