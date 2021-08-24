@@ -184,12 +184,12 @@ class UserDatabase {
   }
 
   /**
-   * @param {*} username
+   * @param {*} name
    * @param {*} uid
    * @returns {Array}
    */
-  searchDatabase (username, uid) {
-    return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE username LIKE '${username}%' AND uid != ? ORDER BY lower(username);`).all(uid)
+  searchDatabase (name, uid) {
+    return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE display_name LIKE '${name}%' AND uid != ? ORDER BY lower(display_name);`).all(uid)
   }
 
   updateEmail (uid, email) {

@@ -17,11 +17,12 @@ html
           
           Group Order
           
-        p#closeGroupView.fonts(style='background-color: purple; color: white; text-decoration: none; border-radius: 10px; font-size: 20px; position: fixed; right: 0px; width: 100px; height: 30px; text-align: center;').
-          
-          Home
+        p#closeGroupView.fonts.closeGroup Close
           
       #groupContainer.
+    #unableToFavorite(style='margin-top: 40vh;left: 3vw; display: none; flex-direction: row; background-color: white; height: 100px; width: 94vw; border-radius: 30px;box-shadow: 0 0 0 10000px rgba(0,0,0,0.95); z-index: 3; position: fixed;')
+      img(src='../assets/denyX.png' style='width: 30px; height: 30px; margin: 30px 20px;' onclick="getElementById('unableToFavorite').style.display = 'none'")
+      h1(style='margin:auto')  You already have three favorites, please unstar a drink! 
         
         
     div
@@ -92,7 +93,7 @@ html
             button.post-button(style='left: 70vw;' value='submit')  Post 
           .userInput
             input.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
-            textarea.large-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+            textarea.small-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
             // This is where the Estabs is
             .autocomplete
               input#search.small-input(type='text' name='search' placeholder='Search..')
@@ -110,10 +111,10 @@ html
         form.form-container#createGroupOrder(action='/groups/createGroup' method='POST')
           .card-bar
             button.del-button(type='button' style='float:left' onclick='closeCardCreate(\'createGroupOrder\')') ×
-            button.post-button(style='left: 60vw; width: 100px;' value='submit' onclick='closeCardCreate(\'createGroupOrder\')') CREATE
+            button.create-button(value='submit' onclick='closeCardCreate(\'createGroupOrder\')') CREATE
           div(style='display: flex; flex-direction: column; text-align: center;')
-            h1.fonts(style='font-size: 30px; margin: 30px;') Group Order Name
-            input#groupName(type='text' placeholder='Group Name' name='groupName' style='width:99%;margin: auto; top: 50%; position: relative; height: 50px; font-size: 40px; border-radius: 10px;')
+            h1.fonts(style='font-size: 30px; margin: 30px; top: 10vh; position: relative;') Group Order Name
+            input#groupName(type='text' placeholder='Group Name' name='groupName' class="small-input")
         //  Hidden form for card update 
         form.form-container#updateCard(action='/drinks/editDrinkCard' method='POST')
           .card-bar
@@ -123,7 +124,7 @@ html
             input#estabInput.small-input(type='text' placeholder='Name of Establishment' name='=establishment')
             input#orderInput.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
             input#drinkId.small-input(type='hidden' name='drinkId')
-            textarea.large-input#descInput(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
+            textarea.small-input#descInput(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
         //  Form to add a card to a group order
         #groupOrder-add.modal-GO
           .gO-modal
