@@ -50,6 +50,9 @@ function openCardCreate( formID ){
     if( document.getElementById("modal-sheet").style.display == "block"){
         document.getElementById("modal-sheet").classList.remove("slide-in");
         document.getElementById("modal-sheet").classList.add('slide-out');
+        setTimeout(function(){
+          document.getElementById('modal-sheet').style.display='none';
+        },200);
         document.getElementById("add-card-btn").style.display ="block";
     }
   }
