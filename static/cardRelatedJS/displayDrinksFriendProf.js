@@ -1,10 +1,10 @@
-let addFriends = document.getElementById("cardContainer");
+
   
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let friends = new XMLHttpRequest();
 friends.open('GET', '/getFavDrinks', true); 
 friends.responseType = 'json';
-friends.send( JSON.stringify({id: friendUID}));
+friends.send( JSON.stringify({id: frienduid}));
 
 async function getEstabName(estabID){
   let response = await fetch("/establishments/get/"+estabID);
