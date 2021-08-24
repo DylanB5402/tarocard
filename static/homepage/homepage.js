@@ -63,6 +63,6 @@ function sendInfoToAlex(){
   document.getElementById('success-message').style.display = "block";
   setTimeout(function(){
     document.getElementById("groupOrder-form").submit();
-  },10000);
+  },1000);
 }
 
