@@ -40,6 +40,11 @@ router.get('/loggedin', debugController.loggedIn)
 // POST request for upload.
 router.post('/upload/:uploadType/:uploadId', debugController.upload)
 
+// POST request for upload2.
+router.post('/up/stuff', debugController.uploadStuff)
+router.post('/up/stuff1', debugController.upload1)
+router.post('/up/stuff2', debugController.upload2)
+
 // GET request to view drinks database
 router.get('/drinks', debugController.drinks)
 

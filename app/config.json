@@ -5,7 +5,6 @@
   "allowed-ext-text" : "txt",
 
   "upload" : {
-    "formFileName" : "file",
     "expressStaticDir" : "static",
     "uploadPath" : "assets/uploads",
     "allowedExtImage" : "jpeg|jpg|png|gif",

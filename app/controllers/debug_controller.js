@@ -155,7 +155,7 @@ exports.currentProfileData = (req, res) => {
 
 exports.upload = (req, res) => {
   const uploadId = req.params.uploadId
-  upload.uploadFile(req, res, req.params.uploadType, (path) => {
+  upload.uploadFile(req, res, req.params.uploadType, 'file', (path) => {
     switch (req.params.uploadType) {
       case config.upload.dir.avatarImage:
 
@@ -185,6 +185,37 @@ exports.upload = (req, res) => {
         res.send('uh oh, something went wrong')
     }
   })
+}
+
+/// DEBUG - UPLOAD TEST 2 ///
+
+exports.upload1 = (req, res) => {
+  upload.uploadFile(req, res, config.upload.dir.drinksImage, 'file', (path) => {
+    if (drinksDB.isExist(1)) {
+      const currentPath = drinksDB.getDrink(1).drink_img
+      if (drinksDB.addImage(1, path)) {
+        upload.deleteFile(currentPath)
+      }
+    }
+  })
+}
+
+exports.upload2 = (req, res) => {
+  console.log('recieved file')
+  upload.uploadFile(req, res, config.upload.dir.drinksImage, 'file2', (path) => {
+    console.log(path)
+    if (drinksDB.isExist(2)) {
+      const currentPath = drinksDB.getDrink(2).drink_img
+      if (drinksDB.addImage(2, path)) {
+        upload.deleteFile(currentPath)
+      }
+    }
+  })
+}
+
+exports.uploadStuff = (req, res) => {
+  console.log(req)
+  res.json(req.body)
 }
 
 exports.drinks = (req, res) => {
