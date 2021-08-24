@@ -318,6 +318,24 @@ exports.allUsersDrinks = (req, res) => {
   res.json({ pairs: favDrinksDB.toString(), success: true })
 }
 
+/**
+ * Removes a drink card
+ * @param {!import('express').Request} req
+ * @param {!import('express').Response} res
+ */
+ exports.removeFavDrink = (req, res) => {
+  if (req.session.loggedin) {
+    const uid = req.body.uid
+    const drinkId = req.body.drinkId
+
+    favDrinksDB.removeFavDrink(uid, drinkId)
+
+    res.redirect('back') // refreshes
+  } else {
+    res.redirect('/')
+  }
+}
+
 exports.editGroupName = (req, res) => {
   const uid = req.body.uid
   const groupId = req.body.groupId

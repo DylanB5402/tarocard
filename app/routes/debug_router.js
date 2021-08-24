@@ -66,6 +66,8 @@ router.get('/drinks/displayHomePage', debugController.displayCardsHomePage)
 
 router.get('/usersDrinks', debugController.allUsersDrinks)
 
+router.get('/deleteDrink', debugController.removeFavDrink)
+
 // GROUPS DEBUG //
 router.post('/groups/editGroupName', debugController.editGroupName)
 

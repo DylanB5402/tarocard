@@ -193,13 +193,9 @@ exports.removeFavDrink = (req, res) => {
     const uid = req.session.uid
     const drinkId = req.params.drinkId
 
-    console.log('inside exports.removeFavDrink') // debug
+    favDrinksDB.removeFavDrink(uid, drinkId)
 
-    const debugBool = favDrinksDB.removeFavDrink(uid, drinkId)
-
-    console.log(debugBool)
-
-    res.redirect('/homepage/home.html') // refreshes
+    res.redirect('back') // refreshes
   } else {
     res.redirect('/')
   }
