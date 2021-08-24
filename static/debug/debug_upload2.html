@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ty Dylan For Carrying</title>
+        <script src="debug_upload2.js"></script>
+    </head>
+    <body>
+        <h1>Upload Image</h1>
+        <!-- this form sends a post to /upload -->
+        <form id="myform" method="post" onsubmit="imageRun()" action="/debug/up/stuff">
+          <input type="file" name="file" id="file1">
+          <input type="file" name="file2" id="file2">
+          <input type="text" name="display-name" id="display-name">
+          <input type="text" name="n2" id="n2">
+          <input type="submit" value="Submit">
+        </form>
+        <button onclick="imageRun()">do the thing</button>
+    </body>
+</html>

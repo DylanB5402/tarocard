@@ -43,9 +43,9 @@ class UploadFile {
      * @param {String} type upload type
      * @return {callback} function which adds image src to db
      */
-  uploadFile (req, res, type, callback) {
+  uploadFile (req, res, type, name, callback) {
     if (type in this) {
-      const upload = this[`${type}`].upload.single(config.formFileName)
+      const upload = this[`${type}`].upload.single(name)
 
       upload(req, res, (err) => {
         if (err instanceof multer.MulterError) {
@@ -53,6 +53,8 @@ class UploadFile {
           return null
         } else if (err) {
           // An unknown error occurred when uploading.
+          return null
+        } else if (req.file === undefined) {
           return null
         }
 
@@ -73,6 +75,8 @@ class UploadFile {
         }
       })
     }
+
+    return null
   }
 
   /**
@@ -92,21 +96,25 @@ class UploadFile {
      * @return {Boolean} true if the file is the correct type, false if not
      */
   checkFileType (file, type) {
-    // Allowed extensions
-    const typeFormatted = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()
-    const filetypes = new RegExp(config[`allowedExt${typeFormatted}`], 'i')
+    if (file !== undefined) {
+      // Allowed extensions
+      const typeFormatted = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()
+      const filetypes = new RegExp(config[`allowedExt${typeFormatted}`], 'i')
 
-    // Check extension
-    const ext = filetypes.test(path.extname(file.originalname).toLowerCase())
+      // Check extension
+      const ext = filetypes.test(path.extname(file.originalname).toLowerCase())
 
-    // Check mime
-    const mime = filetypes.test(file.mimetype)
+      // Check mime
+      const mime = filetypes.test(file.mimetype)
 
-    if (mime && ext) {
-      return true
-    } else {
-      return false
+      if (mime && ext) {
+        return true
+      } else {
+        return false
+      }
     }
+
+    return false
   }
 }
 
