@@ -509,6 +509,7 @@ li:last-child{
 .cardContainer{
     padding-top: 10vh;
     height: 10%;
+    width: 100%;
     overflow-y: scroll;
 }
 
@@ -1212,6 +1213,7 @@ h3 a{
 
 #profileCards {
     background-color: #EFEFEF;
+    width: 100%;
 } 
 
 #favoritesSection{

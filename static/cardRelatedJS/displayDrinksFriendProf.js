@@ -4,9 +4,9 @@ console.log(document.currentScript.getAttribute('friendUID'));
 let frienduid = document.currentScript.getAttribute('friendUID');
 /*Accessing server and putting information into cards // taken from Johnothan's friendpage*/
 let friends = new XMLHttpRequest();
-friends.open('GET', '/drinks/getFavDrinks', true); 
+friends.open('GET', '/drinks/getFavDrinks/' + frienduid, true); 
 friends.responseType = 'json';
-friends.send( JSON.stringify({friendId: frienduid}) );
+friends.send();
 
 async function getEstabName(estabID){
   let response = await fetch("/establishments/get/"+estabID);
@@ -20,9 +20,9 @@ friends.onload = async function () {
   for (const drinkCard in friendCards) {
     let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
-    const drinkName = friendCards[drinkCard]['drink name'];
-    const drinkDesc = friendCards[drinkCard]['drink desc'];
-    const drinkId = friendCards[drinkCard]['drink id'];
+    const drinkName = friendCards[drinkCard]['name'];
+    const drinkDesc = friendCards[drinkCard]['desc'];
+    const drinkId = friendCards[drinkCard]['id'];
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
     const cardDate = friendCards[drinkCard]['date'];
