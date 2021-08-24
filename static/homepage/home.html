@@ -74,11 +74,11 @@
                 <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
             </div>
             <div class="userInput">
-                <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" >
+                <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" required >
                 <textarea maxlength="100" class="small-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
                 <!-- This is where the Estabs is -->
                 <div class="autocomplete">
-                    <input type="text" id="search" name="search" class="small-input"  placeholder="Search..">
+                    <input type="text" id="search" name="search" class="small-input"  placeholder="Search.." required>
                 </div>
                 <div id="estabStuff" style="display: flex; flex-direction: column;">
                  <input type="button" id="estabBtn" onclick="getEstabishments()" value="Get Matching Establishments">           
