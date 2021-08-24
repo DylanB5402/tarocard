@@ -8,7 +8,7 @@ const drinkController = require('../controllers/drink_controller')
 router.get('/', drinkController.getAllDrinks)
 
 // GET request to view all drinks for a friend
-router.get('/getFavDrinks/:uid', drinkController.getFriendDrinks)
+router.get('/getFavDrinks/:uid  ', drinkController.getFriendDrinks)
 
 // GET request for a drink
 router.get('/getDrink/:drinkId', drinkController.getDrink)
