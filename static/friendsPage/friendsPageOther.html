@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Friends Page | Taro Cards</title>
+        <title></title>
         
         <link rel="icon" href="../assets/TaroCardTransparent 1.png">
 
@@ -14,7 +14,7 @@
     </head>
 
     <div class="page-header">
-        <a href="/profile"><img src="../assets/Back.png" id="back"></a>
+        <a href=""><img src="../assets/Back.png" id="back"></a>
         <span>Friends</span>
     </div>
 
@@ -33,11 +33,22 @@
 
         <div class="friends">
             <script>
+                const currentURL = $(location).attr('href');
+                let userID = currentURL.charAt(currentURL.length - 1);
+                let currentChar;
+                let int = currentURL.length - 2;
+                while(currentURL.charAt(int) !== "/") {
+                    currentChar = currentURL.charAt(int);
+                    userID = currentChar + userID;
+                    int --;
+                }
+
                 $(document).ready(function(){
                     $("#search-icon").click(function(){        
                         $.post('/friends/search', 
                         {
-                            "string": $("#friend-search").val()
+                            "string": $("#friend-search").val(),
+                            "id": userID
                             // uses input id
                         }
                         ,function(data, status, xhr) {
@@ -89,5 +100,5 @@
                 <img id="navProfileIcon" src="../assets/profile.png" />
             </a>
         </div>
-    <script type="text/javascript" src="friendsJava.js"></script>
+    <script type="text/javascript" src="../friendsPage/friendsJavaOther.js"></script>
 </html>

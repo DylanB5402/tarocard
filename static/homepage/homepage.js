@@ -51,9 +51,8 @@ function openCardCreate( formID ){
         document.getElementById("modal-sheet").classList.remove("slide-in");
         document.getElementById("modal-sheet").classList.add('slide-out');
         setTimeout(function(){
-            document.getElementById('modal-sheet').style.display='none';
+          document.getElementById('modal-sheet').style.display='none';
         },200);
-  
         document.getElementById("add-card-btn").style.display ="block";
     }
   }
@@ -61,5 +60,9 @@ function openCardCreate( formID ){
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
   document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
+  document.getElementById('success-message').style.display = "block";
+  setTimeout(function(){
+    document.getElementById("groupOrder-form").submit();
+  },1000);
 }
 

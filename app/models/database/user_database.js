@@ -157,12 +157,12 @@ class UserDatabase {
   }
 
   selectProfileData (email) {
-    return this.db.prepare('SELECT username, display_name, bio FROM users WHERE email = ?').get(email)
+    return this.db.prepare('SELECT username, display_name, bio, profile_picture FROM users WHERE email = ?').get(email)
   }
 
   getUserByUID (uid) {
     if (!isNaN(uid)) {
-      return this.db.prepare('SELECT username, display_name, bio FROM users WHERE uid = ?;').get(uid)
+      return this.db.prepare('SELECT username, display_name, bio, profile_picture FROM users WHERE uid = ?;').get(uid)
     } else {
       return undefined
     }
