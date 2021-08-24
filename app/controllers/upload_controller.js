@@ -8,6 +8,7 @@ const drinksDB = new drinksDatabase.DrinksDatabase()
 const tagsDatabase = require('../models/database/tags_database')
 const tagsDB = new tagsDatabase.TagsDatabase()
 
+const config = require('../config.json')
 
 exports.uploadWithId = (req, res) => {
   if (!req.session.loggedin) {
@@ -15,9 +16,10 @@ exports.uploadWithId = (req, res) => {
   }
 
   const uploadId = req.params.uploadId
-  upload.uploadFile(req, res, req.params.uploadType, (path) => {
-    switch (req.params.uploadType) {
-      case config.upload.dir.drinksImage:
+
+  switch (req.params.uploadType) {
+    case config.upload.dir.drinksImage:
+      upload.uploadFile(req, res, req.params.uploadType, 'file', (path) => {
         if (drinksDB.isExist(uploadId)) {
           const currentPath = drinksDB.getDrink(uploadId).drink_img
           if (drinksDB.addImage(uploadId, path)) {
@@ -25,8 +27,10 @@ exports.uploadWithId = (req, res) => {
           }
         }
         res.send('drinks updated')
-        break
-      case config.upload.dir.tagsImage:
+      })
+      break
+    case config.upload.dir.tagsImage:
+      upload.uploadFile(req, res, req.params.uploadType, 'file', (path) => {
         if (tagsDB.isExist(uploadId)) {
           const currentPath = tagsDB.getTag(uploadId).tag_img
           if (tagsDB.addImage(uploadId, path)) {
@@ -34,11 +38,11 @@ exports.uploadWithId = (req, res) => {
           }
         }
         res.send('tags updated')
-        break
-      default:
-        res.send('uh oh, something went wrong')
-    }
-  })
+      })
+      break
+    default:
+      res.send('uh oh, something went wrong')
+  }
 }
 
 exports.upload = (req, res) => {
@@ -46,16 +50,18 @@ exports.upload = (req, res) => {
     return false
   }
 
-  upload.uploadFile(req, res, req.params.uploadType, (path) => {
-    switch (req.params.uploadType) {
-      case config.upload.dir.avatarImage:
+  switch (req.params.uploadType) {
+    case config.upload.dir.avatarImage:
+      upload.uploadFile(req, res, req.params.uploadType, 'Profile-Pic', (path) => {   
         userDB.addProfilePicturePathByUID(path, req.session.uid)
-        break
-      case config.upload.dir.bannerImage:
+      })
+      break
+    case config.upload.dir.bannerImage:
+      upload.uploadFile(req, res, req.params.uploadType, 'Banner', (path) => {  
         userDB.addBannerPathByUID(path, req.session.uid)
-        break
-      default:
-        res.send('uh oh, something went wrong')
-    }
-  })
+      })
+      break
+    default:
+      res.send('uh oh, something went wrong')
+  }
 }

@@ -20,7 +20,7 @@
 
 <body class="edit-page" style="margin-top: 150px;">
     <div class="edit"> 
-        <form action="/edit/profile" method="POST" id="edit" >
+        <form action="/edit/profile" onsubmit="submitImages()" method="POST" id="edit" >
             <div class="banner">
                 <img src="/banner" id="banner">
                 <label id="imgInputBanner" for="inputBanner" class="upload-img-a">
@@ -109,6 +109,33 @@
             event.preventDefault();
             }
         });
+
+        async function sendProfilePicture() {
+            let fileInput = document.querySelector('#inputProfilePic')
+
+            const formData  = new FormData();
+            formData.append("Profile-Pic", fileInput.files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/upload/avatar", true);
+            xhr.send(formData);
+        }
+
+        async function sendBanner() {
+            let fileInput = document.querySelector('#inputBanner')
+
+            const formData  = new FormData();
+            formData.append("Banner", fileInput.files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/upload/banner", true);
+            xhr.send(formData);
+        }
+
+        async function submitImages () {
+            sendProfilePicture()
+            sendBanner()
+        }
     </script>
     
 </body>
