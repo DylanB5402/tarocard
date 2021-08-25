@@ -17,6 +17,7 @@ html {
     /*top: 150px;	/**/
 }
 
+
 .page-header {	
     background-color: white;	
     /*opacity: 0.5;/**/	
@@ -28,7 +29,7 @@ html {
     position: fixed;
     top: 0px;
     /*position: fixed;/**/	
-    z-index: 2;	
+    z-index: 4;	
     /*border: dotted blue;/**/	
 }
 
@@ -95,6 +96,7 @@ html {
     /*border-top-left-radius: 20px;
     border-top-right-radius: 20px;*/
     z-index: 1;
+    margin-top: 150px;
 }
 
 #edit {
@@ -140,6 +142,7 @@ input[type=submit] {
 
 .edit-input {
     padding-left: 20px;
+    font-size: 32px;
 }
 
 
