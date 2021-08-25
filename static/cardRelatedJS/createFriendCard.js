@@ -25,6 +25,7 @@ friends.onload = async function () {
     const imageURL = friendCards[drinkCard]['image url'];
     console.log( imageURL);
     const cardDate = friendCards[drinkCard]['date'];
+    const friendPFP = friendCards[drinkCard]['pfp'];
     createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
 }
