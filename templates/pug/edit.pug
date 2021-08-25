@@ -61,7 +61,7 @@ script.
   event.preventDefault();
   }
   });
-  async function sendProfilePicture() {
+  function sendProfilePicture() {
   let fileInput = document.querySelector('#inputProfilePic')
   const formData = new FormData();
   formData.append("Profile-Pic", fileInput.files[0]);
@@ -69,7 +69,7 @@ script.
   xhr.open("POST", "/upload/avatar", true);
   xhr.send(formData);
   }
-  async function sendBanner() {
+  function sendBanner() {
   let fileInput = document.querySelector('#inputBanner')
   const formData = new FormData();
   formData.append("Banner", fileInput.files[0]);
@@ -77,7 +77,7 @@ script.
   xhr.open("POST", "/upload/banner", true);
   xhr.send(formData);
   }
-  async function submitImages() {
+  function submitImages() {
   sendProfilePicture()
   sendBanner()
   }
