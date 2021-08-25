@@ -181,8 +181,23 @@ html
         img#navSearchIcon(src='../assets/search.png')
       a(href='../Notifications/Notifications.html')
         img#navNotifsIcon(src='../assets/notifs.png')
+        p#incomingNum
       a(href='/profile')
         img#navProfileIcon(src='../assets/profile.png')
+    script.
+      $.post("/friends/incoming", "" , function(data, status, xhr) {
+      const friendRequests = data.users;
+      let navbar = document.getElementById("myNavbar");
+      let notification = navbar.querySelector("#incomingNum");
+      if(friendRequests.length > 99) {
+      notification.textContent = "99+";
+      notification.style = "visibility: visible;";
+      }
+      else if(friendRequests.length > 0) {
+      notification.textContent = friendRequests.length;
+      notification.style = "visibility: visible;";
+      }
+      })
     script(src='../homepage/homepage.js' type='text/javascript')
     script(src='../homepage/userGroupInfo.js' type='text/javascript')
     script(src='../cardRelatedJS/displayDrinksFriendProf.js' friendUID=frienduid type='text/javascript')

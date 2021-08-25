@@ -6,7 +6,22 @@ html {
     min-height: 100%;
     margin: 0;
     background-color: #EFEFEF;
-} 
+}
+
+#incomingNum {
+    height: 38px;
+    width: 60px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 30px;
+    position: absolute;
+    visibility: hidden;
+    top: 100px;
+    right: 31vw;
+    background-color: rgb(218, 52, 52);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
 
 /* EDIT START */
 .body, .notifs {	
@@ -143,6 +158,9 @@ input[type=submit] {
 .edit-input {
     padding-left: 20px;
     font-size: 32px;
+    border: lightgrey;
+    border-style: solid;
+    border-width: 2px;
 }
 
 
