@@ -217,7 +217,8 @@ exports.displayCardsHomePage = (req, res) => {
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
         'drink id': drink.drink_id,
-        date: drink.date
+        date: drink.date,
+        pfp: drink.profile_picture
       })
     })
 
