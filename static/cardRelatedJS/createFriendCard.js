@@ -23,6 +23,7 @@ friends.onload = async function () {
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
     const cardDate = friendCards[drinkCard]['date'];
+    const friendPFP = friendCards[drinkCard]['pfp'];
     createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
 }

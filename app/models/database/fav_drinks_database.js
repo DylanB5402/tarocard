@@ -18,7 +18,7 @@ const config = require('../../config.json')
 
 // Constant Static Variables //
 const NUM_STARRED_LIM = 3
-const DISPLAY_HOME_WINDOW = '1 hours'
+const DISPLAY_HOME_WINDOW = '-1 hours'
 
 class FavDrinksDatabase {
   constructor (database) {
@@ -241,7 +241,7 @@ class FavDrinksDatabase {
             'INNER JOIN users u ON f.friend_uid = u.uid) ' +
             'INNER JOIN drinks d USING(drink_id)) ' +
             "WHERE f.uid = ? AND status = 'friends' " +
-            `AND date > DATE('now', ${DISPLAY_HOME_WINDOW}) ` +
+            `AND date > DATE('now', '${DISPLAY_HOME_WINDOW}') ` +
             'ORDER BY date COLLATE NOCASE DESC')
     const query = stmt.all(uid) // an array of row (drink) objects
 
