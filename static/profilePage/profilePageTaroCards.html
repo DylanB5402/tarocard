@@ -12,6 +12,16 @@
 </head>
 
 <body class="profile">
+    <!-- Form for group update -->
+    <div id="editGroup" style="text-align: center;">
+        <form class="form-container" style="display: block" id="group-order-edit" action="/drinks/editDrinkCard" method="POST">
+            <div class="card-bar"><button class="del-button" type="button" style="float:left" onclick="closeCardCreate('updateGroup')">×</button><button class="post-button" style="left: 70vw;" value="submit">UPDATE</button></div>
+            <h1 class="fonts" style="position:relative;top: 10vh;"> Change group name </h1>
+            <input type="text" class="small-input"  style="border: 1px solid purple;"id="group-order-edit">
+        </form>
+    </div>
+
+
     <!--  Group View // being able to see all the cards in a group Order -->
     <div id="groupView" style="background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;">
         <div class="card-bar" style="display:flex; width: 100vw; top: 0.01vh; left: 0vw; position: fixed; z-index: 4;">

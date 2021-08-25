@@ -58,11 +58,15 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
 
   let tagContainer = document.createElement("div");
   tagContainer.classList.add("tag-container");
+  
+  let profLink = document.createElement("a");
+  profLink.href = "/profile/"+friendUID;
 
   /* profile picture */
   let pfp = document.createElement("img");
   pfp.classList.add("pfp-pic");
   pfp.setAttribute("src", image);
+  profLink.appendChild(pfp);
 
 
   let addToGroupbtn = document.createElement('p');
@@ -81,7 +85,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
 
-  tagContainer.appendChild(pfp);
+  tagContainer.appendChild(profLink);
   container.appendChild(estab);
   container.appendChild(d);
   container.appendChild(desc);
