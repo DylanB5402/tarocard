@@ -66,13 +66,13 @@
             </div><!--  Form for card creation -->
             <form class="form-container" id="id01" action="/drinks/newDrinkCard" method="POST">
                 <div class="card-bar"><button class="del-button" type="button" style="float:left" onclick="closeCardCreate('id01')">&times;</button><button class="post-button" style="left: 70vw;" value="submit"> Post </button></div>
-                <div class="userInput"><input class="small-input" type="text" placeholder="Name of Order" name="nameOfDrink"><textarea class="small-input" maxlength="100" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea><!-- This is where the Estabs is-->
-                    <div class="autocomplete"><input class="small-input" id="search" type="text" name="search" placeholder="Search.."></div>
+                <div class="userInput"><input class="small-input" type="text" placeholder="Name of Order" name="nameOfDrink" required><textarea class="small-input" maxlength="100" name="drinkDesc" placeholder="Description or extra instructions for order" required></textarea><!-- This is where the Estabs is-->
+                    <div class="autocomplete"><input class="small-input" id="search" type="text" name="search" placeholder="Search.." required></div>
                     <div id="estabStuff" style="display: flex; flex-direction: column;"><input id="estabBtn" type="button" onclick="getEstabishments()" value="Get Matching Establishments"><!-- this is where the establishments are-->
                         <h1 style="margin: auto; margin-top: 30px;"> Choose a Place Below </h1>
                         <div class="listWrapper" id="establishments-list"></div>
                         <h1 style="margin: auto; margin-top: 30px;"> Now Click Post! </h1>
-                    </div>
+                    </div><!-- ------------------------------------------->
                 </div>
             </form><!--  Form for group creation -->
             <form class="form-container" id="createGroupOrder" action="/groups/createGroup" method="POST">

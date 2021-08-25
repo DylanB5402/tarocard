@@ -206,12 +206,30 @@
     
         <a href="../Notifications/Notifications.html"></i>
             <img id="navNotifsIcon" src="../assets/notifs.png" />
+            <p id="incomingNum"></p>
         </a>
     
         <a href="/profile"></i>
             <img id="navProfileIcon" src="../assets/profile.png" />
         </a>
     </div>
+
+    <script>
+        $.post("/friends/incoming", "" , function(data, status, xhr) {
+            const friendRequests = data.users;
+            let navbar = document.getElementById("myNavbar");
+            let notification = navbar.querySelector("#incomingNum");
+            if(friendRequests.length > 99) {
+                notification.textContent = "99+";
+                notification.style = "visibility: visible;";
+            }
+            else if(friendRequests.length > 0) {
+                notification.textContent = friendRequests.length;
+                notification.style = "visibility: visible;";
+            }
+        })
+    </script>
+
 </body>
 
 <script src="../homepage/homepage.js" type="text/javascript"></script>
