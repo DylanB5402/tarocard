@@ -23,10 +23,9 @@ friends.onload = async function () {
     const drinkId = friendCards[drinkCard]['drink id'];
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
-    console.log( imageURL);
     const cardDate = friendCards[drinkCard]['date'];
     const friendPFP = friendCards[drinkCard]['pfp'];
-    createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
+    createFriendCard(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, friendUID,cardDate);
   }
 }
 
@@ -63,7 +62,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   /* profile picture */
   let pfp = document.createElement("img");
   pfp.classList.add("pfp-pic");
-  pfp.setAttribute("src", "/pfp/"+friendUID);
+  pfp.setAttribute("src", image);
 
 
   let addToGroupbtn = document.createElement('p');
