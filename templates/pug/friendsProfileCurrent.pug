@@ -39,8 +39,8 @@ html
       .sendRequest
         button#sentRequest(type='button') Friends
       #accept-denyPopup
-        button#add-accept(type='button' style='background-color: red; border-color: black;') Unfriend
-        button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Friend
+        button#add-accept(type='button') Unfriend
+        button#deny(type='button') Keep Friend
       script.
         
         $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {

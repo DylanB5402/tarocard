@@ -39,8 +39,8 @@ html
       .sendRequest
         button#sentRequest(type='button') Pending
       #accept-denyPopup
-        button#add-accept(type='button' style='background-color: red; border-color: black;') Cancel Request?
-        button#deny(type='button' style='color: white; background-color: lightgreen; border-color: black;') Keep Request
+        button#add-accept(type='button') Cancel Request?
+        button#deny(type='button') Keep Request
       script.
         
         $(".profile #profileTop .sendRequest").on("click", "#sentRequest", function (event) {
