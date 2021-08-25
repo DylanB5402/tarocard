@@ -59,10 +59,16 @@ function openCardCreate( formID ){
   
 function sendInfoToAlex(){
   let groupInfo = document.getElementById("groupOrders").value;
-  document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
-  document.getElementById('success-message').style.display = "block";
-  setTimeout(function(){
-    document.getElementById("groupOrder-form").submit();
-  },1000);
+  console.log(groupInfo);
+  if(groupInfo==""){
+    document.getElementById('fail-message').style.display = "block";
+  }else{
+    document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
+    document.getElementById('success-message').style.display = "block";
+    document.getElementById('fail-message').style.display = "none";
+    setTimeout(function(){
+      document.getElementById("groupOrder-form").submit();
+    },1000);
+  }
 }
 
