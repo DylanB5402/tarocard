@@ -11,7 +11,7 @@ html
     script(src='../jquery-3.6.0.min.js')
   body.profile
     //  Group View // being able to see all the cards in a group Order 
-    #groupView(style='background:rgb(216, 216, 216); z-index: 10; height: 90%; position: fixed; display: none; width:100%; overflow-y: auto;')
+    #groupView
       .card-bar(style='display:flex; width: 100vw; top: 0.01vh; left: 0vw; position: fixed; z-index: 4;')
         p#groupView-name.fonts(style='font-size: 2.6vh; margin-right: 0px; top: 0vh; width: auto;').
           
@@ -96,7 +96,7 @@ html
             textarea.small-input(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order' required)
             // This is where the Estabs is
             .autocomplete
-              input#search.small-input(type='text' name='search' placeholder='Search..' required)
+              input#search.small-input(type='text' name='search' placeholder='Search..'  style="top: 0vh;" required)
             #estabStuff(style='display: flex; flex-direction: column;')
               input#estabBtn(type='button' onclick='getEstabishments()' value='Get Matching Establishments')
               // this is where the establishments are
