@@ -15,6 +15,7 @@ async function getEstabName(estabID){
 friends.onload = async function () {
   const friendCards = friends.response.drinks;
   for (const drinkCard in friendCards) {
+    console.log( friendCards[drinkCard] )
     let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
     const drinkName = friendCards[drinkCard]['drink name'];
@@ -22,6 +23,7 @@ friends.onload = async function () {
     const drinkId = friendCards[drinkCard]['drink id'];
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
+    console.log( imageURL);
     const cardDate = friendCards[drinkCard]['date'];
     createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
   }
@@ -60,7 +62,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   /* profile picture */
   let pfp = document.createElement("img");
   pfp.classList.add("pfp-pic");
-  pfp.setAttribute("src", image);
+  pfp.setAttribute("src", "/pfp/"+friendUID);
 
 
   let addToGroupbtn = document.createElement('p');
