@@ -2040,6 +2040,7 @@ button #edit-profile,
   position: relative;
   display: flex;
   flex-direction: column;
+  top: 10vh;
 }
 
 
