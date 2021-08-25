@@ -40,7 +40,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     /* profile picture */
     let pfp = document.createElement("img");
     pfp.classList.add("pfp-pic");
-    pfp.setAttribute("src", image);
+    pfp.setAttribute("src","/pfp/"+image );
 
     /* Options Button */
 
@@ -155,6 +155,7 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = async function() {
         const cards = requestGroupContent.response;
+        console.log(cards)
         for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
           /*
@@ -164,6 +165,7 @@ function getGroupDrinkCards(groupID){
           const drinkId = cards[drinkCard]['id'];
           const ifFav = cards[drinkCard]['fav'];
           */
+         let friendID = cards[drinkCard]['friend_uid'];
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
@@ -172,12 +174,13 @@ function getGroupDrinkCards(groupID){
 
          requestGroupOrdersCard.onload = async function () {
            let content = requestGroupOrdersCard.response;
+           console.log(content);
            let drinkEst = content["establishment_id"]; //will change to establishment id
            drinkEst = await getEstabName(drinkEst);
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
            let drinkId = content["drink_id"];
-           createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, groupID);
+           createGoCards(drinkEst, drinkName, drinkDesc, friendID, drinkId, groupID);
         }
 
 

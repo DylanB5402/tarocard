@@ -65,7 +65,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   /* profile picture */
   let pfp = document.createElement("img");
   pfp.classList.add("pfp-pic");
-  pfp.setAttribute("src", image);
+  pfp.setAttribute("src", "/pfp/"+friendUID);
   profLink.appendChild(pfp);
 
 
