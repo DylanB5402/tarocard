@@ -45,16 +45,34 @@ head
       input#save(type='submit', value='Save changes')
 script.
   $("#inputBanner").change(function(event) {
+  const file = event.target;
+  let fileSize = file.files.item(0).size
+  fileSize = Math.round((fileSize / 1024));
+  if(fileSize > 4096) {
+  alert("Your file must be no larger than 4mb")
+  event.target.value = "";
+  }
+  else {
   alert("You choose: " + event.target.value + " as your Banner.");
   let currentBanner = document.getElementById("banner");
   var tmppath = URL.createObjectURL(event.target.files[0]);
   currentBanner.src = tmppath;
+  }
   })
   $("#inputProfilePic").change(function(event) {
+  const file = event.target;
+  let fileSize = file.files.item(0).size
+  fileSize = Math.round((fileSize / 1024));
+  if(fileSize > 4096) {
+  alert("Your file must be no larger than 4mb")
+  event.target.value = "";
+  }
+  else {
   alert("You choose: " + event.target.value + " as your Profile Picture.");
   let currentProfilePic = document.getElementById("profilePic");
   var tmppath = URL.createObjectURL(event.target.files[0]);
   currentProfilePic.src = tmppath;
+  }
   })
   $('#bio').keypress(function(event) {
   if (event.keyCode == 13) {
