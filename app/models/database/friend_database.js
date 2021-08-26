@@ -164,6 +164,7 @@ class FriendDatabase {
    * @param {*} name
    */
   searchFriends (uid, name) {
+    name = name.replace(/'/g, '')
     return this.db.prepare(`SELECT users2.uid, users2.username AS username, users2.display_name AS display_name, users2.profile_picture FROM users JOIN friends ON users.uid = friends.uid JOIN users users2 ON friends.friend_uid = users2.uid WHERE users.uid = ? AND friends.status = 'friends' AND users2.display_name LIKE '${name}%' ORDER BY LOWER(users2.display_name);`).all(uid)
   }
 
