@@ -234,10 +234,10 @@ class FavDrinksDatabase {
     //     friends and drink_id between fav_drinks and drinks to return a query
     //     for outputting a table of all recent drinks made by friends of a user
     //     within the last month
-    const stmt = this.db.prepare('SELECT ' + 
+    const stmt = this.db.prepare('SELECT ' +
             'u.profile_picture, fd.drink_id, fd.date, f.friend_uid, d.* ' +
             'FROM (((fav_drinks fd ' +
-            'INNER JOIN friends f ON fd.uid = f.friend_uid)' + 
+            'INNER JOIN friends f ON fd.uid = f.friend_uid)' +
             'INNER JOIN users u ON f.friend_uid = u.uid) ' +
             'INNER JOIN drinks d USING(drink_id)) ' +
             "WHERE f.uid = ? AND status = 'friends' " +
