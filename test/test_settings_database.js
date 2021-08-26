@@ -5,7 +5,7 @@ const Database = require('better-sqlite3')
 const userDatabase = require('../app/models/database/user_database')
 
 chai.use(assertArrays)
-const db = new Database('databases/test/test_settings.db')
+const db = new Database('databases/test_settings.db')
 const userDb = new userDatabase.UserDatabase(db)
 userDb.deleteAllTableEntries()
 

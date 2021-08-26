@@ -184,11 +184,12 @@ class UserDatabase {
   }
 
   /**
-   * @param {*} name
-   * @param {*} uid
+   * @param {String} name
+   * @param {Number} uid
    * @returns {Array}
    */
   searchDatabase (name, uid) {
+    name = name.replace(/'/g, '')
     return this.db.prepare(`SELECT username, display_name, uid, profile_picture, profile_picture FROM users WHERE display_name LIKE '${name}%' AND uid != ? ORDER BY lower(display_name);`).all(uid)
   }
 

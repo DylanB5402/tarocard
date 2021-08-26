@@ -92,7 +92,7 @@ exports.profileById = (req, res) => {
       } else {
         res.append('profileaccess', 'successful')
         let friendStatus = friendDb.getFriendStatus(req.session.uid, uid)
-        if (friendStatus == undefined) {
+        if (friendStatus === undefined) {
           friendStatus = friendDatabase.FriendStatus.NONE
         }
         // currently friends
@@ -183,7 +183,7 @@ exports.getBanner = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.getFriendBanner = (req, res) => {
+exports.getFriendBanner = (req, res) => {
   if (req.session.loggedin) {
     const friendUID = req.params.friendUID
     if (userDB.getProfilePicturePathByUID(friendUID) === undefined) {

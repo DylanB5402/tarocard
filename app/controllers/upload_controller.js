@@ -52,12 +52,12 @@ exports.upload = (req, res) => {
 
   switch (req.params.uploadType) {
     case config.upload.dir.avatarImage:
-      upload.uploadFile(req, res, req.params.uploadType, 'Profile-Pic', (path) => {   
+      upload.uploadFile(req, res, req.params.uploadType, 'Profile-Pic', (path) => {
         userDB.addProfilePicturePathByUID(path, req.session.uid)
       })
       break
     case config.upload.dir.bannerImage:
-      upload.uploadFile(req, res, req.params.uploadType, 'Banner', (path) => {  
+      upload.uploadFile(req, res, req.params.uploadType, 'Banner', (path) => {
         userDB.addBannerPathByUID(path, req.session.uid)
       })
       break
