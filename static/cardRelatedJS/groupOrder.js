@@ -40,7 +40,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     /* profile picture */
     let pfp = document.createElement("img");
     pfp.classList.add("pfp-pic");
-    pfp.setAttribute("src",image);
+    pfp.setAttribute("src", image);
 
     /* Options Button */
 
@@ -166,7 +166,7 @@ function getGroupDrinkCards(groupID){
           const ifFav = cards[drinkCard]['fav'];
           */
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
-         let friendPFP = card[drinkCard]["pfp"]
+         let friendPFP = cards[drinkCard]["pfp"]
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
@@ -180,7 +180,7 @@ function getGroupDrinkCards(groupID){
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
            let drinkId = content["drink_id"];
-           createGoCards(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, groupID);
+           createGoCards(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, groupID);        
         }
 
 
