@@ -55,7 +55,8 @@ exports.getGroup = (req, res) => {
         groupName: pair.group_name,
         id: pair.group_id,
         friendUID: pair.friend_uid,
-        drink: pair.friends_drink_id
+        drink: pair.friends_drink_id,
+        pfp: pair.profile_picture
       })
     })
 

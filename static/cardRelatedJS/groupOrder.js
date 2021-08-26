@@ -165,6 +165,7 @@ function getGroupDrinkCards(groupID){
           const ifFav = cards[drinkCard]['fav'];
           */
          let drinkCardID = cards[drinkCard]["friends_drink_id"]
+         let friendPFP = card[drinkCard]["pfp"]
          let requestGroupOrdersCard = new XMLHttpRequest();
          requestGroupOrdersCard.open('GET', '/drinks/getDrink/'+ drinkCardID, true); 
          requestGroupOrdersCard.responseType = 'json';
@@ -177,7 +178,7 @@ function getGroupDrinkCards(groupID){
            let drinkName = content["drink_name"];
            let drinkDesc = content["drink_desc"];
            let drinkId = content["drink_id"];
-           createGoCards(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, groupID);
+           createGoCards(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, groupID);
         }
 
 

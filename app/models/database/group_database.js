@@ -57,7 +57,9 @@ class GroupDatabase {
     if (userDB.getUserByUID(uid) && this.isExist(groupId)) {
       // SQL Statement:
       //   selects all friend-drink pair associated with a specific groupId
-      const stmt = this.db.prepare('SELECT * FROM groups WHERE uid = ? AND group_id = ?')
+      const stmt = this.db.prepare('SELECT u.profile_picture, g.* ' + 
+              'FROM groups g INNER JOIN users u ON g.friend_uid = u.uid ' + 
+              'WHERE g.uid = ? AND g.group_id = ?')
       const query = stmt.all(uid, groupId) // an array of row objects (group)
 
       return query
