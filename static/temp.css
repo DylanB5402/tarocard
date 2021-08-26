@@ -390,6 +390,7 @@ li:last-child{
 .small-input{
     border-radius: 15px;
     /* border: 2px solid rgb(255, 255, 255); */
+    padding: 10px;
     color: black;
     height: 60px;
     width: 80vw;
@@ -601,8 +602,8 @@ li:last-child{
 
 
 .pfp-pic{
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     min-height: 30px;
     max-height: 90px;
     min-width: 30px;
@@ -735,8 +736,14 @@ li:last-child{
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('https://media.discordapp.net/attachments/860617896655716372/877341875445588008/unknown.png');
+    background-color: #9879C5;
     
+}
+
+.group-card h1{
+    max-width: 50%;
+    text-align: center;
+    margin: 10px ;
 }
 
 
@@ -2061,6 +2068,10 @@ button #edit-profile,
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10vh;
+
 }
 
 
@@ -2071,7 +2082,6 @@ button #edit-profile,
   border-top: none;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
-  top: 9vh;
   left: 0;
   right: 0;
 }
@@ -2124,7 +2134,7 @@ python -> underscores -> hey_besties_best_drink
 HTML -> dashes -> hey-besties-best-drink */
 
 .closeGroup{
-    background-color: purple;
+    background-color: #9879C5;
     color: white; 
     text-decoration: none; 
     border-radius: 50px; 
@@ -2152,4 +2162,22 @@ HTML -> dashes -> hey-besties-best-drink */
     background-color: #9879C5;
     color: white;
     border-radius: 75px;
+}
+
+#groupView-name{
+    font-weight: 900;
+}
+
+#groupContainer{
+    position: relative;
+    top: 1vh;
+}
+#groupView{
+    background: rgb(216, 216, 216); 
+    z-index: 10;
+    height: 92%; 
+    position: fixed;
+    display: none;
+    width: 100%;
+    overflow-y: auto;
 }

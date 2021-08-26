@@ -25,8 +25,11 @@ friends.onload = async function () {
     const drinkId = friendCards[drinkCard]['id'];
     const friendUID = friendCards[drinkCard]['friend uid'];
     const imageURL = friendCards[drinkCard]['image url'];
+    console.log(imageURL)
+    const friendPFP = friendCards[drinkCard]['pfp'];
+    console.log(friendPFP);
     const cardDate = friendCards[drinkCard]['date'];
-    createFriendCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, friendUID,cardDate);
+    createFriendCard(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, frienduid,cardDate);
   }
 }
 
@@ -55,15 +58,6 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   desc.style = "font-weight: 100";
   desc.innerHTML = description;
 
-  /*Create tag container*/
-
-  let tagContainer = document.createElement("div");
-  tagContainer.classList.add("tag-container");
-
-  /* profile picture */
-  let pfp = document.createElement("img");
-  pfp.classList.add("pfp-pic");
-  pfp.setAttribute("src", image);
 
 
   let addToGroupbtn = document.createElement('p');
@@ -82,11 +76,9 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
 
-  tagContainer.appendChild(pfp);
   container.appendChild(estab);
   container.appendChild(d);
   container.appendChild(desc);
-  container.appendChild(tagContainer);
   container.appendChild(addToGroupbtn);
   container.appendChild(date);
 

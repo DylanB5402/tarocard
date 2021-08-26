@@ -183,9 +183,14 @@ exports.getBanner = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
-exports.getFriendBanner = (req, res) => {
+ exports.getFriendBanner = (req, res) => {
   if (req.session.loggedin) {
-    res.redirect(userDB.getBannerPathByUID(req.params.friendUID).banner)
+    const friendUID = req.params.friendUID
+    if (userDB.getProfilePicturePathByUID(friendUID) === undefined) {
+      res.redirect(config.defaults.defaultBanner)
+    } else {
+      res.redirect(userDB.getProfilePicturePathByUID(friendUID).banner)
+    }
   } else {
     res.redirect(config.defaults.defaultBanner)
   }
@@ -202,7 +207,11 @@ exports.getProfilePicture = (req, res) => {
 exports.getFriendProfilePicture = (req, res) => {
   if (req.session.loggedin) {
     const friendUID = req.params.friendUID
-    res.redirect(userDB.getProfilePicturePathByUID(friendUID).profile_picture)
+    if (userDB.getProfilePicturePathByUID(friendUID) === undefined) {
+      res.redirect(config.defaults.defaultPfp)
+    } else {
+      res.redirect(userDB.getProfilePicturePathByUID(friendUID).profile_picture)
+    }
   } else {
     res.redirect(config.defaults.defaultPfp)
   }

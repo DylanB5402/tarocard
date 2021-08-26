@@ -57,8 +57,8 @@
                         <select id="groupOrders" name="groupOrders" placeholder="Select a group">
                             <!-- Group names-->
                             <option value="" disabled selected> Select Group Order </option>
-
                         </select>
+                        <h1 style="display:none;"id="fail-message"> Choose a group or make a group to choose from! </h1>
                         <h1 style="display:none;"id="success-message"> Card successfully added! </h1>
                         <input type="text" style="display: none" id="gO-drinkID"name="drinkId">
                         <input type="text" style="display:none" id="gO-userID" name="friendUID">
@@ -79,7 +79,7 @@
                 <textarea maxlength="100" class="small-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
                 <!-- This is where the Estabs is -->
                 <div class="autocomplete">
-                    <input type="text" id="search" name="search" class="small-input"  placeholder="Search.." required>
+                    <input type="text" id="search" name="search" class="small-input"  style="top: 0vh;" placeholder="Search.." required>
                 </div>
                 <div id="estabStuff" style="display: flex; flex-direction: column;">
                  <input type="button" id="estabBtn" onclick="getEstabishments()" value="Get Matching Establishments">           

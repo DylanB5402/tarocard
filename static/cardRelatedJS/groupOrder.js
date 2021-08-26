@@ -40,7 +40,7 @@ function createGoCards(establishment, drink, description, image, drinkID, groupI
     /* profile picture */
     let pfp = document.createElement("img");
     pfp.classList.add("pfp-pic");
-    pfp.setAttribute("src", image);
+    pfp.setAttribute("src",image);
 
     /* Options Button */
 
@@ -155,6 +155,7 @@ function getGroupDrinkCards(groupID){
 
     requestGroupContent.onload = async function() {
         const cards = requestGroupContent.response;
+        console.log(cards)
         for (const drinkCard in cards) {
           //drinkCardID is the id of the cards
           /*
@@ -173,6 +174,7 @@ function getGroupDrinkCards(groupID){
 
          requestGroupOrdersCard.onload = async function () {
            let content = requestGroupOrdersCard.response;
+           console.log(content);
            let drinkEst = content["establishment_id"]; //will change to establishment id
            drinkEst = await getEstabName(drinkEst);
            let drinkName = content["drink_name"];

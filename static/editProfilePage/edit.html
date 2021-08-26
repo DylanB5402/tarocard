@@ -46,7 +46,7 @@
             }
         });
 
-        async function sendProfilePicture() {
+        function sendProfilePicture() {
             let fileInput = document.querySelector('#inputProfilePic')
 
             const formData = new FormData();
@@ -57,7 +57,7 @@
             xhr.send(formData);
         }
 
-        async function sendBanner() {
+        function sendBanner() {
             let fileInput = document.querySelector('#inputBanner')
 
             const formData = new FormData();
@@ -68,7 +68,7 @@
             xhr.send(formData);
         }
 
-        async function submitImages() {
+        function submitImages() {
             sendProfilePicture()
             sendBanner()
         }
