@@ -60,7 +60,8 @@ exports.getGroup = (req, res) => {
       })
     })
 
-    res.send(group)
+
+    res.send({ groups: groupContent, success: true})
     // res.json({ groupContents: groupContent, success: true }) // send as json
   } else {
     res.json({ groupContents: [], success: false })
