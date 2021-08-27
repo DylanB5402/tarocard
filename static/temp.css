@@ -2158,9 +2158,11 @@ HTML -> dashes -> hey-besties-best-drink */
     border-radius: 50px; 
     font-size: 40px; 
     position: fixed; 
-    right: 0px; 
+    right: 50px; 
     width: 200px; 
-    height: 60px; 
+    height: 60px;
+    padding-top: 8px;
+    top: 30px;
     text-align: center;
 }
 
