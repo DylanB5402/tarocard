@@ -14,6 +14,7 @@ async function getEstabName(estabID){
 
 friends.onload = async function () {
   const friendCards = friends.response.drinks;
+  console.log(friendCards);
   for (const drinkCard in friendCards) {
     let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
@@ -24,6 +25,7 @@ friends.onload = async function () {
     const imageURL = friendCards[drinkCard]['image url'];
     const cardDate = friendCards[drinkCard]['date'];
     const friendPFP = friendCards[drinkCard]['pfp'];
+    
     createFriendCard(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, friendUID,cardDate);
   }
 }
