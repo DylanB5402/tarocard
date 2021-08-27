@@ -1,9 +1,9 @@
-let getEstabishments = () => {
-    let searchValue = document.getElementById('search').value
+let getEstabishments2 = () => {
+    let searchValue = document.getElementById('search2').value
     fetch(`/establishments/search/${searchValue}`)
       .then((response) => response.json())
       .then((data) => {
-        let list = document.getElementById('establishments-list')
+        let list = document.getElementById('establishments-list2')
         list.innerHTML = ''
         data.forEach((shop) => {
           let radio = document.createElement('input')
@@ -16,12 +16,10 @@ let getEstabishments = () => {
   
           let label = document.createElement('label')
           label.setAttribute('for', `shop_${shop.id}`)
-          label.classList.add('shopLabel');
+          label.classList.add('shopLabel')
           label.style.width = "100%";
           label.style.textAlign = "center";
-          
-    
-
+  
           let icon = document.createElement('img')
           if (shop.img.length > 0) {
             icon.src = shop.img
@@ -32,8 +30,6 @@ let getEstabishments = () => {
           icon.width = 50
   
           label.appendChild(icon)
-
-
   
           let shopName = document.createElement('h1')
           shopName.innerHTML = shop.name
@@ -165,5 +161,5 @@ let getEstabishments = () => {
     .then((data) => {
       // Maximum elements to show in autocomplete
       let maxDisplay = 10
-      autocomplete(document.getElementById('search'), data, maxDisplay)
+      autocomplete(document.getElementById('search2'), data, maxDisplay)
   });

@@ -61,7 +61,7 @@ exports.editDrinkCard = (req, res) => {
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
-    res.redirect('/homepage/home.html')
+    res.redirect('back')
   } else {
     res.redirect('/')
   }
@@ -96,6 +96,7 @@ exports.getAllDrinks = (req, res) => {
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
         id: drink.drink_id,
+        date: drink.date,
         fav: drink.fav
       })
     })
@@ -130,7 +131,8 @@ exports.getFriendDrinks = (req, res) => {
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
         id: drink.drink_id,
-        date: drink.date
+        date: drink.date,
+        fav: drink.fav
       })
     })
 

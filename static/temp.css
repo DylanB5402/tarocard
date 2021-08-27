@@ -155,6 +155,16 @@ input[type=submit] {
     border-radius: 10px;
 }
 
+#save {
+    margin-top: 20%;
+    font-size: 35px;
+    width: 95%;
+    background-color: #9879C5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
 .edit-input {
     padding-left: 20px;
     font-size: 32px;
@@ -595,7 +605,7 @@ li:last-child{
 }
 .card-template .description{
     width: 75%;
-    font-size: 1.7vh;
+    font-size: 30px;
     font-weight: 100;
     margin-top: 15px;
 }
@@ -1285,7 +1295,7 @@ h3 a{
     display: none;
 }
 .mytabs .tab h2 {
-    font-size: 3em;
+    font-size: 40px;
 }
 
 .mytabs .tab p {
@@ -2041,12 +2051,20 @@ button #edit-profile,
 
 .shopLabel {
   display: flex;
+  width: 100%;
   font-size: 20px;
+  text-align: center;
+}
+
+.shopLabel div{
+    width: 100%;
+    text-align: center;
+    align-items: center;
 }
 
 .shopLabel img{
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: auto;
 }
 
 .shopLabel h1{

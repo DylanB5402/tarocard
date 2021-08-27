@@ -14,8 +14,8 @@ async function getEstabName(estabID){
 
 friends.onload = async function () {
   const friendCards = friends.response.drinks;
+  console.log(friendCards);
   for (const drinkCard in friendCards) {
-    console.log( friendCards[drinkCard] )
     let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
     const drinkName = friendCards[drinkCard]['drink name'];
@@ -25,6 +25,7 @@ friends.onload = async function () {
     const imageURL = friendCards[drinkCard]['image url'];
     const cardDate = friendCards[drinkCard]['date'];
     const friendPFP = friendCards[drinkCard]['pfp'];
+    
     createFriendCard(drinkEst, drinkName, drinkDesc, friendPFP, drinkId, friendUID,cardDate);
   }
 }
@@ -84,6 +85,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   date.innerHTML = "created: " + cardDate;
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
+  date.style.fontSize = "20px"
 
   tagContainer.appendChild(profLink);
   container.appendChild(estab);

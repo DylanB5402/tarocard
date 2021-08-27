@@ -128,11 +128,18 @@ html
             button.del-button(type='button' style='float:left' onclick='closeCardCreate(\'updateCard\')') ×
             button.post-button(style='left: 70vw;' value='submit') UPDATE
           .userInput
-            input#estabInput.small-input(type='text' placeholder='Name of Establishment' name='=establishment')
             input#orderInput.small-input(type='text' placeholder='Name of Order' name='nameOfDrink')
             input#drinkId.small-input(type='hidden' name='drinkId')
             textarea.small-input#descInput(maxlength='100' name='drinkDesc' placeholder='Description or extra instructions for order')
-        //  Form to add a card to a group order
+            .autocomplete
+              input#search2.small-input(type='text' name='search' style='top: 0vh;' placeholder='Different Estab' required)
+            #estabStuff(style='display: flex; flex-direction: column;')
+              input#estabBtn(type='button' onclick='getEstabishments2()' value='Get Matching Establishments')
+              // this is where the establishments are
+              h1(style='margin: auto; margin-top: 30px;')  Choose a Place Below 
+              #establishments-list2.listWrapper
+              h1(style='margin: auto; margin-top: 30px;')  Now Click Update!  
+
         #groupOrder-add.modal-GO
           .gO-modal
             h1 Add to....
@@ -173,3 +180,4 @@ html
     script(src='../homepage/userGroupInfo.js' type='text/javascript')
     script(src='../cardRelatedJS/userCards.js' type='text/javascript')
     script(src='../cardRelatedJS/establishmentsCards.js' type='text/javascript')
+    script(src='../cardRelatedJS/establishmentsCards2.js' type='text/javascript')

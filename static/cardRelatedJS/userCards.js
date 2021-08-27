@@ -27,11 +27,11 @@ request.onload = async function () {
   for (const drinkCard in cards) {
     let drinkEst = cards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
-    console.log(drinkEst);
     const drinkName = cards[drinkCard]['name'];
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];
     const ifFav = cards[drinkCard]['fav'];
+    const date = cards[drinkCard]['date']
     if( ifFav == true){
       numOfStarDrinks++;
     }
@@ -72,7 +72,7 @@ request.onload = async function () {
         document.getElementById('cardContainer').appendChild(favSection);
     }
     
-    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav,userID);
+    createUserCard(drinkEst, drinkName, drinkDesc, '../assets/pfp-placeholder.png', drinkId, ifFav,userID,date);
   }
 }
 
@@ -82,7 +82,7 @@ request.onload = async function () {
 *  need to add the stylesheet for cards if they plan to have cards
 */
 
-function createUserCard(establishment, drink, description, image, drinkId,ifFav,userID){
+function createUserCard(establishment, drink, description, image, drinkId,ifFav,userID,cardDate){
   const container = document.createElement("div"); //This creates div element
   container.classList.add("card-template");
   /* Create establishment element */
@@ -123,8 +123,9 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
       /* 
       form.setAttribute("action", "/{id}/edit_drink_card");
       */
-      let estabInput = document.getElementById("estabInput");
-      estabInput.value = establishment;
+     let estabInput = document.getElementById('search2');
+     estabInput.value = establishment;
+
       let orderInput = document.getElementById("orderInput");
       orderInput.value = drink;
       let descInput = document.getElementById("descInput");
@@ -145,7 +146,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
     options.style.display = "none";
     closeMenu.style.display = "block";
     favOption.style.display = "none";
-
   }
 
   /* Make the other buttons appear  */
@@ -154,7 +154,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   closeMenu.src = "../assets/denyX.png";
   closeMenu.classList.add("option-btn");
   closeMenu.style.display = "none"
-  closeMenu.style.left = "70%"
+  closeMenu.style.left = "78%"
   closeMenu.style.width = "20px"
   closeMenu.style.height = "20px";
   closeMenu.onclick = function () {
@@ -169,7 +169,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   deleteBtn.src="../assets/trash-icon.png";
   deleteBtn.classList.add("trash-card");
   deleteBtn.style.display = "none";
-  deleteBtn.style.left = "78%";
+  deleteBtn.style.left = "84%";
   deleteBtn.style.marginTop = "10px";
 
   deleteBtn.onclick = function(){
@@ -228,7 +228,11 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
     }
   }
 
-
+  let date = document.createElement('h2');
+  date.innerHTML = "created: " + cardDate;
+  date.classList.add('card-date');
+  date.style.color = "rgba(0, 0, 0,0.5)";
+  date.style.fontSize = "20px"
 
   container.appendChild(estab);
   container.appendChild(edit);
@@ -239,5 +243,6 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   container.appendChild(options);
   container.appendChild(deleteBtn);
   container.appendChild(favOption);
+  container.appendChild(date);
   document.getElementById('cardContainer').appendChild(container);
 }
