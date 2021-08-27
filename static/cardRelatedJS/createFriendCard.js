@@ -15,7 +15,6 @@ async function getEstabName(estabID){
 friends.onload = async function () {
   const friendCards = friends.response.drinks;
   for (const drinkCard in friendCards) {
-    console.log( friendCards[drinkCard] )
     let drinkEst = friendCards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
     const drinkName = friendCards[drinkCard]['drink name'];

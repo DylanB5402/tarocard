@@ -61,7 +61,7 @@ exports.editDrinkCard = (req, res) => {
 
     // Because we edited the drink through drinksDB and that favDrinkDB stores
     // uid and drinkId, we don't need any changes to favDrinkDB
-    res.redirect('/homepage/home.html')
+    res.redirect('back')
   } else {
     res.redirect('/')
   }

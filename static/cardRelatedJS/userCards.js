@@ -27,7 +27,6 @@ request.onload = async function () {
   for (const drinkCard in cards) {
     let drinkEst = cards[drinkCard]['establishment'];
     drinkEst = await getEstabName(drinkEst);
-    console.log(drinkEst);
     const drinkName = cards[drinkCard]['name'];
     const drinkDesc = cards[drinkCard]['desc'];
     const drinkId = cards[drinkCard]['id'];
