@@ -48,8 +48,8 @@ script.
   const file = event.target;
   let fileSize = file.files.item(0).size
   fileSize = Math.round((fileSize / 1024));
-  if(fileSize > 4096) {
-  alert("Your file must be no larger than 4mb")
+  if(fileSize > 1024) {
+  alert("Your file must be no larger than 1mb")
   event.target.value = "";
   }
   else {
