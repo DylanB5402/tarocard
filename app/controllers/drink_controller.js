@@ -96,6 +96,7 @@ exports.getAllDrinks = (req, res) => {
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
         id: drink.drink_id,
+        date: drink.date,
         fav: drink.fav
       })
     })
@@ -130,7 +131,8 @@ exports.getFriendDrinks = (req, res) => {
         establishment: drink.establishment_id,
         'image url': drink.drink_img,
         id: drink.drink_id,
-        date: drink.date
+        date: drink.date,
+        fav: drink.fav
       })
     })
 
