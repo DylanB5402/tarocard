@@ -155,6 +155,16 @@ input[type=submit] {
     border-radius: 10px;
 }
 
+#save {
+    margin-top: 20%;
+    font-size: 35px;
+    width: 95%;
+    background-color: #9879C5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
 .edit-input {
     padding-left: 20px;
     font-size: 32px;
