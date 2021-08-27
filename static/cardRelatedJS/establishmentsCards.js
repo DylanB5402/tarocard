@@ -16,9 +16,11 @@ let getEstabishments = () => {
   
           let label = document.createElement('label')
           label.setAttribute('for', `shop_${shop.id}`)
-          label.classList.add('shopLabel')
+          label.classList.add('shopLabel');
+          label.style.width = "100%";
+          label.style.textAlign = "center";
           
-          /*
+    
 
           let icon = document.createElement('img')
           if (shop.img.length > 0) {
@@ -31,7 +33,7 @@ let getEstabishments = () => {
   
           label.appendChild(icon)
 
-          */
+
   
           let shopName = document.createElement('h1')
           shopName.innerHTML = shop.name
