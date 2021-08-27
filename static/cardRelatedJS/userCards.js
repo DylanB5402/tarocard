@@ -154,7 +154,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   closeMenu.src = "../assets/denyX.png";
   closeMenu.classList.add("option-btn");
   closeMenu.style.display = "none"
-  closeMenu.style.left = "70%"
+  closeMenu.style.left = "78%"
   closeMenu.style.width = "20px"
   closeMenu.style.height = "20px";
   closeMenu.onclick = function () {
@@ -169,7 +169,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   deleteBtn.src="../assets/trash-icon.png";
   deleteBtn.classList.add("trash-card");
   deleteBtn.style.display = "none";
-  deleteBtn.style.left = "78%";
+  deleteBtn.style.left = "84%";
   deleteBtn.style.marginTop = "10px";
 
   deleteBtn.onclick = function(){
@@ -232,6 +232,7 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   date.innerHTML = "created: " + cardDate;
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
+  date.style.fontSize = "20px"
 
   container.appendChild(estab);
   container.appendChild(edit);

@@ -85,6 +85,7 @@ function createFriendCard(establishment, drink, description, image, drinkId,frie
   date.innerHTML = "created: " + cardDate;
   date.classList.add('card-date');
   date.style.color = "rgba(0, 0, 0,0.5)";
+  date.style.fontSize = "20px"
 
   tagContainer.appendChild(profLink);
   container.appendChild(estab);
