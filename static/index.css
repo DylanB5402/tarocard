@@ -1,0 +1,122 @@
+body {
+    background: linear-gradient(180deg, #9879C5 -9.79%, #D1A1BB 112.24%) fixed;
+    height:1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    min-height: 100%;
+}
+
+
+.appName{
+    color: black;
+    font-family: 'Chewy', cursive;
+    position: relative;
+    width: auto;
+    height: auto;
+    font-size: 2vh;
+    margin: 10px;
+    text-align: center;
+    top: 10vh;
+}
+
+.appName img {
+    height: 250px;
+    width:  250px;
+}
+
+.userInput {
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color:white;
+    padding: 15px;
+    width: 50vw;
+    height: 3vw;
+    background-color: rgba(255, 255, 255, 0.15);
+    position: relative;
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+}
+
+.userInfo form{
+    text-align: center;
+}
+
+#login-button {
+    width: 52vw;
+    height: 4vh;
+    border-radius: 3px;
+    border-width: 2px;
+    background-color: rgba(0,0,0,0.02);
+    border-color:white;
+    color: white;
+    margin: 10px;
+    font-size: 2vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top:15vh;
+}
+#noAcc {
+    color: white;
+    font-weight: normal;
+    font-size: 2vh;
+    text-align: left;
+    width: 55vw;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+
+#noAcc a{
+    color: white;
+    font-weight: normal;
+    font-size: 2vh;
+    text-align: left;
+    width: 55vw;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+}
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50vw
+}
+
+hr {
+    padding: 0.05px;
+    margin: 0.01px;
+    height: 0px;
+}
+
+#or{
+    padding: 1px;
+    margin: 5px;
+    font-size: 2vh;
+}
+
+
+h3 a{
+    color: white;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;   
+    font-style: normal;
+    line-height: 46px;
+    font-size: 2vh;
+    text-decoration: none;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}

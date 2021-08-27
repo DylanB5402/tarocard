@@ -1,0 +1,380 @@
+ul {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    border-top: 1px solid black;
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    align-content: center;
+    background-color:  #f3f3f3 ;
+    bottom: 0;
+}
+html,body{
+    height: 100%;
+    background-color:#E5E5E5 ;
+}
+
+li {
+    float: left ;
+    display: block;
+    color: black;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 100%;
+    width: 24vw;
+    text-decoration: none;
+    border-right: 1px solid black;
+    font-size: 2vh;
+}
+
+li:last-child{
+    border-right: none;
+}
+
+.active {
+    background-color: #D4D4D4;
+}
+
+
+/* Styling for the card creation button/pop up */ 
+#add-card-btn{
+    position: fixed;
+    left: 84vw;
+    top: 80vh;
+    width: 8vh;
+    height: 8vh;
+    font-size: 5vh;
+    border-radius: 100%;
+    border: none;
+    background-color: #9879C5;
+    color: white;
+}
+
+
+
+.form-container{
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border:none;
+    display: none;
+    z-index: 10;
+    position: fixed;
+    background-color: #E5E5E5;
+    height: 100%;
+    top: 0;
+}
+
+
+.small-input{
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color: black;
+    padding: 15px;
+    width: 80vw;
+    height: 4vw;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+    top: 10vh;
+    margin: 2.5vh ;
+
+}
+
+.option-btn {
+    position: absolute;
+    left: 92%;
+    z-index: 0;
+    height: 30px;
+    top: 10px;
+}
+
+
+.userInput{
+    text-align: center;
+}
+
+.small-input::placeholder{
+    color: rgba(205, 93, 233, 0.5);
+}
+
+.large-input{
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    color:black;
+    padding: 15px;
+    width: 80vw;
+    height: 30vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2vh;
+    top: 10vh;
+    margin: 2.5vh;
+}
+
+.large-input::placeholder{
+    color: rgba(205, 93, 233, 0.5);
+}
+
+.card-bar{
+    width:100%;
+    height: 6vh;
+    background-color: white;
+}
+
+.del-button{
+    height: auto;
+    width: auto;
+    font-size: 4.5vh;
+    position: relative;
+    left: 2vw;
+    color:#9879C5;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transform: rotate(-90deg);
+}
+
+.post-button{
+    height: 4vh;
+    font-size: 2vh;
+    width: 15vw;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    position: relative;
+    top: 1vh;
+    background-color: #9879C5;
+    color: white;
+    font-family: 'Roboto',sans-serif;
+    border-radius: 75px;
+}
+
+/* Styling for the Cards */
+.fonts{
+    font-family: 'Robot',sans-serif;
+    margin: 10px 10px 0px 10px;
+    word-wrap: break-word;
+    font-size: 3vh;
+}
+
+.card-template{
+    width: 87vw;
+    max-width: 1000px;
+    background-color: white ;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.tag-pf-container{
+    margin: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+}
+.tag-container {
+    word-wrap: break-word;
+    max-width: 80%;
+    display: flex;
+    flex-direction: row;
+}
+
+.tag-container p{
+    margin: 10px;
+    font-family: 'Roboto',sans-serif;
+}
+
+.card-template h2{
+    width: 75%;
+
+}
+
+.pfp-pic{
+    width: 3vw;
+    height: 3vw;
+    min-height: 30px;
+    min-width: 30px;
+    border-radius: 75px;
+    position: absolute;
+    left: 85%;
+    bottom: 5%;
+}
+
+/* Modal Box/ Content CSS */
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+    bottom: -10px;
+    box-shadow: 0 0 0 10000px #000000b0;
+    left: 0px;
+}
+
+.modal-content{
+    width: 100%;
+    left: 25vw;
+    align-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: auto;
+    margin: auto;
+}
+
+.stuff {
+    position: relative;
+    height: 10vh;
+    font-size: 3vh;
+    width: 100%;
+    height: 0.01%;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    text-align: left;
+    align-content: center;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+    border-bottom: 2px solid black;
+
+}
+
+.modal-content button:last-child{
+    border-bottom: 2px solid black;
+}
+
+.modal-content button p{
+    padding: 0%;
+    margin-top: 1vh;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+.stuff {
+    margin-top: 25px;
+    margin-left: 10px;
+    text-decoration: none !important;
+    color: black;
+}
+
+.modal-content button img,.stuff img{
+    height: 100%;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+/* Group Order Page  */
+
+.group-card {
+    width: 50vw;
+    display: block;
+    max-width: 100px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    border: 4px solid black;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('https://thumbs.dreamstime.com/b/gradient-colors-design-geometric-background-landing-pages-banner-placeholder-print-gradient-colors-design-geometric-220980341.jpg');
+
+}
+
+
+/* Animation for w3schools */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+
+  .dezoom {
+      -webkit-animation: animatezoomout 0.6s;
+      animation: animatezoomout 0.6s;
+  }
+
+  @-webkit-keyframes animatezoomout {
+    from {-webkit-transform: scale(1)} 
+    to {-webkit-transform: scale(0)}
+  }
+    
+  @keyframes animatezoomout {
+    from {transform: scale(1)} 
+    to {transform: scale(0)}
+  }
+
+  /* Animation Slide in */
+
+  .slide-in {
+    -webkit-animation: slide-in 0.3s;
+    animation: slide-in 0.3s;
+  }
+
+  @keyframes slide-in {
+      0% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+
+      100% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+      
+  }
+  .slide-out {
+    -webkit-animation: slide-out 0.3s;
+    animation: slide-out 0.3s;
+  }
+
+  @keyframes slide-out {
+      0% {
+          opacity: 1;
+          transform: translateY(0vh);
+      }
+
+      100% {
+          opacity: 0;
+          transform: translateY(120vh);
+      }
+      
+  }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Notifications | Taro Cards</title>
+
+    <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../jquery-3.6.0.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../temp.css">
+</head>
+
+<div class="page-header">
+    <a href=".\Notifications.html"><img src="../assets/Back.png" id="back"></a>
+    <span>Friend Requests</span>
+</div>
+
+<body class="notifs" style="z-index: -2; margin-top: 150px;">
+    <template id="friendsRequestTemp">
+        <div class="requestElement">
+            <a class="ActivityLinks"><img></a>
+            <a class="ActivityLinks"><h2></h2></a>
+            <a class="ActivityLinks"><h3></h3></a>
+            <button class="accept" type="button" value="accept"></button>
+            <button class="deny" type="button" value="deny"></button>
+        </div>
+    </template>
+
+    <script>
+        $(".notifs").on("click", ".accept", function (event) {
+            let buttonElement = event.target;
+            let denyButton = event.target.parentElement.querySelector(".deny")
+            denyButton.style.display = "none";
+            let parentDiv = event.target.parentElement;
+            $.post("/friends/accept", 
+                    {
+                        "id": parentDiv.querySelector("h3").id 
+                    }, 
+                    function() {
+                    buttonElement.style.background = "url(../assets/checkmark.png) rgb(152, 121, 197) center/60px 40px no-repeat";
+            })
+
+        })
+
+        $(".notifs").on("click", ".deny", function (event) {
+            let parentDiv = event.target.parentElement;
+            let acceptButton = parentDiv.querySelector(".accept");
+            acceptButton.style.opacity = "0";
+            acceptButton.disabled = "true";
+            $.post("/friends/deny", { "id": parentDiv.querySelector("h3").id }, function() {
+                parentDiv.style.display = "none"; 
+            })
+        })
+    </script>
+
+    <div class="navbar" id="myNavbar" style="z-index: 2;">
+        <a href="/home"></i>
+            <img id="navHomeIcon" src="../assets/home.png" />
+        </a>
+
+        <a href="/search"></i>
+            <img id="navSearchIcon" src="../assets/search.png" />
+        </a>
+
+        <a href="../Notifications/Notifications.html"></i>
+            <img id="navNotifsIcon" src="../assets/notifs.png" />
+            <p id="incomingNum"></p>
+        </a>
+
+        <a href="/profile"></i>
+            <img id="navProfileIcon" src="../assets/profile.png" />
+        </a>
+    </div>
+
+</body>
+
+<script>
+    const body = document.querySelector('body');
+
+    let request = new XMLHttpRequest();
+    // request.open('GET', 'https://my-json-server.typicode.com/VitalKilla/userData/db', true);
+    request.open('POST', '/friends/incoming', true);
+    request.responseType = 'json';
+    request.send();
+
+    request.onload = function () {
+        const users = request.response;
+        console.log(users)
+        populateFriendRequests(users);
+    }
+
+    // function is used to fill page with list of friends request from a json file.
+    function populateFriendRequests(obj) {
+        let template, divAll, div, divCopy, currentLetter, char;
+        divAll = document.createElement("div");
+        divAll.id = "friendsRequestAll";
+        template = document.getElementById('friendsRequestTemp');
+        div = template.content.querySelector(".requestElement");
+        const users = obj.users;
+        for (let i = 0; i < users.length; i++) {
+            divCopy = document.importNode(div, true);
+            // char refers to first letter of current users display name
+            char = users[i]["display name"].charAt(0);
+            divCopy.querySelector("img", true).src = users[i]["image url"];
+            divCopy.querySelector("h2", true).textContent = users[i]["display name"];
+            divCopy.querySelector("h3", true).textContent = users[i]["username"];
+            divCopy.querySelector("h3", true).id = users[i]["id"];
+            let links = divCopy.querySelectorAll(".ActivityLinks");
+            links.forEach(element => {
+                element.href = "/profile/" + users[i]["id"];
+            });
+            divAll.appendChild(divCopy);
+            body.appendChild(divAll);
+        }
+    }
+</script>
+
+<script>
+    $.post("/friends/incoming", "" , function(data, status, xhr) {
+        const friendRequests = data.users;
+        let navbar = document.getElementById("myNavbar");
+        let notification = navbar.querySelector("#incomingNum");
+        if(friendRequests.length > 99) {
+            notification.textContent = "99+";
+            notification.style = "visibility: visible;";
+        }
+        else if(friendRequests.length > 0) {
+            notification.textContent = friendRequests.length;
+            notification.style = "visibility: visible;";
+        }
+    })
+</script>
+</html>

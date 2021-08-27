@@ -1,0 +1,33 @@
+{
+  "db" : "databases/taroCard.db",
+  "prod_db" : "databases/taroCard.db",
+  "allowed-ext-image" : "jpeg|jpg|png",
+  "allowed-ext-text" : "txt",
+
+  "upload" : {
+    "expressStaticDir" : "static",
+    "uploadPath" : "assets/uploads",
+    "allowedExtImage" : "jpeg|jpg|png|gif",
+    "allowedExtText" : "txt",
+
+    "dir" : {
+      "avatarImage" : "avatar",
+      "bannerImage" : "banner",
+      "drinksImage" : "drinks",
+      "tagsImage" : "tags"
+    }
+  },
+
+  "yelp" : {
+    "location" : "san diego, ca",
+    "tags" : ["tea","juice","coffee","cocktail"],
+    
+    "useParent" : true,
+    "parent" : "food",
+    "rate" : 1000
+  }, 
+  "defaults" : {
+    "defaultBanner" : "/assets/banner-default.png",
+    "defaultPfp" : "/assets/pfp-default.png"
+  }
+}
