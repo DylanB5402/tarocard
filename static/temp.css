@@ -2166,6 +2166,7 @@ HTML -> dashes -> hey-besties-best-drink */
 
 #groupView-name{
     font-weight: 900;
+    color: #9879C5;
 }
 
 #groupContainer{
@@ -2173,11 +2174,12 @@ HTML -> dashes -> hey-besties-best-drink */
     top: 1vh;
 }
 #groupView{
-    background: rgb(216, 216, 216); 
+    background-color: #EFEFEF; 
     z-index: 10;
-    height: 92%; 
+    height: 85%; 
     position: fixed;
     display: none;
     width: 100%;
+    bottom: 160px;
     overflow-y: auto;
 }
