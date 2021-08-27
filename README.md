@@ -1,8 +1,9 @@
-# Prologue
-Since the dawn of man, the first Australopithecus to have ever wandered the Earth continually looked for ways to share (to their friends) knowledge of their favorite boba tea.
-
 ![TC Logo](./readme_aj.png)
 
+## Prologue
+Since the dawn of man, the first Australopithecus to have ever wandered the Earth continually looked for ways to share (to their friends) knowledge of their favorite boba tea.
+
+## Taro Cards
 Taro Cards is an webapp designed to cater to the needs of drink lovers who want to share their current favorites among their friends. 
 
 ## Features
@@ -43,11 +44,11 @@ YELP_API_KEY = <YOUR_API_KEY>
 ```
 7. Fill the database with valid establishments from Yelp
 ```bash
-npm run establishments
+$ npm run establishments
 ```
 8. Run the node.js app
 ```bash
-npm start
+$ npm start
 ```
 
 ## Testing
@@ -57,7 +58,7 @@ Unit tests are written using the Mocha and Chai testing libraries.
 
 Populate the database with sample users
 ```bash
-npm run populate
+$ npm run populate
 ```
 
 **npm run populate** populates the database with 10 test users with the following emails:
@@ -76,11 +77,11 @@ The password for each of these users is ‘password’.
 
 Then run the mocha testing suite
 ```bash
-npm run test
+$ npm run test
 ```
 
 
-## Project structure
+## Project Structure
 Taro Cards is written in the standard Model-Routes-Controllers-Services model.
 
 ![routes](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes/mvc_express.png)
