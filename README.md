@@ -81,7 +81,7 @@ $ npm run test
 ```
 
 
-## Project structure
+## Project Structure
 Taro Cards is written in the standard Model-Routes-Controllers-Services model.
 
 ![routes](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes/mvc_express.png)
