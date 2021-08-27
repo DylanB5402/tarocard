@@ -22,7 +22,7 @@ Taro Cards is an webapp designed to cater to the needs of drink lovers who want 
 * Create group orders to manage favorites from multiple friends
 
 
-### Local Development
+## Local Development
 1. Clone this repository into a new directory using git 
 ```bash 
 $ git clone https://gitlab.com/sdsc-rds/rds-interns-su21/ahjintpcc/tarocard.git
@@ -50,7 +50,7 @@ npm run establishments
 npm start
 ```
 
-### Testing
+## Testing
 Debug pages are available at `<url>/debug` to make it easy to add test users, view users and friend data, and add users as friends without logging into those users.
 
 Unit tests are written using the Mocha and Chai testing libraries.
@@ -80,42 +80,42 @@ npm run test
 ```
 
 
-### Project structure
+## Project structure
 Taro Cards is written in the standard Model-Routes-Controllers-Services model.
 
 ![routes](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes/mvc_express.png)
 ```
 root
 ├── app/
-│	├── controllers/
-│	│	contains JS files linking database classes to routes
-│	│
-│	├── models/
-│	│	└── database/
-|	│		contains JS files that define database classes and their functions
-│	│
-│	└── routes/
-│		contains JS files with routes
+│   ├── controllers/
+│   │  contains JS files linking database classes to routes
+│   │
+│   ├── models/
+│   │   └── database/
+|   │      contains JS files that define database classes and their functions
+│   │
+│   └── routes/
+│      contains JS files with routes
 │
 ├── databases/
-│	contains SQLite3 database files
+│  contains SQLite3 database files
 │
 ├── scripts/
-│	contains scripts for populating databases
+│  contains scripts for populating databases
 │
 ├── static/
-│	contains static HTML/CSS/JS files for the website
+│  contains static HTML/CSS/JS files for the website
 │
 ├── templates/ 
-│	contains Pug templates for pages
+│  contains Pug templates for pages
 │
 ├── test/
-│	contains unit tests for the server backend
+│  contains unit tests for the server backend
 │
 └── app.js
 ```
 
-### Future Plans
+## Future Plans
 Taro Cards is dead
 
 
