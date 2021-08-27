@@ -57,7 +57,7 @@ class FavDrinksDatabase {
       const stmt = this.db.prepare('SELECT f.fav, f.date, d.* ' + 
             'FROM fav_drinks f INNER JOIN drinks d USING(drink_id) ' + 
             'WHERE uid = ? ' +
-            'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
+            'ORDER BY fav DESC, d.establishment_id COLLATE NOCASE ASC')
       const query = stmt.all(uid) // an array of row (drink) objects
 
       return query // return the filled array of drink objects
