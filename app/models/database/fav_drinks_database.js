@@ -54,8 +54,10 @@ class FavDrinksDatabase {
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
     if (userDB.getUserByUID(uid)) {
-      const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
-            'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
+      const stmt = this.db.prepare('SELECT f.fav, f.date, d.* ' + 
+            'FROM fav_drinks f INNER JOIN drinks d USING(drink_id) ' + 
+            'WHERE uid = ? ' +
+            'ORDER BY fav DESC, d.establishment_id COLLATE NOCASE ASC')
       const query = stmt.all(uid) // an array of row (drink) objects
 
       return query // return the filled array of drink objects
@@ -100,9 +102,12 @@ class FavDrinksDatabase {
     // SQL Statement:
     //   selects all fields of drinks from the joining of fav_drinks and drinks
     //     tables to get all drinks that correspond to a user
-    const stmt = this.db.prepare('SELECT f.fav, f.date, d.* FROM fav_drinks f ' +
-            'INNER JOIN drinks d USING(drink_id) WHERE uid = ? ' +
-            'ORDER BY fav DESC, drink_name COLLATE NOCASE ASC')
+    const stmt = this.db.prepare('SELECT f.fav, f.date, d.* ' + 
+            'FROM ((fav_drinks f ' +
+            'INNER JOIN drinks d USING(drink_id)) ' + 
+            'INNER JOIN establishments e ON d.establishment_id = e.id) ' + 
+            'WHERE uid = ? ' +
+            'ORDER BY fav DESC, e.name COLLATE NOCASE ASC')
     const query = stmt.all(uid) // an array of row (drink) objects
     return query // return the filled array of drink objects
   }
@@ -234,10 +239,10 @@ class FavDrinksDatabase {
     //     friends and drink_id between fav_drinks and drinks to return a query
     //     for outputting a table of all recent drinks made by friends of a user
     //     within the last month
-    const stmt = this.db.prepare('SELECT ' + 
+    const stmt = this.db.prepare('SELECT ' +
             'u.profile_picture, fd.drink_id, fd.date, f.friend_uid, d.* ' +
             'FROM (((fav_drinks fd ' +
-            'INNER JOIN friends f ON fd.uid = f.friend_uid)' + 
+            'INNER JOIN friends f ON fd.uid = f.friend_uid)' +
             'INNER JOIN users u ON f.friend_uid = u.uid) ' +
             'INNER JOIN drinks d USING(drink_id)) ' +
             "WHERE f.uid = ? AND status = 'friends' " +

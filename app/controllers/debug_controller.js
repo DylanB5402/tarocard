@@ -323,7 +323,7 @@ exports.allUsersDrinks = (req, res) => {
  * @param {!import('express').Request} req
  * @param {!import('express').Response} res
  */
- exports.removeFavDrink = (req, res) => {
+exports.removeFavDrink = (req, res) => {
   if (req.session.loggedin) {
     const uid = req.body.uid
     const drinkId = req.body.drinkId

@@ -55,11 +55,13 @@ exports.getGroup = (req, res) => {
         groupName: pair.group_name,
         id: pair.group_id,
         friendUID: pair.friend_uid,
-        drink: pair.friends_drink_id
+        drink: pair.friends_drink_id,
+        pfp: pair.profile_picture
       })
     })
 
-    res.send(group)
+
+    res.send({ groups: groupContent, success: true})
     // res.json({ groupContents: groupContent, success: true }) // send as json
   } else {
     res.json({ groupContents: [], success: false })
@@ -150,7 +152,6 @@ exports.removeFromGroup = (req, res) => {
     const uid = req.session.uid
     const groupId = req.params.groupId
     const drinkId = req.body.drinkId
-    console.log(`This is the drink id in exports.removeFrom Group: ${drinkId}`) // debug statement
     groupDB.removeFromGroup(uid, groupId, drinkId)
 
     res.redirect('back')
