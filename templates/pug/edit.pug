@@ -11,7 +11,7 @@ head
     img#back(src='../assets/Back.png')
   span Edit Profile
 .edit
-  form#edit(action='/edit/profile', onsubmit='submitImages()', method='POST')
+  form#edit(action='/edit/profile', method='POST')
     .banner
       img#banner(src='/banner')
       label#imgInputBanner.upload-img-a(for='inputBanner')
@@ -42,42 +42,65 @@ head
       textarea#bio.edit-input(name='bio', maxlength='150', value='' + bio, placeholder='' + bio)
       // textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
       br
-      input#save(type='submit', value='Save changes')
+      input#save(type='button' onclick='submitForm()', value='Save changes')
 script.
   $("#inputBanner").change(function(event) {
-  alert("You choose: " + event.target.value + " as your Banner.");
-  let currentBanner = document.getElementById("banner");
-  var tmppath = URL.createObjectURL(event.target.files[0]);
-  currentBanner.src = tmppath;
+      alert("You choose: " + event.target.value + " as your Banner.");
+      let currentBanner = document.getElementById("banner");
+      var tmppath = URL.createObjectURL(event.target.files[0]);
+      currentBanner.src = tmppath;
   })
+
   $("#inputProfilePic").change(function(event) {
-  alert("You choose: " + event.target.value + " as your Profile Picture.");
-  let currentProfilePic = document.getElementById("profilePic");
-  var tmppath = URL.createObjectURL(event.target.files[0]);
-  currentProfilePic.src = tmppath;
+      alert("You choose: " + event.target.value + " as your Profile Picture.");
+      let currentProfilePic = document.getElementById("profilePic");
+      var tmppath = URL.createObjectURL(event.target.files[0]);
+      currentProfilePic.src = tmppath;
   })
+
   $('#bio').keypress(function(event) {
-  if (event.keyCode == 13) {
-  event.preventDefault();
-  }
+      if (event.keyCode == 13) {
+          event.preventDefault();
+      }
   });
+
   function sendProfilePicture() {
-  let fileInput = document.querySelector('#inputProfilePic')
-  const formData = new FormData();
-  formData.append("Profile-Pic", fileInput.files[0]);
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/upload/avatar", true);
-  xhr.send(formData);
+      let fileInput = document.querySelector('#inputProfilePic')
+
+      const formData = new FormData();
+      formData.append("Profile-Pic", fileInput.files[0]);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/upload/avatar", true);
+      xhr.send(formData);
+
+      if (xhr.status === 200) {
+          return true
+      }
+
+      return false
   }
+
   function sendBanner() {
-  let fileInput = document.querySelector('#inputBanner')
-  const formData = new FormData();
-  formData.append("Banner", fileInput.files[0]);
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/upload/banner", true);
-  xhr.send(formData);
+      let fileInput = document.querySelector('#inputBanner')
+
+      const formData = new FormData();
+      formData.append("Banner", fileInput.files[0]);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/upload/banner", true);
+      xhr.send(formData);
+
+      if (xhr.status === 200) {
+          return true
+      }
+
+      return false
   }
-  function submitImages() {
-  sendProfilePicture()
-  sendBanner()
+
+  function submitForm() {
+    sendProfilePicture()
+    sendBanner()
+
+    document.getElementById("edit").submit();
   }
