@@ -89,7 +89,7 @@ script.
       formData.append("Profile-Pic", fileInput.files[0]);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/upload/avatar", true);
+      xhr.open("POST", "/upload/avatar", false);
       xhr.send(formData);
 
       if (xhr.status === 200) {
@@ -106,7 +106,7 @@ script.
       formData.append("Banner", fileInput.files[0]);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/upload/banner", true);
+      xhr.open("POST", "/upload/banner", false);
       xhr.send(formData);
 
       if (xhr.status === 200) {
