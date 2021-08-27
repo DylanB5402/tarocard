@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Notifications | Taro Cards</title>
+
+    <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../temp.css">
+    <script src="../jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="page-header">
+    <span>Activity</span>
+</div>
+
+<body class="notifs" style="z-index: -2; margin-top: 150px;">
+    
+    <template id="userFriendRequestTemp">
+        <div class="userFriendRequestElement" style="margin-bottom: 190px;">
+            <a href=".\friendRequests.html" class="ActivityLinks"><img></a>
+            <a href=".\friendRequests.html" class="ActivityLinks"><h2>Friend Requests</h2></a>
+            <a href=".\friendRequests.html" class="ActivityLinks"><h3>Approve or ignore requests</h3></a>
+            <button style="height: fit-content; width: fit-content;"><a href=".\friendRequests.html" class="ActivityLinks"><img src="../assets/arrow.png" id="FriendRequest-arrow"></a></button>
+            <a href=".\friendRequests.html" class="ActivityLinks"><p></p></a>
+        </div>
+    </template>
+
+    <template id="noRequestTemp">
+        <div class="userFriendRequestElement" style="margin-bottom: 190px;">
+            <a href="/search" class="ActivityLinks"><img src="../assets/friend-request.png"></a>
+            <a href="/search" class="ActivityLinks"><h2>Friend Requests</h2></a>
+            <a href="/search" class="ActivityLinks"><h3>Approve or ignore requests</h3></a>
+        </div>
+    </template>
+
+    <template id="FriendNotifsTemp">
+        <div class="FriendNotifs">
+            <a href="" class="ActivityLinks">
+            <img>
+            <p> <strong></strong> is now your friend.</p>
+            </a>
+        </div>
+    </template>
+
+
+
+    <script>
+        $(document).ready(function(){
+            // $.get("https://my-json-server.typicode.com/VitalKilla/userData/users", "" , function(data, status, xhr) {
+            $.post("/friends/incoming", "" , function(data, status, xhr) {
+                console.log(data)
+                const friendRequests = data.users;
+                let requestTemp = document.querySelector("#userFriendRequestTemp");
+                let requestClone = requestTemp.content.cloneNode(true);
+                let noFriendsTemp = document.querySelector("#noRequestTemp");
+                let noRequestClone = noFriendsTemp.content.cloneNode(true);
+                let element;
+
+                if(friendRequests.length > 99) {
+                    element = requestClone.querySelector("div");
+                    element.querySelector("p").textContent = "99+";
+                    element.querySelector("img").src = friendRequests[0]['image url'];
+                }
+                else if(friendRequests.length > 0) {
+                    element = requestClone.querySelector("div");
+                    element.querySelector("p").textContent = friendRequests.length;
+                    element.querySelector("img").src = friendRequests[0]['image url'];
+                }
+                else {
+                    element = noRequestClone.querySelector("div");
+                }
+                const body = document.querySelector("body");
+                const h6 = document.createElement("h6");
+                h6.id = "ActivityHeader";
+                h6.textContent = "Activity";
+                body.appendChild(element);
+                body.appendChild(h6);
+
+                // $.get("https://my-json-server.typicode.com/VitalKilla/userData/recentFriends", "" , function(data, status, xhr) {
+                $.get("/friends/recent", "" , function(data, status, xhr) {
+                    const recentFriends = data.users;
+                    console.log(data)
+                    const body = document.querySelector("body");
+                    let recentTemp = document.querySelector("#FriendNotifsTemp");
+                    let containAll = document.createElement("div");
+                    containAll.id = "containAllRecent";
+
+                    for(let i = 0; i < recentFriends.length; i++) {
+                        let recentClone = recentTemp.content.cloneNode(true);
+                        let recentElement = recentClone.querySelector("div");
+
+                        recentElement.querySelector("img").src = recentFriends[i]['image url'];
+                        recentElement.querySelector("p").querySelector("strong").textContent = recentFriends[i]['display name'];
+                        recentElement.querySelector("a").href = "/profile/" + recentFriends[i]["id"];
+                        containAll.appendChild(recentElement);
+                    }
+
+                    body.appendChild(containAll);
+                
+                })
+
+            })
+
+            
+        })
+
+
+    </script>
+
+</body>
+
+
+
+<div class="navbar" id="myNavbar">
+    <a href="/home"></i>
+        <img id="navHomeIcon" src="../assets/home.png" />
+    </a>
+
+    <a href=/search></i>
+        <img id="navSearchIcon" src="../assets/search.png" />
+    </a>
+
+    <a class="active" href="#"></i>
+        <img id="navNotifsIcon" src="../assets/notifs.png" />
+        <p id="incomingNum"></p>
+    </a>
+
+    <a href="/profile"></i>
+        <img id="navProfileIcon" src="../assets/profile.png" />
+    </a>
+</div>
+
+<script>
+    $.post("/friends/incoming", "" , function(data, status, xhr) {
+        const friendRequests = data.users;
+        let navbar = document.getElementById("myNavbar");
+        let notification = navbar.querySelector("#incomingNum");
+        if(friendRequests.length > 99) {
+            notification.textContent = "99+";
+            notification.style = "visibility: visible;";
+        }
+        else if(friendRequests.length > 0) {
+            notification.textContent = friendRequests.length;
+            notification.style = "visibility: visible;";
+        }
+    })
+</script>
+
+</html>
+
+<!--<div class="requests">
+        <img src="../assets/pfp-placeholder.png" class="requests-pfp">
+        <div class="request-text">
+            <h6>Friend Requests</h6>
+            <p>Approve or ignore requests</p>
+        </div>
+    </div>-->

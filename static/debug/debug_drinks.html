@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Debug Drinks</title>
+    </head>
+    <body>
+        <h1>Remove Drink</h1>
+        <!-- this form automatically send a post request to /users/create with the input data when submit is pressed -->
+        <form action = "/debug/deleteDrink" method="post" target="_blank">
+
+            <label for="uid">uid:</label><br>
+            <input type="number" id="uid" name="uid"><br>
+
+            <label for="drinkId">drink_id:</label><br>
+            <input type="number" id="drinkId" name="drinkId"><br>
+ 
+            <input type="submit" value="Delete!">
+            <input type="reset">
+        </form>
+    </body>
+</html>

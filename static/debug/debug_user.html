@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Users</title>
+    </head>
+    <body>
+        <h1>Add Users</h1>
+        <!-- this form automatically send a post request to /users/create with the input data when submit is pressed -->
+        <form action = "/debug/adduser" method="post" target="_blank">
+
+            <label for="num"> Number of Users to Add </label><br>
+            <input type="number" id="num" name="num"><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>
+
+        <p> All users created have the email user[RANDOM NUMBER] with a password of password</p>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+doctype html
+head
+  title
+  link(rel='icon', href='../assets/TaroCardTransparent 1.png')
+  link(rel='preconnect', href='https://fonts.googleapis.com')
+  link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap', rel='stylesheet')
+  script(src='../jquery-3.6.0.min.js')
+  link(rel='stylesheet', href='../temp.css')
+.page-header
+  a(href='')
+    img#back(src='../assets/Back.png')
+  span Friends
+.body(style='margin-top: 150px;')
+  .search
+    .search-container
+      input#friend-search.search-bar(type='text', placeholder='Search friends...', name='search-bar-users')
+      button#search-button.search-button(type='submit')
+        img#search-icon(src='../assets/search-bar.png')
+  .friends
+    script.
+      const currentURL = $(location).attr('href');
+      let userID = currentURL.charAt(currentURL.length - 1);
+      let currentChar;
+      let int = currentURL.length - 2;
+      while(currentURL.charAt(int) !== "/") {
+      currentChar = currentURL.charAt(int);
+      userID = currentChar + userID;
+      int --;
+      }
+      $(document).ready(function(){
+      $("#search-icon").click(function(){
+      $.post('/friends/search',
+      {
+      "string": $("#friend-search").val(),
+      "id": userID
+      // uses input id
+      }
+      ,function(data, status, xhr) {
+      searchFriends(data);
+      })
+      });
+      });
+      let div = document.querySelector(".search-container");
+      let input = div.querySelector("input");
+      input.addEventListener("keyup", function(event) {
+      if(event.keyCode == "13") {
+      document.getElementById("search-icon").click();
+      }
+      })
+  template#friendsTemp
+    #headerElement
+      h1#letterHeading
+      hr#headingLine
+    .friendElement
+      a.ActivityLinks
+        img
+      a.ActivityLinks
+        h2
+      a.ActivityLinks
+        h3
+#myNavbar.navbar
+  a(href='/home')
+    img#navHomeIcon(src='../assets/home.png')
+  a(href='/search')
+    img#navSearchIcon(src='../assets/search.png')
+  a(href='..\Notifications\Notifications.html')
+    img#navNotifsIcon(src='../assets/notifs.png')
+    p#incomingNum
+  a(href='/profile')
+    img#navProfileIcon(src='../assets/profile.png')
+script.
+  $.post("/friends/incoming", "" , function(data, status, xhr) {
+  const friendRequests = data.users;
+  let navbar = document.getElementById("myNavbar");
+  let notification = navbar.querySelector("#incomingNum");
+  if(friendRequests.length > 99) {
+  notification.textContent = "99+";
+  notification.style = "visibility: visible;";
+  }
+  else if(friendRequests.length > 0) {
+  notification.textContent = friendRequests.length;
+  notification.style = "visibility: visible;";
+  }
+  })
+script(type='text/javascript', src='../friendsPage/friendsJavaOther.js')

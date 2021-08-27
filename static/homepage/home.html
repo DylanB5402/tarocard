@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Taro Cards</title>
+        <link rel="icon" href="../assets/TaroCardTransparent 1.png">
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../temp.css">
+        <script src="../jquery-3.6.0.min.js"></script>
+    </head>
+    <!-- Group View // being able to see all the cards in a group Order -->
+    <div id="groupView" style="background:rgb(216, 216, 216); z-index: 10; height:100%; position: fixed; display: none; width:99%; overflow-y: auto;">
+        <div class="card-bar" style="display:flex; width: 100vw; top: 0.01vh; left: 0vw; position: fixed; z-index: 4;">
+            <p id="groupView-name" style="font-size: 2.6vh; margin-right: 0px; top: 0vh; width: auto;" class="fonts" >
+                 Group Order 
+            </p>
+            <p id="closeGroupView"
+            style="background-color: purple; color: white; text-decoration: none;
+             border-radius: 10px; font-size: 20px;
+             position: fixed; right: 0px;
+             width: 100px;
+             height: 30px;
+             text-align: center;
+             "
+            class="fonts"> 
+            Home </p>
+        </div>
+
+        <div id="groupContainer">
+        </div>
+    </div>
+
+    <!-- End of Group View -->
+    
+    <div class="page-header" id="home-page">
+        <h1>Taro Cards</h1>
+    </div>
+    
+
+    <body class="home" style="margin-top: 150px;">
+        <!-- Modal Sheet for button -->
+        <div id="modal-sheet" class="modal">
+            <div class="modal-content">
+                <h1 class="fonts" style="font-style: normal; font-size: 3vh;"> Add </h1>
+                <button onclick="openCardCreate('id01')" class="stuff" > <img src="../assets/add-card.png"> <p> Card </p>  </button>
+                <button onclick="openCardCreate('createGroupOrder')" class="stuff"> <img src="../assets/group-order.png"> <p> Group Order </p></button>
+            </div>
+        </div>
+         <!-- Hidden Modal For Adding A Drink Card to a Group  -->
+        <div id="groupOrder-add" class="modal-GO">
+            <div class="gO-modal">
+                <h1> Add to.... </h1> 
+                    <form action="/groups/addToGroup" id="groupOrder-form" method="POST" >
+                        <button type=button style="float:left" class="del-button" onclick="closeGroupAdd()" >&times;</button>
+                        <select id="groupOrders" name="groupOrders" placeholder="Select a group">
+                            <!-- Group names-->
+                            <option value="" disabled selected> Select Group Order </option>
+                        </select>
+                        <h1 style="display:none;"id="fail-message"> Choose a group or make a group to choose from! </h1>
+                        <h1 style="display:none;"id="success-message"> Card successfully added! </h1>
+                        <input type="text" style="display: none" id="gO-drinkID"name="drinkId">
+                        <input type="text" style="display:none" id="gO-userID" name="friendUID">
+                        <input type="button" value="Add" style="width: 100%; height: 50px; font-size: 20px; background-color: #9879C5; font-family: Roboto,sans serif;" onclick="sendInfoToAlex()">
+                    </form>
+                    
+             </div>
+        </div>
+        
+        <!-- Hidden form for card creation -->
+        <form action="/drinks/newDrinkCard" class="form-container" id="id01" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('id01')" >&times;</button>
+                <button class="post-button" style="left: 70vw;"value="submit"> Post </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Order"  name="nameOfDrink" class="small-input" required >
+                <textarea maxlength="100" class="small-input" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+                <!-- This is where the Estabs is -->
+                <div class="autocomplete">
+                    <input type="text" id="search" name="search" class="small-input"  style="top: 0vh;" placeholder="Search.." required>
+                </div>
+                <div id="estabStuff" style="display: flex; flex-direction: column;">
+                 <input type="button" id="estabBtn" onclick="getEstabishments()" value="Get Matching Establishments">           
+                <!-- this is where the establishments are -->
+                <h1 style="margin: auto; margin-top: 30px;"> Choose a Place Below </h1>
+                <div class="listWrapper" id="establishments-list">
+                </div>
+                <h1 style="margin: auto; margin-top: 30px;"> Now Click Post!  </h1>
+                </div>            
+                  <!--------------------------------------------->            
+            </div>
+        </form>
+        <!-- Hidden form for card update -->
+        <form action="/drinks/editDrinkCard" class="form-container" id="updateCard" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('updateCard')" >&times;</button>
+                <button class="post-button" style="left: 70vw;"value="submit"> UPDATE  </button>
+            </div>
+            <div class="userInput">
+                <input type="text" placeholder="Name of Establishment" id="estabInput" name="=establishment" class="small-input">
+                <input type="text" placeholder="Name of Order" id="orderInput" name="nameOfDrink" class="small-input" >
+                <input type="hidden" name="drinkId" id="drinkId" class="small-input">
+                <textarea maxlength="100" class="large-input" id="descInput" name="drinkDesc" placeholder="Description or extra instructions for order"></textarea>
+            </div>
+        </form>
+
+      <!-- Create New Group Order -->
+        <form action="/groups/createGroup" class="form-container" id="createGroupOrder" method="POST">
+            <div class="card-bar">
+                <button type=button style="float:left" class="del-button" onclick="closeCardCreate('createGroupOrder')" >&times;</button>
+                <button class="post-button" style="left: 60vw; width: 200px;"value="submit" onclick="closeCardCreate('createGroupOrder')" > CREATE  </button>
+            </div>
+            <div style="display: flex; flex-direction: column; text-align: center;">
+                <h1 class="fonts" style="font-size: 30px; margin: 30px; "> Group Order Name </h1>
+                <input type="text" placeholder="Group Name" id="groupName" name="groupName" style="width:99%;margin: auto; top: 50%; position: relative; height: 50px; font-size: 40px; border-radius: 10px;">
+            </div>
+            
+        </form>
+        <div id="cardContainer" class="cardContainerHome">
+        </div>
+        <button id="add-card-btn" alt="add card button"> + </button> 
+        <div class="navbar" id="myNavbar">
+        <a class="active" href="#">
+            <img id="navHomeIcon" src="../assets/home.png" />
+        </a>
+    
+        <a href=/search>
+            <img id="navSearchIcon" src="../assets/search.png" />
+        </a>
+    
+        <a href="../Notifications/Notifications.html">
+            <img id="navNotifsIcon" src="../assets/notifs.png" />
+            <p id="incomingNum"></p>
+        </a>
+    
+        <a href="/profile">
+            <img id="navProfileIcon" src="../assets/profile.png" />
+        </a>
+    </div>
+
+    <script>
+        $.post("/friends/incoming", "" , function(data, status, xhr) {
+            const friendRequests = data.users;
+            let navbar = document.getElementById("myNavbar");
+            let notification = navbar.querySelector("#incomingNum");
+            if(friendRequests.length > 99) {
+                notification.textContent = "99+";
+                notification.style = "visibility: visible;";
+            }
+            else if(friendRequests.length > 0) {
+                notification.textContent = friendRequests.length;
+                notification.style = "visibility: visible;";
+            }
+        })
+    </script>
+
+    </body>
+
+    
+
+  <script src="../cardRelatedJS/createFriendCard.js" type="text/javascript"></script> 
+    <script src="./userGroupInfo.js" type="text/javascript"></script>
+    <script src="homepage.js" type="text/javascript"></script>
+    <script src="../cardRelatedJS/establishmentsCards.js"></script>
+</html>
