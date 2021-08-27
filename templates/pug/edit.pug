@@ -48,8 +48,8 @@ script.
   const file = event.target;
   let fileSize = file.files.item(0).size
   fileSize = Math.round((fileSize / 1024));
-  if(fileSize > 4096) {
-  alert("Your file must be no larger than 4mb")
+  if(fileSize > 1024) {
+  alert("Your file must be no larger than 1mb")
   event.target.value = "";
   }
   else {
@@ -89,7 +89,7 @@ script.
       formData.append("Profile-Pic", fileInput.files[0]);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/upload/avatar", true);
+      xhr.open("POST", "/upload/avatar", false);
       xhr.send(formData);
 
       if (xhr.status === 200) {
@@ -106,7 +106,7 @@ script.
       formData.append("Banner", fileInput.files[0]);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/upload/banner", true);
+      xhr.open("POST", "/upload/banner", false);
       xhr.send(formData);
 
       if (xhr.status === 200) {
