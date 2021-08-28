@@ -99,7 +99,8 @@ function createUserCard(establishment, drink, description, image, drinkId,ifFav,
   let desc = document.createElement("h2");
   desc.classList.add("fonts");
   desc.classList.add("description");
-  desc.style = "font-weight: 100";
+  desc.style = "font-weight: 400";
+  desc.style = "font-size: 30px";
   desc.innerHTML = description;
 
   /*Create tag container*/
