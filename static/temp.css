@@ -517,7 +517,7 @@ li:last-child{
 
 .card-template{
     width: 87vw;
-    height: 14vh;
+    height: 16vh;
     max-width: 800px;
     min-height: 85px;
     background-color: white ;
@@ -554,9 +554,11 @@ li:last-child{
 }
 
 .card-template h1{
-    width: 75%;
+    width: 90%;
     font-size: 3vh;
     margin-top: 0px;
+    height: auto;
+
 }
 
 .card-date {
@@ -604,10 +606,13 @@ li:last-child{
     margin-top: 5px;
 }
 .card-template .description{
-    width: 75%;
+    width: 90%;
+    max-height: 40%;
+    overflow: scroll;
     font-size: 30px;
-    font-weight: 100;
+    font-weight: normal;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 
