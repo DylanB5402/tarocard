@@ -173,7 +173,6 @@ input[type=submit] {
     border-width: 2px;
 }
 
-
 input[type=file] {
     display: none;
     height: fit-content;
@@ -181,14 +180,6 @@ input[type=file] {
     margin: 0;
     
 }
-/*
-#imgInputBanner {
-    position: absolute;
-    top: 15%;
-    right: 47%;
-    opacity: 0.8;
-}*/
-
 
 .banner {
     position: relative;
@@ -215,10 +206,7 @@ input[type=file] {
     bottom: 35%;
     z-index: 3;
 }
-
-
 /* EDIT END */
-
 
 /* FORGOT-PASS START */
 .forgot {
@@ -294,12 +282,6 @@ input[type=file] {
 .back-base {
     margin: 30px;
 }
-
-
-
-
-
-
 /* FORGOT-PASS END */
 
 /* HOME START */
@@ -361,12 +343,13 @@ li:last-child{
     background-color: #D4D4D4;
 }
 
-
 /* Styling for the card creation button/pop up */ 
 #add-card-btn{
     position: fixed;
-    left: 84vw;
-    top: 70vh;
+    /*left: 84vw;/**/
+    /*top: 70vh;/**/
+    right:5%;
+    bottom: 190px;
     width: 8vh;
     height: 8vh;
     font-size: 5vh;
@@ -375,8 +358,6 @@ li:last-child{
     background-color: #9879C5;
     color: white;
 }
-
-
 
 .form-container{
     left: 0;
@@ -446,8 +427,6 @@ li:last-child{
     color: #CBBCE2;
 }
 
-
-
 .large-input{
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
@@ -463,7 +442,6 @@ li:last-child{
     font-size: 2vh;
     top: 10vh;
     margin: 2.5vh ;
-
 }
 
 .large-input::placeholder{
@@ -840,8 +818,6 @@ li:last-child{
     flex-direction: column;
 }
 
-
-
 .appName{
     color: black;
     font-family: 'Chewy', cursive;
@@ -978,7 +954,6 @@ hr {
     font-size: 2vh;
 }
 
-
 h3 a{
     color: white;
     font-weight: normal;
@@ -995,7 +970,6 @@ h3 a{
 }
 
 /* INDEX END */
-
 
 /* TAROSTYLE START [PROFILE]*/
 * {
@@ -1352,7 +1326,7 @@ h3 a{
 }
 
 
-/* Place the navbar at the bottom of the page, and make it stick */
+/* Place the bar at the bottom of the page, and make it stick */
 .navbar {
     background-color: #ffffff;
     overflow: hidden;
@@ -1777,9 +1751,6 @@ button #edit-profile,
 .deny:hover {
     background-image: url(./assets/denyXRed.png);
 }
-
-
-
 /* NOTIFS END */
 
 /* Group Order Friends */
@@ -1961,11 +1932,8 @@ button #edit-profile,
     top: 2%;
     margin-top: 0px;
 }
-
-
 /* Group Order View Form */
 
-	
 /* FRIEND LIST START */	
 #friendsAll {	
     margin-bottom: 150px;	
@@ -2152,9 +2120,6 @@ button #edit-profile,
     height: 730px; 
     /*when on phone view */
 }
-/* java -> camel case -> heyBestiesBestDrink
-python -> underscores -> hey_besties_best_drink
-HTML -> dashes -> hey-besties-best-drink */
 
 .closeGroup{
     background-color: #9879C5;
