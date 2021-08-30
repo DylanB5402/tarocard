@@ -50,20 +50,25 @@ class UploadFile {
       upload(req, res, (err) => {
         if (err instanceof multer.MulterError) {
           // A Multer error occurred when uploading.
+          res.sendStatus(500)
           return null
         } else if (err) {
           // An unknown error occurred when uploading.
+          res.sendStatus(500)
           return null
         } else if (req.file === undefined) {
+          res.sendStatus(500)
           return null
         }
 
         // Check File Extension
         if (!this.checkFileType(req.file, this[`${type}`].type)) {
           fs.unlinkSync(req.file.path)
+          res.sendStatus(500)
           return null
         } else if (!fs.existsSync(req.file.path)) {
           // Make sure the file has been created
+          res.sendStatus(500)
           return null
         } else {
           // Obtain path without static (for purposes of website display)
@@ -71,6 +76,7 @@ class UploadFile {
             req.file.path.indexOf(config.expressStaticDir) + config.expressStaticDir.length)
 
           console.log(relativePath)
+          res.sendStatus(200)
           return callback(relativePath)
         }
       })
