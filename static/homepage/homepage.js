@@ -34,6 +34,9 @@ function openCardCreate( formID ){
   
   function closeGroupAdd(){
     document.getElementById("groupOrder-add").style.display = 'none';
+    document.getElementById('success-message').style.display = "none";
+    document.getElementById('fail-message').style.display = "none";
+    document.getElementById('fail-message-2').style.display = "none";
   }
   
   
@@ -57,18 +60,46 @@ function openCardCreate( formID ){
     }
   }
   
-function sendInfoToAlex(){
-  let groupInfo = document.getElementById("groupOrders").value;
-  console.log(groupInfo);
+ async function sendInfoToAlex(){
+  let groupInfo = document.getElementById("groupOrders").value; //group Order id
   if(groupInfo==""){
     document.getElementById('fail-message').style.display = "block";
   }else{
     document.getElementById("groupOrder-form").action = "/groups/addToGroup/"+groupInfo;
-    document.getElementById('success-message').style.display = "block";
-    document.getElementById('fail-message').style.display = "none";
-    setTimeout(function(){
-      document.getElementById("groupOrder-form").submit();
-    },1000);
+    let cardId = document.getElementById('gO-drinkID').value;
+
+
+
+    //Check if card is already in group//
+
+    let cardsInGroup = new XMLHttpRequest();
+    cardsInGroup.open('GET', '/groups/getGroup/' + groupInfo, true); 
+    cardsInGroup.responseType = 'json';
+    cardsInGroup.send();
+    let inGroup = true;
+
+    function itsFalse(){
+      inGroup = false;
+    }
+
+    cardsInGroup.onload =  function () {
+      const content = cardsInGroup.response.groups;
+      for (drinks in content) {
+        let drinkCardID = content[drinks]["drink"];
+        if (cardId == drinkCardID) {
+          document.getElementById('fail-message-2').style.display = "block";
+          return;
+        }
+      }
+        //goes through with no fails
+        document.getElementById('success-message').style.display = "block";
+        document.getElementById('fail-message').style.display = "none";
+        document.getElementById('fail-message-2').style.display = "none";
+        setTimeout(function(){
+          document.getElementById("groupOrder-form").submit();
+        },1000);
+    }
+
   }
 }
 
