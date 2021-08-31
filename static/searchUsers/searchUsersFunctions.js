@@ -28,7 +28,7 @@ function populateUsers(obj) {
         divCopy = document.importNode(div, true);
         divCopy.querySelector("img", true).src = users[i]["image url"];
         divCopy.querySelector("h2", true).textContent = users[i]["display name"];
-        divCopy.querySelector("h3", true).textContent = users[i]["username"];
+        divCopy.querySelector("h3", true).textContent =  "@" + users[i]["username"];
         let links = divCopy.querySelectorAll(".ActivityLinks");
         links.forEach(element => {
             element.href = "/profile/" + users[i]["id"];
