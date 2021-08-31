@@ -122,23 +122,23 @@
         </div>
         <button id="add-card-btn" alt="add card button"> + </button> 
         <div class="navbar" id="myNavbar">
-        <a class="active" href="#">
-            <img id="navHomeIcon" src="../assets/home.png" />
-        </a>
-    
-        <a href=/search>
-            <img id="navSearchIcon" src="../assets/search.png" />
-        </a>
-    
-        <a href="../Notifications/Notifications.html">
-            <img id="navNotifsIcon" src="../assets/notifs.png" />
-            <p id="incomingNum"></p>
-        </a>
-    
-        <a href="/profile">
-            <img id="navProfileIcon" src="../assets/profile.png" />
-        </a>
-    </div>
+            <a class="active" href="#">
+                <img id="navHomeIcon" src="../assets/home.png" />
+            </a>
+        
+            <a href=/search>
+                <img id="navSearchIcon" src="../assets/search.png" />
+            </a>
+        
+            <a href="../Notifications/Notifications.html">
+                <img id="navNotifsIcon" src="../assets/notifs.png" />
+                <p id="incomingNum"></p>
+            </a>
+        
+            <a href="/profile">
+                <img id="navProfileIcon" src="../assets/profile.png" />
+            </a>
+        </div>
 
     <script>
         $.post("/friends/incoming", "" , function(data, status, xhr) {
