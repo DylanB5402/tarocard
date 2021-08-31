@@ -186,10 +186,10 @@ exports.getBanner = (req, res) => {
 exports.getFriendBanner = (req, res) => {
   if (req.session.loggedin) {
     const friendUID = req.params.friendUID
-    if (userDB.getProfilePicturePathByUID(friendUID) === undefined) {
+    if (userDB.getBannerPathByUID(friendUID) === undefined) {      
       res.redirect(config.defaults.defaultBanner)
     } else {
-      res.redirect(userDB.getProfilePicturePathByUID(friendUID).banner)
+      res.redirect(userDB.getBannerPathByUID(friendUID).banner)
     }
   } else {
     res.redirect(config.defaults.defaultBanner)
