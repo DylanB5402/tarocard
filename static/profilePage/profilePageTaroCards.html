@@ -42,14 +42,14 @@
             <!--  should pull real value from DB in final version -->
             <p id="profileDescription">
             </p>
-        </section><button class="friend-button"><a href="/friends">Friends </a></button>
+        </section><button class="friend-button"><a href="/friends"> Friends </a></button>
         <div class="user-stats">
             <!--  <a href="../friendsPage/Friends_Page.html" > -->
             <div class="stat">
-                <p><span> Friends</span></p>
+                <p><span> Friends </span></p>
             </div><!--  </a> -->
             <div class="stat">
-                <p><span> Cards</span></p>
+                <p><span> Cards </span></p>
             </div>
         </div>
         <div class="mytabs"><input id="tabfree" type="radio" name="mytabs" checked><label for="tabfree"><img class="tab-icon" src="../assets/cards-purple.png"></label>
@@ -113,7 +113,7 @@
                 <a class="active" href="#">
                     <img id="navProfileIcon" src="../assets/profile.png">
                 </a>
-                
+
                 <script>
                     $.post("/friends/incoming", "", function(data, status, xhr) {
                         const friendRequests = data.users;
