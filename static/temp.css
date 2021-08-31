@@ -348,8 +348,8 @@ li:last-child{
     position: fixed;
     /*left: 84vw;/**/
     /*top: 70vh;/**/
-    right:5%;
-    bottom: 190px;
+    right:1%;
+    bottom: 250px;
     width: 8vh;
     height: 8vh;
     font-size: 5vh;
@@ -2117,7 +2117,8 @@ button #edit-profile,
 
 }
 .cardContainerProf{
-    height: 730px; 
+    height: 730px;
+    margin-bottom: 150px;
     /*when on phone view */
 }
 
