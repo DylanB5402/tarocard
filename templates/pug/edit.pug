@@ -29,17 +29,17 @@ head
     .text-input
       label.label(for='display-name') Display Name
       br
-      input#display-name.edit-input(type='text', name='display-name', value='' + displayName)
+      input#display-name.edit-input(type='text', name='display-name', value='' + displayName, maxlength="15")
       br
       // input#display-name.edit-input(type='text' name='display-name' value= '' + displayName)
       label.label(for='username') Username
       br
-      input#usernameEdit.edit-input(type='text', name='username', value='' + username)
+      input#usernameEdit.edit-input(type='text', name='username', value='' + username, maxlength="15")
       br
       // input#usernameEdit.edit-input(type='text' name='username' value='' + username)
       label.label(for='bio') Bio
       br
-      textarea#bio.edit-input(name='bio', maxlength='150', value='' + bio, placeholder='' + bio)
+      textarea#bio.edit-input(name='bio', maxlength='150', value='' + bio, placeholder='' + bio, size="35")
       // textarea#bio.edit-input(name='bio' maxlength='150' value=''+bio placeholder=''+bio)
       br
       input#save(type='button' onclick='submitForm()', value='Save changes')
